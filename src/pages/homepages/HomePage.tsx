@@ -27,13 +27,7 @@ import post04 from '../../assets/images/activities-fanpage/post-04.png';
 import post05 from '../../assets/images/activities-fanpage/post-05.png';
 import post06 from '../../assets/images/activities-fanpage/post-06.png';
 import post07 from '../../assets/images/activities-fanpage/post-07.png';
-// Import videos
-import video1 from '../../assets/videos/survey-results/IMG_0339.MOV';
-import video2 from '../../assets/videos/survey-results/IMG_5667.MOV';
 // Import poster images (we'll create these from video frames)
-import poster1 from '../../assets/images/carousel/khoi-doanh-nghiep.png';
-import poster2 from '../../assets/images/carousel/SIEM-web.png';
-import poster3 from '../../assets/images/carousel/smartphone.png';
 import { 
   DownloadOutlined, 
   MessageOutlined, 
@@ -383,284 +377,8 @@ const HomePage: React.FC = () => {
         }}>
           <Space direction="vertical" size={40} style={{ width: '100%' }}>
 
-        {/* Awesome Stuffs Section */}
-        <AnimatedSection animationType="fadeInUp" delay={200}>
-        <Card 
-          title="Some Of Our Awesome Stuffs"
-          style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '20px',
-            boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-            backdropFilter: 'blur(10px)'
-          }}
-          headStyle={{
-            background: 'transparent',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#fff',
-            fontSize: '28px',
-            fontWeight: '700',
-            textAlign: 'center'
-          }}
-        >
-          <Carousel 
-            autoplay 
-            autoplaySpeed={4000} 
-            dots={{ className: 'custom-dots' }}
-            arrows={true}
-            prevArrow={<Button 
-              type="text" 
-              icon={<LeftOutlined />} 
-              style={{ 
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.9)',
-                border: 'none',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#1890ff',
-                fontSize: '16px',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
-                e.currentTarget.style.transform = 'scale(1.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-            />}
-            nextArrow={<Button 
-              type="text" 
-              icon={<RightOutlined />} 
-              style={{ 
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.9)',
-                border: 'none',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#1890ff',
-                fontSize: '16px',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
-                e.currentTarget.style.transform = 'scale(1.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-            />}
-          >
-            <div>
-              <Row gutter={[24, 24]} justify="center">
-                {[
-                  { 
-                    image: post01, 
-                    category: 'Marketing',
-                    title: 'Discover, Explore the Product',
-                    description: 'Khám phá và phát triển sản phẩm công nghệ tiên tiến'
-                  },
-                  { 
-                    image: post02, 
-                    category: 'Technology',
-                    title: 'SIEM Security Solutions',
-                    description: 'Giải pháp bảo mật thông tin và giám sát an ninh mạng'
-                  },
-                  { 
-                    image: post03, 
-                    category: 'Mobile App',
-                    title: 'Smart Mobile Applications',
-                    description: 'Ứng dụng di động thông minh cho cuộc sống hiện đại'
-                  }
-                ].map((item, index) => (
-                  <Col xs={24} sm={12} md={8} key={index}>
-                    <div
-                      style={{
-                        position: 'relative',
-                        borderRadius: '16px',
-                        overflow: 'hidden',
-                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
-                        transition: 'transform 0.3s ease',
-                        cursor: 'default',
-                        height: '300px'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-8px)';
-                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                      }}
-                    >
-                      <div style={{ position: 'relative', height: '100%' }}>
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover'
-                          }}
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
-                    <div style={{ 
-                          position: 'absolute',
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
-                          padding: '20px',
-                          color: 'white'
-                        }}>
-                          <Text style={{ 
-                            color: 'rgba(255,255,255,0.8)', 
-                            fontSize: '12px',
-                            fontWeight: '500',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px'
-                          }}>
-                            {item.category}
-                          </Text>
-                          <Title level={4} style={{ 
-                            color: 'white', 
-                            margin: '8px 0 0 0',
-                            fontSize: '18px',
-                            fontWeight: '600',
-                            lineHeight: 1.3
-                          }}>
-                            {item.title}
-                          </Title>
-                          <Text style={{ 
-                            color: 'rgba(255,255,255,0.9)', 
-                            fontSize: '12px',
-                            marginTop: '8px',
-                            display: 'block'
-                          }}>
-                            {item.description}
-                          </Text>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                ))}
-              </Row>
-            </div>
-            <div>
-              <Row gutter={[24, 24]} justify="center">
-                {[
-                  { 
-                    image: post04, 
-                    category: 'Innovation',
-                    title: 'Cutting-Edge Solutions',
-                    description: 'Giải pháp công nghệ tiên tiến cho doanh nghiệp'
-                  },
-                  { 
-                    image: post05, 
-                    category: 'Business',
-                    title: 'Startup Support Program',
-                    description: 'Chương trình hỗ trợ khởi nghiệp và phát triển doanh nghiệp'
-                  },
-                  { 
-                    image: post06, 
-                    category: 'Research',
-                    title: 'Advanced Research Projects',
-                    description: 'Các dự án nghiên cứu khoa học và công nghệ cao'
-                  }
-                ].map((item, index) => (
-                  <Col xs={24} sm={12} md={8} key={index}>
-                    <div
-                      style={{
-                        position: 'relative',
-                        borderRadius: '16px',
-                        overflow: 'hidden',
-                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
-                        transition: 'transform 0.3s ease',
-                        cursor: 'default',
-                        height: '300px'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-8px)';
-                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                      }}
-                    >
-                      <div style={{ position: 'relative', height: '100%' }}>
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        style={{ 
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover'
-                          }}
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
-                        <div style={{
-                          position: 'absolute',
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
-                          padding: '20px',
-                          color: 'white'
-                        }}>
-                          <Text style={{ 
-                            color: 'rgba(255,255,255,0.8)', 
-                            fontSize: '12px',
-                            fontWeight: '500',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px'
-                          }}>
-                            {item.category}
-                          </Text>
-                          <Title level={4} style={{ 
-                            color: 'white', 
-                            margin: '8px 0 0 0',
-                            fontSize: '18px',
-                            fontWeight: '600',
-                            lineHeight: 1.3
-                          }}>
-                            {item.title}
-                          </Title>
-                          <Text style={{ 
-                            color: 'rgba(255,255,255,0.9)', 
-                            fontSize: '12px',
-                            marginTop: '8px',
-                            display: 'block'
-                          }}>
-                            {item.description}
-                          </Text>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          </Carousel>
-        </Card>
-        </AnimatedSection>
-
         {/* Community Interview Section */}
-        <AnimatedSection animationType="fadeInUp" delay={300}>
+        <AnimatedSection animationType="fadeInUp" delay={600}>
           <Card 
             title="Community Survey Results"
             style={{
@@ -684,8 +402,7 @@ const HomePage: React.FC = () => {
                 {
                   title: 'Kết quả khảo sát cộng đồng - Video 1',
                   description: 'Chia sẻ kết quả khảo sát từ cộng đồng người dùng Mekong Pathfinder',
-                  videoUrl: video1,
-                  poster: poster1,
+                  videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5664_qx1vn6&profile=cld-default',
                   duration: '2:30',
                   views: '1.2K',
                   date: '15/12/2024'
@@ -693,17 +410,15 @@ const HomePage: React.FC = () => {
                 {
                   title: 'Kết quả khảo sát cộng đồng - Video 2',
                   description: 'Phân tích chi tiết về phản hồi và đánh giá từ người dùng',
-                  videoUrl: video2,
-                  poster: poster2,
+                  videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
                   duration: '3:15',
                   views: '1.8K',
                   date: '22/12/2024'
                 },
                 {
-                  title: 'Tổng hợp phản hồi cộng đồng',
+                  title: 'Kết quả khảo sát cộng đồng - Video 3',
                   description: 'Tổng kết và đánh giá tổng thể từ cộng đồng người dùng',
-                  videoUrl: video1,
-                  poster: poster3,
+                  videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5673_rf5rm6&profile=cld-default',
                   duration: '4:20',
                   views: '2.1K',
                   date: '29/12/2024'
@@ -737,10 +452,21 @@ const HomePage: React.FC = () => {
                       height: '200px',
                       background: '#000'
                     }}>
+                      {item.videoUrl.includes('player.cloudinary.com') ? (
+                        <iframe
+                          src={`${item.videoUrl}&player[controls]=true&player[autoplay]=false`}
+                          allow="autoplay; fullscreen; encrypted-media"
+                          style={{
+                            border: 'none',
+                            width: '100%',
+                            height: '100%'
+                          }}
+                          title={item.title}
+                        />
+                      ) : (
                       <video
                         controls
                         preload="metadata"
-                        poster={item.poster}
                         style={{
                           width: '100%',
                           height: '100%',
@@ -748,9 +474,9 @@ const HomePage: React.FC = () => {
                         }}
                       >
                         <source src={item.videoUrl} type="video/mp4" />
-                        <source src={item.videoUrl} type="video/quicktime" />
                         Your browser does not support the video tag.
                       </video>
+                      )}
                     </div>
                     
                     {/* Video Info */}
@@ -800,7 +526,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Social Achievement Section */}
-        <AnimatedSection animationType="fadeInUp" delay={400}>
+        <AnimatedSection animationType="fadeInUp" delay={800}>
           <Card 
             title={
               <div style={{ textAlign: 'center' }}>
@@ -1285,87 +1011,938 @@ const HomePage: React.FC = () => {
         </Card>
         </AnimatedSection>
 
-        {/* Quick Actions */}
-        <AnimatedSection animationType="fadeInUp" delay={600}>
+        {/* Awesome Stuffs Section */}
+        <AnimatedSection animationType="fadeInUp" delay={400}>
         <Card 
-          title={t('home.quick.title')}
+          title="Some Of Our Awesome Stuffs"
           style={{ 
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            borderRadius: '24px',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-            backdropFilter: 'blur(15px)',
-            width: '100%'
+            background: 'rgba(255, 255, 255, 0.05)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '20px',
+            boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
+            backdropFilter: 'blur(10px)'
           }}
-          headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
+          headStyle={{
+            background: 'transparent',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+            color: '#fff',
+            fontSize: '28px',
+            fontWeight: '700',
+            textAlign: 'center'
+          }}
         >
-          <Row gutter={[16, 16]}>
-            <Col xs={24} sm={8}>
-              <Card 
-                hoverable 
+          <Carousel 
+            autoplay 
+            autoplaySpeed={4000} 
+            dots={{ className: 'custom-dots' }}
+            arrows={true}
+            prevArrow={<Button 
+              type="text" 
+              icon={<LeftOutlined />} 
                 style={{ 
-                  textAlign: 'center', 
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1890ff',
+                fontSize: '16px',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            />}
+            nextArrow={<Button 
+              type="text" 
+              icon={<RightOutlined />} 
+              style={{ 
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1890ff',
+                fontSize: '16px',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            />}
+          >
+            {/* Item 1: */}
+            <div>
+              <Row gutter={[24, 24]} justify="center">
+                {[
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811194/20251008_182018_dzfasn.jpg', 
+                    category: 'Marketing',
+                    title: 'Discover, Explore the Product',
+                    description: 'Khám phá và phát triển sản phẩm công nghệ tiên tiến'
+                  },
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811192/20251008_181936_c5xjuz.jpg', 
+                    category: 'Technology',
+                    title: 'SIEM Security Solutions',
+                    description: 'Giải pháp bảo mật thông tin và giám sát an ninh mạng'
+                  },
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811189/20251008_180835_pwcawb.jpg', 
+                    category: 'Mobile App',
+                    title: 'Smart Mobile Applications',
+                    description: 'Ứng dụng di động thông minh cho cuộc sống hiện đại'
+                  }
+                ].map((item, index) => (
+                  <Col xs={24} sm={12} md={8} key={index}>
+                    <div
+                      style={{
+                        position: 'relative',
+                        borderRadius: '16px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'default',
+                        height: '300px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-8px)';
+                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                      }}
+                    >
+                      <div style={{ position: 'relative', height: '100%' }}>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          style={{
+                            width: '100%',
                   height: '100%',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                            objectFit: 'cover'
+                          }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                    <div style={{ 
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                          padding: '20px',
+                          color: 'white'
+                        }}>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            fontSize: '12px',
+                            fontWeight: '500',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            {item.category}
+                          </Text>
+                          <Title level={4} style={{ 
+                            color: 'white', 
+                            margin: '8px 0 0 0',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            lineHeight: 1.3
+                          }}>
+                            {item.title}
+                          </Title>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontSize: '12px',
+                            marginTop: '8px',
+                            display: 'block'
+                          }}>
+                            {item.description}
+                          </Text>
+                        </div>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+            {/* Item 2: */}
+            <div>
+              <Row gutter={[24, 24]} justify="center">
+                {[
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811187/20251008_180831_ghmp8l.jpg', 
+                    category: 'Innovation',
+                    title: 'Cutting-Edge Solutions',
+                    description: 'Giải pháp công nghệ tiên tiến cho doanh nghiệp'
+                  },
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811182/20251008_175534_vdjfss.jpg', 
+                    category: 'Business',
+                    title: 'Startup Support Program',
+                    description: 'Chương trình hỗ trợ khởi nghiệp và phát triển doanh nghiệp'
+                  },
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811186/20251008_180817_uici8r.jpg', 
+                    category: 'Research',
+                    title: 'Advanced Research Projects',
+                    description: 'Các dự án nghiên cứu khoa học và công nghệ cao'
+                  }
+                ].map((item, index) => (
+                  <Col xs={24} sm={12} md={8} key={index}>
+                    <div
+                      style={{
+                        position: 'relative',
                   borderRadius: '16px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'default',
+                        height: '300px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-8px)';
+                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                      }}
+                    >
+                      <div style={{ position: 'relative', height: '100%' }}>
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        style={{ 
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover'
+                          }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                          padding: '20px',
+                          color: 'white'
+                        }}>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            fontSize: '12px',
+                            fontWeight: '500',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            {item.category}
+                          </Text>
+                          <Title level={4} style={{ 
+                            color: 'white', 
+                            margin: '8px 0 0 0',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            lineHeight: 1.3
+                          }}>
+                            {item.title}
+                          </Title>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontSize: '12px',
+                            marginTop: '8px',
+                            display: 'block'
+                          }}>
+                            {item.description}
+                          </Text>
+                        </div>
+                      </div>
+                    </div>
+            </Col>
+                ))}
+              </Row>
+            </div>
+            {/* Item 3: */}
+            <div>
+              <Row gutter={[24, 24]} justify="center">
+                {[
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811180/20251008_175544_xgc4ik.jpg', 
+                    category: 'Innovation',
+                    title: 'Cutting-Edge Solutions',
+                    description: 'Giải pháp công nghệ tiên tiến cho doanh nghiệp'
+                  },
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811185/20251008_180702_epomf6.jpg', 
+                    category: 'Business',
+                    title: 'Startup Support Program',
+                    description: 'Chương trình hỗ trợ khởi nghiệp và phát triển doanh nghiệp'
+                  },
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811184/20251008_180652_d2gtug.jpg', 
+                    category: 'Research',
+                    title: 'Advanced Research Projects',
+                    description: 'Các dự án nghiên cứu khoa học và công nghệ cao'
+                  }
+                ].map((item, index) => (
+                  <Col xs={24} sm={12} md={8} key={index}>
+                    <div
+                style={{ 
+                        position: 'relative',
+                        borderRadius: '16px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'default',
+                        height: '300px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-8px)';
+                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                      }}
+                    >
+                      <div style={{ position: 'relative', height: '100%' }}>
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        style={{ 
+                            width: '100%',
+                  height: '100%',
+                            objectFit: 'cover'
+                          }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                          padding: '20px',
+                          color: 'white'
+                        }}>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            fontSize: '12px',
+                            fontWeight: '500',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            {item.category}
+                          </Text>
+                          <Title level={4} style={{ 
+                            color: 'white', 
+                            margin: '8px 0 0 0',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            lineHeight: 1.3
+                          }}>
+                            {item.title}
+                          </Title>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontSize: '12px',
+                            marginTop: '8px',
+                            display: 'block'
+                          }}>
+                            {item.description}
+                          </Text>
+                        </div>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+            {/* Item 4: */}
+            <div>
+              <Row gutter={[24, 24]} justify="center">
+                {[
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811177/20251008_175453_ba68pz.jpg', 
+                    category: 'Innovation',
+                    title: 'Cutting-Edge Solutions',
+                    description: 'Giải pháp công nghệ tiên tiến cho doanh nghiệp'
+                  },
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811179/20251008_175539_idjceo.jpg', 
+                    category: 'Business',
+                    title: 'Startup Support Program',
+                    description: 'Chương trình hỗ trợ khởi nghiệp và phát triển doanh nghiệp'
+                  },
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811175/20251008_173630_elc55o.jpg', 
+                    category: 'Research',
+                    title: 'Advanced Research Projects',
+                    description: 'Các dự án nghiên cứu khoa học và công nghệ cao'
+                  }
+                ].map((item, index) => (
+                  <Col xs={24} sm={12} md={8} key={index}>
+                    <div
+                      style={{
+                        position: 'relative',
+                  borderRadius: '16px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'default',
+                        height: '300px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-8px)';
+                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                      }}
+                    >
+                      <div style={{ position: 'relative', height: '100%' }}>
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        style={{ 
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover'
+                          }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                          padding: '20px',
+                          color: 'white'
+                        }}>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            fontSize: '12px',
+                            fontWeight: '500',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            {item.category}
+                          </Text>
+                          <Title level={4} style={{ 
+                            color: 'white', 
+                            margin: '8px 0 0 0',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            lineHeight: 1.3
+                          }}>
+                            {item.title}
+                          </Title>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontSize: '12px',
+                            marginTop: '8px',
+                            display: 'block'
+                          }}>
+                            {item.description}
+                          </Text>
+                        </div>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+           </Carousel>
+ 
+           {/* Gap between carousels */}
+           <div style={{ height: '20px' }} />
+ 
+           {/* Carousel-02 */}
+           <Carousel
+            autoplay 
+            autoplaySpeed={4000} 
+            dots={{ className: 'custom-dots' }}
+            arrows={true}
+            prevArrow={<Button 
+              type="text" 
+              icon={<LeftOutlined />} 
+              style={{ 
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1890ff',
+                fontSize: '16px',
                   transition: 'all 0.3s ease'
                 }}
-                onClick={() => navigate('/apk-download')}
-              >
-                <Space direction="vertical" size={16}>
-                  <DownloadOutlined style={{ fontSize: '48px', color: '#52c41a' }} />
-                  <Title level={4} style={{ margin: 0, color: '#fff' }}>{t('home.quick.download')}</Title>
-                  <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{t('home.quick.download.desc')}</Text>
-                </Space>
-              </Card>
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            />}
+            nextArrow={<Button 
+              type="text" 
+              icon={<RightOutlined />} 
+              style={{ 
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1890ff',
+                fontSize: '16px',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            />}
+          >
+            {/* Item 1: */}
+            <div>
+              <Row gutter={[24, 24]} justify="center">
+                {[
+                  { 
+                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811171/20251008_173548_shheoz.jpg', 
+                    category: 'Marketing',
+                    title: 'Discover, Explore the Product',
+                    description: 'Khám phá và phát triển sản phẩm công nghệ tiên tiến'
+                  },
+                  { 
+                    image: post02, 
+                    category: 'Technology',
+                    title: 'SIEM Security Solutions',
+                    description: 'Giải pháp bảo mật thông tin và giám sát an ninh mạng'
+                  },
+                  { 
+                    image: post03, 
+                    category: 'Mobile App',
+                    title: 'Smart Mobile Applications',
+                    description: 'Ứng dụng di động thông minh cho cuộc sống hiện đại'
+                  }
+                ].map((item, index) => (
+                  <Col xs={24} sm={12} md={8} key={index}>
+                    <div
+                      style={{
+                        position: 'relative',
+                        borderRadius: '16px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'default',
+                        height: '300px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-8px)';
+                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                      }}
+                    >
+                      <div style={{ position: 'relative', height: '100%' }}>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover'
+                          }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                    <div style={{ 
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                          padding: '20px',
+                          color: 'white'
+                        }}>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            fontSize: '12px',
+                            fontWeight: '500',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            {item.category}
+                          </Text>
+                          <Title level={4} style={{ 
+                            color: 'white', 
+                            margin: '8px 0 0 0',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            lineHeight: 1.3
+                          }}>
+                            {item.title}
+                          </Title>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontSize: '12px',
+                            marginTop: '8px',
+                            display: 'block'
+                          }}>
+                            {item.description}
+                          </Text>
+                        </div>
+                      </div>
+                    </div>
             </Col>
-            <Col xs={24} sm={8}>
-              <Card 
-                hoverable 
+                ))}
+              </Row>
+            </div>
+            {/* Item 2: */}
+            <div>
+              <Row gutter={[24, 24]} justify="center">
+                {[
+                  { 
+                    image: post04, 
+                    category: 'Innovation',
+                    title: 'Cutting-Edge Solutions',
+                    description: 'Giải pháp công nghệ tiên tiến cho doanh nghiệp'
+                  },
+                  { 
+                    image: post05, 
+                    category: 'Business',
+                    title: 'Startup Support Program',
+                    description: 'Chương trình hỗ trợ khởi nghiệp và phát triển doanh nghiệp'
+                  },
+                  { 
+                    image: post06, 
+                    category: 'Research',
+                    title: 'Advanced Research Projects',
+                    description: 'Các dự án nghiên cứu khoa học và công nghệ cao'
+                  }
+                ].map((item, index) => (
+                  <Col xs={24} sm={12} md={8} key={index}>
+                    <div
                 style={{ 
-                  textAlign: 'center', 
+                        position: 'relative',
+                        borderRadius: '16px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'default',
+                        height: '300px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-8px)';
+                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                      }}
+                    >
+                      <div style={{ position: 'relative', height: '100%' }}>
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        style={{ 
+                            width: '100%',
                   height: '100%',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                            objectFit: 'cover'
+                          }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                          padding: '20px',
+                          color: 'white'
+                        }}>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            fontSize: '12px',
+                            fontWeight: '500',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            {item.category}
+                          </Text>
+                          <Title level={4} style={{ 
+                            color: 'white', 
+                            margin: '8px 0 0 0',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            lineHeight: 1.3
+                          }}>
+                            {item.title}
+                          </Title>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontSize: '12px',
+                            marginTop: '8px',
+                            display: 'block'
+                          }}>
+                            {item.description}
+                          </Text>
+                        </div>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+            {/* Item 3: */}
+            <div>
+              <Row gutter={[24, 24]} justify="center">
+                {[
+                  { 
+                    image: post04, 
+                    category: 'Innovation',
+                    title: 'Cutting-Edge Solutions',
+                    description: 'Giải pháp công nghệ tiên tiến cho doanh nghiệp'
+                  },
+                  { 
+                    image: post05, 
+                    category: 'Business',
+                    title: 'Startup Support Program',
+                    description: 'Chương trình hỗ trợ khởi nghiệp và phát triển doanh nghiệp'
+                  },
+                  { 
+                    image: post06, 
+                    category: 'Research',
+                    title: 'Advanced Research Projects',
+                    description: 'Các dự án nghiên cứu khoa học và công nghệ cao'
+                  }
+                ].map((item, index) => (
+                  <Col xs={24} sm={12} md={8} key={index}>
+                    <div
+                      style={{
+                        position: 'relative',
                   borderRadius: '16px',
-                  transition: 'all 0.3s ease'
-                }}
-                onClick={() => navigate('/feedback')}
-              >
-                <Space direction="vertical" size={16}>
-                  <MessageOutlined style={{ fontSize: '48px', color: '#1890ff' }} />
-                  <Title level={4} style={{ margin: 0, color: '#fff' }}>{t('home.quick.feedback')}</Title>
-                  <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{t('home.quick.feedback.desc')}</Text>
-                </Space>
-              </Card>
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'default',
+                        height: '300px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-8px)';
+                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                      }}
+                    >
+                      <div style={{ position: 'relative', height: '100%' }}>
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        style={{ 
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover'
+                          }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                          padding: '20px',
+                          color: 'white'
+                        }}>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            fontSize: '12px',
+                            fontWeight: '500',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            {item.category}
+                          </Text>
+                          <Title level={4} style={{ 
+                            color: 'white', 
+                            margin: '8px 0 0 0',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            lineHeight: 1.3
+                          }}>
+                            {item.title}
+                          </Title>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontSize: '12px',
+                            marginTop: '8px',
+                            display: 'block'
+                          }}>
+                            {item.description}
+                          </Text>
+                        </div>
+                      </div>
+                    </div>
             </Col>
-            <Col xs={24} sm={8}>
-              <Card 
-                hoverable 
-                style={{ 
-                  textAlign: 'center', 
-                  height: '100%',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '16px',
-                  transition: 'all 0.3s ease'
-                }}
-                onClick={() => navigate('/guide')}
-              >
-                <Space direction="vertical" size={16}>
-                  <InfoCircleOutlined style={{ fontSize: '48px', color: '#faad14' }} />
-                  <Title level={4} style={{ margin: 0, color: '#fff' }}>{t('home.quick.guide')}</Title>
-                  <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{t('home.quick.guide.desc')}</Text>
-                </Space>
-              </Card>
-            </Col>
+                ))}
           </Row>
+            </div>
+            {/* Item 4: */}
+            <div>
+              <Row gutter={[24, 24]} justify="center">
+                {[
+                  { 
+                    image: post04, 
+                    category: 'Innovation',
+                    title: 'Cutting-Edge Solutions',
+                    description: 'Giải pháp công nghệ tiên tiến cho doanh nghiệp'
+                  },
+                  { 
+                    image: post05, 
+                    category: 'Business',
+                    title: 'Startup Support Program',
+                    description: 'Chương trình hỗ trợ khởi nghiệp và phát triển doanh nghiệp'
+                  },
+                  { 
+                    image: post06, 
+                    category: 'Research',
+                    title: 'Advanced Research Projects',
+                    description: 'Các dự án nghiên cứu khoa học và công nghệ cao'
+                  }
+                ].map((item, index) => (
+                  <Col xs={24} sm={12} md={8} key={index}>
+                    <div
+                      style={{
+                        position: 'relative',
+                        borderRadius: '16px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'default',
+                        height: '300px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-8px)';
+                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                      }}
+                    >
+                      <div style={{ position: 'relative', height: '100%' }}>
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        style={{ 
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover'
+                          }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                          padding: '20px',
+                          color: 'white'
+                        }}>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            fontSize: '12px',
+                            fontWeight: '500',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            {item.category}
+                          </Text>
+                          <Title level={4} style={{ 
+                            color: 'white', 
+                            margin: '8px 0 0 0',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            lineHeight: 1.3
+                          }}>
+                            {item.title}
+                          </Title>
+                          <Text style={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontSize: '12px',
+                            marginTop: '8px',
+                            display: 'block'
+                          }}>
+                            {item.description}
+                          </Text>
+                        </div>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          </Carousel>
         </Card>
         </AnimatedSection>
 
         {/* Features Section */}
-        <AnimatedSection animationType="fadeInLeft" delay={800}>
+        <AnimatedSection animationType="fadeInLeft" delay={1200}>
         <Card 
           title={t('home.features.title')}
           style={{ 
@@ -1383,7 +1960,6 @@ const HomePage: React.FC = () => {
               <Col xs={24} sm={12} md={6} key={index}>
                 <Card 
                   size="small" 
-                  hoverable 
                   style={{ 
                     height: '100%',
                     background: 'rgba(255, 255, 255, 0.05)',
@@ -1407,7 +1983,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* How to Use */}
-        <AnimatedSection animationType="fadeInRight" delay={1000}>
+        <AnimatedSection animationType="fadeInRight" delay={1400}>
         <Card 
           title={t('home.howto.title')}
           style={{ 
@@ -1422,20 +1998,22 @@ const HomePage: React.FC = () => {
         >
           <Row gutter={[24, 24]}>
             <Col xs={24} md={12}>
+              <div style={{ color: '#fff' }}>
               <Steps
                 direction="vertical"
                 current={-1}
                 items={steps.map(step => ({
-                  title: step.title,
-                  description: step.description,
+                    title: <span style={{ color: '#fff' }}>{step.title}</span>,
+                    description: <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{step.description}</span>,
                   icon: step.icon
                 }))}
               />
+              </div>
             </Col>
             <Col xs={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4}>{t('home.howto.start.title')}</Title>
-                <Paragraph>
+                <Title level={4} style={{ color: '#fff' }}>{t('home.howto.start.title')}</Title>
+                <Paragraph style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                   {t('home.howto.start.desc')}
                 </Paragraph>
                 <Alert
@@ -1460,7 +2038,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Achievements */}
-        <AnimatedSection animationType="scaleIn" delay={1200}>
+        <AnimatedSection animationType="scaleIn" delay={1600}>
         <Card 
           title={t('home.achievements.title')}
           style={{ 
@@ -1499,7 +2077,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Testimonials */}
-        <AnimatedSection animationType="fadeInUp" delay={1400}>
+        <AnimatedSection animationType="fadeInUp" delay={1800}>
         <Card 
           title={t('home.testimonials.title')}
           style={{ 
@@ -1555,7 +2133,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Contact & Support */}
-        <AnimatedSection animationType="fadeInUp" delay={1600}>
+        <AnimatedSection animationType="fadeInUp" delay={2000}>
         <Card 
           title={t('home.contact.title')}
           style={{ 

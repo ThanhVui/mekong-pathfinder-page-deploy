@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Card, 
   Button, 
@@ -36,6 +36,7 @@ import {
 import HomePageHeader from './header/header';
 import HomePageFooter from './footer/footer';
 import AnimatedSection from '../../components/AnimatedSection';
+import { saveDownload, getDownloadStats } from '../../utils/downloadTracker';
 
 // Import application images
 import navigateRoute from '../../assets/images/application/navigate-route.png';
@@ -63,7 +64,17 @@ const APKDownload: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [imagePreviewVisible, setImagePreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
+  const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: '' });
   const downloadFormRef = useRef<HTMLDivElement>(null);
+
+  // Load download stats khi component mount
+  useEffect(() => {
+    const stats = getDownloadStats();
+    setDownloadStats({
+      totalDownloads: stats.totalDownloads,
+      lastUpdated: stats.lastUpdated
+    });
+  }, []);
 
   const scrollToDownloadForm = () => {
     if (downloadFormRef.current) {
@@ -79,14 +90,27 @@ const APKDownload: React.FC = () => {
     setLoading(true);
     
     try {
-      // Simulate API call to log user download
+      // Lưu thông tin download vào localStorage
+      const saveResult = saveDownload(values.name, values.email);
+      
+      if (saveResult.success) {
+        // Cập nhật thống kê hiển thị
+        setDownloadStats(prev => ({
+          ...prev,
+          totalDownloads: saveResult.totalDownloads,
+          lastUpdated: new Date().toISOString()
+        }));
+        message.success(`Thông tin đã được ghi nhận! Tổng lượt tải: ${saveResult.totalDownloads}`);
+      } else {
+        message.warning('Đã lưu thông tin nhưng có lỗi xảy ra với thống kê.');
+      }
+      
+      // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      message.success('Thông tin đã được ghi nhận! Đang tải xuống APK...');
-      
-      // Trigger APK download immediately
+      // Trigger APK download immediately using direct download link
       const link = document.createElement('a');
-      link.href = '/apk/app-release.apk';
+      link.href = 'https://drive.google.com/uc?export=download&id=1weaBUn1T8M0km0Uf5FPAzVB-Q3eXdR-v';
       link.download = 'MekongPathfinder-app-release.apk';
       link.style.display = 'none';
       document.body.appendChild(link);
@@ -426,7 +450,6 @@ const APKDownload: React.FC = () => {
                 <Col xs={24} sm={12} md={6} key={index}>
                   <Card 
                     size="small" 
-                    hoverable
                     style={{
                       height: '200px',
                       display: 'flex',
@@ -833,7 +856,7 @@ const APKDownload: React.FC = () => {
                   <Row gutter={[16, 16]}>
                     <Col span={12}>
                       <div style={{ textAlign: 'center' }}>
-                        <Title level={2} style={{ margin: 0, color: '#52c41a' }}>1,234</Title>
+                        <Title level={2} style={{ margin: 0, color: '#52c41a' }}>{downloadStats.totalDownloads}</Title>
                         <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Lượt tải</Text>
                       </div>
                     </Col>

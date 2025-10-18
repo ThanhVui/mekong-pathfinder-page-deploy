@@ -177,35 +177,6 @@ const HomePageFooter: React.FC = () => {
               </Space>
             </Col>
 
-            {/* Quick Links */}
-            <Col xs={24} sm={12} md={4}>
-              <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={5} style={{ color: '#fff', margin: 0 }}>
-                  Liên kết nhanh
-                </Title>
-                <List
-                  dataSource={quickLinks}
-                  renderItem={item => (
-                    <List.Item style={{ padding: '4px 0', border: 'none' }}>
-                      <Button
-                        type="text"
-                        icon={item.icon}
-                        onClick={() => navigate(item.path)}
-                        style={{
-                          color: 'rgba(255, 255, 255, 0.8)',
-                          padding: '4px 0',
-                          height: 'auto',
-                          textAlign: 'left',
-                          fontWeight: '400'
-                        }}
-                      >
-                        {item.label}
-                      </Button>
-                    </List.Item>
-                  )}
-                />
-              </Space>
-            </Col>
 
             {/* Features */}
             <Col xs={24} sm={12} md={4}>
@@ -228,6 +199,28 @@ const HomePageFooter: React.FC = () => {
                     </List.Item>
                   )}
                 />
+              </Space>
+            </Col>
+
+            {/* Admin Section */}
+            <Col xs={24} sm={12} md={4}>
+              <Space direction="vertical" size={16} style={{ width: '100%' }}>
+                <Title level={5} style={{ color: '#fff', margin: 0 }}>
+                  Admin
+                </Title>
+                <Button
+                  type="link"
+                  onClick={() => navigate('/admin')}
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    padding: '4px 0',
+                    height: 'auto',
+                    textAlign: 'left',
+                    fontWeight: '400'
+                  }}
+                >
+                  📊 Xem thống kê downloads
+                </Button>
               </Space>
             </Col>
 
