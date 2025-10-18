@@ -21,7 +21,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../../context/LanguageContext';
 import AnimatedButton from '../../../components/AnimatedButton';
 import NavigationMenu from '../../../components/NavigationMenu';
-import { useResponsive } from '../../../hooks/useResponsive';
+// import { useResponsive } from '../../../hooks/useResponsive';
 import logoBanner from '../../../assets/images/logo_header/logo_banner.png';
 
 const { Header } = Layout;
@@ -33,7 +33,7 @@ const HomePageHeader: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
-  const { isMobile, isTablet } = useResponsive();
+  // const { isMobile, isTablet } = useResponsive();
 
   // Handle scroll effect
   useEffect(() => {
@@ -75,6 +75,24 @@ const HomePageHeader: React.FC = () => {
 
   return (
     <>
+      <style>
+        {`
+          .desktop-nav {
+            display: flex;
+          }
+          .desktop-text {
+            display: inline;
+          }
+          @media (max-width: 768px) {
+            .desktop-nav {
+              display: none !important;
+            }
+            .desktop-text {
+              display: none !important;
+            }
+          }
+        `}
+      </style>
       <Header
         style={{
           position: 'fixed',
@@ -137,14 +155,14 @@ const HomePageHeader: React.FC = () => {
 
             {/* Center - Navigation Menu */}
             <div style={{ 
-              display: !isMobile ? 'flex' : 'none', 
+              display: 'flex',
               position: 'absolute',
               left: '50%',
               transform: 'translateX(-50%)',
               maxWidth: '700px',
               overflow: 'hidden',
               zIndex: 1
-            }}>
+            }} className="desktop-nav">
               <NavigationMenu 
                 items={menuItems} 
                 style={{
@@ -158,7 +176,7 @@ const HomePageHeader: React.FC = () => {
             <div style={{ 
               display: 'flex', 
               alignItems: 'center', 
-              gap: !isMobile ? '12px' : '8px',
+              gap: 'clamp(8px, 2vw, 12px)',
               flexWrap: 'nowrap',
               zIndex: 2
             }}>
@@ -167,14 +185,14 @@ const HomePageHeader: React.FC = () => {
                 value={language}
                 onChange={setLanguage}
                 style={{ 
-                  width: !isMobile ? 120 : 100,
+                  width: 'clamp(60px, 15vw, 120px)',
                   borderRadius: '20px',
-                  fontSize: '12px'
+                  fontSize: 'clamp(10px, 2vw, 12px)'
                 }}
                 suffixIcon={<GlobalOutlined />}
                 options={[
-                  { value: 'vi', label: !isMobile ? '🇻🇳 Tiếng Việt' : '🇻🇳 VI' },
-                  { value: 'en', label: !isMobile ? '🇺🇸 English' : '🇺🇸 EN' }
+                  { value: 'vi', label: '🇻🇳 VI' },
+                  { value: 'en', label: '🇺🇸 EN' }
                 ]}
               />
 
@@ -185,9 +203,9 @@ const HomePageHeader: React.FC = () => {
                 onClick={() => navigate('/feedback')}
                 glowEffect={true}
                 shimmerEffect={true}
-                size={!isMobile ? 'medium' : 'small'}
+                size="medium"
               >
-                {!isMobile ? t('nav.contact') : ''}
+                <span className="desktop-text">{t('nav.contact')}</span>
               </AnimatedButton>
 
               {/* Mobile Menu Button */}
@@ -201,7 +219,7 @@ const HomePageHeader: React.FC = () => {
                   width: '36px',
                   background: 'rgba(255, 255, 255, 0.8)',
                   border: '1px solid rgba(0, 0, 0, 0.1)',
-                  display: isMobile ? 'flex' : 'none',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   transition: 'all 0.3s ease',

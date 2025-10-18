@@ -149,7 +149,7 @@ const HomePage: React.FC = () => {
   const testimonials = useMemo(() => {
     const feedbacks = feedbackStats.recentFeedbacks;
     const topFeedbacks = feedbacks
-      .filter((f: any) => f.rating >= 4)
+      .filter((f: any) => f.rating === 5)
       .slice(0, 3);
     
     if (topFeedbacks.length === 0) {
