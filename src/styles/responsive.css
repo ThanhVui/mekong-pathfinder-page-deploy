@@ -1,0 +1,655 @@
+/* Responsive Design Utilities */
+
+/* Mobile First Approach */
+/* Base styles are for mobile (320px+) */
+
+/* Mobile Styles (320px - 767px) */
+@media (max-width: 767px) {
+  .ant-layout-sider {
+    display: none !important;
+  }
+  
+  .ant-layout-content {
+    margin-left: 0 !important;
+    padding: 8px !important;
+  }
+  
+  .ant-layout-header {
+    padding: 0 12px !important;
+    min-height: 56px !important;
+  }
+  
+  .ant-card {
+    margin-bottom: 8px !important;
+  }
+  
+  .ant-card-body {
+    padding: 12px !important;
+  }
+  
+  .ant-table {
+    font-size: 12px !important;
+  }
+  
+  .ant-table-thead > tr > th {
+    padding: 8px 4px !important;
+    font-size: 12px !important;
+  }
+  
+  .ant-table-tbody > tr > td {
+    padding: 8px 4px !important;
+    font-size: 12px !important;
+  }
+  
+  .ant-btn {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+    height: 28px !important;
+  }
+  
+  .ant-btn-sm {
+    font-size: 10px !important;
+    padding: 2px 6px !important;
+    height: 24px !important;
+  }
+  
+  .ant-input {
+    font-size: 14px !important;
+    padding: 6px 8px !important;
+  }
+  
+  .ant-select {
+    font-size: 14px !important;
+  }
+  
+  .ant-typography {
+    font-size: 12px !important;
+  }
+  
+  .ant-typography h1 {
+    font-size: 20px !important;
+  }
+  
+  .ant-typography h2 {
+    font-size: 18px !important;
+  }
+  
+  .ant-typography h3 {
+    font-size: 16px !important;
+  }
+  
+  .ant-typography h4 {
+    font-size: 14px !important;
+  }
+  
+  .ant-typography h5 {
+    font-size: 12px !important;
+  }
+  
+  .ant-tag {
+    font-size: 10px !important;
+    padding: 2px 6px !important;
+  }
+  
+  .ant-drawer {
+    width: 100% !important;
+  }
+  
+  .ant-drawer-body {
+    padding: 16px !important;
+  }
+  
+  .ant-space {
+    gap: 8px !important;
+  }
+  
+  .ant-space-vertical > .ant-space-item {
+    margin-bottom: 8px !important;
+  }
+  
+  .ant-row {
+    margin-left: -4px !important;
+    margin-right: -4px !important;
+  }
+  
+  .ant-col {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+  
+  .ant-flex {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .ant-flex-justify-space-between {
+    align-items: flex-start !important;
+  }
+}
+
+/* Tablet Styles (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ant-layout-sider {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+  }
+  
+  .ant-layout-sider-collapsed {
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+  }
+  
+  .ant-layout-content {
+    margin-left: 200px !important;
+    padding: 12px !important;
+  }
+  
+  .ant-layout-content.sider-collapsed {
+    margin-left: 60px !important;
+  }
+  
+  .ant-layout-header {
+    padding: 0 16px !important;
+    min-height: 64px !important;
+  }
+  
+  .ant-card-body {
+    padding: 16px !important;
+  }
+  
+  .ant-table {
+    font-size: 13px !important;
+  }
+  
+  .ant-table-thead > tr > th {
+    padding: 12px 8px !important;
+    font-size: 13px !important;
+  }
+  
+  .ant-table-tbody > tr > td {
+    padding: 12px 8px !important;
+    font-size: 13px !important;
+  }
+  
+  .ant-btn {
+    font-size: 13px !important;
+    padding: 6px 12px !important;
+    height: 32px !important;
+  }
+  
+  .ant-input {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+  }
+  
+  .ant-typography {
+    font-size: 13px !important;
+  }
+  
+  .ant-typography h1 {
+    font-size: 24px !important;
+  }
+  
+  .ant-typography h2 {
+    font-size: 20px !important;
+  }
+  
+  .ant-typography h3 {
+    font-size: 18px !important;
+  }
+  
+  .ant-typography h4 {
+    font-size: 16px !important;
+  }
+  
+  .ant-typography h5 {
+    font-size: 14px !important;
+  }
+  
+  .ant-tag {
+    font-size: 11px !important;
+    padding: 2px 8px !important;
+  }
+  
+  .ant-drawer {
+    width: 300px !important;
+  }
+  
+  .ant-space {
+    gap: 12px !important;
+  }
+  
+  .ant-space-vertical > .ant-space-item {
+    margin-bottom: 12px !important;
+  }
+  
+  .ant-row {
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+  }
+  
+  .ant-col {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+}
+
+/* Desktop Styles (1024px+) */
+@media (min-width: 1024px) {
+  .ant-layout-sider {
+    width: 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+  }
+  
+  .ant-layout-sider-collapsed {
+    width: 80px !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+  }
+  
+  .ant-layout-content {
+    margin-left: 280px !important;
+    padding: 16px !important;
+  }
+  
+  .ant-layout-content.sider-collapsed {
+    margin-left: 80px !important;
+  }
+  
+  .ant-layout-header {
+    padding: 0 16px !important;
+    min-height: 64px !important;
+  }
+  
+  .ant-card-body {
+    padding: 24px !important;
+  }
+  
+  .ant-table {
+    font-size: 14px !important;
+  }
+  
+  .ant-table-thead > tr > th {
+    padding: 16px 12px !important;
+    font-size: 14px !important;
+  }
+  
+  .ant-table-tbody > tr > td {
+    padding: 16px 12px !important;
+    font-size: 14px !important;
+  }
+  
+  .ant-btn {
+    font-size: 14px !important;
+    padding: 8px 16px !important;
+    height: 36px !important;
+  }
+  
+  .ant-input {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+  }
+  
+  .ant-typography {
+    font-size: 14px !important;
+  }
+  
+  .ant-typography h1 {
+    font-size: 28px !important;
+  }
+  
+  .ant-typography h2 {
+    font-size: 24px !important;
+  }
+  
+  .ant-typography h3 {
+    font-size: 20px !important;
+  }
+  
+  .ant-typography h4 {
+    font-size: 18px !important;
+  }
+  
+  .ant-typography h5 {
+    font-size: 16px !important;
+  }
+  
+  .ant-tag {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+  }
+  
+  .ant-drawer {
+    width: 400px !important;
+  }
+  
+  .ant-space {
+    gap: 16px !important;
+  }
+  
+  .ant-space-vertical > .ant-space-item {
+    margin-bottom: 16px !important;
+  }
+  
+  .ant-row {
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+  }
+  
+  .ant-col {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
+
+/* Utility Classes */
+.mobile-only {
+  display: block;
+}
+
+.tablet-only {
+  display: none;
+}
+
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+  
+  .tablet-only {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tablet-only {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* Responsive Grid Utilities */
+.responsive-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (max-width: 767px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+}
+
+/* Responsive Flex Utilities */
+.responsive-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 767px) {
+  .responsive-flex {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-flex {
+    gap: 12px;
+  }
+}
+
+/* Responsive Text Utilities */
+.responsive-text {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 767px) {
+  .responsive-text {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-text {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* Responsive Spacing Utilities */
+.responsive-padding {
+  padding: 16px;
+}
+
+.responsive-margin {
+  margin: 16px;
+}
+
+@media (max-width: 767px) {
+  .responsive-padding {
+    padding: 8px;
+  }
+  
+  .responsive-margin {
+    margin: 8px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-padding {
+    padding: 12px;
+  }
+  
+  .responsive-margin {
+    margin: 12px;
+  }
+}
+
+/* Responsive Button Utilities */
+.responsive-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  height: 36px;
+}
+
+@media (max-width: 767px) {
+  .responsive-button {
+    padding: 4px 8px;
+    font-size: 12px;
+    height: 28px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-button {
+    padding: 6px 12px;
+    font-size: 13px;
+    height: 32px;
+  }
+}
+
+/* Responsive Card Utilities */
+.responsive-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767px) {
+  .responsive-card {
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Responsive Table Utilities */
+.responsive-table {
+  overflow-x: auto;
+}
+
+@media (max-width: 767px) {
+  .responsive-table {
+    font-size: 12px;
+  }
+  
+  .responsive-table .ant-table-thead > tr > th {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  
+  .responsive-table .ant-table-tbody > tr > td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+}
+
+/* Responsive Form Utilities */
+.responsive-form {
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  .responsive-form .ant-form-item {
+    margin-bottom: 16px;
+  }
+  
+  .responsive-form .ant-form-item-label {
+    padding-bottom: 4px;
+  }
+  
+  .responsive-form .ant-input,
+  .responsive-form .ant-select {
+    font-size: 14px;
+  }
+}
+
+/* Responsive Modal Utilities */
+.responsive-modal {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+@media (max-width: 767px) {
+  .responsive-modal {
+    max-width: 95vw;
+    max-height: 95vh;
+    margin: 8px;
+  }
+}
+
+/* Responsive Drawer Utilities */
+.responsive-drawer {
+  width: 400px;
+}
+
+@media (max-width: 767px) {
+  .responsive-drawer {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-drawer {
+    width: 300px;
+  }
+}
+
+/* Responsive Navigation Utilities */
+.responsive-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+  .responsive-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* Responsive Sidebar Utilities */
+.responsive-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+}
+
+@media (max-width: 767px) {
+  .responsive-sidebar {
+    display: none;
+  }
+}
+
+/* Responsive Content Utilities */
+.responsive-content {
+  transition: margin-left 0.2s ease;
+}
+
+@media (max-width: 767px) {
+  .responsive-content {
+    margin-left: 0 !important;
+  }
+}
+
+/* Responsive Header Utilities */
+.responsive-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+@media (max-width: 767px) {
+  .responsive-header {
+    padding: 0 12px;
+    min-height: 56px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-header {
+    padding: 0 16px;
+    min-height: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-header {
+    padding: 0 16px;
+    min-height: 64px;
+  }
+}

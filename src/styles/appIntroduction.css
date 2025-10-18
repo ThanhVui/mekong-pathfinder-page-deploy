@@ -1,0 +1,80 @@
+/* Solution Vertical Cards */
+.solution-list-vertical {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 40px 0;
+}
+
+.solution-vertical-card {
+  position: relative;
+  width: 150px;
+  height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.solution-vertical-card:hover,
+.solution-vertical-card.active {
+  width: 300px;
+  transform: scale(1.05);
+  z-index: 10;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.solution-vertical-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Animation for expanded content */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .solution-vertical-card {
+    width: 120px;
+    height: 220px;
+  }
+  
+  .solution-vertical-card:hover,
+  .solution-vertical-card.active {
+    width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .solution-list-vertical {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .solution-vertical-card {
+    width: 100%;
+    max-width: 280px;
+    height: 240px;
+  }
+  
+  .solution-vertical-card:hover,
+  .solution-vertical-card.active {
+    width: 100%;
+    max-width: 320px;
+  }
+}

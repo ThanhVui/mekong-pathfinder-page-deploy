@@ -1,0 +1,35 @@
+CẤU TRÚC THƯ MỤC NÂNG CAO CHO REACTJS 📂
+/src
+Thư mục gốc, nơi chứa toàn bộ mã nguồn của ứng dụng. Đây là trái tim của dự án ReactJS, nơi mọi logic và giao diện được xây dựng.
+/assets
+Lưu trữ các tệp tĩnh như hình ảnh, phông chữ, hoặc các tài nguyên dùng chung khác trong toàn bộ ứng dụng. Đây là nơi bạn đặt các tệp không thay đổi trong suốt quá trình chạy ứng dụng.
+/components
+Chứa các thành phần (components) có thể tái sử dụng, được chia sẻ giữa nhiều phần khác nhau của ứng dụng. Những thành phần này thường là các khối xây dựng nhỏ giúp xây dựng giao diện.
+/context
+Đây là nơi quản lý trạng thái toàn cục (global state) bằng Context API hoặc logic liên quan đến Redux. Thư mục này đặc biệt hữu ích khi cần chia sẻ trạng thái giữa nhiều thành phần trong ứng dụng.
+/data
+Chứa dữ liệu tĩnh hoặc các mô hình dữ liệu (data models) mà ứng dụng sử dụng. Ví dụ: danh sách sản phẩm, cấu hình hoặc các dữ liệu mẫu.
+/features
+Tổ chức các mô-đun theo tính năng, nhóm các thành phần, kiểu dáng, và logic liên quan với nhau. Cách tổ chức này giúp phân chia rõ ràng từng chức năng trong ứng dụng.
+/pages
+Chứa các thành phần cấp trang, thường được sử dụng trong cấu trúc định tuyến của React Router hoặc Next.js. Đây là nơi bạn định nghĩa các trang như trang chủ, trang chi tiết sản phẩm, hoặc trang liên hệ.
+/hooks
+Lưu trữ các hooks tùy chỉnh của React. Những hooks này giúp đóng gói logic tái sử dụng, ví dụ: hooks để xử lý biểu mẫu hoặc kết nối API.
+/layouts
+Gồm các thành phần định hình cấu trúc ứng dụng, như header, footer, hoặc các trình bao (layout wrapper). Đây là nơi bạn quản lý giao diện chung cho toàn bộ ứng dụng.
+/lib
+Chứa các thư viện bên ngoài, tiện ích, hoặc các tích hợp với hệ thống khác. Những phần này thường là các công cụ hỗ trợ cho logic ứng dụng.
+/services
+Quản lý các cuộc gọi API, kết nối với các dịch vụ bên ngoài, hoặc tích hợp với thư viện bên thứ ba. Đây là nơi bạn xử lý dữ liệu đến và đi từ máy chủ.
+/styles
+Lưu trữ các tệp CSS, SCSS, hoặc các tệp kiểu dáng toàn cục và kiểu dáng dành riêng cho từng thành phần. Giúp quản lý và tái sử dụng các quy tắc kiểu dáng dễ dàng.
+/utils
+Chứa các hàm tiện ích và các helper dùng chung cho toàn bộ ứng dụng. Ví dụ: định dạng ngày tháng, xử lý chuỗi, hoặc kiểm tra dữ liệu đầu vào.
+Lợi Ích Của Cấu Trúc Này
+Khả Năng Mở Rộng: Cấu trúc rõ ràng và theo mô-đun giúp dễ dàng bổ sung tính năng mới mà không làm rối các phần khác.
+Dễ Duy Trì: Phân tách logic hợp lý giúp việc sửa lỗi hoặc nâng cấp trở nên đơn giản hơn.
+Hỗ Trợ Làm Việc Nhóm: Tổ chức tệp khoa học giúp các thành viên mới trong nhóm dễ dàng làm quen với dự án.
+Một cấu trúc thư mục hợp lý không chỉ giúp bạn quản lý ứng dụng tốt hơn mà còn là bước đầu tạo nên một dự án ReactJS thành công!
+
+Reactjs Project Structure and Best Practices:
+https://dev.to/ziontutorial/best-project-structure-reactjs-project-22ef

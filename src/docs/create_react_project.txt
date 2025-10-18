@@ -1,0 +1,160 @@
+Create App React:
+Creating a React App
+1
+2
+3
+Creating a React app is a straightforward process thanks to the Create React App tool. This tool sets up a modern web app by running a single command, allowing you to focus on development without worrying about configuring build tools like webpack or Babel.
+
+Steps to Create a React App
+
+Prerequisites
+
+Ensure you have Node.js installed on your machine. You can check this by running node -v in your terminal. If not installed, download and install it from the official Node.js website.
+
+Using Create React App
+
+Open your terminal and navigate to the directory where you want to create your new React app.
+
+Run the following command to create a new React app:
+
+npx create-react-app my-app
+Copy
+Navigate into your project directory:
+
+cd my-app
+Copy
+Start the development server:
+
+npm start
+Copy
+Project Structure
+
+After running the above commands, you will have a directory structure like this:
+
+my-app
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── public
+│ ├── favicon.ico
+│ ├── index.html
+│ ├── logo192.png
+│ ├── logo512.png
+│ ├── manifest.json
+│ └── robots.txt
+└── src
+├── App.css
+├── App.js
+├── App.test.js
+├── index.css
+├── index.js
+├── logo.svg
+├── serviceWorker.js
+└── setupTests.js
+Copy
+This structure includes all the necessary files to start building your React application
+2
+.
+
+Additional Commands
+
+Run tests:
+
+npm test
+Copy
+Build for production:
+
+npm run build
+Copy
+Templates and TypeScript
+
+You can also start a new app from a template or create a TypeScript app by appending --template [template-name] or --template typescript to the creation command:
+
+npx create-react-app my-app --template typescript
+Copy
+This command sets up a new React app with TypeScript configuration
+2
+.
+
+By following these steps, you can quickly set up a new React application and start developing your web app with ease.
+
+
+
+(base) PS D:\mekong-pathfinder\apps> npx create-react-app web
+Need to install the following packages:
+create-react-app@5.1.0
+Ok to proceed? (y) y
+
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated fstream-ignore@1.0.5: This package is no longer supported.
+npm warn deprecated uid-number@0.0.6: This package is no longer supported.
+npm warn deprecated fstream@1.0.12: This package is no longer supported.
+npm warn deprecated tar@2.2.2: This version of tar is no longer supported, and will not receive security updates. Please upgrade asap.
+create-react-app is deprecated.
+
+You can find a list of up-to-date React frameworks on react.dev
+For more info see:https://react.dev/link/cra
+
+This error message will only be shown once per install.
+
+Creating a new React app in D:\mekong-pathfinder\apps\web.
+
+Installing packages. This might take a couple of minutes.
+Installing react, react-dom, and react-scripts with cra-template...
+
+
+added 1325 packages in 50s
+
+271 packages are looking for funding
+  run `npm fund` for details
+
+Installing template dependencies using npm...
+
+added 17 packages, removed 1 package, and changed 1 package in 5s
+
+271 packages are looking for funding
+  run `npm fund` for details
+Removing template package using npm...
+
+
+removed 1 package, and audited 1341 packages in 3s
+
+271 packages are looking for funding
+  run `npm fund` for details
+
+9 vulnerabilities (3 moderate, 6 high)
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+Success! Created web at D:\mekong-pathfinder\apps\web
+Inside that directory, you can run several commands:
+
+  npm start
+    Starts the development server.
+
+  npm run build
+    Bundles the app into static files for production.
+
+  npm test
+    Starts the test runner.
+
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+
+We suggest that you begin by typing:
+
+  cd web
+  npm start
+
+Happy hacking!
+(base) PS D:\mekong-pathfinder\apps> 
+
+
+
