@@ -21,6 +21,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../../context/LanguageContext';
 import AnimatedButton from '../../../components/AnimatedButton';
 import NavigationMenu from '../../../components/NavigationMenu';
+import { useResponsive } from '../../../hooks/useResponsive';
 import logoBanner from '../../../assets/images/logo_header/logo_banner.png';
 
 const { Header } = Layout;
@@ -32,6 +33,7 @@ const HomePageHeader: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
+  const { isMobile, isTablet } = useResponsive();
 
   // Handle scroll effect
   useEffect(() => {
@@ -135,7 +137,7 @@ const HomePageHeader: React.FC = () => {
 
             {/* Center - Navigation Menu */}
             <div style={{ 
-              display: window.innerWidth > 768 ? 'flex' : 'none', 
+              display: !isMobile ? 'flex' : 'none', 
               position: 'absolute',
               left: '50%',
               transform: 'translateX(-50%)',
@@ -156,7 +158,7 @@ const HomePageHeader: React.FC = () => {
             <div style={{ 
               display: 'flex', 
               alignItems: 'center', 
-              gap: window.innerWidth > 480 ? '12px' : '8px',
+              gap: !isMobile ? '12px' : '8px',
               flexWrap: 'nowrap',
               zIndex: 2
             }}>
@@ -165,14 +167,14 @@ const HomePageHeader: React.FC = () => {
                 value={language}
                 onChange={setLanguage}
                 style={{ 
-                  width: window.innerWidth > 480 ? 120 : 100,
+                  width: !isMobile ? 120 : 100,
                   borderRadius: '20px',
                   fontSize: '12px'
                 }}
                 suffixIcon={<GlobalOutlined />}
                 options={[
-                  { value: 'vi', label: window.innerWidth > 480 ? '🇻🇳 Tiếng Việt' : '🇻🇳 VI' },
-                  { value: 'en', label: window.innerWidth > 480 ? '🇺🇸 English' : '🇺🇸 EN' }
+                  { value: 'vi', label: !isMobile ? '🇻🇳 Tiếng Việt' : '🇻🇳 VI' },
+                  { value: 'en', label: !isMobile ? '🇺🇸 English' : '🇺🇸 EN' }
                 ]}
               />
 
@@ -183,9 +185,9 @@ const HomePageHeader: React.FC = () => {
                 onClick={() => navigate('/feedback')}
                 glowEffect={true}
                 shimmerEffect={true}
-                size={window.innerWidth > 480 ? 'medium' : 'small'}
+                size={!isMobile ? 'medium' : 'small'}
               >
-                {window.innerWidth > 480 ? t('nav.contact') : <PhoneOutlined />}
+                {!isMobile ? t('nav.contact') : ''}
               </AnimatedButton>
 
               {/* Mobile Menu Button */}
@@ -199,7 +201,7 @@ const HomePageHeader: React.FC = () => {
                   width: '36px',
                   background: 'rgba(255, 255, 255, 0.8)',
                   border: '1px solid rgba(0, 0, 0, 0.1)',
-                  display: window.innerWidth <= 768 ? 'flex' : 'none',
+                  display: isMobile ? 'flex' : 'none',
                   alignItems: 'center',
                   justifyContent: 'center',
                   transition: 'all 0.3s ease',

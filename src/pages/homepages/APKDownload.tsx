@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { 
   Card, 
   Button, 
@@ -37,6 +37,8 @@ import HomePageHeader from './header/header';
 import HomePageFooter from './footer/footer';
 import AnimatedSection from '../../components/AnimatedSection';
 import { saveDownload, getDownloadStats } from '../../utils/downloadTracker';
+import { getFeedbackStats } from '../../utils/feedbackTracker';
+import { useResponsive } from '../../hooks/useResponsive';
 
 // Import application images
 import navigateRoute from '../../assets/images/application/navigate-route.png';
@@ -65,14 +67,20 @@ const APKDownload: React.FC = () => {
   const [imagePreviewVisible, setImagePreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: '' });
+  const [feedbackStats, setFeedbackStats] = useState({ averageRating: 0 });
   const downloadFormRef = useRef<HTMLDivElement>(null);
+  const { isMobile, isTablet } = useResponsive();
 
   // Load download stats khi component mount
   useEffect(() => {
     const stats = getDownloadStats();
+    const feedbacks = getFeedbackStats();
     setDownloadStats({
       totalDownloads: stats.totalDownloads,
       lastUpdated: stats.lastUpdated
+    });
+    setFeedbackStats({
+      averageRating: feedbacks.averageRating
     });
   }, []);
 
@@ -192,8 +200,8 @@ const APKDownload: React.FC = () => {
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
             backdropFilter: 'blur(10px)'
           }}>
-          <Row gutter={[24, 24]} align="middle">
-            <Col xs={24} md={12}>
+          <Row gutter={[16, 16]} align="middle">
+            <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16}>
                 <Title level={1} style={{ margin: 0, color: '#fff' }}>
                   <AndroidOutlined style={{ color: '#52c41a', marginRight: 12 }} />
@@ -219,11 +227,11 @@ const APKDownload: React.FC = () => {
                 </Space>
               </Space>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={24} sm={24} md={12}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{
-                  width: '200px',
-                  height: '200px',
+                  width: isMobile ? '150px' : '200px',
+                  height: isMobile ? '150px' : '200px',
                   backgroundColor: '#f0f0f0',
                   borderRadius: '20px',
                   display: 'flex',
@@ -232,14 +240,14 @@ const APKDownload: React.FC = () => {
                   margin: '0 auto',
                   border: '2px dashed #d9d9d9'
                 }}>
-                  <AndroidOutlined style={{ fontSize: '80px', color: '#52c41a' }} />
+                  <AndroidOutlined style={{ fontSize: isMobile ? '60px' : '80px', color: '#52c41a' }} />
                 </div>
                 <Text style={{ marginTop: 16, display: 'block', color: 'rgba(255, 255, 255, 0.8)' }}>
                   Icon ứng dụng Mekong Pathfinder
                 </Text>
                 <Button
                   type="primary"
-                  size="large"
+                  size={isMobile ? 'middle' : 'large'}
                   icon={<DownloadOutlined />}
                   onClick={scrollToDownloadForm}
                   style={{
@@ -247,9 +255,9 @@ const APKDownload: React.FC = () => {
                     background: 'linear-gradient(135deg, #52c41a 0%, #73d13d 100%)',
                     border: 'none',
                     borderRadius: '25px',
-                    height: '50px',
-                    padding: '0 30px',
-                    fontSize: '16px',
+                    height: isMobile ? '40px' : '50px',
+                    padding: isMobile ? '0 20px' : '0 30px',
+                    fontSize: isMobile ? '14px' : '16px',
                     fontWeight: '600',
                     boxShadow: '0 4px 15px rgba(82, 196, 26, 0.4)'
                   }}
@@ -289,23 +297,23 @@ const APKDownload: React.FC = () => {
               arrows={true}
             >
               <div>
-                <Row gutter={[24, 24]}>
-                  <Col xs={24} md={12}>
-                    <div style={{ textAlign: 'center' }}>
-                      <img
-                        src={navigateRoute}
-                        alt="Navigate Route"
-                        style={{
-                          width: '100%',
-                          maxWidth: '300px',
-                          height: 'auto',
-                          borderRadius: '12px',
-                          boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
-                        }}
-                      />
-                    </div>
-                  </Col>
-                  <Col xs={24} md={12}>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} sm={24} md={12}>
+                <div style={{ textAlign: 'center' }}>
+                  <img
+                    src={navigateRoute}
+                    alt="Navigate Route"
+                    style={{
+                      width: '100%',
+                      maxWidth: isMobile ? '250px' : '300px',
+                      height: 'auto',
+                      borderRadius: '12px',
+                      boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
+                    }}
+                  />
+                </div>
+              </Col>
+              <Col xs={24} sm={24} md={12}>
                     <Space direction="vertical" size={16} style={{ width: '100%' }}>
                       <Title level={3} style={{ color: '#fff', margin: 0 }}>
                         Điều hướng thông minh
@@ -445,13 +453,13 @@ const APKDownload: React.FC = () => {
               fontWeight: '700'
             }}
           >
-            <Row gutter={[16, 16]}>
+            <Row gutter={[12, 12]}>
               {appFeatures.map((feature, index) => (
                 <Col xs={24} sm={12} md={6} key={index}>
                   <Card 
                     size="small" 
                     style={{
-                      height: '200px',
+                      height: isMobile ? '180px' : '200px',
                       display: 'flex',
                       flexDirection: 'column',
                       background: 'rgba(255, 255, 255, 0.05)',
@@ -769,12 +777,12 @@ const APKDownload: React.FC = () => {
                 background: 'transparent',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
                 color: '#fff',
-                fontSize: '24px',
+                fontSize: isMobile ? '20px' : '24px',
                 fontWeight: '700'
               }}
             >
-          <Row gutter={[24, 24]}>
-            <Col xs={24} md={12}>
+          <Row gutter={[16, 16]}>
+            <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
                 <Title level={4} style={{ color: '#fff' }}>Thông tin cá nhân</Title>
                 <Paragraph style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
@@ -834,7 +842,7 @@ const APKDownload: React.FC = () => {
               </Space>
             </Col>
             
-            <Col xs={24} md={12}>
+            <Col xs={24} sm={24} md={12}>
               <Card 
                 title="Thống kê tải xuống" 
                 size="small"
@@ -848,22 +856,24 @@ const APKDownload: React.FC = () => {
                   background: 'transparent',
                   borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
                   color: '#fff',
-                  fontSize: '18px',
+                  fontSize: isMobile ? '16px' : '18px',
                   fontWeight: '600'
                 }}
               >
                 <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                  <Row gutter={[16, 16]}>
-                    <Col span={12}>
+                  <Row gutter={[8, 8]}>
+                    <Col xs={12} sm={12} md={12}>
                       <div style={{ textAlign: 'center' }}>
-                        <Title level={2} style={{ margin: 0, color: '#52c41a' }}>{downloadStats.totalDownloads}</Title>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Lượt tải</Text>
+                        <Title level={isMobile ? 3 : 2} style={{ margin: 0, color: '#52c41a' }}>{downloadStats.totalDownloads}</Title>
+                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: isMobile ? '12px' : '14px' }}>Lượt tải</Text>
                       </div>
                     </Col>
-                    <Col span={12}>
+                    <Col xs={12} sm={12} md={12}>
                       <div style={{ textAlign: 'center' }}>
-                        <Title level={2} style={{ margin: 0, color: '#1890ff' }}>4.8</Title>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Đánh giá</Text>
+                        <Title level={isMobile ? 3 : 2} style={{ margin: 0, color: '#1890ff' }}>
+                          {feedbackStats.averageRating.toFixed(1)}
+                        </Title>
+                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: isMobile ? '12px' : '14px' }}>Đánh giá</Text>
                       </div>
                     </Col>
                   </Row>

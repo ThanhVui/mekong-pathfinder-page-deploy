@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Card, 
   Button, 
@@ -59,6 +59,9 @@ import { useLanguage } from '../../context/LanguageContext';
 import HomePageHeader from './header/header';
 import HomePageFooter from './footer/footer';
 import AnimatedSection from '../../components/AnimatedSection';
+// import { useResponsive } from '../../hooks/useResponsive';
+import { getDownloadStats } from '../../utils/downloadTracker';
+import { getFeedbackStats } from '../../utils/feedbackTracker';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -66,6 +69,35 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  // const { isMobile, isTablet } = useResponsive();
+  const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: '' });
+  const [feedbackStats, setFeedbackStats] = useState({ 
+    totalFeedbacks: 0, 
+    averageRating: 0, 
+    categoryStats: {},
+    recentFeedbacks: [] as any[]
+  });
+
+  // Load stats on component mount
+  useEffect(() => {
+    const loadStats = () => {
+      try {
+        const downloads = getDownloadStats();
+        const feedbacks = getFeedbackStats();
+        setDownloadStats(downloads);
+        setFeedbackStats({
+          totalFeedbacks: feedbacks.totalFeedbacks,
+          averageRating: feedbacks.averageRating,
+          categoryStats: feedbacks.categoryStats,
+          recentFeedbacks: feedbacks.recentFeedbacks
+        });
+      } catch (error) {
+        console.error('Error loading stats:', error);
+      }
+    };
+    
+    loadStats();
+  }, []);
 
   const features = [
     {
@@ -113,52 +145,78 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: t('home.testimonials.user1.name'),
-      role: t('home.testimonials.user1.role'),
-      content: t('home.testimonials.user1.content'),
-      rating: 5,
-      avatar: null
-    },
-    {
-      name: t('home.testimonials.user2.name'),
-      role: t('home.testimonials.user2.role'),
-      content: t('home.testimonials.user2.content'),
-      rating: 5,
-      avatar: null
-    },
-    {
-      name: t('home.testimonials.user3.name'),
-      role: t('home.testimonials.user3.role'),
-      content: t('home.testimonials.user3.content'),
-      rating: 4,
-      avatar: null
+  // Get testimonials from feedback data using useMemo
+  const testimonials = useMemo(() => {
+    const feedbacks = feedbackStats.recentFeedbacks;
+    const topFeedbacks = feedbacks
+      .filter((f: any) => f.rating >= 4)
+      .slice(0, 3);
+    
+    if (topFeedbacks.length === 0) {
+      // Fallback to default testimonials if no feedback data
+      return [
+        {
+          name: t('home.testimonials.user1.name'),
+          role: t('home.testimonials.user1.role'),
+          content: t('home.testimonials.user1.content'),
+          rating: 5,
+          avatar: null
+        },
+        {
+          name: t('home.testimonials.user2.name'),
+          role: t('home.testimonials.user2.role'),
+          content: t('home.testimonials.user2.content'),
+          rating: 5,
+          avatar: null
+        },
+        {
+          name: t('home.testimonials.user3.name'),
+          role: t('home.testimonials.user3.role'),
+          content: t('home.testimonials.user3.content'),
+          rating: 4,
+          avatar: null
+        }
+      ];
     }
-  ];
+    
+    return topFeedbacks.map((feedback: any) => ({
+      name: feedback.name,
+      role: feedback.isAnonymous ? 'Người dùng ẩn danh' : 'Người dùng',
+      content: feedback.content,
+      rating: feedback.rating,
+      avatar: feedback.avatar
+    }));
+  }, [feedbackStats.recentFeedbacks.length]);
 
-  const achievements = [
-    {
-      icon: <TrophyOutlined style={{ color: '#faad14' }} />,
-      title: t('home.achievements.award.title'),
-      description: t('home.achievements.award.desc')
-    },
-    {
-      icon: <StarOutlined style={{ color: '#52c41a' }} />,
-      title: t('home.achievements.rating.title'),
-      description: t('home.achievements.rating.desc')
-    },
-    {
-      icon: <GlobalOutlined style={{ color: '#1890ff' }} />,
-      title: t('home.achievements.users.title'),
-      description: t('home.achievements.users.desc')
-    },
-    {
-      icon: <HeartOutlined style={{ color: '#ff4d4f' }} />,
-      title: t('home.achievements.support.title'),
-      description: t('home.achievements.support.desc')
-    }
-  ];
+  // Get achievements from real data using useMemo
+  const achievements = useMemo(() => {
+    return [
+      {
+        icon: <TrophyOutlined style={{ color: '#faad14' }} />,
+        title: 'Tổng lượt tải',
+        description: `${downloadStats.totalDownloads} lượt tải xuống`,
+        value: downloadStats.totalDownloads
+      },
+      {
+        icon: <StarOutlined style={{ color: '#52c41a' }} />,
+        title: 'Đánh giá trung bình',
+        description: `${feedbackStats.averageRating.toFixed(1)}/5 sao`,
+        value: feedbackStats.averageRating
+      },
+      {
+        icon: <MessageOutlined style={{ color: '#1890ff' }} />,
+        title: 'Góp ý nhận được',
+        description: `${feedbackStats.totalFeedbacks} góp ý từ người dùng`,
+        value: feedbackStats.totalFeedbacks
+      },
+      {
+        icon: <HeartOutlined style={{ color: '#ff4d4f' }} />,
+        title: 'Phản hồi tích cực',
+        description: `${Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)}% hài lòng`,
+        value: Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)
+      }
+    ];
+  }, [downloadStats.totalDownloads, feedbackStats.averageRating, feedbackStats.totalFeedbacks, feedbackStats.recentFeedbacks.length]);
 
   const carouselItems = [
     {
@@ -371,7 +429,7 @@ const HomePage: React.FC = () => {
         position: 'relative'
       }}>
         <div style={{ 
-          padding: window.innerWidth > 768 ? '40px 60px' : '20px 24px',
+          padding: 'clamp(20px, 5vw, 40px) clamp(16px, 3vw, 60px)',
           maxWidth: '1400px',
           margin: '0 auto'
         }}>
@@ -397,7 +455,7 @@ const HomePage: React.FC = () => {
               textAlign: 'center'
             }}
           >
-            <Row gutter={[24, 24]} justify="center">
+            <Row gutter={[16, 16]} justify="center">
               {[
                 {
                   title: 'Kết quả khảo sát cộng đồng - Video 1',
@@ -431,7 +489,7 @@ const HomePage: React.FC = () => {
                       overflow: 'hidden',
                       boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
                       transition: 'all 0.3s ease',
-                      height: '350px',
+                      height: 'clamp(300px, 50vh, 350px)',
                       background: 'rgba(87, 128, 161, 0.1)',
                       border: '1px solid rgba(87, 128, 161, 0.3)',
                       display: 'flex',
@@ -449,7 +507,7 @@ const HomePage: React.FC = () => {
                     {/* Video Player */}
                     <div style={{ 
                       position: 'relative', 
-                      height: '200px',
+                      height: 'clamp(150px, 25vh, 200px)',
                       background: '#000'
                     }}>
                       {item.videoUrl.includes('player.cloudinary.com') ? (
@@ -490,7 +548,7 @@ const HomePage: React.FC = () => {
             <div>
                         <h4 style={{ 
                           margin: '0 0 8px 0', 
-                          fontSize: '16px', 
+                          fontSize: 'clamp(14px, 2.5vw, 16px)', 
                           fontWeight: '600',
                           color: '#ffffff'
                         }}>
@@ -498,7 +556,7 @@ const HomePage: React.FC = () => {
                         </h4>
                         <p style={{ 
                           margin: '0 0 12px 0', 
-                          fontSize: '12px', 
+                          fontSize: 'clamp(10px, 2vw, 12px)', 
                           color: 'rgba(255, 255, 255, 0.8)',
                           lineHeight: '1.4'
                         }}>
@@ -510,7 +568,7 @@ const HomePage: React.FC = () => {
                         display: 'flex', 
                         justifyContent: 'space-between', 
                         alignItems: 'center',
-                        fontSize: '11px',
+                        fontSize: 'clamp(9px, 1.8vw, 11px)',
                         color: 'rgba(255, 255, 255, 0.7)'
                       }}>
                         <span>{item.duration}</span>
@@ -659,7 +717,7 @@ const HomePage: React.FC = () => {
                 />}
           >
             <div>
-                  <Row gutter={[24, 24]} justify="center">
+                  <Row gutter={[16, 16]} justify="center">
                     {[
                       { 
                         image: post01, 
@@ -703,7 +761,7 @@ const HomePage: React.FC = () => {
                             boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
                             transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                             cursor: 'pointer',
-                            height: '400px',
+                            height: 'clamp(350px, 60vh, 400px)',
                             background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
                             border: '1px solid rgba(255, 215, 0, 0.2)'
                       }}
@@ -776,7 +834,7 @@ const HomePage: React.FC = () => {
                               alt={achievement.title}
                           style={{
                             width: '100%',
-                                height: '240px',
+                                height: 'clamp(200px, 30vh, 240px)',
                                 objectFit: 'cover',
                                 filter: 'brightness(0.9)'
                           }}
@@ -1955,7 +2013,7 @@ const HomePage: React.FC = () => {
           }}
           headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
         >
-          <Row gutter={[16, 16]}>
+          <Row gutter={[12, 12]}>
             {features.map((feature, index) => (
               <Col xs={24} sm={12} md={6} key={index}>
                 <Card 
@@ -1994,10 +2052,10 @@ const HomePage: React.FC = () => {
             backdropFilter: 'blur(15px)',
             width: '100%'
           }}
-          headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
+          headStyle={{ color: '#fff', fontSize: 'clamp(24px, 4vw, 28px)', fontWeight: '700' }}
         >
-          <Row gutter={[24, 24]}>
-            <Col xs={24} md={12}>
+          <Row gutter={[16, 16]}>
+            <Col xs={24} sm={24} md={12}>
               <div style={{ color: '#fff' }}>
               <Steps
                 direction="vertical"
@@ -2010,10 +2068,10 @@ const HomePage: React.FC = () => {
               />
               </div>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#fff' }}>{t('home.howto.start.title')}</Title>
-                <Paragraph style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                <Title level={4} style={{ color: '#fff', fontSize: 'clamp(16px, 3vw, 20px)' }}>{t('home.howto.start.title')}</Title>
+                <Paragraph style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: 'clamp(14px, 2.5vw, 16px)' }}>
                   {t('home.howto.start.desc')}
                 </Paragraph>
                 <Alert
@@ -2051,7 +2109,7 @@ const HomePage: React.FC = () => {
           }}
           headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
         >
-          <Row gutter={[16, 16]}>
+          <Row gutter={[12, 12]}>
             {achievements.map((achievement, index) => (
               <Col xs={24} sm={12} md={6} key={index}>
                 <Card 
@@ -2068,6 +2126,16 @@ const HomePage: React.FC = () => {
                     <div style={{ fontSize: '32px' }}>{achievement.icon}</div>
                     <Title level={5} style={{ margin: 0, color: '#fff' }}>{achievement.title}</Title>
                     <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{achievement.description}</Text>
+                    {achievement.value !== undefined && (
+                      <Statistic
+                        value={achievement.value}
+                        valueStyle={{ 
+                          color: '#fff', 
+                          fontSize: 'clamp(18px, 4vw, 24px)',
+                          fontWeight: 'bold'
+                        }}
+                      />
+                    )}
                   </Space>
                 </Card>
               </Col>
@@ -2090,9 +2158,9 @@ const HomePage: React.FC = () => {
           }}
           headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
         >
-          <Row gutter={[16, 16]}>
-            {testimonials.map((testimonial, index) => (
-              <Col xs={24} md={8} key={index}>
+          <Row gutter={[12, 12]}>
+            {testimonials.map((testimonial: any, index: number) => (
+              <Col xs={24} sm={24} md={8} key={index}>
                 <Card 
                   size="small"
                   style={{ 
@@ -2106,6 +2174,7 @@ const HomePage: React.FC = () => {
                     <Space>
                       <Avatar 
                         size={40}
+                        src={testimonial.avatar}
                         style={{ 
                           backgroundColor: '#1890ff',
                           color: '#fff'
@@ -2146,8 +2215,8 @@ const HomePage: React.FC = () => {
           }}
           headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
         >
-          <Row gutter={[24, 24]}>
-            <Col xs={24} md={12}>
+          <Row gutter={[16, 16]}>
+            <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
                 <Title level={4} style={{ color: '#fff' }}>{t('home.contact.info.title')}</Title>
                 <List
@@ -2167,19 +2236,20 @@ const HomePage: React.FC = () => {
                 />
               </Space>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#fff' }}>{t('home.contact.support.title')}</Title>
+                <Title level={4} style={{ color: '#fff', fontSize: 'clamp(16px, 3vw, 20px)' }}>{t('home.contact.support.title')}</Title>
                 <Space wrap>
                   <Button 
                     type="primary" 
                     icon={<MessageOutlined />}
                     onClick={() => navigate('/feedback')}
+                    size="large"
                     style={{ 
                       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                       border: 'none',
                       borderRadius: '8px',
-                      height: '40px'
+                      height: 'clamp(36px, 5vh, 40px)'
                     }}
                   >
                     {t('home.contact.support.feedback')}
@@ -2187,12 +2257,13 @@ const HomePage: React.FC = () => {
                   <Button 
                     icon={<DownloadOutlined />}
                     onClick={() => navigate('/apk-download')}
+                    size="large"
                     style={{ 
                       background: 'rgba(255, 255, 255, 0.1)',
                       border: '1px solid rgba(255, 255, 255, 0.2)',
                       color: '#fff',
                       borderRadius: '8px',
-                      height: '40px'
+                      height: 'clamp(36px, 5vh, 40px)'
                     }}
                   >
                     {t('home.contact.support.download')}

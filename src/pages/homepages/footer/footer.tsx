@@ -202,27 +202,6 @@ const HomePageFooter: React.FC = () => {
               </Space>
             </Col>
 
-            {/* Admin Section */}
-            <Col xs={24} sm={12} md={4}>
-              <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={5} style={{ color: '#fff', margin: 0 }}>
-                  Admin
-                </Title>
-                <Button
-                  type="link"
-                  onClick={() => navigate('/admin')}
-                  style={{
-                    color: 'rgba(255, 255, 255, 0.8)',
-                    padding: '4px 0',
-                    height: 'auto',
-                    textAlign: 'left',
-                    fontWeight: '400'
-                  }}
-                >
-                  📊 Xem thống kê downloads
-                </Button>
-              </Space>
-            </Col>
 
             {/* Newsletter */}
             <Col xs={24} md={8}>
