@@ -59,6 +59,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import HomePageHeader from './header/header';
 import HomePageFooter from './footer/footer';
 import AnimatedSection from '../../components/AnimatedSection';
+import NavigationButton from '../../components/NavigationButton';
 // import { useResponsive } from '../../hooks/useResponsive';
 import { getDownloadStats } from '../../utils/downloadTracker';
 import { getFeedbackStats } from '../../utils/feedbackTracker';
@@ -238,7 +239,7 @@ const HomePage: React.FC = () => {
     <>
       
       {/* Hero Section - Full Width */}
-      <div style={{ position: 'relative', paddingTop: '30px', background: 'rgb(52, 52, 139)'}}>
+      <div style={{ position: 'relative', paddingTop: '10px', background: 'rgb(52, 52, 139)' }}>
       <HomePageHeader />
 
             <Carousel 
@@ -250,122 +251,113 @@ const HomePage: React.FC = () => {
             >
             {carouselItems.map((item, index) => (
               <div key={index}>
-                  <div style={{ 
+                <div style={{ 
+                  position: 'relative',
+                  minHeight: 'clamp(400px, 60vh, 700px)',
+                  maxWidth: '1400px',
+                  margin: '0 auto',
+                  borderRadius: '20px',
+                  backgroundImage: `url(${item.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
                   display: 'flex',
-                  minHeight: 'clamp(500px, 60vh, 700px)',
-                  height: 'clamp(500px, 60vh, 700px)',
+                  alignItems: 'flex-end',
+                  overflow: 'hidden',
                   width: '100%',
-                  overflow: 'hidden'
                 }}>
-                  {/* Content bên trái - 3/10 */}
+                  {/* Overlay để làm tối ảnh nền */}
                   <div style={{
-                    flex: '0 0 30%',
-                    background: 'linear-gradient(135deg, #34348b 0%, #4a4a9e 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: 'clamp(20px, 5vw, 40px)',
-                    position: 'relative',
-                    paddingLeft: '100px'
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%)',
+                    zIndex: 1
+                  }} />
+                  
+                  {/* Content overlay - góc dưới trái */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '40px',
+                    left: '40px',
+                    zIndex: 2,
+                    color: 'white',
+                    textAlign: 'left',
+                    maxWidth: '600px'
                   }}>
-                    <div style={{
-                      width: '100%',
-                      color: 'white',
-                      textAlign: 'left'
-                    }}>
-                      <Space direction="vertical" size={24} style={{ width: '100%' }}>
-                        <Title level={1} style={{ 
-                          margin: 0,
-                          fontSize: 'clamp(24px, 4vw, 36px)',
-                          color: 'white',
-                          fontWeight: '700',
-                          textAlign: 'left'
-                        }}>
+                    <Space direction="vertical" size={24} style={{ width: '100%' }}>
+                      <Title level={1} style={{ 
+                        margin: 0,
+                        fontSize: 'clamp(28px, 4vw, 42px)',
+                        color: 'white',
+                        textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
+                        fontWeight: '700',
+                        textAlign: 'left'
+                      }}>
                         {item.title}
                       </Title>
-                        <Paragraph style={{ 
-                          fontSize: 'clamp(14px, 2.5vw, 18px)', 
-                          lineHeight: 1.6,
-                          color: 'rgba(255,255,255,0.95)',
-                          margin: 0,
-                          textAlign: 'left'
-                        }}>
+                      <Paragraph style={{ 
+                        fontSize: 'clamp(16px, 2.5vw, 20px)', 
+                        lineHeight: 1.6,
+                        color: 'rgba(255,255,255,0.95)',
+                        textShadow: '1px 1px 2px rgba(0,0,0,0.7)',
+                        margin: 0,
+                        textAlign: 'left'
+                      }}>
                         {item.description}
                       </Paragraph>
-                        <Space wrap style={{ justifyContent: 'flex-start' }}>
+                      <Space wrap style={{ justifyContent: 'flex-start' }}>
                         <Button 
                           type="primary" 
-                            size="large"
+                          size="large"
                           icon={<ArrowRightOutlined />}
                           onClick={item.buttonAction}
-                            style={{
-                              background: 'linear-gradient(135deg, #1890ff 0%, #40a9ff 100%)',
-                              border: 'none',
-                              borderRadius: '25px',
-                              height: '50px',
-                              padding: '0 30px',
-                              fontSize: '16px',
-                              fontWeight: '600',
-                              boxShadow: '0 4px 15px rgba(24, 144, 255, 0.4)'
-                            }}
+                          style={{
+                            background: 'linear-gradient(135deg, #1890ff 0%, #40a9ff 100%)',
+                            border: 'none',
+                            borderRadius: '25px',
+                            height: '50px',
+                            padding: '0 30px',
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            boxShadow: '0 4px 15px rgba(24, 144, 255, 0.4)',
+                            textShadow: 'none',
+                            minWidth: '160px'
+                          }}
                         >
                           {item.buttonText}
                         </Button>
                         <Button 
-                            size="large"
+                          size="large"
                           icon={<PlayCircleOutlined />}
-                            style={{
-                              borderRadius: '25px',
-                              height: '50px',
-                              padding: '0 30px',
-                              fontSize: '16px',
-                              fontWeight: '600',
-                              border: '2px solid white',
-                              color: 'white',
-                              background: 'rgba(255, 255, 255, 0.2)',
-                              backdropFilter: 'blur(10px)'
-                            }}
-                          >
-                            {t('home.hero.video')}
+                          style={{
+                            borderRadius: '25px',
+                            height: '50px',
+                            padding: '0 30px',
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            border: '2px solid white',
+                            color: 'white',
+                            background: 'rgba(255, 255, 255, 0.2)',
+                            backdropFilter: 'blur(10px)',
+                            minWidth: '160px'
+                          }}
+                        >
+                          {t('home.hero.video')}
                         </Button>
                       </Space>
                     </Space>
-                    </div>
-                  </div>
-                  
-                  {/* Ảnh bên phải - 5/10 */}
-                  <div style={{
-                    flex: '0 0 70%',
-                    backgroundImage: `url(${item.image})`,
-                    backgroundSize: '100% 100%',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    position: 'relative',
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    {/* Overlay nhẹ */}
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      background: 'linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%)',
-                      zIndex: 1
-                    }} />
-                    </div>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
             </Carousel>
             
             {/* Navigation Arrows */}
-            <Button
-              type="text"
-              icon={<LeftOutlined />}
+            <NavigationButton
+              direction="left"
               onClick={() => {
                 const newSlide = currentSlide > 0 ? currentSlide - 1 : carouselItems.length - 1;
                 setCurrentSlide(newSlide);
@@ -373,33 +365,14 @@ const HomePage: React.FC = () => {
               }}
               style={{
                 position: 'absolute',
-                left: '20px',
-                top: '50%',
+                top: '60%',
+                left: '2%',
                 transform: 'translateY(-50%)',
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.9)',
-                border: 'none',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-                fontSize: '18px',
-                color: '#1890ff',
-                zIndex: 10,
-                backdropFilter: 'blur(10px)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
-                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
-                e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                zIndex: 10
               }}
             />
-            <Button
-              type="text"
-              icon={<RightOutlined />}
+            <NavigationButton
+              direction="right"
               onClick={() => {
                 const newSlide = currentSlide < carouselItems.length - 1 ? currentSlide + 1 : 0;
                 setCurrentSlide(newSlide);
@@ -407,28 +380,10 @@ const HomePage: React.FC = () => {
               }}
               style={{
                 position: 'absolute',
-                right: '20px',
-                top: '50%',
+                top: '60%',
+                right: '2%',
                 transform: 'translateY(-50%)',
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.9)',
-                border: 'none',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-                fontSize: '18px',
-                color: '#1890ff',
-                zIndex: 10,
-                backdropFilter: 'blur(10px)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
-                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
-                e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                zIndex: 10
               }}
             />
         </div>
@@ -448,7 +403,7 @@ const HomePage: React.FC = () => {
           <Space direction="vertical" size={40} style={{ width: '100%' }}>
 
         {/* Community Interview Section */}
-        <AnimatedSection animationType="fadeInUp" delay={200}>
+        <AnimatedSection animationType="fadeInUp" delay={100}>
           <Card 
             title="Community Survey Results"
             style={{
@@ -596,7 +551,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Social Achievement Section */}
-        <AnimatedSection animationType="fadeInUp" delay={300}>
+        <AnimatedSection animationType="fadeInUp" delay={100}>
           <Card 
             title={
               <div style={{ textAlign: 'center' }}>
@@ -663,68 +618,36 @@ const HomePage: React.FC = () => {
                   className: 'custom-dots'
                 }}
                 arrows={true}
-                prevArrow={<Button 
-                  type="text" 
-                  icon={<LeftOutlined />} 
+                prevArrow={<NavigationButton
+                  direction="left"
+                  onClick={() => {}}
                   style={{ 
                     width: '60px',
                     height: '60px',
-                    borderRadius: '50%',
                     background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
                     border: '3px solid rgba(255, 255, 255, 0.3)',
                     boxShadow: '0 8px 25px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     color: '#000',
                     fontSize: '22px',
                     fontWeight: 'bold',
-                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                    zIndex: 10,
                     position: 'relative',
                     overflow: 'hidden'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.15) translateX(-8px)';
-                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.5)';
-                    e.currentTarget.style.border = '3px solid rgba(255, 255, 255, 0.6)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1) translateX(0)';
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3)';
-                    e.currentTarget.style.border = '3px solid rgba(255, 255, 255, 0.3)';
                   }}
                 />}
-                nextArrow={<Button 
-                  type="text" 
-                  icon={<RightOutlined />} 
+                nextArrow={<NavigationButton
+                  direction="right"
+                  onClick={() => {}}
                   style={{ 
                     width: '60px',
                     height: '60px',
-                    borderRadius: '50%',
                     background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
                     border: '3px solid rgba(255, 255, 255, 0.3)',
                     boxShadow: '0 8px 25px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     color: '#000',
                     fontSize: '22px',
                     fontWeight: 'bold',
-                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                    zIndex: 10,
                     position: 'relative',
                     overflow: 'hidden'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.15) translateX(8px)';
-                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.5)';
-                    e.currentTarget.style.border = '3px solid rgba(255, 255, 255, 0.6)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1) translateX(0)';
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3)';
-                    e.currentTarget.style.border = '3px solid rgba(255, 255, 255, 0.3)';
                   }}
                 />}
           >
@@ -1082,7 +1005,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Awesome Stuffs Section */}
-        <AnimatedSection animationType="fadeInUp" delay={200}>
+        <AnimatedSection animationType="fadeInUp" delay={100}>
         <Card 
           title="Some Of Our Awesome Stuffs"
           style={{ 
@@ -2012,7 +1935,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Features Section */}
-        <AnimatedSection animationType="fadeInLeft" delay={200}>
+        <AnimatedSection animationType="fadeInLeft" delay={100}>
         <Card 
           title={t('home.features.title')}
           style={{ 
@@ -2053,7 +1976,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* How to Use */}
-        <AnimatedSection animationType="fadeInRight" delay={200}>
+        <AnimatedSection animationType="fadeInRight" delay={100}>
         <Card 
           title={t('home.howto.title')}
           style={{ 
@@ -2108,7 +2031,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Achievements */}
-        <AnimatedSection animationType="scaleIn" delay={200}>
+        <AnimatedSection animationType="scaleIn" delay={100}>
         <Card 
           title={t('home.achievements.title')}
           style={{ 
@@ -2157,7 +2080,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Testimonials */}
-        <AnimatedSection animationType="fadeInUp" delay={200}>
+        <AnimatedSection animationType="fadeInUp" delay={100}>
         <Card 
           title={t('home.testimonials.title')}
           style={{ 
@@ -2214,7 +2137,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Contact & Support */}
-        <AnimatedSection animationType="fadeInUp" delay={200}>
+        <AnimatedSection animationType="fadeInUp" delay={100}>
         <Card 
           title={t('home.contact.title')}
           style={{ 
