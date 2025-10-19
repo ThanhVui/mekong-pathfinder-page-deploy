@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Card, 
   Button, 
@@ -69,6 +69,7 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const carouselRef = useRef<any>(null);
   // const { isMobile, isTablet } = useResponsive();
   const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: '' });
   const [feedbackStats, setFeedbackStats] = useState({ 
@@ -145,60 +146,52 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  // Get testimonials from feedback data using useMemo
-  const testimonials = useMemo(() => {
-    const feedbacks = feedbackStats.recentFeedbacks;
-    const topFeedbacks = feedbacks
-      .filter((f: any) => f.rating === 5)
-      .slice(0, 3);
-    
-    if (topFeedbacks.length === 0) {
-      // Fallback to default testimonials if no feedback data
-      return [
-        {
-          name: t('home.testimonials.user1.name'),
-          role: t('home.testimonials.user1.role'),
-          content: t('home.testimonials.user1.content'),
-          rating: 5,
-          avatar: null
-        },
-        {
-          name: t('home.testimonials.user2.name'),
-          role: t('home.testimonials.user2.role'),
-          content: t('home.testimonials.user2.content'),
-          rating: 5,
-          avatar: null
-        },
-        {
-          name: t('home.testimonials.user3.name'),
-          role: t('home.testimonials.user3.role'),
-          content: t('home.testimonials.user3.content'),
-          rating: 4,
-          avatar: null
-        }
-      ];
+  // Get testimonials from feedback data
+  const feedbacks = feedbackStats.recentFeedbacks;
+  const topFeedbacks = feedbacks
+    .filter((f: any) => f.rating === 5)
+    .slice(0, 3);
+  
+  const testimonials = topFeedbacks.length === 0 ? [
+    {
+      name: t('home.testimonials.user1.name'),
+      role: t('home.testimonials.user1.role'),
+      content: t('home.testimonials.user1.content'),
+      rating: 5,
+      avatar: null
+    },
+    {
+      name: t('home.testimonials.user2.name'),
+      role: t('home.testimonials.user2.role'),
+      content: t('home.testimonials.user2.content'),
+      rating: 5,
+      avatar: null
+    },
+    {
+      name: t('home.testimonials.user3.name'),
+      role: t('home.testimonials.user3.role'),
+      content: t('home.testimonials.user3.content'),
+      rating: 4,
+      avatar: null
     }
-    
-    return topFeedbacks.map((feedback: any) => ({
-      name: feedback.name,
-      role: feedback.isAnonymous ? 'Người dùng ẩn danh' : 'Người dùng',
-      content: feedback.content,
-      rating: feedback.rating,
-      avatar: feedback.avatar
-    }));
-  }, [feedbackStats.recentFeedbacks.length]);
+  ] : topFeedbacks.map((feedback: any) => ({
+    name: feedback.name,
+    role: feedback.isAnonymous ? 'Người dùng ẩn danh' : 'Người dùng',
+    content: feedback.content,
+    rating: feedback.rating,
+    avatar: feedback.avatar
+  }));
 
-  // Get achievements from real data using useMemo
-  const achievements = useMemo(() => {
-    return [
-      {
-        icon: <TrophyOutlined style={{ color: '#faad14' }} />,
+  // Get achievements from real data
+  const achievements = [
+    {
+      icon: <TrophyOutlined style={{ color: '#faad14' }} />,
         title: 'Tổng lượt tải',
         description: `${downloadStats.totalDownloads} lượt tải xuống`,
         value: downloadStats.totalDownloads
-      },
-      {
-        icon: <StarOutlined style={{ color: '#52c41a' }} />,
+    },
+    {
+      icon: <StarOutlined style={{ color: '#52c41a' }} />,
         title: 'Đánh giá trung bình',
         description: `${feedbackStats.averageRating.toFixed(1)}/5 sao`,
         value: feedbackStats.averageRating
@@ -208,15 +201,14 @@ const HomePage: React.FC = () => {
         title: 'Góp ý nhận được',
         description: `${feedbackStats.totalFeedbacks} góp ý từ người dùng`,
         value: feedbackStats.totalFeedbacks
-      },
-      {
-        icon: <HeartOutlined style={{ color: '#ff4d4f' }} />,
+    },
+    {
+      icon: <HeartOutlined style={{ color: '#ff4d4f' }} />,
         title: 'Phản hồi tích cực',
         description: `${Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)}% hài lòng`,
         value: Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)
-      }
-    ];
-  }, [downloadStats.totalDownloads, feedbackStats.averageRating, feedbackStats.totalFeedbacks, feedbackStats.recentFeedbacks.length]);
+    }
+  ];
 
   const carouselItems = [
     {
@@ -250,73 +242,59 @@ const HomePage: React.FC = () => {
       <HomePageHeader />
 
             <Carousel 
+              ref={carouselRef}
               autoplay 
-              autoplaySpeed={5000} 
+              autoplaySpeed={2000} 
               lazyLoad="ondemand"
               beforeChange={(from, to) => setCurrentSlide(to)}
             >
             {carouselItems.map((item, index) => (
               <div key={index}>
                   <div style={{ 
-                    position: 'relative',
-                    minHeight: window.innerWidth > 768 ? '500px' : '400px',
-                    backgroundImage: `url(${item.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
+                  display: 'flex',
+                  minHeight: 'clamp(500px, 60vh, 700px)',
+                  height: 'clamp(500px, 60vh, 700px)',
+                  width: '100%',
+                  overflow: 'hidden'
+                }}>
+                  {/* Content bên trái - 3/10 */}
+                  <div style={{
+                    flex: '0 0 30%',
+                    background: 'linear-gradient(135deg, #34348b 0%, #4a4a9e 100%)',
                     display: 'flex',
                     alignItems: 'center',
-                    overflow: 'hidden',
-                    width: '100%'
+                    padding: 'clamp(20px, 5vw, 40px)',
+                    position: 'relative',
+                    paddingLeft: '100px'
                   }}>
-                    {/* Overlay để làm tối ảnh nền */}
                     <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      background: 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%)',
-                      zIndex: 1
-                    }} />
-                    
-                    {/* Content overlay - căn giữa hoàn toàn */}
-                    <div style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      zIndex: 2,
                       width: '100%',
-                      padding: '20px',
                       color: 'white',
-                      textAlign: 'center'
+                      textAlign: 'left'
                     }}>
                       <Space direction="vertical" size={24} style={{ width: '100%' }}>
                         <Title level={1} style={{ 
                           margin: 0,
-                          fontSize: window.innerWidth > 768 ? '42px' : '28px',
+                          fontSize: 'clamp(24px, 4vw, 36px)',
                           color: 'white',
-                          textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
                           fontWeight: '700',
-                          textAlign: 'center'
+                          textAlign: 'left'
                         }}>
                         {item.title}
                       </Title>
                         <Paragraph style={{ 
-                          fontSize: window.innerWidth > 768 ? '20px' : '16px', 
+                          fontSize: 'clamp(14px, 2.5vw, 18px)', 
                           lineHeight: 1.6,
                           color: 'rgba(255,255,255,0.95)',
-                          textShadow: '1px 1px 2px rgba(0,0,0,0.7)',
                           margin: 0,
-                          textAlign: 'center'
+                          textAlign: 'left'
                         }}>
                         {item.description}
                       </Paragraph>
-                        <Space wrap style={{ justifyContent: 'center' }}>
+                        <Space wrap style={{ justifyContent: 'flex-start' }}>
                         <Button 
                           type="primary" 
-                            size={window.innerWidth > 768 ? 'large' : 'middle'}
+                            size="large"
                           icon={<ArrowRightOutlined />}
                           onClick={item.buttonAction}
                             style={{
@@ -327,14 +305,13 @@ const HomePage: React.FC = () => {
                               padding: '0 30px',
                               fontSize: '16px',
                               fontWeight: '600',
-                              boxShadow: '0 4px 15px rgba(24, 144, 255, 0.4)',
-                              textShadow: 'none'
+                              boxShadow: '0 4px 15px rgba(24, 144, 255, 0.4)'
                             }}
                         >
                           {item.buttonText}
                         </Button>
                         <Button 
-                            size={window.innerWidth > 768 ? 'large' : 'middle'}
+                            size="large"
                           icon={<PlayCircleOutlined />}
                             style={{
                               borderRadius: '25px',
@@ -354,6 +331,33 @@ const HomePage: React.FC = () => {
                     </Space>
                     </div>
                   </div>
+                  
+                  {/* Ảnh bên phải - 5/10 */}
+                  <div style={{
+                    flex: '0 0 70%',
+                    backgroundImage: `url(${item.image})`,
+                    backgroundSize: '100% 100%',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    {/* Overlay nhẹ */}
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: 'linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%)',
+                      zIndex: 1
+                    }} />
+                    </div>
+                  </div>
                 </div>
               ))}
             </Carousel>
@@ -362,7 +366,11 @@ const HomePage: React.FC = () => {
             <Button
               type="text"
               icon={<LeftOutlined />}
-              onClick={() => setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : carouselItems.length - 1)}
+              onClick={() => {
+                const newSlide = currentSlide > 0 ? currentSlide - 1 : carouselItems.length - 1;
+                setCurrentSlide(newSlide);
+                carouselRef.current?.goTo(newSlide);
+              }}
               style={{
                 position: 'absolute',
                 left: '20px',
@@ -392,7 +400,11 @@ const HomePage: React.FC = () => {
             <Button
               type="text"
               icon={<RightOutlined />}
-              onClick={() => setCurrentSlide(currentSlide < carouselItems.length - 1 ? currentSlide + 1 : 0)}
+              onClick={() => {
+                const newSlide = currentSlide < carouselItems.length - 1 ? currentSlide + 1 : 0;
+                setCurrentSlide(newSlide);
+                carouselRef.current?.goTo(newSlide);
+              }}
               style={{
                 position: 'absolute',
                 right: '20px',
@@ -436,7 +448,7 @@ const HomePage: React.FC = () => {
           <Space direction="vertical" size={40} style={{ width: '100%' }}>
 
         {/* Community Interview Section */}
-        <AnimatedSection animationType="fadeInUp" delay={600}>
+        <AnimatedSection animationType="fadeInUp" delay={200}>
           <Card 
             title="Community Survey Results"
             style={{
@@ -584,7 +596,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Social Achievement Section */}
-        <AnimatedSection animationType="fadeInUp" delay={800}>
+        <AnimatedSection animationType="fadeInUp" delay={300}>
           <Card 
             title={
               <div style={{ textAlign: 'center' }}>
@@ -1070,7 +1082,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Awesome Stuffs Section */}
-        <AnimatedSection animationType="fadeInUp" delay={400}>
+        <AnimatedSection animationType="fadeInUp" delay={200}>
         <Card 
           title="Some Of Our Awesome Stuffs"
           style={{ 
@@ -2000,7 +2012,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Features Section */}
-        <AnimatedSection animationType="fadeInLeft" delay={1200}>
+        <AnimatedSection animationType="fadeInLeft" delay={200}>
         <Card 
           title={t('home.features.title')}
           style={{ 
@@ -2041,7 +2053,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* How to Use */}
-        <AnimatedSection animationType="fadeInRight" delay={1400}>
+        <AnimatedSection animationType="fadeInRight" delay={200}>
         <Card 
           title={t('home.howto.title')}
           style={{ 
@@ -2096,7 +2108,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Achievements */}
-        <AnimatedSection animationType="scaleIn" delay={1600}>
+        <AnimatedSection animationType="scaleIn" delay={200}>
         <Card 
           title={t('home.achievements.title')}
           style={{ 
@@ -2145,7 +2157,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Testimonials */}
-        <AnimatedSection animationType="fadeInUp" delay={1800}>
+        <AnimatedSection animationType="fadeInUp" delay={200}>
         <Card 
           title={t('home.testimonials.title')}
           style={{ 
@@ -2202,7 +2214,7 @@ const HomePage: React.FC = () => {
         </AnimatedSection>
 
         {/* Contact & Support */}
-        <AnimatedSection animationType="fadeInUp" delay={2000}>
+        <AnimatedSection animationType="fadeInUp" delay={200}>
         <Card 
           title={t('home.contact.title')}
           style={{ 

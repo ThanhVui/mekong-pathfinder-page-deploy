@@ -38,7 +38,7 @@ import HomePageFooter from './footer/footer';
 import AnimatedSection from '../../components/AnimatedSection';
 import { saveDownload, getDownloadStats } from '../../utils/downloadTracker';
 import { getFeedbackStats } from '../../utils/feedbackTracker';
-import { useResponsive } from '../../hooks/useResponsive';
+// import { useResponsive } from '../../hooks/useResponsive';
 
 // Import application images
 import navigateRoute from '../../assets/images/application/navigate-route.png';
@@ -69,7 +69,7 @@ const APKDownload: React.FC = () => {
   const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: '' });
   const [feedbackStats, setFeedbackStats] = useState({ averageRating: 0 });
   const downloadFormRef = useRef<HTMLDivElement>(null);
-  const { isMobile, isTablet } = useResponsive();
+  // const { isMobile, isTablet } = useResponsive();
 
   // Load download stats khi component mount
   useEffect(() => {
@@ -230,8 +230,8 @@ const APKDownload: React.FC = () => {
             <Col xs={24} sm={24} md={12}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{
-                  width: isMobile ? '150px' : '200px',
-                  height: isMobile ? '150px' : '200px',
+                  width: 'clamp(150px, 20vw, 200px)',
+                  height: 'clamp(150px, 20vw, 200px)',
                   backgroundColor: '#f0f0f0',
                   borderRadius: '20px',
                   display: 'flex',
@@ -240,14 +240,14 @@ const APKDownload: React.FC = () => {
                   margin: '0 auto',
                   border: '2px dashed #d9d9d9'
                 }}>
-                  <AndroidOutlined style={{ fontSize: isMobile ? '60px' : '80px', color: '#52c41a' }} />
+                  <AndroidOutlined style={{ fontSize: 'clamp(60px, 8vw, 80px)', color: '#52c41a' }} />
                 </div>
                 <Text style={{ marginTop: 16, display: 'block', color: 'rgba(255, 255, 255, 0.8)' }}>
                   Icon ứng dụng Mekong Pathfinder
                 </Text>
                 <Button
                   type="primary"
-                  size={isMobile ? 'middle' : 'large'}
+                  size={'large'}
                   icon={<DownloadOutlined />}
                   onClick={scrollToDownloadForm}
                   style={{
@@ -255,9 +255,9 @@ const APKDownload: React.FC = () => {
                     background: 'linear-gradient(135deg, #52c41a 0%, #73d13d 100%)',
                     border: 'none',
                     borderRadius: '25px',
-                    height: isMobile ? '40px' : '50px',
-                    padding: isMobile ? '0 20px' : '0 30px',
-                    fontSize: isMobile ? '14px' : '16px',
+                    height: 'clamp(40px, 5vh, 50px)',
+                    padding: 'clamp(0 20px, 2.5vw, 0 30px)',
+                    fontSize: 'clamp(14px, 2.5vw, 16px)',
                     fontWeight: '600',
                     boxShadow: '0 4px 15px rgba(82, 196, 26, 0.4)'
                   }}
@@ -305,7 +305,7 @@ const APKDownload: React.FC = () => {
                     alt="Navigate Route"
                     style={{
                       width: '100%',
-                      maxWidth: isMobile ? '250px' : '300px',
+                      maxWidth: 'clamp(250px, 30vw, 300px)',
                       height: 'auto',
                       borderRadius: '12px',
                       boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
@@ -459,7 +459,7 @@ const APKDownload: React.FC = () => {
                   <Card 
                     size="small" 
                     style={{
-                      height: isMobile ? '180px' : '200px',
+                      height: 'clamp(180px, 25vh, 200px)',
                       display: 'flex',
                       flexDirection: 'column',
                       background: 'rgba(255, 255, 255, 0.05)',
@@ -777,7 +777,7 @@ const APKDownload: React.FC = () => {
                 background: 'transparent',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
                 color: '#fff',
-                fontSize: isMobile ? '20px' : '24px',
+                fontSize: 'clamp(20px, 3vw, 24px)',
                 fontWeight: '700'
               }}
             >
@@ -856,7 +856,7 @@ const APKDownload: React.FC = () => {
                   background: 'transparent',
                   borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
                   color: '#fff',
-                  fontSize: isMobile ? '16px' : '18px',
+                  fontSize: 'clamp(16px, 2.5vw, 18px)',
                   fontWeight: '600'
                 }}
               >
@@ -864,16 +864,16 @@ const APKDownload: React.FC = () => {
                   <Row gutter={[8, 8]}>
                     <Col xs={12} sm={12} md={12}>
                       <div style={{ textAlign: 'center' }}>
-                        <Title level={isMobile ? 3 : 2} style={{ margin: 0, color: '#52c41a' }}>{downloadStats.totalDownloads}</Title>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: isMobile ? '12px' : '14px' }}>Lượt tải</Text>
+                        <Title level={2} style={{ margin: 0, color: '#52c41a' }}>{downloadStats.totalDownloads}</Title>
+                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Lượt tải</Text>
                       </div>
                     </Col>
                     <Col xs={12} sm={12} md={12}>
                       <div style={{ textAlign: 'center' }}>
-                        <Title level={isMobile ? 3 : 2} style={{ margin: 0, color: '#1890ff' }}>
+                        <Title level={2} style={{ margin: 0, color: '#1890ff' }}>
                           {feedbackStats.averageRating.toFixed(1)}
                         </Title>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: isMobile ? '12px' : '14px' }}>Đánh giá</Text>
+                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Đánh giá</Text>
                       </div>
                     </Col>
                   </Row>

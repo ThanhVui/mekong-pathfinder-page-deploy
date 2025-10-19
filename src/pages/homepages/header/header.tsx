@@ -83,12 +83,18 @@ const HomePageHeader: React.FC = () => {
           .desktop-text {
             display: inline;
           }
+          .mobile-menu-btn {
+            display: none !important;
+          }
           @media (max-width: 768px) {
             .desktop-nav {
               display: none !important;
             }
             .desktop-text {
               display: none !important;
+            }
+            .mobile-menu-btn {
+              display: flex !important;
             }
           }
         `}
@@ -200,7 +206,7 @@ const HomePageHeader: React.FC = () => {
               <AnimatedButton
                 variant="primary"
                 icon={<PhoneOutlined />}
-                onClick={() => navigate('/feedback')}
+                onClick={() => window.open('https://www.facebook.com/mekongpathfinder', '_blank', 'noopener,noreferrer')}
                 glowEffect={true}
                 shimmerEffect={true}
                 size="medium"
@@ -208,11 +214,12 @@ const HomePageHeader: React.FC = () => {
                 <span className="desktop-text">{t('nav.contact')}</span>
               </AnimatedButton>
 
-              {/* Mobile Menu Button */}
+              {/* Mobile Menu Button - chỉ hiển thị trên tablet/mobile */}
               <Button
                 type="text"
                 icon={<MenuOutlined />}
                 onClick={() => setMobileMenuVisible(true)}
+                className="mobile-menu-btn"
                 style={{
                   borderRadius: '50%',
                   height: '36px',

@@ -35,7 +35,7 @@ import {
 } from '@ant-design/icons';
 import HomePageHeader from './header/header';
 import HomePageFooter from './footer/footer';
-import { useResponsive } from '../../hooks/useResponsive';
+// import { useResponsive } from '../../hooks/useResponsive';
 import { saveFeedback, getFeedbackStats, updateFeedbackLikes, FeedbackData } from '../../utils/feedbackTracker';
 
 const { Title, Paragraph, Text } = Typography;
@@ -70,7 +70,7 @@ const FeedBack: React.FC = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [rating, setRating] = useState(0);
-  const { isMobile, isTablet } = useResponsive();
+  // const { isMobile, isTablet } = useResponsive();
   const [feedbacks, setFeedbacks] = useState<FeedbackData[]>([]);
   const [stats, setStats] = useState(getFeedbackStats());
 
@@ -178,14 +178,14 @@ const FeedBack: React.FC = () => {
           <Row gutter={[16, 16]} align="middle">
             <Col xs={24} sm={24} md={16}>
               <Space direction="vertical" size={16}>
-                <Title level={isMobile ? 2 : 1} style={{ margin: 0, color: '#fff' }}>
-                  <MessageOutlined style={{ color: '#1890ff', marginRight: 12, fontSize: isMobile ? '20px' : '24px' }} />
+                <Title level={1} style={{ margin: 0, color: '#fff', fontSize: 'clamp(24px, 4vw, 32px)' }}>
+                  <MessageOutlined style={{ color: '#1890ff', marginRight: 12, fontSize: 'clamp(20px, 3vw, 24px)' }} />
                   Góp ý & Phản hồi
                 </Title>
-                <Title level={isMobile ? 4 : 3} style={{ margin: 0, color: 'rgba(255, 255, 255, 0.8)' }}>
+                <Title level={3} style={{ margin: 0, color: 'rgba(255, 255, 255, 0.8)' }}>
                   Chia sẻ trải nghiệm của bạn
                 </Title>
-                <Paragraph style={{ fontSize: isMobile ? '14px' : '16px', lineHeight: 1.6, color: 'rgba(255, 255, 255, 0.9)' }}>
+                <Paragraph style={{ fontSize: 'clamp(14px, 2.5vw, 16px)', lineHeight: 1.6, color: 'rgba(255, 255, 255, 0.9)' }}>
                   Chúng tôi rất mong nhận được ý kiến đóng góp từ bạn để có thể cải thiện 
                   ứng dụng Mekong Pathfinder ngày một tốt hơn. Mọi góp ý đều được đánh giá cao!
                 </Paragraph>
@@ -205,8 +205,8 @@ const FeedBack: React.FC = () => {
             <Col xs={24} sm={24} md={8}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{
-                  width: isMobile ? '120px' : '150px',
-                  height: isMobile ? '120px' : '150px',
+                  width: 'clamp(120px, 15vw, 150px)',
+                  height: 'clamp(120px, 15vw, 150px)',
                   backgroundColor: '#f0f0f0',
                   borderRadius: '50%',
                   display: 'flex',
@@ -215,7 +215,7 @@ const FeedBack: React.FC = () => {
                   margin: '0 auto',
                   border: '3px solid #1890ff'
                 }}>
-                  <MessageOutlined style={{ fontSize: isMobile ? '50px' : '60px', color: '#1890ff' }} />
+                  <MessageOutlined style={{ fontSize: 'clamp(50px, 6vw, 60px)', color: '#1890ff' }} />
                 </div>
               </div>
             </Col>
@@ -232,10 +232,10 @@ const FeedBack: React.FC = () => {
               backdropFilter: 'blur(10px)'
             }}>
               <Statistic
-                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: isMobile ? '12px' : '14px' }}>Tổng số góp ý</span>}
+                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Tổng số góp ý</span>}
                 value={totalFeedbacks}
                 prefix={<CommentOutlined />}
-                valueStyle={{ color: '#1890ff', fontSize: isMobile ? '18px' : '24px' }}
+                valueStyle={{ color: '#1890ff', fontSize: 'clamp(18px, 3vw, 24px)' }}
               />
             </Card>
           </Col>
@@ -247,10 +247,10 @@ const FeedBack: React.FC = () => {
               backdropFilter: 'blur(10px)'
             }}>
               <Statistic
-                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: isMobile ? '12px' : '14px' }}>Đánh giá trung bình</span>}
+                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Đánh giá trung bình</span>}
                 value={averageRating.toFixed(1)}
                 prefix={<StarOutlined />}
-                valueStyle={{ color: '#faad14', fontSize: isMobile ? '18px' : '24px' }}
+                valueStyle={{ color: '#faad14', fontSize: 'clamp(18px, 3vw, 24px)' }}
                 suffix="/ 5"
               />
             </Card>
@@ -263,10 +263,10 @@ const FeedBack: React.FC = () => {
               backdropFilter: 'blur(10px)'
             }}>
               <Statistic
-                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: isMobile ? '12px' : '14px' }}>Phản hồi tích cực</span>}
+                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Phản hồi tích cực</span>}
                 value={Math.round((feedbacks.filter(f => f.rating >= 4).length / totalFeedbacks) * 100)}
                 prefix={<LikeOutlined />}
-                valueStyle={{ color: '#52c41a', fontSize: isMobile ? '18px' : '24px' }}
+                valueStyle={{ color: '#52c41a', fontSize: 'clamp(18px, 3vw, 24px)' }}
                 suffix="%"
               />
             </Card>
@@ -310,7 +310,7 @@ const FeedBack: React.FC = () => {
                   <Input
                     prefix={<UserOutlined />}
                     placeholder="Nhập họ và tên của bạn"
-                    size={isMobile ? 'middle' : 'large'}
+                    size={'large'}
                   />
                 </Form.Item>
               </Col>
@@ -327,7 +327,7 @@ const FeedBack: React.FC = () => {
                   <Input
                     prefix={<MailOutlined />}
                     placeholder="Nhập địa chỉ email"
-                    size={isMobile ? 'middle' : 'large'}
+                    size={'large'}
                   />
                 </Form.Item>
               </Col>
@@ -342,7 +342,7 @@ const FeedBack: React.FC = () => {
                   <Input
                     prefix={<PhoneOutlined />}
                     placeholder="Nhập số điện thoại"
-                    size={isMobile ? 'middle' : 'large'}
+                    size={'large'}
                   />
                 </Form.Item>
               </Col>
@@ -353,7 +353,7 @@ const FeedBack: React.FC = () => {
                   label="Loại góp ý"
                   rules={[{ required: true, message: 'Vui lòng chọn loại góp ý!' }]}
                 >
-                  <Select placeholder="Chọn loại góp ý" size={isMobile ? 'middle' : 'large'}>
+                  <Select placeholder="Chọn loại góp ý" size={'large'}>
                     <Option value="feature">
                       <Space>
                         <BulbOutlined style={{ color: '#52c41a' }} />
@@ -392,7 +392,7 @@ const FeedBack: React.FC = () => {
                 allowHalf 
                 value={rating} 
                 onChange={setRating}
-                style={{ fontSize: isMobile ? '18px' : '24px' }}
+                style={{ fontSize: 'clamp(18px, 3vw, 24px)' }}
               />
             </Form.Item>
 
@@ -406,7 +406,7 @@ const FeedBack: React.FC = () => {
             >
               <Input
                 placeholder="Nhập tiêu đề góp ý của bạn"
-                size={isMobile ? 'middle' : 'large'}
+                size={'large'}
               />
             </Form.Item>
 
@@ -419,7 +419,7 @@ const FeedBack: React.FC = () => {
               ]}
             >
               <TextArea
-                rows={isMobile ? 4 : 6}
+                rows={6}
                 placeholder="Mô tả chi tiết về góp ý của bạn..."
                 showCount
                 maxLength={1000}
@@ -441,7 +441,7 @@ const FeedBack: React.FC = () => {
                 type="primary"
                 htmlType="submit"
                 loading={loading}
-                size={isMobile ? 'middle' : 'large'}
+                size={'large'}
                 icon={<MessageOutlined />}
                 style={{ width: '100%' }}
               >
