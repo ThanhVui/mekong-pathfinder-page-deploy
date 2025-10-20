@@ -12,7 +12,6 @@ import {
   HomeOutlined,
   DownloadOutlined,
   MessageOutlined,
-  BookOutlined,
   PhoneOutlined,
   MailOutlined,
   GlobalOutlined
@@ -21,8 +20,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../../context/LanguageContext';
 import AnimatedButton from '../../../components/AnimatedButton';
 import NavigationMenu from '../../../components/NavigationMenu';
-// import { useResponsive } from '../../../hooks/useResponsive';
-import logoBanner from '../../../assets/images/logo_header/logo_banner.png';
+import logoBanner from '../../../assets/images/logo_header/logo-04.png';
 
 const { Header } = Layout;
 const { Text } = Typography;
@@ -31,16 +29,13 @@ const HomePageHeader: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
-  // const { isMobile, isTablet } = useResponsive();
 
-  // Handle scroll effect
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -50,19 +45,19 @@ const HomePageHeader: React.FC = () => {
     {
       key: 'home',
       label: t('nav.home'),
-      icon: <HomeOutlined />,
+      icon: <HomeOutlined style={{ color: '#0344d6' }} />,
       onClick: () => navigate('/')
     },
     {
       key: 'download',
-      label: t('nav.download'),
-      icon: <DownloadOutlined />,
+      label: language === 'vi' ? 'Tải xuống' : t('nav.download'),
+      icon: <DownloadOutlined style={{ color: '#0344d6' }} />,
       onClick: () => navigate('/apk-download')
     },
     {
       key: 'feedback',
-      label: t('nav.feedback'),
-      icon: <MessageOutlined />,
+      label: language === 'vi' ? 'Góp ý' : t('nav.feedback'),
+      icon: <MessageOutlined style={{ color: '#0344d6' }} />,
       onClick: () => navigate('/feedback')
     }
   ];
@@ -71,7 +66,6 @@ const HomePageHeader: React.FC = () => {
     navigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
 
   return (
     <>
@@ -99,46 +93,65 @@ const HomePageHeader: React.FC = () => {
           }
         `}
       </style>
-      <Header
+
+      {/* Background Layer — fixed under header content */}
+      <div
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
+          height: isScrolled ? '0px' : '100px',
+          background: '#c5e2ff',
+          zIndex: 0,
+          transition: 'height 0.3s ease',
+        }}
+      />
+
+      {/* Floating Header Card */}
+      <Header
+        style={{
+          position: 'fixed',
+          top: isScrolled ? '10px' : '20px',
+          left: 0,
+          right: 0,
           zIndex: 1000,
           background: 'transparent',
-          padding: '20px 0',
+          borderBottom: 'none',
+          transition: 'all 0.3s ease',
           height: 'auto',
-          lineHeight: 'normal'
         }}
       >
-        {/* Main Header Container */}
-        <div style={{
-          maxWidth: '1300px',
-          margin: '0 auto',
-          padding: '0 24px'
-        }}>
-          {/* Floating Header Card */}
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '16px',
-            padding: '12px 20px',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            height: '70px'
-          }}>
-            {/* Left Side - Logo */}
+        <div
+          style={{
+            maxWidth: '1300px',
+            margin: '0 auto',
+            padding: '0 24px',
+          }}
+        >
+          <div
+            style={{
+              background: 'white',
+              borderRadius: '20px',
+              padding: '12px 20px',
+              border: '1px solid #83b5fc',
+              boxShadow: '0 8px 32px rgba(3, 68, 214, 0.2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              height: '70px',
+              transition: 'all 0.3s ease',
+              backdropFilter: 'blur(15px)',
+            }}
+          >
+            {/* Logo */}
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div 
-                style={{ 
+              <div
+                style={{
                   cursor: 'pointer',
                   transition: 'transform 0.3s ease',
                   display: 'flex',
-                  alignItems: 'center'
+                  alignItems: 'center',
                 }}
                 onClick={handleLogoClick}
                 onMouseEnter={(e) => {
@@ -148,97 +161,98 @@ const HomePageHeader: React.FC = () => {
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
-                <img 
-                  src={logoBanner} 
-                  alt="Mekong Pathfinder" 
-                  style={{ 
-                    height: '36px',
-                    objectFit: 'contain'
+                <img
+                  src={logoBanner}
+                  alt="Mekong Pathfinder"
+                  style={{
+                    height: '50px',
+                    objectFit: 'contain',
                   }}
                 />
               </div>
             </div>
 
-            {/* Center - Navigation Menu */}
-            <div style={{ 
-              display: 'flex',
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              maxWidth: '700px',
-              overflow: 'hidden',
-              zIndex: 1
-            }} className="desktop-nav">
-              <NavigationMenu 
-                items={menuItems} 
+            {/* Center Navigation */}
+            <div
+              style={{
+                display: 'flex',
+                position: 'absolute',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                maxWidth: '700px',
+                overflow: 'hidden',
+              }}
+              className="desktop-nav"
+            >
+              <NavigationMenu
+                items={menuItems}
                 style={{
                   flexWrap: 'nowrap',
-                  overflow: 'hidden'
                 }}
               />
             </div>
 
-            {/* Right Side - Actions */}
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: 'clamp(8px, 2vw, 12px)',
-              flexWrap: 'nowrap',
-              zIndex: 2
-            }}>
-              {/* Language Selector */}
+            {/* Right Actions */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'clamp(8px, 2vw, 12px)',
+              }}
+            >
               <Select
                 value={language}
                 onChange={setLanguage}
-                style={{ 
+                style={{
                   width: 'clamp(60px, 15vw, 120px)',
                   borderRadius: '20px',
-                  fontSize: 'clamp(10px, 2vw, 12px)'
+                  fontSize: 'clamp(10px, 2vw, 12px)',
                 }}
-                suffixIcon={<GlobalOutlined />}
+                suffixIcon={<GlobalOutlined style={{ color: '#0344d6' }} />}
                 options={[
                   { value: 'vi', label: '🇻🇳 VI' },
-                  { value: 'en', label: '🇺🇸 EN' }
+                  { value: 'en', label: '🇺🇸 EN' },
                 ]}
               />
 
-              {/* Contact Button */}
               <AnimatedButton
                 variant="primary"
-                icon={<PhoneOutlined />}
-                onClick={() => window.open('https://www.facebook.com/mekongpathfinder', '_blank', 'noopener,noreferrer')}
+                icon={<PhoneOutlined style={{ color: '#fff' }} />}
+                onClick={() =>
+                  window.open(
+                    'https://www.facebook.com/mekongpathfinder',
+                    '_blank',
+                    'noopener,noreferrer'
+                  )
+                }
                 glowEffect={true}
                 shimmerEffect={true}
                 size="medium"
+                style={{
+                  boxShadow: '0 0 20px rgba(3, 68, 214, 0.4)',
+                  borderRadius: '30px',
+                }}
               >
                 <span className="desktop-text">{t('nav.contact')}</span>
               </AnimatedButton>
 
-              {/* Mobile Menu Button - chỉ hiển thị trên tablet/mobile */}
+              {/* Mobile Menu Button */}
               <Button
                 type="text"
-                icon={<MenuOutlined />}
+                icon={<MenuOutlined style={{ color: '#0344d6' }} />}
                 onClick={() => setMobileMenuVisible(true)}
                 className="mobile-menu-btn"
                 style={{
                   borderRadius: '50%',
                   height: '36px',
                   width: '36px',
-                  background: 'rgba(255, 255, 255, 0.8)',
+                  background: 'rgba(255, 255, 255, 0.9)',
                   border: '1px solid rgba(0, 0, 0, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   transition: 'all 0.3s ease',
-                  flexShrink: 0
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.1)';
-                  e.currentTarget.style.background = 'rgba(24, 144, 255, 0.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.8)';
+                  boxShadow: '0 0 10px rgba(3, 68, 214, 0.3)'
                 }}
               />
             </div>
@@ -246,7 +260,7 @@ const HomePageHeader: React.FC = () => {
         </div>
       </Header>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Drawer */}
       <Drawer
         title={t('mobile.menu.title')}
         placement="right"
@@ -255,13 +269,13 @@ const HomePageHeader: React.FC = () => {
         width={280}
         styles={{
           header: {
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: 'linear-gradient(135deg, #667eea 0%, #377aef 100%)',
             color: '#fff'
-          }
+          },
         }}
       >
         <Space direction="vertical" size={16} style={{ width: '100%' }}>
-          {menuItems.map(item => (
+          {menuItems.map((item) => (
             <Button
               key={item.key}
               type="text"
@@ -283,27 +297,11 @@ const HomePageHeader: React.FC = () => {
               {item.label}
             </Button>
           ))}
-          
-          <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #f0f0f0' }}>
-            <Text type="secondary" style={{ fontSize: '14px' }}>
-              {t('mobile.menu.contact')}
-            </Text>
-            <Space direction="vertical" size={8} style={{ width: '100%', marginTop: '12px' }}>
-              <Space>
-                <PhoneOutlined style={{ color: '#1890ff' }} />
-                <Text>1900-xxxx</Text>
-              </Space>
-              <Space>
-                <MailOutlined style={{ color: '#1890ff' }} />
-                <Text>support@mekongpathfinder.com</Text>
-              </Space>
-            </Space>
-          </div>
         </Space>
       </Drawer>
 
-      {/* Spacer for fixed header */}
-      <div style={{ height: '90px' }} />
+      {/* Spacer for layout */}
+      <div style={{ height: '100px' }} />
     </>
   );
 };

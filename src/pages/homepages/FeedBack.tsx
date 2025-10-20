@@ -161,7 +161,7 @@ const FeedBack: React.FC = () => {
         padding: '100px 0 0 0', 
         width: '100%', 
         margin: '0',
-        background: 'rgb(52, 52, 139)',
+        background: '#c5e2ff',
         minHeight: '100vh'
       }}>
         <Space direction="vertical" size={24} style={{ width: '100%', padding: '0 24px' }}>
@@ -169,8 +169,8 @@ const FeedBack: React.FC = () => {
         <HomePageHeader />
 
         <Card style={{
-          background: 'rgba(255, 255, 255, 0.05)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'rgba(255, 255, 255, 0.8)',
+          border: '1px solid #83b5fc',
           borderRadius: '20px',
           boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
           backdropFilter: 'blur(10px)'
@@ -178,14 +178,14 @@ const FeedBack: React.FC = () => {
           <Row gutter={[16, 16]} align="middle">
             <Col xs={24} sm={24} md={16}>
               <Space direction="vertical" size={16}>
-                <Title level={1} style={{ margin: 0, color: '#fff', fontSize: 'clamp(24px, 4vw, 32px)' }}>
+                <Title level={1} style={{ margin: 0, color: '#000', fontSize: 'clamp(24px, 4vw, 32px)' }}>
                   <MessageOutlined style={{ color: '#1890ff', marginRight: 12, fontSize: 'clamp(20px, 3vw, 24px)' }} />
                   Góp ý & Phản hồi
                 </Title>
-                <Title level={3} style={{ margin: 0, color: 'rgba(255, 255, 255, 0.8)' }}>
+                <Title level={3} style={{ margin: 0, color: '#000' }}>
                   Chia sẻ trải nghiệm của bạn
                 </Title>
-                <Paragraph style={{ fontSize: 'clamp(14px, 2.5vw, 16px)', lineHeight: 1.6, color: 'rgba(255, 255, 255, 0.9)' }}>
+                <Paragraph style={{ fontSize: 'clamp(16px, 2.5vw, 18px)', lineHeight: 1.6, color: '#001f44' }}>
                   Chúng tôi rất mong nhận được ý kiến đóng góp từ bạn để có thể cải thiện 
                   ứng dụng Mekong Pathfinder ngày một tốt hơn. Mọi góp ý đều được đánh giá cao!
                 </Paragraph>
@@ -232,7 +232,7 @@ const FeedBack: React.FC = () => {
               backdropFilter: 'blur(10px)'
             }}>
               <Statistic
-                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Tổng số góp ý</span>}
+                title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>Tổng số góp ý</span>}
                 value={totalFeedbacks}
                 prefix={<CommentOutlined />}
                 valueStyle={{ color: '#1890ff', fontSize: 'clamp(18px, 3vw, 24px)' }}
@@ -247,7 +247,7 @@ const FeedBack: React.FC = () => {
               backdropFilter: 'blur(10px)'
             }}>
               <Statistic
-                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Đánh giá trung bình</span>}
+                title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>Đánh giá trung bình</span>}
                 value={averageRating.toFixed(1)}
                 prefix={<StarOutlined />}
                 valueStyle={{ color: '#faad14', fontSize: 'clamp(18px, 3vw, 24px)' }}
@@ -263,7 +263,7 @@ const FeedBack: React.FC = () => {
               backdropFilter: 'blur(10px)'
             }}>
               <Statistic
-                title={<span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Phản hồi tích cực</span>}
+                title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>Phản hồi tích cực</span>}
                 value={Math.round((feedbacks.filter(f => f.rating >= 4).length / totalFeedbacks) * 100)}
                 prefix={<LikeOutlined />}
                 valueStyle={{ color: '#52c41a', fontSize: 'clamp(18px, 3vw, 24px)' }}
@@ -286,7 +286,7 @@ const FeedBack: React.FC = () => {
           headStyle={{
             background: 'transparent',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#fff',
+            color: '#000',
             fontSize: '24px',
             fontWeight: '700'
           }}
@@ -464,7 +464,7 @@ const FeedBack: React.FC = () => {
           headStyle={{
             background: 'transparent',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#fff',
+            color: '#000',
             fontSize: '24px',
             fontWeight: '700'
           }}
@@ -474,7 +474,7 @@ const FeedBack: React.FC = () => {
             renderItem={(feedback) => (
               <List.Item
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
+                  background: 'rgba(255, 255, 255, 0.6)',
                   borderRadius: '12px',
                   marginBottom: '12px',
                   padding: '16px',
@@ -542,7 +542,7 @@ const FeedBack: React.FC = () => {
           headStyle={{
             background: 'transparent',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#fff',
+            color: '#000',
             fontSize: '24px',
             fontWeight: '700'
           }}
@@ -554,7 +554,7 @@ const FeedBack: React.FC = () => {
                   <Card 
                     size="small"
                     style={{
-                      background: 'rgba(255, 255, 255, 0.05)',
+                      background: 'rgba(255, 255, 255, 0.6)',
                       border: '1px solid rgba(255, 255, 255, 0.1)',
                       borderRadius: '12px',
                       backdropFilter: 'blur(10px)',

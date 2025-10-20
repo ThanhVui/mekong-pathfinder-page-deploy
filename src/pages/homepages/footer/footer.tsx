@@ -114,7 +114,7 @@ const HomePageFooter: React.FC = () => {
       {/* Main Footer */}
       <Footer
         style={{
-          background: 'rgb(52, 52, 139)',
+          background: '#001f44',
           color: '#fff',
           padding: '60px 0 20px',
         }}
@@ -129,7 +129,7 @@ const HomePageFooter: React.FC = () => {
                   <div style={{
                     width: '50px',
                     height: '50px',
-                    background: 'rgba(255, 255, 255, 0.2)',
+                    background: 'rgba(3, 68, 214, 0.3)',
                     borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
@@ -142,13 +142,13 @@ const HomePageFooter: React.FC = () => {
                     <Title level={3} style={{ color: '#fff', margin: 0 }}>
                       Mekong Pathfinder
                     </Title>
-                    <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                    <Text style={{ color: '#c5e2ff' }}>
                       Smart Navigation Platform
                     </Text>
                   </div>
                 </Space>
                 
-                <Paragraph style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '15px', lineHeight: 1.6 }}>
+                <Paragraph style={{ color: '#c5e2ff', fontSize: '16px', lineHeight: 1.6 }}>
                   Nền tảng điều hướng thông minh cho khu vực Đồng bằng sông Cửu Long. 
                   Cung cấp thông tin thời tiết, giao thông và cảnh báo lũ lụt thời gian thực.
                 </Paragraph>
@@ -157,19 +157,19 @@ const HomePageFooter: React.FC = () => {
                 <Space direction="vertical" size={8}>
                   <Space>
                     <PhoneOutlined style={{ color: '#52c41a' }} />
-                    <Text style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                    <Text style={{ color: '#c5e2ff' }}>
                       Hotline: 1900-xxxx
                     </Text>
                   </Space>
                   <Space>
                     <MailOutlined style={{ color: '#1890ff' }} />
-                    <Text style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                    <Text style={{ color: '#c5e2ff' }}>
                       support@mekongpathfinder.com
                     </Text>
                   </Space>
                   <Space>
                     <EnvironmentOutlined style={{ color: '#faad14' }} />
-                    <Text style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                    <Text style={{ color: '#c5e2ff' }}>
                       TP. Cần Thơ, Việt Nam
                     </Text>
                   </Space>
@@ -192,7 +192,7 @@ const HomePageFooter: React.FC = () => {
                         <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
                           {item.icon}
                         </div>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                        <Text style={{ color: '#c5e2ff' }}>
                           {item.label}
                         </Text>
                       </Space>
@@ -209,7 +209,7 @@ const HomePageFooter: React.FC = () => {
                 <Title level={5} style={{ color: '#fff', margin: 0 }}>
                   Nhận tin tức mới
                 </Title>
-                <Paragraph style={{ color: 'rgba(255, 255, 255, 0.8)', margin: 0 }}>
+                <Paragraph style={{ color: '#c5e2ff', margin: 0 }}>
                   Đăng ký để nhận thông tin cập nhật và tin tức mới nhất từ chúng tôi.
                 </Paragraph>
                 
@@ -219,8 +219,8 @@ const HomePageFooter: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     style={{
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      background: 'rgba(3, 68, 214, 0.2)',
+                      border: '1px solid rgba(131, 181, 252, 0.3)',
                       color: '#fff',
                       borderRadius: '8px 0 0 8px'
                     }}
@@ -231,7 +231,7 @@ const HomePageFooter: React.FC = () => {
                     loading={loading}
                     onClick={handleNewsletterSubmit}
                     style={{
-                      background: 'linear-gradient(135deg, #52c41a 0%, #73d13d 100%)',
+                      background: 'linear-gradient(135deg, #0344d6 0%, #377aef 100%)',
                       border: 'none',
                       borderRadius: '0 8px 8px 0',
                       height: '40px'
@@ -258,8 +258,8 @@ const HomePageFooter: React.FC = () => {
                         width: '45px',
                         height: '45px',
                         borderRadius: '50%',
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        background: 'rgba(3, 68, 214, 0.2)',
+                        border: '1px solid rgba(131, 181, 252, 0.3)',
                         color: '#fff',
                         fontSize: '18px',
                         display: 'flex',
@@ -273,7 +273,7 @@ const HomePageFooter: React.FC = () => {
                         e.currentTarget.style.boxShadow = `0 4px 12px ${social.color}40`;
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                        e.currentTarget.style.background = 'rgba(3, 68, 214, 0.3)';
                         e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.boxShadow = 'none';
                       }}
@@ -290,7 +290,7 @@ const HomePageFooter: React.FC = () => {
           <Row justify="space-between" align="middle">
             <Col xs={24} md={12}>
               <Space direction="vertical" size={8}>
-                <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                        <Text style={{ color: '#c5e2ff' }}>
                   © 2024 Mekong Pathfinder. Tất cả quyền được bảo lưu.
                 </Text>
                 <Space wrap>
@@ -300,10 +300,10 @@ const HomePageFooter: React.FC = () => {
                       type="link"
                       onClick={() => navigate(link.path)}
                       style={{
-                        color: 'rgba(255, 255, 255, 0.7)',
+                        color: '#c5e2ff',
                         padding: '0 8px',
                         height: 'auto',
-                        fontSize: '12px'
+                        fontSize: '14px'
                       }}
                     >
                       {link.label}
@@ -340,9 +340,9 @@ const HomePageFooter: React.FC = () => {
           right: '30px',
           width: '50px',
           height: '50px',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          background: 'linear-gradient(135deg, #0344d6 0%, #377aef 100%)',
           border: 'none',
-          boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)',
+          boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)',
           zIndex: 1000,
           fontSize: '18px',
           display: 'flex',

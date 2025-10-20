@@ -239,7 +239,7 @@ const HomePage: React.FC = () => {
     <>
       
       {/* Hero Section - Full Width */}
-      <div style={{ position: 'relative', paddingTop: '10px', background: 'rgb(52, 52, 139)' }}>
+      <div style={{ position: 'relative', paddingTop: '10px', background: '#c5e2ff' }}>
       <HomePageHeader />
 
             <Carousel 
@@ -315,14 +315,14 @@ const HomePage: React.FC = () => {
                           icon={<ArrowRightOutlined />}
                           onClick={item.buttonAction}
                           style={{
-                            background: 'linear-gradient(135deg, #1890ff 0%, #40a9ff 100%)',
+                            background: 'linear-gradient(135deg, #0344d6 0%, #377aef 100%)',
                             border: 'none',
                             borderRadius: '25px',
                             height: '50px',
                             padding: '0 30px',
                             fontSize: '16px',
                             fontWeight: '600',
-                            boxShadow: '0 4px 15px rgba(24, 144, 255, 0.4)',
+                            boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)',
                             textShadow: 'none',
                             minWidth: '160px'
                           }}
@@ -338,9 +338,9 @@ const HomePage: React.FC = () => {
                             padding: '0 30px',
                             fontSize: '16px',
                             fontWeight: '600',
-                            border: '2px solid white',
-                            color: 'white',
-                            background: 'rgba(255, 255, 255, 0.2)',
+                            border: '2px solid #c5e2ff',
+                            color: '#001f44',
+                            background: 'rgba(197, 226, 255, 0.1)',
                             backdropFilter: 'blur(10px)',
                             minWidth: '160px'
                           }}
@@ -392,7 +392,7 @@ const HomePage: React.FC = () => {
       <div style={{ 
         width: '100%',
         minHeight: '100vh',
-        background: 'rgb(52, 52, 139)',
+        background: '#c5e2ff',
         position: 'relative'
       }}>
         <div style={{ 
@@ -407,16 +407,16 @@ const HomePage: React.FC = () => {
           <Card 
             title="Community Survey Results"
             style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              background: '#fff',
+              border: '1px solid rgba(131, 181, 252, 0.2)',
               borderRadius: '20px',
-              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
+              boxShadow: '0 15px 35px rgba(0, 31, 68, 0.3)',
               backdropFilter: 'blur(10px)'
             }}
             headStyle={{
               background: 'transparent',
               borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#fff',
+              color: '#000',
               fontSize: '28px',
               fontWeight: '700',
               textAlign: 'center'
@@ -517,14 +517,14 @@ const HomePage: React.FC = () => {
                           margin: '0 0 8px 0', 
                           fontSize: 'clamp(14px, 2.5vw, 16px)', 
                           fontWeight: '600',
-                          color: '#ffffff'
+                          color: '#000'
                         }}>
                           {item.title}
                         </h4>
                         <p style={{ 
                           margin: '0 0 12px 0', 
-                          fontSize: 'clamp(10px, 2vw, 12px)', 
-                          color: 'rgba(255, 255, 255, 0.8)',
+                          fontSize: 'clamp(14px, 2.5vw, 16px)',
+                          color: '#000',
                           lineHeight: '1.4'
                         }}>
                           {item.description}
@@ -536,7 +536,7 @@ const HomePage: React.FC = () => {
                         justifyContent: 'space-between', 
                         alignItems: 'center',
                         fontSize: 'clamp(9px, 1.8vw, 11px)',
-                        color: 'rgba(255, 255, 255, 0.7)'
+                        color: '#000'
                       }}>
                         <span>{item.duration}</span>
                         <span>{item.views} lượt xem</span>
@@ -557,20 +557,20 @@ const HomePage: React.FC = () => {
               <div style={{ textAlign: 'center' }}>
                 <TrophyOutlined style={{ fontSize: '32px', color: '#ffd700', marginRight: '12px' }} />
                 <span style={{ 
-                  background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                  background: '#000',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   fontSize: '32px',
                   fontWeight: '800',
-                  textShadow: '0 2px 4px rgba(255, 215, 0, 0.3)'
+                  textShadow: 'white'
                 }}>
                   Social Achievement
                 </span>
             </div>
             }
             style={{
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-              border: '2px solid rgba(255, 215, 0, 0.2)',
+              background: '#fff',
+              border: '2px solid #83b5fc',
               borderRadius: '25px',
               boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.1)',
               backdropFilter: 'blur(15px)',
@@ -579,9 +579,9 @@ const HomePage: React.FC = () => {
             }}
             headStyle={{
               background: 'transparent',
-              borderBottom: '2px solid rgba(255, 215, 0, 0.3)',
+              borderBottom: '2px solid #83b5fc',
               padding: '30px 20px',
-              marginBottom: '0'
+              marginBottom: '0',
             }}
             bodyStyle={{
               padding: '40px 20px',
@@ -697,8 +697,8 @@ const HomePage: React.FC = () => {
                             transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                             cursor: 'pointer',
                             height: 'clamp(350px, 60vh, 400px)',
-                            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-                            border: '1px solid rgba(255, 215, 0, 0.2)'
+                            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(197, 226, 255, 0.6) 100%)',
+                            border: '1px solid #83b5fc'
                       }}
                       onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)';
@@ -725,7 +725,7 @@ const HomePage: React.FC = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 4px 15px rgba(255, 215, 0, 0.4)'
+                            boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)'
                           }}>
                             <TrophyOutlined style={{ color: '#000', fontSize: '18px' }} />
                           </div>
@@ -743,7 +743,7 @@ const HomePage: React.FC = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 4px 15px rgba(24, 119, 242, 0.4)',
+                            boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease'
                           }}
@@ -753,7 +753,7 @@ const HomePage: React.FC = () => {
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.transform = 'scale(1)';
-                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(24, 119, 242, 0.4)';
+                            e.currentTarget.style.boxShadow = '0 8px 25px rgba(3, 68, 214, 0.4)';
                           }}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -769,7 +769,7 @@ const HomePage: React.FC = () => {
                               alt={achievement.title}
                           style={{
                             width: '100%',
-                                height: 'clamp(200px, 30vh, 240px)',
+                                height: '100%',
                                 objectFit: 'cover',
                                 filter: 'brightness(0.9)'
                           }}
@@ -793,7 +793,7 @@ const HomePage: React.FC = () => {
                                 <span style={{ 
                                   marginLeft: '8px',
                                   fontSize: '12px',
-                                  color: '#ffd700',
+                                  color: '#fff',
                                   fontWeight: '600'
                                 }}>
                                   {achievement.stats}
@@ -871,8 +871,8 @@ const HomePage: React.FC = () => {
                         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                         cursor: 'pointer',
                         height: '400px',
-                        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-                        border: '1px solid rgba(255, 215, 0, 0.2)'
+                        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(197, 226, 255, 0.6) 100%)',
+                        border: '1px solid #83b5fc'
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)';
@@ -899,7 +899,7 @@ const HomePage: React.FC = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 4px 15px rgba(255, 215, 0, 0.4)'
+                            boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)'
                           }}>
                             <TrophyOutlined style={{ color: '#000', fontSize: '18px' }} />
                           </div>
@@ -917,7 +917,7 @@ const HomePage: React.FC = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 4px 15px rgba(24, 119, 242, 0.4)',
+                            boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease'
                           }}
@@ -927,7 +927,7 @@ const HomePage: React.FC = () => {
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.transform = 'scale(1)';
-                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(24, 119, 242, 0.4)';
+                            e.currentTarget.style.boxShadow = '0 8px 25px rgba(3, 68, 214, 0.4)';
                           }}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -943,7 +943,7 @@ const HomePage: React.FC = () => {
                               alt={achievement.title}
                           style={{
                             width: '100%',
-                                height: '240px',
+                                height: '100%',
                                 objectFit: 'cover',
                                 filter: 'brightness(0.9)'
                           }}
@@ -967,7 +967,7 @@ const HomePage: React.FC = () => {
                                 <span style={{ 
                                   marginLeft: '8px',
                                   fontSize: '12px',
-                                  color: '#ffd700',
+                                  color: '#fff',
                                   fontWeight: '600'
                                 }}>
                                   {achievement.stats}
@@ -1009,8 +1009,8 @@ const HomePage: React.FC = () => {
         <Card 
           title="Some Of Our Awesome Stuffs"
           style={{ 
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            background: '#fff',
+            border: '1px solid #83b5fc',
             borderRadius: '20px',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
             backdropFilter: 'blur(10px)'
@@ -1018,7 +1018,7 @@ const HomePage: React.FC = () => {
           headStyle={{
             background: 'transparent',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#fff',
+            color: '#000',
             fontSize: '28px',
             fontWeight: '700',
             textAlign: 'center'
@@ -1036,7 +1036,7 @@ const HomePage: React.FC = () => {
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.9)',
+                background: 'rgba(197, 226, 255, 0.9)',
                 border: 'none',
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
                 display: 'flex',
@@ -1047,11 +1047,11 @@ const HomePage: React.FC = () => {
                 transition: 'all 0.3s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                e.currentTarget.style.background = 'rgba(197, 226, 255, 1)';
                 e.currentTarget.style.transform = 'scale(1.1)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.background = 'rgba(197, 226, 255, 0.9)';
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             />}
@@ -1062,7 +1062,7 @@ const HomePage: React.FC = () => {
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.9)',
+                background: 'rgba(197, 226, 255, 0.9)',
                 border: 'none',
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
                 display: 'flex',
@@ -1073,11 +1073,11 @@ const HomePage: React.FC = () => {
                 transition: 'all 0.3s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                e.currentTarget.style.background = 'rgba(197, 226, 255, 1)';
                 e.currentTarget.style.transform = 'scale(1.1)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.background = 'rgba(197, 226, 255, 0.9)';
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             />}
@@ -1492,7 +1492,7 @@ const HomePage: React.FC = () => {
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.9)',
+                background: 'rgba(197, 226, 255, 0.9)',
                 border: 'none',
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
                 display: 'flex',
@@ -1503,11 +1503,11 @@ const HomePage: React.FC = () => {
                   transition: 'all 0.3s ease'
                 }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                e.currentTarget.style.background = 'rgba(197, 226, 255, 1)';
                 e.currentTarget.style.transform = 'scale(1.1)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.background = 'rgba(197, 226, 255, 0.9)';
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             />}
@@ -1518,7 +1518,7 @@ const HomePage: React.FC = () => {
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.9)',
+                background: 'rgba(197, 226, 255, 0.9)',
                 border: 'none',
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
                 display: 'flex',
@@ -1529,11 +1529,11 @@ const HomePage: React.FC = () => {
                 transition: 'all 0.3s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                e.currentTarget.style.background = 'rgba(197, 226, 255, 1)';
                 e.currentTarget.style.transform = 'scale(1.1)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.background = 'rgba(197, 226, 255, 0.9)';
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             />}
@@ -1939,14 +1939,14 @@ const HomePage: React.FC = () => {
         <Card 
           title={t('home.features.title')}
           style={{ 
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            background: 'rgba(255, 255, 255, 0.8)',
+            border: '1px solid #83b5fc',
             borderRadius: '24px',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
             backdropFilter: 'blur(15px)',
             width: '100%'
           }}
-          headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
+          headStyle={{ color: '#000', fontSize: '28px', fontWeight: '700' }}
         >
           <Row gutter={[12, 12]}>
             {features.map((feature, index) => (
@@ -1955,16 +1955,16 @@ const HomePage: React.FC = () => {
                   size="small" 
                   style={{ 
                     height: '100%',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: 'rgba(255, 255, 255, 0.6)',
+                    border: '1px solid #83b5fc',
                     borderRadius: '16px',
                     transition: 'all 0.3s ease'
                   }}
                 >
                   <Space direction="vertical" align="center" style={{ width: '100%', textAlign: 'center' }}>
                     <div>{feature.icon}</div>
-                    <Title level={5} style={{ margin: 0, color: '#fff' }}>{feature.title}</Title>
-                    <Text style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.7)' }}>
+                    <Title level={5} style={{ margin: 0, color: '#000' }}>{feature.title}</Title>
+                    <Text style={{ fontSize: '12px', color: '#000' }}>
                       {feature.description}
                     </Text>
                   </Space>
@@ -1980,24 +1980,24 @@ const HomePage: React.FC = () => {
         <Card 
           title={t('home.howto.title')}
           style={{ 
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            background: 'rgba(255, 255, 255, 0.8)',
+            border: '1px solid #83b5fc',
             borderRadius: '24px',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
             backdropFilter: 'blur(15px)',
             width: '100%'
           }}
-          headStyle={{ color: '#fff', fontSize: 'clamp(24px, 4vw, 28px)', fontWeight: '700' }}
+          headStyle={{ color: '#000', fontSize: 'clamp(24px, 4vw, 28px)', fontWeight: '700' }}
         >
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24} md={12}>
-              <div style={{ color: '#fff' }}>
+              <div style={{ color: '#000' }}>
               <Steps
                 direction="vertical"
                 current={-1}
                 items={steps.map(step => ({
-                    title: <span style={{ color: '#fff' }}>{step.title}</span>,
-                    description: <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{step.description}</span>,
+                    title: <span style={{ color: '#000' }}>{step.title}</span>,
+                    description: <span style={{ color: '#000' }}>{step.description}</span>,
                   icon: step.icon
                 }))}
               />
@@ -2005,8 +2005,8 @@ const HomePage: React.FC = () => {
             </Col>
             <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#fff', fontSize: 'clamp(16px, 3vw, 20px)' }}>{t('home.howto.start.title')}</Title>
-                <Paragraph style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: 'clamp(14px, 2.5vw, 16px)' }}>
+                <Title level={4} style={{ color: '#000', fontSize: 'clamp(16px, 3vw, 20px)' }}>{t('home.howto.start.title')}</Title>
+                <Paragraph style={{ color: '#000', fontSize: 'clamp(14px, 2.5vw, 16px)' }}>
                   {t('home.howto.start.desc')}
                 </Paragraph>
                 <Alert
@@ -2035,14 +2035,14 @@ const HomePage: React.FC = () => {
         <Card 
           title={t('home.achievements.title')}
           style={{ 
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            background: 'rgba(255, 255, 255, 0.8)',
+            border: '1px solid #83b5fc',
             borderRadius: '24px',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
             backdropFilter: 'blur(15px)',
             width: '100%'
           }}
-          headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
+          headStyle={{ color: '#000', fontSize: '28px', fontWeight: '700' }}
         >
           <Row gutter={[12, 12]}>
             {achievements.map((achievement, index) => (
@@ -2051,21 +2051,21 @@ const HomePage: React.FC = () => {
                   size="small" 
                   style={{ 
                     textAlign: 'center',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: 'rgba(255, 255, 255, 0.6)',
+                    border: '1px solid #83b5fc',
                     borderRadius: '16px',
                     transition: 'all 0.3s ease'
                   }}
                 >
                   <Space direction="vertical" size={8}>
                     <div style={{ fontSize: '32px' }}>{achievement.icon}</div>
-                    <Title level={5} style={{ margin: 0, color: '#fff' }}>{achievement.title}</Title>
-                    <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{achievement.description}</Text>
+                    <Title level={5} style={{ margin: 0, color: '#000' }}>{achievement.title}</Title>
+                    <Text style={{ color: '#000' }}>{achievement.description}</Text>
                     {achievement.value !== undefined && (
                       <Statistic
                         value={achievement.value}
                         valueStyle={{ 
-                          color: '#fff', 
+                          color: '#000', 
                           fontSize: 'clamp(18px, 4vw, 24px)',
                           fontWeight: 'bold'
                         }}
@@ -2084,14 +2084,14 @@ const HomePage: React.FC = () => {
         <Card 
           title={t('home.testimonials.title')}
           style={{ 
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            background: 'rgba(255, 255, 255, 0.8)',
+            border: '1px solid #83b5fc',
             borderRadius: '24px',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
             backdropFilter: 'blur(15px)',
             width: '100%'
           }}
-          headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
+          headStyle={{ color: '#000', fontSize: '28px', fontWeight: '700' }}
         >
           <Row gutter={[12, 12]}>
             {testimonials.map((testimonial: any, index: number) => (
@@ -2099,8 +2099,8 @@ const HomePage: React.FC = () => {
                 <Card 
                   size="small"
                   style={{ 
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: 'rgba(255, 255, 255, 0.6)',
+                    border: '1px solid #83b5fc',
                     borderRadius: '16px',
                     transition: 'all 0.3s ease'
                   }}
@@ -2112,20 +2112,20 @@ const HomePage: React.FC = () => {
                         src={testimonial.avatar}
                         style={{ 
                           backgroundColor: '#1890ff',
-                          color: '#fff'
+                          color: '#000'
                         }}
                       >
                         {testimonial.name.charAt(0)}
                       </Avatar>
                       <Space direction="vertical" size={0}>
-                        <Text strong style={{ color: '#fff' }}>{testimonial.name}</Text>
-                        <Text style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.7)' }}>
+                        <Text strong style={{ color: '#000' }}>{testimonial.name}</Text>
+                        <Text style={{ fontSize: '12px', color: '#000' }}>
                           {testimonial.role}
                         </Text>
                       </Space>
                     </Space>
                     <Rate disabled value={testimonial.rating} style={{ fontSize: '14px' }} />
-                    <Paragraph style={{ margin: 0, fontSize: '14px', color: 'rgba(255, 255, 255, 0.8)' }}>
+                    <Paragraph style={{ margin: 0, fontSize: '14px', color: '#000' }}>
                       "{testimonial.content}"
                     </Paragraph>
                   </Space>
@@ -2141,19 +2141,19 @@ const HomePage: React.FC = () => {
         <Card 
           title={t('home.contact.title')}
           style={{ 
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            background: 'rgba(255, 255, 255, 0.8)',
+            border: '1px solid #83b5fc',
             borderRadius: '24px',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
             backdropFilter: 'blur(15px)',
             width: '100%'
           }}
-          headStyle={{ color: '#fff', fontSize: '28px', fontWeight: '700' }}
+          headStyle={{ color: '#000', fontSize: '28px', fontWeight: '700' }}
         >
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#fff' }}>{t('home.contact.info.title')}</Title>
+                <Title level={4} style={{ color: '#000' }}>{t('home.contact.info.title')}</Title>
                 <List
                   dataSource={[
                     { icon: <MailOutlined />, text: t('home.contact.info.email') },
@@ -2163,8 +2163,8 @@ const HomePage: React.FC = () => {
                   renderItem={item => (
                     <List.Item>
                       <Space>
-                        <div style={{ color: '#1890ff' }}>{item.icon}</div>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{item.text}</Text>
+                        <div style={{ color: '#000' }}>{item.icon}</div>
+                        <Text style={{ color: '#000' }}>{item.text}</Text>
                       </Space>
                     </List.Item>
                   )}
@@ -2173,7 +2173,7 @@ const HomePage: React.FC = () => {
             </Col>
             <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#fff', fontSize: 'clamp(16px, 3vw, 20px)' }}>{t('home.contact.support.title')}</Title>
+                <Title level={4} style={{ color: '#000', fontSize: 'clamp(16px, 3vw, 20px)' }}>{t('home.contact.support.title')}</Title>
                 <Space wrap>
                   <Button 
                     type="primary" 
@@ -2194,9 +2194,9 @@ const HomePage: React.FC = () => {
                     onClick={() => navigate('/apk-download')}
                     size="large"
                     style={{ 
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      color: '#fff',
+                      background: 'rgba(255, 255, 255, 0.8)',
+                      border: '1px solid #83b5fc',
+                      color: '#001f44',
                       borderRadius: '8px',
                       height: 'clamp(36px, 5vh, 40px)'
                     }}

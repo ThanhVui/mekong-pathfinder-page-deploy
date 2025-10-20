@@ -185,7 +185,7 @@ const APKDownload: React.FC = () => {
         padding: '100px 0 0 0', 
         width: '100%', 
         margin: '0',
-        background: 'rgb(52, 52, 139)',
+        background: '#c5e2ff',
         minHeight: '100vh'
       }}>
         <Space direction="vertical" size={24} style={{ width: '100%', padding: '0 24px' }}>
@@ -194,8 +194,8 @@ const APKDownload: React.FC = () => {
 
         <AnimatedSection animationType="fadeInUp" delay={100}>
           <Card style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            background: 'rgba(255, 255, 255, 0.8)',
+            border: '1px solid #83b5fc',
             borderRadius: '20px',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
             backdropFilter: 'blur(10px)'
@@ -203,14 +203,14 @@ const APKDownload: React.FC = () => {
           <Row gutter={[16, 16]} align="middle">
             <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16}>
-                <Title level={1} style={{ margin: 0, color: '#fff' }}>
+                <Title level={1} style={{ margin: 0, color: '#000' }}>
                   <AndroidOutlined style={{ color: '#52c41a', marginRight: 12 }} />
                   Mekong Pathfinder
                 </Title>
-                <Title level={3} style={{ margin: 0, color: 'rgba(255, 255, 255, 0.8)' }}>
+                <Title level={3} style={{ margin: 0, color: '#000' }}>
                   Ứng dụng di động thông minh
                 </Title>
-                <Paragraph style={{ fontSize: '16px', lineHeight: 1.6, color: 'rgba(255, 255, 255, 0.9)' }}>
+                <Paragraph style={{ fontSize: '16px', lineHeight: 1.6, color: '#000' }}>
                   Khám phá các tuyến đường tối ưu, theo dõi giao thông và thời tiết thời gian thực 
                   với ứng dụng Mekong Pathfinder. Được thiết kế đặc biệt cho khu vực Đồng bằng sông Cửu Long.
                 </Paragraph>
@@ -242,7 +242,7 @@ const APKDownload: React.FC = () => {
                 }}>
                   <AndroidOutlined style={{ fontSize: 'clamp(60px, 8vw, 80px)', color: '#52c41a' }} />
                 </div>
-                <Text style={{ marginTop: 16, display: 'block', color: 'rgba(255, 255, 255, 0.8)' }}>
+                <Text style={{ marginTop: 16, display: 'block', color: '#001f44' }}>
                   Icon ứng dụng Mekong Pathfinder
                 </Text>
                 <Button
@@ -259,7 +259,7 @@ const APKDownload: React.FC = () => {
                     padding: 'clamp(0 20px, 2.5vw, 0 30px)',
                     fontSize: 'clamp(14px, 2.5vw, 16px)',
                     fontWeight: '600',
-                    boxShadow: '0 4px 15px rgba(82, 196, 26, 0.4)'
+                    boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)'
                   }}
                 >
                   Download APK
@@ -275,8 +275,8 @@ const APKDownload: React.FC = () => {
           <Card 
             title="Giới thiệu ứng dụng"
             style={{
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(197, 226, 255, 0.6) 100%)',
+              border: '1px solid #83b5fc',
               borderRadius: '20px',
               boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)',
               backdropFilter: 'blur(10px)'
@@ -284,7 +284,7 @@ const APKDownload: React.FC = () => {
             headStyle={{
               background: 'transparent',
               borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#fff',
+              color: '#000',
               fontSize: '28px',
               fontWeight: '700',
               textAlign: 'center'
@@ -315,10 +315,10 @@ const APKDownload: React.FC = () => {
               </Col>
               <Col xs={24} sm={24} md={12}>
                     <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                      <Title level={3} style={{ color: '#fff', margin: 0 }}>
+                      <Title level={3} style={{ color: '#000', margin: 0 }}>
                         Điều hướng thông minh
                       </Title>
-                      <Paragraph style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '16px', lineHeight: 1.6 }}>
+                      <Paragraph style={{ color: '#000', fontSize: '16px', lineHeight: 1.6 }}>
                         Tìm kiếm và lựa chọn tuyến đường tối ưu nhất dựa trên tình hình giao thông thời gian thực. 
                         Ứng dụng sẽ gợi ý các lộ trình an toàn và tiết kiệm thời gian nhất.
                       </Paragraph>
@@ -330,8 +330,8 @@ const APKDownload: React.FC = () => {
                           'Gợi ý tuyến đường thay thế'
                         ]}
                         renderItem={item => (
-                          <List.Item style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
-                            <CheckCircleOutlined style={{ color: '#52c41a', marginRight: 8 }} />
+                          <List.Item style={{ color: '#000' }}>
+                            <CheckCircleOutlined style={{ color: '#000', marginRight: 8 }} />
                             {item}
                           </List.Item>
                         )}
@@ -360,10 +360,10 @@ const APKDownload: React.FC = () => {
                   </Col>
                   <Col xs={24} md={12}>
                     <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                      <Title level={3} style={{ color: '#fff', margin: 0 }}>
+                      <Title level={3} style={{ color: '#000', margin: 0 }}>
                         Tuyến đường an toàn
                       </Title>
-                      <Paragraph style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '16px', lineHeight: 1.6 }}>
+                      <Paragraph style={{ color: '#000', fontSize: '16px', lineHeight: 1.6 }}>
                         Hệ thống đánh giá và phân loại mức độ an toàn của các tuyến đường, 
                         giúp người dùng lựa chọn lộ trình phù hợp với nhu cầu và tình hình thực tế.
                       </Paragraph>
@@ -375,7 +375,7 @@ const APKDownload: React.FC = () => {
                           'Gợi ý tuyến đường thay thế an toàn'
                         ]}
                         renderItem={item => (
-                          <List.Item style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                          <List.Item style={{ color: '#000' }}>
                             <SafetyOutlined style={{ color: '#faad14', marginRight: 8 }} />
                             {item}
                           </List.Item>
@@ -405,10 +405,10 @@ const APKDownload: React.FC = () => {
                   </Col>
                   <Col xs={24} md={12}>
                     <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                      <Title level={3} style={{ color: '#fff', margin: 0 }}>
+                      <Title level={3} style={{ color: '#000', margin: 0 }}>
                         Cộng đồng người dùng
                       </Title>
-                      <Paragraph style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '16px', lineHeight: 1.6 }}>
+                      <Paragraph style={{ color: '#000', fontSize: '16px', lineHeight: 1.6 }}>
                         Kết nối với cộng đồng người dùng trong khu vực, chia sẻ thông tin về giao thông, 
                         thời tiết và các sự kiện quan trọng để hỗ trợ lẫn nhau.
                       </Paragraph>
@@ -420,7 +420,7 @@ const APKDownload: React.FC = () => {
                           'Báo cáo sự cố và cảnh báo'
                         ]}
                         renderItem={item => (
-                          <List.Item style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                          <List.Item style={{ color: '#000' }}>
                             <StarOutlined style={{ color: '#722ed1', marginRight: 8 }} />
                             {item}
                           </List.Item>
@@ -448,7 +448,7 @@ const APKDownload: React.FC = () => {
             headStyle={{
               background: 'transparent',
               borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#fff',
+              color: '#000',
               fontSize: '24px',
               fontWeight: '700'
             }}
@@ -462,8 +462,8 @@ const APKDownload: React.FC = () => {
                       height: 'clamp(180px, 25vh, 200px)',
                       display: 'flex',
                       flexDirection: 'column',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      background: 'rgba(255, 255, 255, 0.6)',
+                      border: '1px solid #83b5fc',
                       borderRadius: '16px',
                       backdropFilter: 'blur(10px)',
                       transition: 'all 0.3s ease'
@@ -479,8 +479,8 @@ const APKDownload: React.FC = () => {
                   >
                     <Space direction="vertical" align="center" style={{ width: '100%', textAlign: 'center', height: '100%', justifyContent: 'center' }}>
                       <div style={{ fontSize: '32px', marginBottom: '12px' }}>{feature.icon}</div>
-                      <Title level={5} style={{ margin: '0 0 8px 0', color: '#fff', fontSize: '16px' }}>{feature.title}</Title>
-                      <Text style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.8)', lineHeight: '1.4', margin: 0 }}>
+                      <Title level={5} style={{ margin: '0 0 8px 0', color: '#000', fontSize: '16px' }}>{feature.title}</Title>
+                      <Text style={{ fontSize: '12px', color: '#000', lineHeight: '1.4', margin: 0 }}>
                         {feature.description}
                       </Text>
                     </Space>
@@ -505,7 +505,7 @@ const APKDownload: React.FC = () => {
             headStyle={{
               background: 'transparent',
               borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#fff',
+              color: '#000',
               fontSize: '24px',
               fontWeight: '700'
             }}
@@ -561,7 +561,7 @@ const APKDownload: React.FC = () => {
                   width: '40px',
                   height: '40px',
                   borderRadius: '50%',
-                  background: 'rgba(255, 255, 255, 0.9)',
+                  background: 'rgba(197, 226, 255, 0.9)',
                   border: 'none',
                   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
                   display: 'flex',
@@ -572,11 +572,11 @@ const APKDownload: React.FC = () => {
                   transition: 'all 0.3s ease'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                  e.currentTarget.style.background = 'rgba(197, 226, 255, 1)';
                   e.currentTarget.style.transform = 'scale(1.1)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                  e.currentTarget.style.background = 'rgba(197, 226, 255, 0.9)';
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               />}
@@ -587,7 +587,7 @@ const APKDownload: React.FC = () => {
                   width: '40px',
                   height: '40px',
                   borderRadius: '50%',
-                  background: 'rgba(255, 255, 255, 0.9)',
+                  background: 'rgba(197, 226, 255, 0.9)',
                   border: 'none',
                   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
                   display: 'flex',
@@ -598,11 +598,11 @@ const APKDownload: React.FC = () => {
                   transition: 'all 0.3s ease'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
+                  e.currentTarget.style.background = 'rgba(197, 226, 255, 1)';
                   e.currentTarget.style.transform = 'scale(1.1)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
+                  e.currentTarget.style.background = 'rgba(197, 226, 255, 0.9)';
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               />}
@@ -776,7 +776,7 @@ const APKDownload: React.FC = () => {
               headStyle={{
                 background: 'transparent',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                color: '#fff',
+                color: '#000',
                 fontSize: 'clamp(20px, 3vw, 24px)',
                 fontWeight: '700'
               }}
@@ -784,8 +784,8 @@ const APKDownload: React.FC = () => {
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#fff' }}>Thông tin cá nhân</Title>
-                <Paragraph style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                <Title level={4} style={{ color: '#000' }}>Thông tin cá nhân</Title>
+                <Paragraph style={{ color: '#000' }}>
                   Vui lòng cung cấp thông tin để chúng tôi có thể hỗ trợ bạn tốt nhất và 
                   gửi thông báo về các phiên bản cập nhật mới.
                 </Paragraph>
@@ -855,7 +855,7 @@ const APKDownload: React.FC = () => {
                 headStyle={{
                   background: 'transparent',
                   borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                  color: '#fff',
+                  color: '#000',
                   fontSize: 'clamp(16px, 2.5vw, 18px)',
                   fontWeight: '600'
                 }}
@@ -865,7 +865,7 @@ const APKDownload: React.FC = () => {
                     <Col xs={12} sm={12} md={12}>
                       <div style={{ textAlign: 'center' }}>
                         <Title level={2} style={{ margin: 0, color: '#52c41a' }}>{downloadStats.totalDownloads}</Title>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Lượt tải</Text>
+                        <Text style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>Lượt tải</Text>
                       </div>
                     </Col>
                     <Col xs={12} sm={12} md={12}>
@@ -873,7 +873,7 @@ const APKDownload: React.FC = () => {
                         <Title level={2} style={{ margin: 0, color: '#1890ff' }}>
                           {feedbackStats.averageRating.toFixed(1)}
                         </Title>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: 'clamp(12px, 2vw, 14px)' }}>Đánh giá</Text>
+                        <Text style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>Đánh giá</Text>
                       </div>
                     </Col>
                   </Row>
@@ -881,18 +881,18 @@ const APKDownload: React.FC = () => {
                   <Divider style={{ borderColor: 'rgba(255, 255, 255, 0.2)' }} />
                   
                   <div>
-                    <Text strong style={{ color: '#fff' }}>Phiên bản hiện tại:</Text>
+                    <Text strong style={{ color: '#000' }}>Phiên bản hiện tại:</Text>
                     <Tag color="blue" style={{ marginLeft: 8 }}>v1.0.0</Tag>
                   </div>
                   
                   <div>
-                    <Text strong style={{ color: '#fff' }}>Cập nhật lần cuối:</Text>
-                    <Text style={{ marginLeft: 8, color: 'rgba(255, 255, 255, 0.8)' }}>15/12/2024</Text>
+                    <Text strong style={{ color: '#000' }}>Cập nhật lần cuối:</Text>
+                    <Text style={{ marginLeft: 8, color: '#000' }}>15/12/2024</Text>
                   </div>
                   
                   <div>
-                    <Text strong style={{ color: '#fff' }}>Kích thước file:</Text>
-                    <Text style={{ marginLeft: 8, color: 'rgba(255, 255, 255, 0.8)' }}>45.2 MB</Text>
+                    <Text strong style={{ color: '#000' }}>Kích thước file:</Text>
+                    <Text style={{ marginLeft: 8, color: '#000' }}>45.2 MB</Text>
                   </div>
                 </Space>
               </Card>
