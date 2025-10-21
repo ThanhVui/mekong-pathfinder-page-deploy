@@ -212,7 +212,7 @@ const HomePage: React.FC = () => {
         value: Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)
     }
   ];
-
+ 
   const carouselItems = [
     {
       title: t('home.hero.title1'),
@@ -255,7 +255,7 @@ const HomePage: React.FC = () => {
               <div key={index}>
                 <div style={{ 
                   position: 'relative',
-                  minHeight: 'clamp(400px, 60vh, 700px)',
+                  minHeight: 'clamp(500px, 60vh, 700px)',
                   maxWidth: '1400px',
                   margin: '0 auto',
                   borderRadius: '20px',

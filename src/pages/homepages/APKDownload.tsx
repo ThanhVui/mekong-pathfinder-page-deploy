@@ -436,63 +436,6 @@ const APKDownload: React.FC = () => {
           </Card>
         </AnimatedSection>
 
-        {/* Features Section */}
-        <AnimatedSection animationType="fadeInUp" delay={400}>
-          <Card 
-            title="Tính năng nổi bật"
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '20px',
-              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-              backdropFilter: 'blur(10px)'
-            }}
-            headStyle={{
-              background: 'transparent',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#000',
-              fontSize: '24px',
-              fontWeight: '700'
-            }}
-          >
-            <Row gutter={[12, 12]}>
-              {appFeatures.map((feature, index) => (
-                <Col xs={24} sm={12} md={6} key={index}>
-                  <Card 
-                    size="small" 
-                    style={{
-                      height: 'clamp(180px, 25vh, 200px)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      background: 'rgba(255, 255, 255, 0.6)',
-                      border: '1px solid #83b5fc',
-                      borderRadius: '16px',
-                      backdropFilter: 'blur(10px)',
-                      transition: 'all 0.3s ease'
-                    }}
-                    bodyStyle={{
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      padding: '20px',
-                      background: 'transparent'
-                    }}
-                  >
-                    <Space direction="vertical" align="center" style={{ width: '100%', textAlign: 'center', height: '100%', justifyContent: 'center' }}>
-                      <div style={{ fontSize: '32px', marginBottom: '12px' }}>{feature.icon}</div>
-                      <Title level={5} style={{ margin: '0 0 8px 0', color: '#000', fontSize: '16px' }}>{feature.title}</Title>
-                      <Text style={{ fontSize: '12px', color: '#000', lineHeight: '1.4', margin: 0 }}>
-                        {feature.description}
-                      </Text>
-                    </Space>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Card>
-        </AnimatedSection>
-
         {/* App Screenshots Gallery */}
         <AnimatedSection animationType="fadeInUp" delay={600}>
           <Card 
@@ -698,6 +641,63 @@ const APKDownload: React.FC = () => {
                 </div>
               ))}
             </Carousel>
+          </Card>
+        </AnimatedSection>
+
+        {/* Features Section */}
+        <AnimatedSection animationType="fadeInUp" delay={400}>
+          <Card 
+            title="Tính năng nổi bật"
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '20px',
+              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
+              backdropFilter: 'blur(10px)'
+            }}
+            headStyle={{
+              background: 'transparent',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+              color: '#000',
+              fontSize: '24px',
+              fontWeight: '700'
+            }}
+          >
+            <Row gutter={[12, 12]}>
+              {appFeatures.map((feature, index) => (
+                <Col xs={24} sm={12} md={6} key={index}>
+                  <Card 
+                    size="small" 
+                    style={{
+                      height: 'clamp(180px, 25vh, 200px)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      background: 'rgba(255, 255, 255, 0.6)',
+                      border: '1px solid #83b5fc',
+                      borderRadius: '16px',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.3s ease'
+                    }}
+                    bodyStyle={{
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      padding: '20px',
+                      background: 'transparent'
+                    }}
+                  >
+                    <Space direction="vertical" align="center" style={{ width: '100%', textAlign: 'center', height: '100%', justifyContent: 'center' }}>
+                      <div style={{ fontSize: '32px', marginBottom: '12px' }}>{feature.icon}</div>
+                      <Title level={5} style={{ margin: '0 0 8px 0', color: '#000', fontSize: '16px' }}>{feature.title}</Title>
+                      <Text style={{ fontSize: '12px', color: '#000', lineHeight: '1.4', margin: 0 }}>
+                        {feature.description}
+                      </Text>
+                    </Space>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
           </Card>
         </AnimatedSection>
 
