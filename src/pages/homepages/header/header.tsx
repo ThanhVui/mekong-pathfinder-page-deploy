@@ -18,6 +18,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../../context/LanguageContext';
+import { useColorTheme } from '../../../context/ColorThemeContext';
 import AnimatedButton from '../../../components/AnimatedButton';
 import NavigationMenu from '../../../components/NavigationMenu';
 import logoBanner from '../../../assets/images/logo_header/logo-04.png';
@@ -30,6 +31,7 @@ const HomePageHeader: React.FC = () => {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
+  const { theme } = useColorTheme();
 
   // Scroll effect
   useEffect(() => {
@@ -45,19 +47,19 @@ const HomePageHeader: React.FC = () => {
     {
       key: 'home',
       label: t('nav.home'),
-      icon: <HomeOutlined style={{ color: '#0344d6' }} />,
+      icon: <HomeOutlined style={{ color: theme.primary.bright }} />,
       onClick: () => navigate('/')
     },
     {
       key: 'download',
       label: language === 'vi' ? 'Tải xuống' : t('nav.download'),
-      icon: <DownloadOutlined style={{ color: '#0344d6' }} />,
+      icon: <DownloadOutlined style={{ color: theme.primary.bright }} />,
       onClick: () => navigate('/apk-download')
     },
     {
       key: 'feedback',
       label: language === 'vi' ? 'Góp ý' : t('nav.feedback'),
-      icon: <MessageOutlined style={{ color: '#0344d6' }} />,
+      icon: <MessageOutlined style={{ color: theme.primary.bright }} />,
       onClick: () => navigate('/feedback')
     }
   ];
@@ -94,17 +96,16 @@ const HomePageHeader: React.FC = () => {
         `}
       </style>
 
-      {/* Background Layer — fixed under header content */}
+      {/* Background Layer — always at bottom, behind content */}
       <div
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
-          height: isScrolled ? '0px' : '100px',
-          background: '#c5e2ff',
-          zIndex: 0,
-          transition: 'height 0.3s ease',
+          height: '100px',
+          background: theme.background.header,
+          zIndex: 1,
         }}
       />
 
@@ -131,11 +132,11 @@ const HomePageHeader: React.FC = () => {
         >
           <div
             style={{
-              background: 'white',
+              background: theme.background.card,
               borderRadius: '20px',
               padding: '12px 20px',
-              border: '1px solid #83b5fc',
-              boxShadow: '0 8px 32px rgba(3, 68, 214, 0.2)',
+              border: `1px solid ${theme.border.primary}`,
+              boxShadow: theme.shadow.secondary,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -208,7 +209,7 @@ const HomePageHeader: React.FC = () => {
                   borderRadius: '20px',
                   fontSize: 'clamp(10px, 2vw, 12px)',
                 }}
-                suffixIcon={<GlobalOutlined style={{ color: '#0344d6' }} />}
+                suffixIcon={<GlobalOutlined style={{ color: theme.primary.bright }} />}
                 options={[
                   { value: 'vi', label: '🇻🇳 VI' },
                   { value: 'en', label: '🇺🇸 EN' },
@@ -217,7 +218,7 @@ const HomePageHeader: React.FC = () => {
 
               <AnimatedButton
                 variant="primary"
-                icon={<PhoneOutlined style={{ color: '#fff' }} />}
+                icon={<PhoneOutlined style={{ color: theme.neutral.white }} />}
                 onClick={() =>
                   window.open(
                     'https://www.facebook.com/mekongpathfinder',
@@ -229,7 +230,7 @@ const HomePageHeader: React.FC = () => {
                 shimmerEffect={true}
                 size="medium"
                 style={{
-                  boxShadow: '0 0 20px rgba(3, 68, 214, 0.4)',
+                  boxShadow: theme.shadow.glow,
                   borderRadius: '30px',
                 }}
               >
@@ -239,20 +240,20 @@ const HomePageHeader: React.FC = () => {
               {/* Mobile Menu Button */}
               <Button
                 type="text"
-                icon={<MenuOutlined style={{ color: '#0344d6' }} />}
+                icon={<MenuOutlined style={{ color: theme.primary.bright }} />}
                 onClick={() => setMobileMenuVisible(true)}
                 className="mobile-menu-btn"
                 style={{
                   borderRadius: '50%',
                   height: '36px',
                   width: '36px',
-                  background: 'rgba(255, 255, 255, 0.9)',
-                  border: '1px solid rgba(0, 0, 0, 0.1)',
+                  background: theme.background.overlay,
+                  border: `1px solid ${theme.border.light}`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   transition: 'all 0.3s ease',
-                  boxShadow: '0 0 10px rgba(3, 68, 214, 0.3)'
+                  boxShadow: `0 0 10px ${theme.primary.bright}40`
                 }}
               />
             </div>
@@ -269,8 +270,8 @@ const HomePageHeader: React.FC = () => {
         width={280}
         styles={{
           header: {
-            background: 'linear-gradient(135deg, #667eea 0%, #377aef 100%)',
-            color: '#fff'
+            background: `linear-gradient(135deg, ${theme.primary.medium} 0%, ${theme.primary.light} 100%)`,
+            color: theme.text.white
           },
         }}
       >

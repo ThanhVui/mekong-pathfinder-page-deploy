@@ -19,6 +19,7 @@ import {
   Progress,
   Alert
 } from 'antd';
+import { useColorTheme } from '../../context/ColorThemeContext';
 import { 
   MessageOutlined, 
   StarOutlined, 
@@ -67,6 +68,7 @@ interface FeedbackItem {
 }
 
 const FeedBack: React.FC = () => {
+  const { theme } = useColorTheme();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [rating, setRating] = useState(0);
@@ -161,7 +163,7 @@ const FeedBack: React.FC = () => {
         padding: '100px 0 0 0', 
         width: '100%', 
         margin: '0',
-        background: '#c5e2ff',
+        background: theme.background.page,
         minHeight: '100vh'
       }}>
         <Space direction="vertical" size={24} style={{ width: '100%', padding: '0 24px' }}>

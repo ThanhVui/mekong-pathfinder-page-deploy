@@ -17,6 +17,7 @@ import {
   Rate,
   Avatar
 } from 'antd';
+import { useColorTheme } from '../../context/ColorThemeContext';
 import logoBanner from '../../assets/images/logo_header/logo_banner.png';
 import banner from '../../assets/images/logo_header/banner.png';
 // Import activities-fanpage images
@@ -69,6 +70,7 @@ const { Title, Paragraph, Text } = Typography;
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { theme } = useColorTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselRef = useRef<any>(null);
   // const { isMobile, isTablet } = useResponsive();
@@ -239,7 +241,7 @@ const HomePage: React.FC = () => {
     <>
       
       {/* Hero Section - Full Width */}
-      <div style={{ position: 'relative', paddingTop: '10px', background: '#c5e2ff' }}>
+      <div style={{ position: 'relative', paddingTop: '10px', background: theme.background.page }}>
       <HomePageHeader />
 
             <Carousel 
@@ -392,7 +394,7 @@ const HomePage: React.FC = () => {
       <div style={{ 
         width: '100%',
         minHeight: '100vh',
-        background: '#c5e2ff',
+        background: theme.background.page,
         position: 'relative'
       }}>
         <div style={{ 
