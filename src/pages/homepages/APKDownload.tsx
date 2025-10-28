@@ -66,11 +66,12 @@ const APKDownload: React.FC = () => {
   const { theme } = useColorTheme();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [imagePreviewVisible, setImagePreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
+  const [selectedMainImage, setSelectedMainImage] = useState<string>(applicationInterface);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: '' });
   const [feedbackStats, setFeedbackStats] = useState({ averageRating: 0 });
   const downloadFormRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<any>(null);
   // const { isMobile, isTablet } = useResponsive();
 
   // Load download stats khi component mount
@@ -93,6 +94,41 @@ const APKDownload: React.FC = () => {
         block: 'start'
       });
     }
+  };
+
+  const handleSlideChange = (current: number) => {
+    setCurrentSlide(current);
+    const images = [
+      applicationInterface,
+      viewMap,
+      communityPost,
+      sosRequest,
+      viewAllCamera,
+      yourTimeline,
+      repairShop,
+      community02
+    ];
+    // Cập nhật ngay lập tức không có delay
+    setSelectedMainImage(images[current]);
+  };
+
+  const handleImageClick = (index: number) => {
+    // Di chuyển carousel đến ảnh được click
+    if (carouselRef.current) {
+      carouselRef.current.goTo(index);
+    }
+    setCurrentSlide(index);
+    const images = [
+      applicationInterface,
+      viewMap,
+      communityPost,
+      sosRequest,
+      viewAllCamera,
+      yourTimeline,
+      repairShop,
+      community02
+    ];
+    setSelectedMainImage(images[index]);
   };
 
 
@@ -183,6 +219,77 @@ const APKDownload: React.FC = () => {
 
   return (
     <>
+      <style>
+      {`
+        .ant-carousel .slick-slide {
+          display: block !important;
+        }
+        .ant-carousel .slick-slide > div {
+          height: 100%;
+        }
+        .ant-carousel .slick-list {
+          height: auto !important;
+        }
+        .ant-carousel .slick-track {
+          display: flex !important;
+          align-items: center !important;
+        }
+        .ant-carousel .slick-slide img {
+          display: block !important;
+          margin: 0 auto !important;
+        }
+        .ant-carousel .slick-slide.slick-center {
+          transform: scale(1.15) !important;
+          opacity: 1 !important;
+          z-index: 10 !important;
+          position: relative !important;
+          transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+        .ant-carousel .slick-slide:not(.slick-center) {
+          transform: scale(0.85) !important;
+          opacity: 0.8 !important;
+          z-index: 1 !important;
+          transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+        .ant-carousel .slick-slide.slick-center .carousel-item {
+          height: 300px !important;
+          width: 160px !important;
+        }
+        .ant-carousel .slick-slide:not(.slick-center) .carousel-item {
+          height: 280px !important;
+          width: 150px !important;
+        }
+        .ant-carousel .slick-track {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+        .main-image-container img {
+          transition: none !important;
+        }
+        .carousel-item:active {
+          transform: scale(0.95) !important;
+          transition: transform 0.1s ease !important;
+        }
+        .ant-steps-item-title {
+          color: #000 !important;
+        }
+        .ant-steps-item-description {
+          color: #000 !important;
+        }
+      `}
+    </style>
+
+    <Text style={{ 
+        color: '#000', 
+        margin: '0px 0px',
+        fontSize: 'clamp(20px, 3vw, 34px)',
+        fontWeight: '700',
+        textAlign: 'center',
+        display: 'block'
+      }}>
+        Giới thiệu ứng dụng
+    </Text>
       <div style={{ 
         padding: '100px 0 0 0', 
         width: '100%', 
@@ -191,9 +298,6 @@ const APKDownload: React.FC = () => {
         minHeight: '100vh'
       }}>
         <Space direction="vertical" size={24} style={{ width: '100%', padding: '0 24px' }}>
-        {/* Header Section */}
-        <HomePageHeader />
-
         <AnimatedSection animationType="fadeInUp" delay={100}>
           <Card style={{
             background: 'rgba(255, 255, 255, 0.8)',
@@ -201,18 +305,21 @@ const APKDownload: React.FC = () => {
             borderRadius: '20px',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
             backdropFilter: 'blur(10px)'
+          }}
+          bodyStyle={{
+            padding: '10px'
           }}>
-          <Row gutter={[16, 16]} align="middle">
+          <Row gutter={[8, 8]} align="middle">
             <Col xs={24} sm={24} md={12}>
-              <Space direction="vertical" size={16}>
-                <Title level={1} style={{ margin: 0, color: '#000' }}>
-                  <AndroidOutlined style={{ color: '#52c41a', marginRight: 12 }} />
+              <Space direction="vertical" size={8}>
+                <Title level={2} style={{ margin: 0, color: '#000', fontSize: '24px' }}>
+                  <AndroidOutlined style={{ color: '#52c41a', marginRight: 8 }} />
                   Mekong Pathfinder
                 </Title>
-                <Title level={3} style={{ margin: 0, color: '#000' }}>
+                <Title level={4} style={{ margin: 0, color: '#000', fontSize: '16px' }}>
                   Ứng dụng di động thông minh
                 </Title>
-                <Paragraph style={{ fontSize: '16px', lineHeight: 1.6, color: '#000' }}>
+                <Paragraph style={{ fontSize: '14px', lineHeight: 1.5, color: '#000', margin: '0 0 8px 0' }}>
                   Khám phá các tuyến đường tối ưu, theo dõi giao thông và thời tiết thời gian thực 
                   với ứng dụng Mekong Pathfinder. Được thiết kế đặc biệt cho khu vực Đồng bằng sông Cửu Long.
                 </Paragraph>
@@ -232,36 +339,36 @@ const APKDownload: React.FC = () => {
             <Col xs={24} sm={24} md={12}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{
-                  width: 'clamp(150px, 20vw, 200px)',
-                  height: 'clamp(150px, 20vw, 200px)',
+                  width: 'clamp(60px, 8vw, 80px)',
+                  height: 'clamp(60px, 8vw, 80px)',
                   backgroundColor: '#f0f0f0',
-                  borderRadius: '20px',
+                  borderRadius: '10px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto',
                   border: '2px dashed #d9d9d9'
                 }}>
-                  <AndroidOutlined style={{ fontSize: 'clamp(60px, 8vw, 80px)', color: '#52c41a' }} />
+                  <AndroidOutlined style={{ fontSize: 'clamp(25px, 3vw, 35px)', color: '#52c41a' }} />
                 </div>
-                <Text style={{ marginTop: 16, display: 'block', color: '#001f44' }}>
+                <Text style={{ marginTop: 4, display: 'block', color: '#001f44', fontSize: '11px' }}>
                   Icon ứng dụng Mekong Pathfinder
                 </Text>
                 <Button
                   type="primary"
-                  size={'large'}
+                  size={'small'}
                   icon={<DownloadOutlined />}
                   onClick={scrollToDownloadForm}
                   style={{
-                    marginTop: 20,
+                    marginTop: 4,
                     background: 'linear-gradient(135deg, #52c41a 0%, #73d13d 100%)',
                     border: 'none',
-                    borderRadius: '25px',
-                    height: 'clamp(40px, 5vh, 50px)',
-                    padding: 'clamp(0 20px, 2.5vw, 0 30px)',
-                    fontSize: 'clamp(14px, 2.5vw, 16px)',
+                    borderRadius: '14px',
+                    height: '28px',
+                    padding: '0 12px',
+                    fontSize: '11px',
                     fontWeight: '600',
-                    boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)'
+                    boxShadow: '0 3px 12px rgba(3, 68, 214, 0.3)'
                   }}
                 >
                   Download APK
@@ -272,16 +379,16 @@ const APKDownload: React.FC = () => {
           </Card>
         </AnimatedSection>
 
-        {/* Application Introduction Section */}
+        {/* Combined Application Introduction & Screenshots Section */}
         <AnimatedSection animationType="fadeInUp" delay={200}>
           <Card 
-            title="Giới thiệu ứng dụng"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(197, 226, 255, 0.6) 100%)',
               border: '1px solid #83b5fc',
               borderRadius: '20px',
               boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)',
-              backdropFilter: 'blur(10px)'
+              backdropFilter: 'blur(10px)',
+              minHeight: '400px'
             }}
             headStyle={{
               background: 'transparent',
@@ -292,210 +399,162 @@ const APKDownload: React.FC = () => {
               textAlign: 'center'
             }}
           >
-            <Carousel 
-              autoplay 
-              autoplaySpeed={4000}
-              dots={{ className: 'custom-dots' }}
-              arrows={true}
-            >
-              <div>
-            <Row gutter={[16, 16]}>
-              <Col xs={24} sm={24} md={12}>
-                <div style={{ textAlign: 'center' }}>
-                  <img
-                    src={navigateRoute}
-                    alt="Navigate Route"
+            <Row gutter={[24, 24]} align="stretch">
+              {/* Left Column - Main Image (5/10) */}
+              <Col xs={24} md={10}>
+                <div style={{ 
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  minHeight: '100px',
+                  padding: '20px'
+                }}>
+                  <div className="main-image-container" style={{ 
+                    textAlign: 'center',
+                    padding: '20px'
+                  }}>
+                    <img
+                      src={selectedMainImage}
+                      alt="Selected Application Image"
                     style={{
                       width: '100%',
-                      maxWidth: 'clamp(250px, 30vw, 300px)',
-                      height: 'auto',
-                      borderRadius: '12px',
-                      boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
-                    }}
-                  />
-                </div>
-              </Col>
-              <Col xs={24} sm={24} md={12}>
-                    <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                      <Title level={3} style={{ color: '#000', margin: 0 }}>
-                        Điều hướng thông minh
-                      </Title>
-                      <Paragraph style={{ color: '#000', fontSize: '16px', lineHeight: 1.6 }}>
-                        Tìm kiếm và lựa chọn tuyến đường tối ưu nhất dựa trên tình hình giao thông thời gian thực. 
-                        Ứng dụng sẽ gợi ý các lộ trình an toàn và tiết kiệm thời gian nhất.
-                      </Paragraph>
-                      <List
-                        dataSource={[
-                          'Tính toán lộ trình tối ưu',
-                          'Cập nhật giao thông thời gian thực',
-                          'Cảnh báo tắc đường và sự cố',
-                          'Gợi ý tuyến đường thay thế'
-                        ]}
-                        renderItem={item => (
-                          <List.Item style={{ color: '#000' }}>
-                            <CheckCircleOutlined style={{ color: '#000', marginRight: 8 }} />
-                            {item}
-                          </List.Item>
-                        )}
-                      />
-                    </Space>
-                  </Col>
-                </Row>
-              </div>
-              
-              <div>
-                <Row gutter={[24, 24]}>
-                  <Col xs={24} md={12}>
-                    <div style={{ textAlign: 'center' }}>
-                      <img
-                        src={safeRoute}
-                        alt="Safe Route"
-                        style={{
-                          width: '100%',
-                          maxWidth: '300px',
-                          height: 'auto',
-                          borderRadius: '12px',
-                          boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
+                        maxWidth: 'clamp(250px, 30vw, 350px)',
+                      height: '80%',
+                        borderRadius: '20px',
+                        boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
+                        transition: 'all 0.3s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2)';
+                      }}
+                      onClick={() => {
+                        // Chỉ cập nhật ảnh chính, không hiển thị popup
                         }}
                       />
                     </div>
-                  </Col>
-                  <Col xs={24} md={12}>
-                    <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                      <Title level={3} style={{ color: '#000', margin: 0 }}>
-                        Tuyến đường an toàn
-                      </Title>
-                      <Paragraph style={{ color: '#000', fontSize: '16px', lineHeight: 1.6 }}>
-                        Hệ thống đánh giá và phân loại mức độ an toàn của các tuyến đường, 
-                        giúp người dùng lựa chọn lộ trình phù hợp với nhu cầu và tình hình thực tế.
-                      </Paragraph>
-                      <List
-                        dataSource={[
-                          'Đánh giá mức độ an toàn tuyến đường',
-                          'Cảnh báo khu vực nguy hiểm',
-                          'Thông tin về tình hình lũ lụt',
-                          'Gợi ý tuyến đường thay thế an toàn'
-                        ]}
-                        renderItem={item => (
-                          <List.Item style={{ color: '#000' }}>
-                            <SafetyOutlined style={{ color: '#faad14', marginRight: 8 }} />
-                            {item}
-                          </List.Item>
-                        )}
-                      />
-                    </Space>
-                  </Col>
-                </Row>
               </div>
+                  </Col>
 
+              {/* Right Column - Content & Screenshots (5/10) */}
+              <Col xs={24} md={14}>
+                <Space direction="vertical" size={24} style={{ width: '100%' }}>
+                  {/* Main Content */}
               <div>
-                <Row gutter={[24, 24]}>
-                  <Col xs={24} md={12}>
-                    <div style={{ textAlign: 'center' }}>
-                      <img
-                        src={community01}
-                        alt="Community"
-                        style={{
-                          width: '100%',
-                          maxWidth: '300px',
-                          height: 'auto',
-                          borderRadius: '12px',
-                          boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
-                        }}
-                      />
-                    </div>
-                  </Col>
-                  <Col xs={24} md={12}>
-                    <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                      <Title level={3} style={{ color: '#000', margin: 0 }}>
-                        Cộng đồng người dùng
+                    <Title level={2} style={{ 
+                      color: '#000', 
+                      margin: '0 0 16px 0',
+                      fontSize: 'clamp(20px, 3vw, 24px)',
+                      fontWeight: '700'
+                    }}>
+                      Mekong Pathfinder
                       </Title>
-                      <Paragraph style={{ color: '#000', fontSize: '16px', lineHeight: 1.6 }}>
-                        Kết nối với cộng đồng người dùng trong khu vực, chia sẻ thông tin về giao thông, 
-                        thời tiết và các sự kiện quan trọng để hỗ trợ lẫn nhau.
+                    <Paragraph style={{ 
+                      color: '#000', 
+                      fontSize: '16px', 
+                      lineHeight: 1.6,
+                      marginBottom: '20px'
+                    }}>
+                      Ứng dụng thông minh giúp người dùng điều hướng an toàn và hiệu quả 
+                      trong khu vực Đồng bằng sông Cửu Long với các tính năng tiên tiến.
                       </Paragraph>
-                      <List
-                        dataSource={[
-                          'Chia sẻ thông tin giao thông',
-                          'Cập nhật tình hình thời tiết',
-                          'Thảo luận và tương tác cộng đồng',
-                          'Báo cáo sự cố và cảnh báo'
-                        ]}
-                        renderItem={item => (
-                          <List.Item style={{ color: '#000' }}>
-                            <StarOutlined style={{ color: '#722ed1', marginRight: 8 }} />
-                            {item}
-                          </List.Item>
-                        )}
-                      />
-                    </Space>
-                  </Col>
-                </Row>
+                    
+                    {/* Features List */}
+                    <Row gutter={[16, 8]}>
+                      <Col xs={24} sm={12}>
+                        <List
+                          dataSource={[
+                            'Điều hướng thông minh với AI',
+                            'Tuyến đường an toàn thời gian thực',
+                            'Cộng đồng người dùng tương tác'
+                          ]}
+                          renderItem={item => (
+                            <List.Item style={{ 
+                              color: '#000',
+                              padding: '8px 0',
+                              borderBottom: 'none',
+                              justifyContent: 'flex-start'
+                            }}>
+                              <CheckCircleOutlined style={{ 
+                                color: '#52c41a', 
+                                marginRight: 12,
+                                fontSize: '16px'
+                              }} />
+                              <span style={{ fontSize: '15px', fontWeight: '500' }}>{item}</span>
+                            </List.Item>
+                          )}
+                        />
+                      </Col>
+                      <Col xs={24} sm={12}>
+                        <List
+                          dataSource={[
+                            'Cảnh báo thời tiết và lũ lụt',
+                            'Hệ thống camera giám sát',
+                            'Yêu cầu cứu trợ khẩn cấp'
+                          ]}
+                          renderItem={item => (
+                            <List.Item style={{ 
+                              color: '#000',
+                              padding: '8px 0',
+                              borderBottom: 'none',
+                              justifyContent: 'flex-start'
+                            }}>
+                              <CheckCircleOutlined style={{ 
+                                color: '#52c41a', 
+                                marginRight: 12,
+                                fontSize: '16px'
+                              }} />
+                              <span style={{ fontSize: '15px', fontWeight: '500' }}>{item}</span>
+                            </List.Item>
+                          )}
+                        />
+                      </Col>
+                    </Row>
               </div>
-            </Carousel>
-          </Card>
-        </AnimatedSection>
 
-        {/* App Screenshots Gallery */}
-        <AnimatedSection animationType="fadeInUp" delay={600}>
-          <Card 
-            title="Hình ảnh ứng dụng"
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '20px',
-              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-              backdropFilter: 'blur(10px)'
-            }}
-            headStyle={{
-              background: 'transparent',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#000',
-              fontSize: '24px',
-              fontWeight: '700'
-            }}
-          >
+                  {/* Screenshots Gallery */}
+                  <div>
+                    <Title level={4} style={{ 
+                      color: '#000',
+                      margin: '0 0 16px 0',
+                      fontSize: '18px',
+                      fontWeight: '600',
+                      textAlign: 'center'
+                    }}>
+                      Hình ảnh ứng dụng
+                    </Title>
             <Carousel 
+              ref={carouselRef}
               autoplay={false}
-              dots={{ className: 'custom-dots' }}
+              dots={false}
               arrows={true}
-              slidesToShow={6}
+              slidesToShow={5}
               slidesToScroll={1}
               infinite={true}
+              centerMode={true}
+              centerPadding="80px"
+              afterChange={handleSlideChange}
               responsive={[
                 {
                   breakpoint: 1200,
                   settings: {
-                    slidesToShow: 5,
-                    slidesToScroll: 1,
-                  }
-                },
-                {
-                  breakpoint: 992,
-                  settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
+                    slidesToShow: 3,
+                    centerMode: true,
+                    centerPadding: "60px"
                   }
                 },
                 {
                   breakpoint: 768,
                   settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                  }
-                },
-                {
-                  breakpoint: 576,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1,
+                    centerMode: true,
+                    centerPadding: "40px"
                   }
                 }
               ]}
@@ -503,8 +562,8 @@ const APKDownload: React.FC = () => {
                 type="text" 
                 icon={<LeftOutlined />} 
                 style={{ 
-                  width: '40px',
-                  height: '40px',
+                          width: '35px',
+                          height: '35px',
                   borderRadius: '50%',
                   background: 'rgba(197, 226, 255, 0.9)',
                   border: 'none',
@@ -513,7 +572,7 @@ const APKDownload: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#1890ff',
-                  fontSize: '16px',
+                          fontSize: '14px',
                   transition: 'all 0.3s ease'
                 }}
                 onMouseEnter={(e) => {
@@ -529,8 +588,8 @@ const APKDownload: React.FC = () => {
                 type="text" 
                 icon={<RightOutlined />} 
                 style={{ 
-                  width: '40px',
-                  height: '40px',
+                          width: '35px',
+                          height: '35px',
                   borderRadius: '50%',
                   background: 'rgba(197, 226, 255, 0.9)',
                   border: 'none',
@@ -539,7 +598,7 @@ const APKDownload: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#1890ff',
-                  fontSize: '16px',
+                          fontSize: '14px',
                   transition: 'all 0.3s ease'
                 }}
                 onMouseEnter={(e) => {
@@ -560,37 +619,29 @@ const APKDownload: React.FC = () => {
                 { src: viewAllCamera, alt: 'Camera', title: 'Hệ thống camera' },
                 { src: yourTimeline, alt: 'Timeline', title: 'Dòng thời gian' },
                 { src: repairShop, alt: 'Repair Shop', title: 'Tìm cửa hàng sửa chữa' },
-                { src: community02, alt: 'Community 2', title: 'Cộng đồng tương tác' },
-                { src: navigateRoute, alt: 'Navigate Route', title: 'Điều hướng tuyến đường' },
-                { src: safeRoute, alt: 'Safe Route', title: 'Tuyến đường an toàn' },
-                { src: community01, alt: 'Community 1', title: 'Cộng đồng người dùng' }
+                        { src: community02, alt: 'Community 2', title: 'Cộng đồng tương tác' }
               ].map((image, index) => (
                 <div key={index}>
                   <div
+                    className="carousel-item"
                     style={{
                       position: 'relative',
-                      cursor: 'pointer',
                       borderRadius: '12px',
                       overflow: 'hidden',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                      transition: 'all 0.3s ease',
-                      height: '100%',
-                      width: '100%',
-                      margin: '0 8px',
+                      transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      height: '400px',
+                      width: '150px',
+                      margin: '0 -20%',
                       display: 'flex',
-                      flexDirection: 'column'
+                      flexDirection: 'column',
+                      maxHeight: '400px'
                     }}
-                    onClick={() => {
-                      setPreviewImage(image.src);
-                      setImagePreviewVisible(true);
-                    }}
+                    onClick={() => handleImageClick(index)}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-5px)';
-                      e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.25)';
+                      e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                      e.currentTarget.style.transform = 'translateY(0) scale(1)';
                     }}
                   >
                     <div style={{
@@ -604,8 +655,9 @@ const APKDownload: React.FC = () => {
                         style={{
                           width: '100%',
                           height: '100%',
-                          objectFit: 'cover',
-                          objectPosition: 'center'
+                          objectFit: 'contain',
+                          objectPosition: 'center',
+                          backgroundColor: '#f0f0f0'
                         }}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
@@ -617,19 +669,19 @@ const APKDownload: React.FC = () => {
                       bottom: 0,
                       left: 0,
                       right: 0,
-                      background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
-                      padding: '12px',
+                      background: 'linear-gradient(transparent, rgba(0,0,0,0.9))',
+                      padding: '8px',
                       color: 'white',
-                      minHeight: '50px',
+                      minHeight: '35px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}>
                       <Text style={{ 
-                        fontSize: '14px', 
-                        fontWeight: '600',
+                        fontSize: '10px', 
+                        fontWeight: '700',
                         color: 'white',
-                        textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                        textShadow: '1px 1px 3px rgba(0,0,0,0.8)',
                         textAlign: 'center',
                         lineHeight: '1.2',
                         margin: 0
@@ -641,11 +693,12 @@ const APKDownload: React.FC = () => {
                 </div>
               ))}
             </Carousel>
-          </Card>
-        </AnimatedSection>
-
-        {/* Features Section */}
-        <AnimatedSection animationType="fadeInUp" delay={400}>
+                  </div>
+                </Space>
+              </Col>
+            </Row>
+            {/* Features Section */}
+        <AnimatedSection animationType="fadeInUp" delay={400} style={{ marginTop: '40px' }}>
           <Card 
             title="Tính năng nổi bật"
             style={{
@@ -700,72 +753,9 @@ const APKDownload: React.FC = () => {
             </Row>
           </Card>
         </AnimatedSection>
-
-        {/* Installation Guide */}
-        <Card title="Hướng dẫn cài đặt">
-          <Steps
-            direction="horizontal"
-            current={-1}
-            items={installationSteps.map(step => ({
-              title: step.title,
-              description: step.description
-            }))}
-            style={{ marginBottom: 24 }}
-          />
-          
-          <Alert
-            message="Lưu ý quan trọng"
-            description="Để cài đặt ứng dụng, bạn cần cho phép cài đặt từ 'Nguồn không xác định' trong cài đặt bảo mật của thiết bị Android."
-            type="warning"
-            showIcon
-            style={{ marginBottom: 16 }}
-          />
-          
-          <Row gutter={[16, 16]}>
-            <Col xs={24} md={12}>
-              <Card size="small" title="Yêu cầu hệ thống">
-                <List
-                  size="small"
-                  dataSource={[
-                    'Android 6.0 trở lên',
-                    'RAM: Tối thiểu 2GB',
-                    'Dung lượng: 50MB',
-                    'Kết nối Internet'
-                  ]}
-                  renderItem={item => (
-                    <List.Item>
-                      <CheckCircleOutlined style={{ color: '#52c41a', marginRight: 8 }} />
-                      {item}
-                    </List.Item>
-                  )}
-                />
-              </Card>
-            </Col>
-            <Col xs={24} md={12}>
-              <Card size="small" title="Hỗ trợ">
-                <List
-                  size="small"
-                  dataSource={[
-                    'Email: support@mekongpathfinder.com',
-                    'Hotline: 1900-xxxx',
-                    'Thời gian: 8:00 - 17:00',
-                    'Thứ 2 - Thứ 6'
-                  ]}
-                  renderItem={item => (
-                    <List.Item>
-                      <InfoCircleOutlined style={{ color: '#1890ff', marginRight: 8 }} />
-                      {item}
-                    </List.Item>
-                  )}
-                />
-              </Card>
-            </Col>
-          </Row>
-        </Card>
-
         {/* Download Form */}
         <div ref={downloadFormRef}>
-          <AnimatedSection animationType="fadeInUp" delay={800}>
+          <AnimatedSection animationType="fadeInUp" delay={800} style={{ marginTop: '40px' }}>
             <Card 
               title="Tải xuống ứng dụng"
               style={{
@@ -902,10 +892,9 @@ const APKDownload: React.FC = () => {
           </Row>
             </Card>
           </AnimatedSection>
-        </div>
 
         {/* User Guide Section */}
-        <Card title="Hướng dẫn sử dụng ứng dụng">
+        <Card title="Hướng dẫn sử dụng ứng dụng" style={{ marginTop: '40px' }}>
           <Row gutter={[24, 24]}>
             <Col xs={24} md={12}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
@@ -943,34 +932,12 @@ const APKDownload: React.FC = () => {
             </Col>
           </Row>
         </Card>
-
-      </Space>
-
-
-      {/* Image Preview Modal */}
-      <Modal
-        title="Xem hình ảnh"
-        open={imagePreviewVisible}
-        onCancel={() => setImagePreviewVisible(false)}
-        footer={null}
-        width="20vw"
-        style={{ top: 20 }}
-      >
-        <div style={{ textAlign: 'center' }}>
-          <img
-            src={previewImage}
-            alt="Preview"
-            style={{
-              maxWidth: '100%',
-              maxHeight: '70vh',
-              objectFit: 'contain',
-              borderRadius: '8px'
-            }}
-          />
         </div>
-      </Modal>
-      </div>
-      <HomePageFooter />
+          </Card>
+        </AnimatedSection>
+      </Space>
+        </div>
+
     </>
   );
 };
