@@ -19,6 +19,7 @@ import {
   Carousel,
 } from "antd"
 import { useColorTheme } from "../../context/ColorThemeContext"
+import { useLanguage } from "../../context/LanguageContext"
 import {
   DownloadOutlined,
   MobileOutlined,
@@ -56,6 +57,7 @@ interface DownloadFormData {
 
 const APKDownload: React.FC = () => {
   const { theme } = useColorTheme()
+  const { t } = useLanguage()
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false)
   const [selectedMainImage, setSelectedMainImage] = useState<string>(applicationInterface)
@@ -159,42 +161,42 @@ const APKDownload: React.FC = () => {
   const appFeatures = [
     {
       icon: <MobileOutlined style={{ color: "#1890ff" }} />,
-      title: "Giao diện thân thiện",
-      description: "Thiết kế đơn giản, dễ sử dụng cho mọi lứa tuổi",
+      title: t("app.feature.friendly"),
+      description: t("app.feature.friendly.desc"),
     },
     {
       icon: <SafetyOutlined style={{ color: "#52c41a" }} />,
-      title: "Bảo mật cao",
-      description: "Dữ liệu được mã hóa và bảo vệ an toàn",
+      title: t("app.feature.secure"),
+      description: t("app.feature.secure.desc"),
     },
     {
       icon: <ClockCircleOutlined style={{ color: "#faad14" }} />,
-      title: "Cập nhật thời gian thực",
-      description: "Thông tin giao thông và thời tiết được cập nhật liên tục",
+      title: t("app.feature.realtime"),
+      description: t("app.feature.realtime.desc"),
     },
     {
       icon: <StarOutlined style={{ color: "#722ed1" }} />,
-      title: "Đánh giá chất lượng",
-      description: "Hệ thống đánh giá và phản hồi từ cộng đồng",
+      title: t("app.feature.quality"),
+      description: t("app.feature.quality.desc"),
     },
   ]
 
   const installationSteps = [
     {
-      title: "Tải APK",
-      description: "Tải file APK từ website",
+      title: t("app.step.apk"),
+      description: t("app.step.apk.desc"),
     },
     {
-      title: "Cài đặt",
-      description: "Cho phép cài đặt từ nguồn không xác định",
+      title: t("app.step.install"),
+      description: t("app.step.install.desc"),
     },
     {
-      title: "Khởi động",
-      description: "Mở ứng dụng và đăng nhập",
+      title: t("app.step.start"),
+      description: t("app.step.start.desc"),
     },
     {
-      title: "Sử dụng",
-      description: "Khám phá các tính năng của ứng dụng",
+      title: t("app.step.use"),
+      description: t("app.step.use.desc"),
     },
   ]
 
@@ -367,7 +369,7 @@ const APKDownload: React.FC = () => {
           display: "block",
         }}
       >
-        Giới thiệu ứng dụng
+        {t('app.intro.title')}
       </Text>
       <div
         style={{
@@ -401,13 +403,13 @@ const APKDownload: React.FC = () => {
                       style={{ margin: 0, color: "#000", fontSize: "24px", transition: "all 0.3s ease" }}
                     >
                       <AndroidOutlined style={{ color: "#52c41a", marginRight: 8, transition: "all 0.3s ease" }} />
-                      Mekong Pathfinder
+                      {t('app.intro.name')}
                     </Title>
                     <Title
                       level={4}
                       style={{ margin: 0, color: "#666", fontSize: "16px", transition: "all 0.3s ease" }}
                     >
-                      Ứng dụng di động thông minh
+                      {t('app.intro.subtitle')}
                     </Title>
                     <Paragraph
                       style={{
@@ -418,18 +420,17 @@ const APKDownload: React.FC = () => {
                         transition: "all 0.3s ease",
                       }}
                     >
-                      Khám phá các tuyến đường tối ưu, theo dõi giao thông và thời tiết thời gian thực với ứng dụng
-                      Mekong Pathfinder. Được thiết kế đặc biệt cho khu vực Đồng bằng sông Cửu Long.
+                      {t('app.intro.description')}
                     </Paragraph>
                     <Space wrap>
                       <Tag color="green" icon={<CheckCircleOutlined />} style={{ transition: "all 0.3s ease" }}>
-                        Miễn phí 100%
+                        {t('app.intro.free')}
                       </Tag>
                       <Tag color="blue" icon={<InfoCircleOutlined />} style={{ transition: "all 0.3s ease" }}>
-                        Không quảng cáo
+                        {t('app.intro.no.ads')}
                       </Tag>
                       <Tag color="purple" icon={<SafetyOutlined />} style={{ transition: "all 0.3s ease" }}>
-                        Bảo mật cao
+                        {t('app.intro.secure')}
                       </Tag>
                     </Space>
                   </Space>
@@ -471,7 +472,7 @@ const APKDownload: React.FC = () => {
                         transition: "all 0.3s ease",
                       }}
                     >
-                      Download Ứng Dụng Mekong Pathfinder
+                      {t('app.intro.download')}
                     </Text>
                     <Button
                       type="primary"
@@ -560,7 +561,7 @@ const APKDownload: React.FC = () => {
                           e.currentTarget.style.transform = "scale(1) translateY(0)"
                           e.currentTarget.style.boxShadow = "0 15px 35px rgba(0, 0, 0, 0.12)"
                         }}
-                        onClick={() => {}}
+                        onClick={() => { }}
                       />
                     </div>
                   </div>
@@ -581,7 +582,7 @@ const APKDownload: React.FC = () => {
                           transition: "all 0.3s ease",
                         }}
                       >
-                        Mekong Pathfinder
+                        {t('app.intro.name')}
                       </Title>
                       <Paragraph
                         style={{
@@ -678,7 +679,7 @@ const APKDownload: React.FC = () => {
                           transition: "all 0.3s ease",
                         }}
                       >
-                        Hình ảnh ứng dụng
+                        {t('app.screenshots')}
                       </Title>
                       <Carousel
                         ref={carouselRef}
@@ -878,7 +879,7 @@ const APKDownload: React.FC = () => {
               {/* Features Section */}
               <AnimatedSection animationType="fadeInUp" delay={400} style={{ marginTop: "40px" }}>
                 <Card
-                  title="Tính năng nổi bật"
+                  title={t('app.features.title')}
                   style={{
                     background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 245, 255, 0.6) 100%)",
                     border: "1px solid rgba(131, 181, 252, 0.5)",
@@ -963,7 +964,7 @@ const APKDownload: React.FC = () => {
               <div ref={downloadFormRef}>
                 <AnimatedSection animationType="fadeInUp" delay={800} style={{ marginTop: "40px" }}>
                   <Card
-                    title="Tải xuống ứng dụng"
+                    title={t('app.download.title')}
                     style={{
                       background:
                         "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 245, 255, 0.6) 100%)",
@@ -985,11 +986,10 @@ const APKDownload: React.FC = () => {
                       <Col xs={24} sm={24} md={12}>
                         <Space direction="vertical" size={16} style={{ width: "100%" }}>
                           <Title level={4} style={{ color: "#000", transition: "all 0.3s ease" }}>
-                            Thông tin cá nhân
+                            {t('app.download.personal')}
                           </Title>
                           <Paragraph style={{ color: "#333", transition: "all 0.3s ease" }}>
-                            Vui lòng cung cấp thông tin để chúng tôi có thể hỗ trợ bạn tốt nhất và gửi thông báo về các
-                            phiên bản cập nhật mới.
+                            {t('app.download.desc')}
                           </Paragraph>
 
                           <Form form={form} layout="vertical" onFinish={handleDownload} requiredMark={false}>
@@ -1034,7 +1034,7 @@ const APKDownload: React.FC = () => {
                                 icon={<DownloadOutlined />}
                                 style={{ width: "100%", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}
                               >
-                                Tải xuống APK
+                                {t('app.download.button')}
                               </Button>
                             </Form.Item>
                           </Form>
@@ -1043,7 +1043,7 @@ const APKDownload: React.FC = () => {
 
                       <Col xs={24} sm={24} md={12}>
                         <Card
-                          title="Thống kê tải xuống"
+                          title={t('app.download.stats')}
                           size="small"
                           style={{
                             background:
@@ -1080,7 +1080,7 @@ const APKDownload: React.FC = () => {
                                       transition: "all 0.3s ease",
                                     }}
                                   >
-                                    Lượt tải
+                                    {t('app.download.downloads')}
                                   </Text>
                                 </div>
                               </Col>
@@ -1100,7 +1100,7 @@ const APKDownload: React.FC = () => {
                                       transition: "all 0.3s ease",
                                     }}
                                   >
-                                    Đánh giá
+                                    {t('app.download.rating')}
                                   </Text>
                                 </div>
                               </Col>
@@ -1110,7 +1110,7 @@ const APKDownload: React.FC = () => {
 
                             <div style={{ transition: "all 0.3s ease" }}>
                               <Text strong style={{ color: "#000", transition: "all 0.3s ease" }}>
-                                Phiên bản hiện tại:
+                                {t('app.download.version')}
                               </Text>
                               <Tag color="blue" style={{ marginLeft: 8, transition: "all 0.3s ease" }}>
                                 v1.0.0
@@ -1119,7 +1119,7 @@ const APKDownload: React.FC = () => {
 
                             <div style={{ transition: "all 0.3s ease" }}>
                               <Text strong style={{ color: "#000", transition: "all 0.3s ease" }}>
-                                Cập nhật lần cuối:
+                                {t('app.download.updated')}
                               </Text>
                               <Text style={{ marginLeft: 8, color: "#666", transition: "all 0.3s ease" }}>
                                 15/12/2024
@@ -1128,7 +1128,7 @@ const APKDownload: React.FC = () => {
 
                             <div style={{ transition: "all 0.3s ease" }}>
                               <Text strong style={{ color: "#000", transition: "all 0.3s ease" }}>
-                                Kích thước file:
+                                {t('app.download.size')}
                               </Text>
                               <Text style={{ marginLeft: 8, color: "#666", transition: "all 0.3s ease" }}>45.2 MB</Text>
                             </div>
@@ -1141,7 +1141,7 @@ const APKDownload: React.FC = () => {
 
                 {/* User Guide Section */}
                 <Card
-                  title="Hướng dẫn sử dụng ứng dụng"
+                  title={t('app.guide.title')}
                   style={{
                     marginTop: "40px",
                     background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 245, 255, 0.6) 100%)",
@@ -1163,7 +1163,7 @@ const APKDownload: React.FC = () => {
                     <Col xs={24} md={12}>
                       <Space direction="vertical" size={16} style={{ width: "100%" }}>
                         <Title level={4} style={{ transition: "all 0.3s ease" }}>
-                          Cài đặt và sử dụng
+                          {t('app.guide.install')}
                         </Title>
                         <Steps
                           direction="vertical"
@@ -1178,16 +1178,16 @@ const APKDownload: React.FC = () => {
                     <Col xs={24} md={12}>
                       <Space direction="vertical" size={16} style={{ width: "100%" }}>
                         <Title level={4} style={{ transition: "all 0.3s ease" }}>
-                          Tính năng chính
+                          {t('app.guide.features')}
                         </Title>
                         <List
                           dataSource={[
-                            "Bản đồ thông minh với giao thông thời gian thực",
-                            "Dự báo thời tiết chính xác cho khu vực ĐBSCL",
-                            "Cảnh báo lũ lụt và thiên tai",
-                            "Cộng đồng người dùng chia sẻ thông tin",
-                            "Tìm kiếm địa điểm và lộ trình tối ưu",
-                            "Lưu vị trí yêu thích và lịch sử di chuyển",
+                            t('app.guide.feature1'),
+                            t('app.guide.feature2'),
+                            t('app.guide.feature3'),
+                            t('app.guide.feature4'),
+                            t('app.guide.feature5'),
+                            t('app.guide.feature6'),
                           ]}
                           renderItem={(item) => (
                             <List.Item style={{ transition: "all 0.3s ease" }}>

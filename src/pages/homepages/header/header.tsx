@@ -158,8 +158,9 @@ const HomePageHeader: React.FC = () => {
         style={{
           position: 'relative',
           height: '700px',
+          width: '100%',
           backgroundImage: `url(${backgroundHeader})`,
-          backgroundSize: 'cover',
+          backgroundSize: 'fill',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           zIndex: 1,

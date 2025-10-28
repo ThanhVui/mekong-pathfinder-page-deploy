@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Card, 
-  Button, 
-  Typography, 
-  Space, 
-  Row, 
-  Col, 
-  Steps, 
+import {
+  Card,
+  Button,
+  Typography,
+  Space,
+  Row,
+  Col,
+  Steps,
   List,
   Tag,
   Divider,
@@ -29,14 +29,16 @@ import post06 from '../../assets/images/activities-fanpage/post-06.png';
 import post07 from '../../assets/images/activities-fanpage/post-07.png';
 // Import About Us images
 import mapCanTho from '../../assets/images/map-location/map-cantho.png';
-import oipImage from '../../assets/images/map-location/97.jpg';
-import canThoVietnam from '../../assets/images/map-location/can-tho-in-vietnam4.png';
+import ourTeamImage from '../../assets/images/map-location/can-tho-in-vietnam4.png';
+import ourVisionUSImage from '../../assets/images/our-vision/our-vision-us-01.png';
+import ourVisionVNImage from '../../assets/images/our-vision/our-vision-vn.png';
+
 // Import poster images (we'll create these from video frames)
-import { 
-  DownloadOutlined, 
-  MessageOutlined, 
-  MobileOutlined, 
-  SafetyOutlined, 
+import {
+  DownloadOutlined,
+  MessageOutlined,
+  MobileOutlined,
+  SafetyOutlined,
   CheckCircleOutlined,
   InfoCircleOutlined,
   StarOutlined,
@@ -78,9 +80,9 @@ const HomePage: React.FC = () => {
   const { theme } = useColorTheme();
   // const { isMobile, isTablet } = useResponsive();
   const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: '' });
-  const [feedbackStats, setFeedbackStats] = useState({ 
-    totalFeedbacks: 0, 
-    averageRating: 0, 
+  const [feedbackStats, setFeedbackStats] = useState({
+    totalFeedbacks: 0,
+    averageRating: 0,
     categoryStats: {},
     recentFeedbacks: [] as any[]
   });
@@ -129,7 +131,7 @@ const HomePage: React.FC = () => {
         console.error('Error loading stats:', error);
       }
     };
-    
+
     loadStats();
   }, []);
 
@@ -184,7 +186,7 @@ const HomePage: React.FC = () => {
   const topFeedbacks = feedbacks
     .filter((f: any) => f.rating === 5)
     .slice(0, 3);
-  
+
   const testimonials = topFeedbacks.length === 0 ? [
     {
       name: t('home.testimonials.user1.name'),
@@ -219,45 +221,45 @@ const HomePage: React.FC = () => {
   const achievements = [
     {
       icon: <TrophyOutlined style={{ color: '#faad14' }} />,
-        title: 'Tổng lượt tải',
-        description: `${downloadStats.totalDownloads} lượt tải xuống`,
-        value: downloadStats.totalDownloads
+      title: 'Tổng lượt tải',
+      description: `${downloadStats.totalDownloads} lượt tải xuống`,
+      value: downloadStats.totalDownloads
     },
     {
       icon: <StarOutlined style={{ color: '#52c41a' }} />,
-        title: 'Đánh giá trung bình',
-        description: `${feedbackStats.averageRating.toFixed(1)}/5 sao`,
-        value: feedbackStats.averageRating
-      },
-      {
-        icon: <MessageOutlined style={{ color: '#1890ff' }} />,
-        title: 'Góp ý nhận được',
-        description: `${feedbackStats.totalFeedbacks} góp ý từ người dùng`,
-        value: feedbackStats.totalFeedbacks
+      title: 'Đánh giá trung bình',
+      description: `${feedbackStats.averageRating.toFixed(1)}/5 sao`,
+      value: feedbackStats.averageRating
+    },
+    {
+      icon: <MessageOutlined style={{ color: '#1890ff' }} />,
+      title: 'Góp ý nhận được',
+      description: `${feedbackStats.totalFeedbacks} góp ý từ người dùng`,
+      value: feedbackStats.totalFeedbacks
     },
     {
       icon: <HeartOutlined style={{ color: '#ff4d4f' }} />,
-        title: 'Phản hồi tích cực',
-        description: `${Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)}% hài lòng`,
-        value: Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)
+      title: 'Phản hồi tích cực',
+      description: `${Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)}% hài lòng`,
+      value: Math.round((feedbackStats.recentFeedbacks.filter((f: any) => f.rating >= 4).length / Math.max(feedbackStats.totalFeedbacks, 1)) * 100)
     }
   ];
 
 
   return (
     <>
-      
+
       {/* Header with Hero Background */}
       <HomePageHeader />
 
       {/* Main Content Container */}
-                  <div style={{ 
-                  width: '100%',
+      <div style={{
+        width: '100%',
         minHeight: '100vh',
         background: theme.background.page,
         position: 'relative'
-                  }}>
-                    <div style={{
+      }}>
+        <div style={{
           padding: 'clamp(20px, 5vw, 40px) clamp(16px, 3vw, 60px)',
           margin: '0 auto'
         }}>
@@ -272,7 +274,7 @@ const HomePage: React.FC = () => {
                     textAlign: 'center',
                     margin: '20px 0px',
                     fontSize: 'clamp(24px, 4vw, 32px)',
-                          fontWeight: '700',
+                    fontWeight: '700',
                     transition: 'all 0.3s ease',
                   }}
                   onMouseEnter={(e) => {
@@ -286,8 +288,8 @@ const HomePage: React.FC = () => {
                     e.currentTarget.style.transform = 'scale(1)';
                   }}
                 >
-                  {language === 'vi' ? 'Về Chúng Tôi' : 'About Us'}
-                      </Title>
+{t('section.about.title')}
+                </Title>
                 <Row gutter={[24, 24]} style={{ minHeight: '500px' }}>
                   {/* Left Panel - Map Can Tho Image */}
                   <Col xs={24} md={8}>
@@ -356,7 +358,7 @@ const HomePage: React.FC = () => {
                           >
                             <Title
                               level={2}
-                            style={{
+                              style={{
                                 textAlign: 'right',
                                 marginBottom: '20px',
                                 fontSize: 'clamp(20px, 3vw, 24px)',
@@ -374,7 +376,7 @@ const HomePage: React.FC = () => {
                                 e.currentTarget.style.transform = 'translateX(0)';
                               }}
                             >
-                              {language === 'vi' ? 'Đội Ngũ Của Chúng Tôi' : 'Our Team'}
+{t('section.about.team')}
                             </Title>
                             <Paragraph
                               style={{
@@ -400,7 +402,7 @@ const HomePage: React.FC = () => {
                                 : 'We are Mekong Pathfinders, a passionate team of young innovators from Can Tho committed to using technology for social impact and sustainable development in the Mekong Delta. Our mission is to create smart, practical solutions that address real challenges faced by local communities, combining AI, data, and human collaboration to build a safer, more connected, and resilient region.'
                               }
                             </Paragraph>
-                    </div>
+                          </div>
                         </Col>
 
                         {/* Right - OIP Image */}
@@ -424,12 +426,12 @@ const HomePage: React.FC = () => {
                             }}
                           >
                             <img
-                              src={oipImage}
+                              src={ourTeamImage}
                               alt="Global Responsibility"
-              style={{
+                              style={{
                                 width: '100%',
                                 height: '100%',
-                                objectFit: 'cover',
+                                objectFit: 'fill',
                                 transition: 'transform 0.3s ease'
                               }}
                             />
@@ -460,22 +462,22 @@ const HomePage: React.FC = () => {
                             }}
                           >
                             <img
-                              src={canThoVietnam}
+                              src={ourVisionUSImage}
                               alt="Can Tho Vietnam"
-              style={{
+                              style={{
                                 width: '100%',
                                 height: '100%',
-                                objectFit: 'cover',
+                                objectFit: 'fill',
                                 transition: 'transform 0.3s ease'
-              }}
-            />
-        </div>
+                              }}
+                            />
+                          </div>
                         </Col>
 
                         {/* Right - Our Vision Text */}
                         <Col xs={24} md={12}>
                           <div
-            style={{
+                            style={{
                               background: 'white',
                               borderRadius: '16px',
                               padding: '40px',
@@ -500,7 +502,7 @@ const HomePage: React.FC = () => {
                                 textAlign: 'left',
                                 marginBottom: '20px',
                                 fontSize: 'clamp(20px, 3vw, 24px)',
-              fontWeight: '700',
+                                fontWeight: '700',
                                 transition: 'all 0.3s ease',
                               }}
                               onMouseEnter={(e) => {
@@ -514,7 +516,7 @@ const HomePage: React.FC = () => {
                                 e.currentTarget.style.transform = 'translateX(0)';
                               }}
                             >
-                              {language === 'vi' ? 'Tầm Nhìn Của Chúng Tôi' : 'Our Vision'}
+{t('section.about.vision')}
                             </Title>
                             <Paragraph
                               style={{
@@ -552,35 +554,35 @@ const HomePage: React.FC = () => {
             {/* Community Interview Section */}
             <AnimatedSection animationType="fadeInUp" delay={100}>
               <Title level={1} style={{ textAlign: 'center', marginBottom: '24px', fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: '700' }}>
-                Community Survey Results
+                {t('section.community.survey')}
               </Title>
 
               {/* Survey Data */}
               {(() => {
                 const surveyData = [
-                {
-                  title: 'Kết quả khảo sát cộng đồng - Video 1',
-                  description: 'Chia sẻ kết quả khảo sát từ cộng đồng người dùng Mekong Pathfinder',
-                  videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5664_qx1vn6&profile=cld-default',
-                  duration: '2:30',
-                  views: '1.2K',
-                  date: '15/12/2024'
-                },
-                {
-                  title: 'Kết quả khảo sát cộng đồng - Video 2',
-                  description: 'Phân tích chi tiết về phản hồi và đánh giá từ người dùng',
-                  videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
-                  duration: '3:15',
-                  views: '1.8K',
-                  date: '22/12/2024'
-                },
-                {
-                  title: 'Kết quả khảo sát cộng đồng - Video 3',
-                  description: 'Tổng kết và đánh giá tổng thể từ cộng đồng người dùng',
-                  videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5673_rf5rm6&profile=cld-default',
-                  duration: '4:20',
-                  views: '2.1K',
-                  date: '29/12/2024'
+                  {
+                    title: 'Kết quả khảo sát cộng đồng - Video 1',
+                    description: 'Chia sẻ kết quả khảo sát từ cộng đồng người dùng Mekong Pathfinder',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5664_qx1vn6&profile=cld-default',
+                    duration: '2:30',
+                    views: '1.2K',
+                    date: '15/12/2024'
+                  },
+                  {
+                    title: 'Kết quả khảo sát cộng đồng - Video 2',
+                    description: 'Phân tích chi tiết về phản hồi và đánh giá từ người dùng',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
+                    duration: '3:15',
+                    views: '1.8K',
+                    date: '22/12/2024'
+                  },
+                  {
+                    title: 'Kết quả khảo sát cộng đồng - Video 3',
+                    description: 'Tổng kết và đánh giá tổng thể từ cộng đồng người dùng',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5673_rf5rm6&profile=cld-default',
+                    duration: '4:20',
+                    views: '2.1K',
+                    date: '29/12/2024'
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 4',
@@ -670,7 +672,7 @@ const HomePage: React.FC = () => {
                               handleSurveySlideChange(currentSurveySlide - 1);
                             }
                           }}
-                    style={{
+                          style={{
                             position: 'absolute',
                             left: '0px',
                             top: '50%',
@@ -757,73 +759,73 @@ const HomePage: React.FC = () => {
                           <div
                             style={{
                               borderRadius: '12px',
-                      overflow: 'hidden',
+                              overflow: 'hidden',
                               boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)',
                               transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                               height: '280px',
-                      background: 'rgba(87, 128, 161, 0.1)',
-                      border: '1px solid rgba(87, 128, 161, 0.3)',
-                      display: 'flex',
+                              background: 'rgba(87, 128, 161, 0.1)',
+                              border: '1px solid rgba(87, 128, 161, 0.3)',
+                              display: 'flex',
                               flexDirection: 'column',
                               animationDelay: `${index * 0.1}s`,
                               transform: isSurveyTransitioning ? 'translateY(10px) scale(0.98)' : 'translateY(0) scale(1)',
                               opacity: isSurveyTransitioning ? 0.7 : 1
-                    }}
-                    onMouseEnter={(e) => {
+                            }}
+                            onMouseEnter={(e) => {
                               e.currentTarget.style.transform = 'translateY(-6px)';
                               e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.18)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.transform = 'translateY(0)';
                               e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
-                    }}
-                  >
-                    {/* Video Player */}
-                    <div style={{ 
-                      position: 'relative', 
+                            }}
+                          >
+                            {/* Video Player */}
+                            <div style={{
+                              position: 'relative',
                               height: '180px',
-                      background: '#000'
-                    }}>
-                      {item.videoUrl.includes('player.cloudinary.com') ? (
-                        <iframe
-                          src={`${item.videoUrl}&player[controls]=true&player[autoplay]=false`}
-                          allow="autoplay; fullscreen; encrypted-media"
-                          style={{
-                            border: 'none',
-                            width: '100%',
-                            height: '100%'
-                          }}
-                          title={item.title}
-                        />
-                      ) : (
-                      <video
-                        controls
-                        preload="metadata"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover'
-                        }}
-                      >
-                        <source src={item.videoUrl} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                      )}
-                    </div>
-                    
-                    {/* Video Info */}
-                    <div style={{
+                              background: '#000'
+                            }}>
+                              {item.videoUrl.includes('player.cloudinary.com') ? (
+                                <iframe
+                                  src={`${item.videoUrl}&player[controls]=true&player[autoplay]=false`}
+                                  allow="autoplay; fullscreen; encrypted-media"
+                                  style={{
+                                    border: 'none',
+                                    width: '100%',
+                                    height: '100%'
+                                  }}
+                                  title={item.title}
+                                />
+                              ) : (
+                                <video
+                                  controls
+                                  preload="metadata"
+                                  style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover'
+                                  }}
+                                >
+                                  <source src={item.videoUrl} type="video/mp4" />
+                                  Your browser does not support the video tag.
+                                </video>
+                              )}
+                            </div>
+
+                            {/* Video Info */}
+                            <div style={{
                               padding: '12px',
-                      flex: 1,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between'
-                    }}>
-            <div>
-                        <h4 style={{ 
+                              flex: 1,
+                              display: 'flex',
+                              flexDirection: 'column',
+                              justifyContent: 'space-between'
+                            }}>
+                              <div>
+                                <h4 style={{
                                   margin: '0 0 6px 0',
                                   fontSize: '13px',
-                          fontWeight: '600',
+                                  fontWeight: '600',
                                   color: '#000',
                                   lineHeight: '1.3',
                                   overflow: 'hidden',
@@ -831,10 +833,10 @@ const HomePage: React.FC = () => {
                                   display: '-webkit-box',
                                   WebkitLineClamp: 2,
                                   WebkitBoxOrient: 'vertical'
-                        }}>
-                          {item.title}
-                        </h4>
-                        <p style={{ 
+                                }}>
+                                  {item.title}
+                                </h4>
+                                <p style={{
                                   margin: '0 0 8px 0',
                                   fontSize: '11px',
                                   color: '#666',
@@ -844,115 +846,114 @@ const HomePage: React.FC = () => {
                                   display: '-webkit-box',
                                   WebkitLineClamp: 2,
                                   WebkitBoxOrient: 'vertical'
-                        }}>
-                          {item.description}
-                        </p>
-                      </div>
-                      
-                      <div style={{ 
-                        display: 'flex', 
-                        justifyContent: 'space-between', 
-                        alignItems: 'center',
+                                }}>
+                                  {item.description}
+                                </p>
+                              </div>
+
+                              <div style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
                                 fontSize: '10px',
                                 color: '#888'
-                      }}>
-                        <span>{item.duration}</span>
+                              }}>
+                                <span>{item.duration}</span>
                                 <span>{item.views}</span>
-                        <span>{item.date}</span>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              ))}
-              </Row>
+                                <span>{item.date}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </Col>
+                      ))}
+                    </Row>
                   </div>
                 );
               })()}
-        </AnimatedSection>
+            </AnimatedSection>
 
-        {/* Social Achievement Section */}
-        <AnimatedSection animationType="fadeInUp" delay={100}>
+            {/* Social Achievement Section */}
+            <AnimatedSection animationType="fadeInUp" delay={100}>
               <Title
                 level={1}
-            style={{
+                style={{
                   textAlign: 'center',
                   marginBottom: '40px',
                   fontSize: 'clamp(24px, 4vw, 32px)',
                   fontWeight: '700',
-                    color: '#000',
-                  textTransform: 'uppercase',
+                  color: '#000',
                   letterSpacing: '2px'
                 }}
               >
-                Social Achievement
+                {t('section.social.achievement')}
               </Title>
 
               {/* Achievement Carousel */}
               {(() => {
                 const achievementData = [
-                      { 
-                        image: post01, 
+                  {
+                    image: post01,
                     title: 'Conservation',
                     subtitle: 'Efforts',
                     description: 'Our community-driven conservation initiatives have made significant impact on environmental protection and sustainable development in the Mekong Delta region.',
                     stats: '2.5K Community Members',
                     icon: <EnvironmentOutlined />,
-                        facebookUrl: 'https://www.facebook.com/share/p/1D8mHMC4c3/'
-                      },
-                      { 
-                        image: post02, 
+                    facebookUrl: 'https://www.facebook.com/share/p/1D8mHMC4c3/'
+                  },
+                  {
+                    image: post02,
                     title: 'Community',
                     subtitle: 'Engagement',
                     description: 'Building strong connections with local communities through technology and innovation for better social outcomes.',
                     stats: '1.8K Active Users',
                     icon: <TeamOutlined />,
-                        facebookUrl: 'https://www.facebook.com/share/p/1G6HNSTikK/'
-                      },
-                      { 
-                        image: post03, 
+                    facebookUrl: 'https://www.facebook.com/share/p/1G6HNSTikK/'
+                  },
+                  {
+                    image: post03,
                     title: 'Innovation',
                     subtitle: 'Impact',
                     description: 'Developing cutting-edge solutions that address real-world challenges faced by Mekong Delta communities.',
                     stats: '3.2K Downloads',
                     icon: <RocketOutlined />,
-                        facebookUrl: 'https://www.facebook.com/share/1BcDW5Cb8v/'
-                      },
-                      { 
-                        image: post04, 
+                    facebookUrl: 'https://www.facebook.com/share/1BcDW5Cb8v/'
+                  },
+                  {
+                    image: post04,
                     title: 'Sustainability',
                     subtitle: 'Goals',
                     description: 'Working towards long-term sustainable development goals through technology and community collaboration.',
                     stats: '950 Projects',
                     icon: <GlobalOutlined />,
-                        facebookUrl: 'https://www.facebook.com/share/p/1BH3VLG8ZQ/'
+                    facebookUrl: 'https://www.facebook.com/share/p/1BH3VLG8ZQ/'
                   },
-                      { 
-                        image: post05, 
+                  {
+                    image: post05,
                     title: 'Digital',
                     subtitle: 'Transformation',
                     description: 'Empowering communities through digital solutions and smart technology integration.',
                     stats: '5.2K Interactions',
                     icon: <BulbOutlined />,
-                        facebookUrl: 'https://www.facebook.com/share/r/1RgUzWkQ4N/'
-                      },
-                      { 
-                        image: post06, 
+                    facebookUrl: 'https://www.facebook.com/share/r/1RgUzWkQ4N/'
+                  },
+                  {
+                    image: post06,
                     title: 'Social',
                     subtitle: 'Impact',
                     description: 'Creating positive social change through technology and community-driven initiatives.',
                     stats: '1.2K New Members',
                     icon: <HeartOutlined />,
-                        facebookUrl: 'https://www.facebook.com/share/p/1BZuTZZwVB/'
-                      },
-                      { 
-                        image: post07, 
+                    facebookUrl: 'https://www.facebook.com/share/p/1BZuTZZwVB/'
+                  },
+                  {
+                    image: post07,
                     title: 'Future',
                     subtitle: 'Vision',
                     description: 'Building a smarter, more connected Mekong Delta for future generations.',
                     stats: '850 Partners',
                     icon: <StarOutlined />,
-                        facebookUrl: 'https://www.facebook.com/share/p/1BZuTZZwVB/'
-                      }
+                    facebookUrl: 'https://www.facebook.com/share/p/1BZuTZZwVB/'
+                  }
                 ];
 
                 const totalSlides = achievementData.length;
@@ -1002,34 +1003,34 @@ const HomePage: React.FC = () => {
                   >
                     {/* Left Arrow */}
                     <Button
-              type="text" 
-              icon={<LeftOutlined />} 
+                      type="text"
+                      icon={<LeftOutlined />}
                       onClick={() => handleAchievementSlideChange((currentAchievementSlide - 1 + totalSlides) % totalSlides)}
-                style={{ 
+                      style={{
                         position: 'absolute',
                         left: '0px',
                         top: '50%',
                         transform: 'translateY(-50%)',
                         zIndex: 10,
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '50%',
                         background: 'rgba(255, 255, 255, 0.95)',
                         border: '2px solid rgba(0, 31, 68, 0.2)',
                         boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         transition: 'all 0.3s ease',
                         color: '#001f44'
-              }}
-              onMouseEnter={(e) => {
+                      }}
+                      onMouseEnter={(e) => {
                         e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
                         e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
                         e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
                         e.currentTarget.style.borderColor = 'rgba(0, 31, 68, 0.4)';
-              }}
-              onMouseLeave={(e) => {
+                      }}
+                      onMouseLeave={(e) => {
                         e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
                         e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
                         e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
@@ -1039,34 +1040,34 @@ const HomePage: React.FC = () => {
 
                     {/* Right Arrow */}
                     <Button
-              type="text" 
-              icon={<RightOutlined />} 
+                      type="text"
+                      icon={<RightOutlined />}
                       onClick={() => handleAchievementSlideChange((currentAchievementSlide + 1) % totalSlides)}
-              style={{ 
+                      style={{
                         position: 'absolute',
                         right: '0px',
                         top: '50%',
                         transform: 'translateY(-50%)',
                         zIndex: 10,
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '50%',
                         background: 'rgba(255, 255, 255, 0.95)',
                         border: '2px solid rgba(0, 31, 68, 0.2)',
                         boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         transition: 'all 0.3s ease',
                         color: '#001f44'
-              }}
-              onMouseEnter={(e) => {
+                      }}
+                      onMouseEnter={(e) => {
                         e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
                         e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
                         e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
                         e.currentTarget.style.borderColor = 'rgba(0, 31, 68, 0.4)';
-              }}
-              onMouseLeave={(e) => {
+                      }}
+                      onMouseLeave={(e) => {
                         e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
                         e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
                         e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
@@ -1084,47 +1085,47 @@ const HomePage: React.FC = () => {
                       transform: isAchievementTransitioning ? 'translateX(20px)' : 'translateX(0)',
                     }}>
                       {/* Far Left Item (Smallest) */}
-                    <div
-                      style={{
+                      <div
+                        style={{
                           width: '220px',
                           height: '280px',
-                        borderRadius: '16px',
-                        overflow: 'hidden',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
                           position: 'relative',
                           cursor: 'pointer',
                           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                           transform: 'scale(0.7)',
                           opacity: 1,
                           boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)'
-                      }}
-                      onMouseEnter={(e) => {
+                        }}
+                        onMouseEnter={(e) => {
                           e.currentTarget.style.transform = 'scale(0.8)';
                           e.currentTarget.style.opacity = '1';
                           e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                      }}
-                      onMouseLeave={(e) => {
+                        }}
+                        onMouseLeave={(e) => {
                           e.currentTarget.style.transform = 'scale(0.7)';
                           e.currentTarget.style.opacity = '1';
                           e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
-                      }}
+                        }}
                         onClick={() => window.open(currentItems[0].facebookUrl, '_blank')}
-                    >
+                      >
                         <img
                           src={currentItems[0].image}
                           alt={currentItems[0].title}
                           style={{
                             width: '100%',
-                  height: '100%',
+                            height: '100%',
                             objectFit: 'cover',
                             filter: 'brightness(0.8)'
                           }}
                         />
-                    <div style={{ 
+                        <div style={{
                           position: 'absolute',
                           bottom: '10px',
                           left: '10px',
                           right: '10px',
-                            color: 'white', 
+                          color: 'white',
                           textAlign: 'center'
                         }}>
                           <Title level={5} style={{
@@ -1139,35 +1140,35 @@ const HomePage: React.FC = () => {
                       </div>
 
                       {/* Left Item (Small) */}
-                    <div
-                      style={{
+                      <div
+                        style={{
                           width: '280px',
                           height: '350px',
                           borderRadius: '20px',
-                        overflow: 'hidden',
+                          overflow: 'hidden',
                           position: 'relative',
                           cursor: 'pointer',
                           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                           transform: 'scale(0.85)',
                           opacity: 1,
                           boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
-                      }}
-                      onMouseEnter={(e) => {
+                        }}
+                        onMouseEnter={(e) => {
                           e.currentTarget.style.transform = 'scale(0.9)';
                           e.currentTarget.style.opacity = '1';
                           e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.2)';
-                      }}
-                      onMouseLeave={(e) => {
+                        }}
+                        onMouseLeave={(e) => {
                           e.currentTarget.style.transform = 'scale(0.85)';
                           e.currentTarget.style.opacity = '1';
-                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                      }}
+                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                        }}
                         onClick={() => window.open(currentItems[1].facebookUrl, '_blank')}
-                    >
-                      <img 
+                      >
+                        <img
                           src={currentItems[1].image}
                           alt={currentItems[1].title}
-                        style={{ 
+                          style={{
                             width: '100%',
                             height: '100%',
                             objectFit: 'cover',
@@ -1182,8 +1183,8 @@ const HomePage: React.FC = () => {
                           color: 'white',
                           textAlign: 'center'
                         }}>
-                          <Title level={4} style={{ 
-                            color: 'white', 
+                          <Title level={4} style={{
+                            color: 'white',
                             margin: '0 0 5px 0',
                             fontSize: '16px',
                             fontWeight: '700'
@@ -1194,34 +1195,34 @@ const HomePage: React.FC = () => {
                       </div>
 
                       {/* Center Item (Large) */}
-                    <div
-                style={{ 
+                      <div
+                        style={{
                           width: '400px',
                           height: '500px',
                           borderRadius: '25px',
-                        overflow: 'hidden',
+                          overflow: 'hidden',
                           position: 'relative',
                           cursor: 'pointer',
                           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                           transform: 'scale(1)',
                           boxShadow: '0 15px 40px rgba(0, 0, 0, 0.2)'
-                      }}
-                      onMouseEnter={(e) => {
+                        }}
+                        onMouseEnter={(e) => {
                           e.currentTarget.style.transform = 'scale(1.05)';
                           e.currentTarget.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.3)';
-                      }}
-                      onMouseLeave={(e) => {
+                        }}
+                        onMouseLeave={(e) => {
                           e.currentTarget.style.transform = 'scale(1)';
                           e.currentTarget.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.2)';
-                      }}
+                        }}
                         onClick={() => window.open(currentItems[2].facebookUrl, '_blank')}
-                    >
-                      <img 
+                      >
+                        <img
                           src={currentItems[2].image}
                           alt={currentItems[2].title}
-                        style={{ 
+                          style={{
                             width: '100%',
-                  height: '100%',
+                            height: '100%',
                             objectFit: 'cover',
                             filter: 'brightness(0.8)'
                           }}
@@ -1250,7 +1251,7 @@ const HomePage: React.FC = () => {
                           </div>
 
                           <Title level={1} style={{
-                            color: 'white', 
+                            color: 'white',
                             margin: '0 0 10px 0',
                             fontSize: '32px',
                             fontWeight: '800',
@@ -1269,8 +1270,8 @@ const HomePage: React.FC = () => {
                             {currentItems[2].subtitle}
                           </Title>
 
-                          <Text style={{ 
-                            color: 'rgba(255,255,255,0.9)', 
+                          <Text style={{
+                            color: 'rgba(255,255,255,0.9)',
                             fontSize: '14px',
                             lineHeight: 1.5,
                             display: 'block'
@@ -1281,35 +1282,35 @@ const HomePage: React.FC = () => {
                       </div>
 
                       {/* Right Item (Small) */}
-                    <div
-                      style={{
+                      <div
+                        style={{
                           width: '280px',
                           height: '350px',
                           borderRadius: '20px',
-                        overflow: 'hidden',
+                          overflow: 'hidden',
                           position: 'relative',
                           cursor: 'pointer',
                           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                           transform: 'scale(0.85)',
                           opacity: 1,
                           boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
-                      }}
-                      onMouseEnter={(e) => {
+                        }}
+                        onMouseEnter={(e) => {
                           e.currentTarget.style.transform = 'scale(0.9)';
                           e.currentTarget.style.opacity = '1';
                           e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.2)';
-                      }}
-                      onMouseLeave={(e) => {
+                        }}
+                        onMouseLeave={(e) => {
                           e.currentTarget.style.transform = 'scale(0.85)';
                           e.currentTarget.style.opacity = '1';
-                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                      }}
+                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                        }}
                         onClick={() => window.open(currentItems[3].facebookUrl, '_blank')}
-                    >
-                      <img 
+                      >
+                        <img
                           src={currentItems[3].image}
                           alt={currentItems[3].title}
-                        style={{ 
+                          style={{
                             width: '100%',
                             height: '100%',
                             objectFit: 'cover',
@@ -1324,8 +1325,8 @@ const HomePage: React.FC = () => {
                           color: 'white',
                           textAlign: 'center'
                         }}>
-                          <Title level={4} style={{ 
-                            color: 'white', 
+                          <Title level={4} style={{
+                            color: 'white',
                             margin: '0 0 5px 0',
                             fontSize: '16px',
                             fontWeight: '700'
@@ -1336,31 +1337,31 @@ const HomePage: React.FC = () => {
                       </div>
 
                       {/* Far Right Item (Smallest) */}
-                    <div
-                      style={{
+                      <div
+                        style={{
                           width: '220px',
                           height: '280px',
-                        borderRadius: '16px',
-                        overflow: 'hidden',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
                           position: 'relative',
                           cursor: 'pointer',
                           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                           transform: 'scale(0.7)',
                           opacity: 1,
                           boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)'
-                      }}
-                      onMouseEnter={(e) => {
+                        }}
+                        onMouseEnter={(e) => {
                           e.currentTarget.style.transform = 'scale(0.8)';
                           e.currentTarget.style.opacity = '1';
                           e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                      }}
-                      onMouseLeave={(e) => {
+                        }}
+                        onMouseLeave={(e) => {
                           e.currentTarget.style.transform = 'scale(0.7)';
                           e.currentTarget.style.opacity = '1';
                           e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
-                      }}
+                        }}
                         onClick={() => window.open(currentItems[4].facebookUrl, '_blank')}
-                    >
+                      >
                         <img
                           src={currentItems[4].image}
                           alt={currentItems[4].title}
@@ -1371,12 +1372,12 @@ const HomePage: React.FC = () => {
                             filter: 'brightness(0.8)'
                           }}
                         />
-                    <div style={{ 
+                        <div style={{
                           position: 'absolute',
                           bottom: '10px',
                           left: '10px',
                           right: '10px',
-                            color: 'white', 
+                          color: 'white',
                           textAlign: 'center'
                         }}>
                           <Title level={5} style={{
@@ -1390,7 +1391,7 @@ const HomePage: React.FC = () => {
                         </div>
                       </div>
                     </div>
-            </div>
+                  </div>
                 );
               })()}
             </AnimatedSection>
@@ -1405,11 +1406,10 @@ const HomePage: React.FC = () => {
                   fontSize: 'clamp(24px, 4vw, 32px)',
                   fontWeight: '700',
                   color: '#000',
-                  textTransform: 'uppercase',
                   letterSpacing: '2px'
                 }}
               >
-                Gallery
+                {t('section.gallery')}
               </Title>
 
               {/* Gallery Data */}
@@ -1519,52 +1519,52 @@ const HomePage: React.FC = () => {
                     <Row gutter={[20, 20]} justify="center">
                       {currentItems.map((item, index) => (
                         <Col xs={24} sm={12} md={6} key={index}>
-                    <div
-                      style={{
-                        position: 'relative',
-                        borderRadius: '16px',
-                        overflow: 'hidden',
-                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                          <div
+                            style={{
+                              position: 'relative',
+                              borderRadius: '16px',
+                              overflow: 'hidden',
+                              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
                               transition: 'all 0.3s ease',
                               height: '220px', // Giảm chiều cao từ clamp(300px, 50vh, 350px)
                               background: 'rgba(87, 128, 161, 0.1)',
                               border: '1px solid rgba(87, 128, 161, 0.3)',
                               cursor: 'pointer'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-8px)';
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.transform = 'translateY(-8px)';
                               e.currentTarget.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                      }}
-                    >
-                      <div style={{ position: 'relative', height: '100%' }}>
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        style={{ 
-                            width: '100%',
-                            height: '100%',
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.transform = 'translateY(0)';
+                              e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                            }}
+                          >
+                            <div style={{ position: 'relative', height: '100%' }}>
+                              <img
+                                src={item.image}
+                                alt={item.title}
+                                style={{
+                                  width: '100%',
+                                  height: '100%',
                                   objectFit: 'cover',
                                   filter: 'brightness(0.9)'
-                          }}
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
+                                }}
+                                onError={(e) => {
+                                  e.currentTarget.style.display = 'none';
+                                }}
+                              />
 
                               {/* Content overlay */}
-                        <div style={{
-                          position: 'absolute',
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
+                              <div style={{
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
                                 background: 'linear-gradient(transparent, rgba(0,0,0,0.9))',
                                 padding: '12px',
-                          color: 'white'
-                        }}>
+                                color: 'white'
+                              }}>
                                 <div style={{
                                   display: 'inline-block',
                                   background: 'rgba(3, 68, 214, 0.8)',
@@ -1574,34 +1574,34 @@ const HomePage: React.FC = () => {
                                   fontSize: '9px',
                                   fontWeight: '600',
                                   marginBottom: '6px'
-                          }}>
-                            {item.category}
+                                }}>
+                                  {item.category}
                                 </div>
 
                                 <Title level={5} style={{
-                            color: 'white', 
+                                  color: 'white',
                                   margin: '0 0 4px 0',
                                   fontSize: '12px',
                                   fontWeight: '700',
                                   lineHeight: 1.2
-                          }}>
-                            {item.title}
-                          </Title>
+                                }}>
+                                  {item.title}
+                                </Title>
 
-                          <Text style={{ 
-                            color: 'rgba(255,255,255,0.9)', 
+                                <Text style={{
+                                  color: 'rgba(255,255,255,0.9)',
                                   fontSize: '10px',
                                   lineHeight: 1.3,
-                            display: 'block'
-                          }}>
-                            {item.description}
-                          </Text>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                ))}
-              </Row>
+                                  display: 'block'
+                                }}>
+                                  {item.description}
+                                </Text>
+                              </div>
+                            </div>
+                          </div>
+                        </Col>
+                      ))}
+                    </Row>
 
                     {/* Pagination */}
                     <div style={{
@@ -1617,15 +1617,15 @@ const HomePage: React.FC = () => {
                         icon={<LeftOutlined />}
                         onClick={() => setCurrentGalleryPage(Math.max(1, currentGalleryPage - 1))}
                         disabled={currentGalleryPage === 1}
-          style={{ 
+                        style={{
                           width: '40px',
                           height: '40px',
                           borderRadius: '50%',
                           background: currentGalleryPage === 1 ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 31, 68, 0.1)',
                           border: '1px solid rgba(0, 31, 68, 0.2)',
                           color: currentGalleryPage === 1 ? 'rgba(0, 0, 0, 0.3)' : '#001f44',
-                    transition: 'all 0.3s ease'
-                  }}
+                          transition: 'all 0.3s ease'
+                        }}
                         onMouseEnter={(e) => {
                           if (currentGalleryPage > 1) {
                             e.currentTarget.style.background = 'rgba(0, 31, 68, 0.2)';
@@ -1646,7 +1646,7 @@ const HomePage: React.FC = () => {
                           key={page}
                           type={page === currentGalleryPage ? 'primary' : 'text'}
                           onClick={() => setCurrentGalleryPage(page)}
-          style={{ 
+                          style={{
                             width: '40px',
                             height: '40px',
                             borderRadius: '50%',
@@ -1654,8 +1654,8 @@ const HomePage: React.FC = () => {
                             border: page === currentGalleryPage ? '1px solid #001f44' : '1px solid rgba(0, 31, 68, 0.2)',
                             color: page === currentGalleryPage ? 'white' : '#001f44',
                             fontWeight: '600',
-                    transition: 'all 0.3s ease'
-                  }}
+                            transition: 'all 0.3s ease'
+                          }}
                           onMouseEnter={(e) => {
                             if (page !== currentGalleryPage) {
                               e.currentTarget.style.background = 'rgba(0, 31, 68, 0.2)';
@@ -1674,12 +1674,12 @@ const HomePage: React.FC = () => {
                       ))}
 
                       {/* Next Button */}
-                  <Button 
+                      <Button
                         type="text"
                         icon={<RightOutlined />}
                         onClick={() => setCurrentGalleryPage(Math.min(totalPages, currentGalleryPage + 1))}
                         disabled={currentGalleryPage === totalPages}
-                    style={{ 
+                        style={{
                           width: '40px',
                           height: '40px',
                           borderRadius: '50%',
@@ -1716,7 +1716,7 @@ const HomePage: React.FC = () => {
                   </div>
                 );
               })()}
-        </AnimatedSection>
+            </AnimatedSection>
 
             {/* Download Section */}
             <div id="download-section">
@@ -1732,7 +1732,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      
+
       <HomePageFooter />
     </>
   );
