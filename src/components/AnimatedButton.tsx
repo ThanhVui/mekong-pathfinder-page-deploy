@@ -84,16 +84,12 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     position: 'relative',
     overflow: 'hidden',
-    boxShadow: glowEffect ? '0 4px 15px rgba(102, 126, 234, 0.3)' : 'none',
     ...style
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.currentTarget;
     target.style.transform = 'translateY(-3px) scale(1.05)';
-    if (glowEffect) {
-      target.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.5)';
-    }
     if (variant === 'primary') {
       target.style.background = 'linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)';
     }
@@ -102,9 +98,6 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.currentTarget;
     target.style.transform = 'translateY(0) scale(1)';
-    if (glowEffect) {
-      target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.3)';
-    }
     if (variant === 'primary') {
       target.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
     }

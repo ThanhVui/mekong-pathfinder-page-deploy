@@ -57,9 +57,6 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
                 : 'transparent',
               transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
               border: 'none',
-              boxShadow: isActive 
-                ? '0 8px 25px rgba(3, 68, 214, 0.4)' 
-                : 'none',
               transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
               position: 'relative',
               overflow: 'hidden',
@@ -74,7 +71,6 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
                 e.currentTarget.style.background = 'linear-gradient(135deg, rgba(3, 68, 214, 0.2) 0%, rgba(55, 122, 239, 0.2) 100%)';
                 e.currentTarget.style.color = '#0344d6';
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 6px 20px rgba(3, 68, 214, 0.3)';
               }
             }}
             onMouseLeave={(e) => {
@@ -82,7 +78,6 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
                 e.currentTarget.style.background = 'transparent';
                 e.currentTarget.style.color = '#001f44';
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
               }
             }}
           >

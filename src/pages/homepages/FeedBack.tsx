@@ -167,9 +167,6 @@ const FeedBack: React.FC = () => {
         minHeight: '100vh'
       }}>
         <Space direction="vertical" size={24} style={{ width: '100%', padding: '0 24px' }}>
-        {/* Header Section */}
-        <HomePageHeader />
-
         <Card style={{
           background: 'rgba(255, 255, 255, 0.8)',
           border: '1px solid #83b5fc',
@@ -229,7 +226,7 @@ const FeedBack: React.FC = () => {
           <Col xs={24} sm={12} md={8}>
             <Card style={{
               background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              border: '1px solid #83b5fc',
               borderRadius: '16px',
               backdropFilter: 'blur(10px)'
             }}>
@@ -244,7 +241,7 @@ const FeedBack: React.FC = () => {
           <Col xs={24} sm={12} md={8}>
             <Card style={{
               background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              border: '1px solid #83b5fc',
               borderRadius: '16px',
               backdropFilter: 'blur(10px)'
             }}>
@@ -260,7 +257,7 @@ const FeedBack: React.FC = () => {
           <Col xs={24} sm={12} md={8}>
             <Card style={{
               background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              border: '1px solid #83b5fc',
               borderRadius: '16px',
               backdropFilter: 'blur(10px)'
             }}>
@@ -280,7 +277,7 @@ const FeedBack: React.FC = () => {
           title="Gửi góp ý của bạn"
           style={{
             background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '1px solid #83b5fc',
             borderRadius: '20px',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
             backdropFilter: 'blur(10px)'
@@ -458,7 +455,7 @@ const FeedBack: React.FC = () => {
           title="Góp ý gần đây"
           style={{
             background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '1px solid #83b5fc',
             borderRadius: '20px',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
             backdropFilter: 'blur(10px)'
@@ -480,7 +477,7 @@ const FeedBack: React.FC = () => {
                   borderRadius: '12px',
                   marginBottom: '12px',
                   padding: '16px',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                  border: '1px solid #83b5fc'
                 }}
                 actions={[
                   <Button
@@ -536,7 +533,7 @@ const FeedBack: React.FC = () => {
           title="Thống kê theo loại góp ý"
           style={{
             background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '1px solid #83b5fc',
             borderRadius: '20px',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
             backdropFilter: 'blur(10px)'
@@ -557,7 +554,7 @@ const FeedBack: React.FC = () => {
                     size="small"
                     style={{
                       background: 'rgba(255, 255, 255, 0.6)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      border: '1px solid #83b5fc',
                       borderRadius: '12px',
                       backdropFilter: 'blur(10px)',
                       height: '160px',
@@ -597,7 +594,6 @@ const FeedBack: React.FC = () => {
         </Card>
         </Space>
       </div>
-      <HomePageFooter />
     </>
   );
 };
