@@ -15,7 +15,8 @@ import {
   MessageOutlined,
   PhoneOutlined,
   MailOutlined,
-  GlobalOutlined
+  GlobalOutlined,
+  UsergroupAddOutlined
 } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../../context/LanguageContext';
@@ -79,31 +80,33 @@ const HomePageHeader: React.FC = () => {
     }
   };
 
+  const [activeKey, setActiveKey] = useState<string>('home');
+
   // Navigation items
   const menuItems = [
     {
       key: 'home',
       label: t('nav.home'),
-      icon: <HomeOutlined style={{ color: getIconColor('home') }} />,
-      onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' })
+      icon: <HomeOutlined style={{ color: 'inherit' }} />,
+      onClick: () => { setActiveKey('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
     },
     {
       key: 'about',
       label: language === 'vi' ? 'Giới thiệu' : 'About',
-      icon: <MessageOutlined style={{ color: getIconColor('about') }} />,
-      onClick: scrollToAbout
+      icon: <UsergroupAddOutlined style={{ color: 'inherit' }} />,
+      onClick: () => { setActiveKey('about'); scrollToAbout(); }
     },
     {
       key: 'download',
       label: language === 'vi' ? 'Tải xuống' : t('nav.download'),
-      icon: <DownloadOutlined style={{ color: getIconColor('download') }} />,
-      onClick: scrollToDownload
+      icon: <DownloadOutlined style={{ color: 'inherit' }} />,
+      onClick: () => { setActiveKey('download'); scrollToDownload(); }
     },
     {
       key: 'feedback',
       label: language === 'vi' ? 'Góp ý' : t('nav.feedback'),
-      icon: <MessageOutlined style={{ color: getIconColor('feedback') }} />,
-      onClick: scrollToFeedback
+      icon: <MessageOutlined style={{ color: 'inherit' }} />,
+      onClick: () => { setActiveKey('feedback'); scrollToFeedback(); }
     }
   ];
 
@@ -246,6 +249,7 @@ const HomePageHeader: React.FC = () => {
           }}>
             <NavigationMenu
               items={menuItems}
+              activeKey={activeKey}
               style={{
                 flexWrap: 'nowrap',
                 gap: 'clamp(8px, 2vw, 24px)',

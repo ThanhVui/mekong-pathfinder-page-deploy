@@ -13,12 +13,14 @@ interface NavigationMenuProps {
   items: MenuItem[];
   className?: string;
   style?: React.CSSProperties;
+  activeKey?: string;
 }
 
 const NavigationMenu: React.FC<NavigationMenuProps> = ({ 
   items, 
   className, 
-  style 
+  style,
+  activeKey
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,10 +37,12 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
       }}
     >
       {items.map((item) => {
-        const isActive = (item.key === 'home' && location.pathname === '/') ||
-                        (item.key === 'download' && location.pathname === '/apk-download') ||
-                        (item.key === 'feedback' && location.pathname === '/feedback') ||
-                        location.pathname === item.key;
+        const isActive = activeKey
+          ? item.key === activeKey
+          : (item.key === 'home' && location.pathname === '/') ||
+            (item.key === 'download' && location.pathname === '/apk-download') ||
+            (item.key === 'feedback' && location.pathname === '/feedback') ||
+            location.pathname === item.key;
         return (
           <Button
             key={item.key}
@@ -88,7 +92,9 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
               alignItems: 'center',
               gap: '6px'
             }}>
-              {item.icon}
+              <span style={{ color: isActive ? '#fff' : '#83b5fc', display: 'flex', alignItems: 'center' }}>
+                {item.icon}
+              </span>
               {item.label}
             </span>
             {isActive && (
