@@ -24,9 +24,9 @@ import AnimatedButton from '../../../components/AnimatedButton';
 import NavigationMenu from '../../../components/NavigationMenu';
 import logoBanner from '../../../assets/images/logo_header/logo-04.png';
 import logoCenter from '../../../assets/images/logo_header/logo-12.png';
-import backgroundHeader from '../../../assets/page-images/background-header.png';
-import usFlag from '../../../assets/page-images/us.png';
-import vietnamFlag from '../../../assets/page-images/vietnam.png';
+import backgroundHeader from '../../../assets/images/page-images/background-header.png';
+import usFlag from '../../../assets/images/page-images/us.png';
+import vietnamFlag from '../../../assets/images/page-images/vietnam.png';
 
 const { Header } = Layout;
 const { Text } = Typography;

@@ -28,9 +28,9 @@ import post05 from '../../assets/images/activities-fanpage/post-05.png';
 import post06 from '../../assets/images/activities-fanpage/post-06.png';
 import post07 from '../../assets/images/activities-fanpage/post-07.png';
 // Import About Us images
-import mapCanTho from '../../assets/images/map-cantho.png';
-import oipImage from '../../assets/images/97.jpg';
-import canThoVietnam from '../../assets/images/can-tho-in-vietnam4.png';
+import mapCanTho from '../../assets/images/map-location/map-cantho.png';
+import oipImage from '../../assets/images/map-location/97.jpg';
+import canThoVietnam from '../../assets/images/map-location/can-tho-in-vietnam4.png';
 // Import poster images (we'll create these from video frames)
 import { 
   DownloadOutlined, 

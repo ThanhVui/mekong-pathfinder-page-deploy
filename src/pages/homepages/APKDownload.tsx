@@ -1,29 +1,28 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { 
-  Card, 
-  Button, 
-  Form, 
-  Input, 
-  Typography, 
-  Space, 
-  Row, 
-  Col, 
-  Divider, 
+"use client"
+
+import type React from "react"
+import { useState, useRef, useEffect } from "react"
+import {
+  Card,
+  Button,
+  Form,
+  Input,
+  Typography,
+  Space,
+  Row,
+  Col,
+  Divider,
   Steps,
-  Alert,
   message,
-  Modal,
   Tag,
   List,
-  Avatar,
-  Image,
-  Carousel
-} from 'antd';
-import { useColorTheme } from '../../context/ColorThemeContext';
-import { 
-  DownloadOutlined, 
-  MobileOutlined, 
-  SafetyOutlined, 
+  Carousel,
+} from "antd"
+import { useColorTheme } from "../../context/ColorThemeContext"
+import {
+  DownloadOutlined,
+  MobileOutlined,
+  SafetyOutlined,
   CheckCircleOutlined,
   InfoCircleOutlined,
   UserOutlined,
@@ -32,72 +31,63 @@ import {
   ClockCircleOutlined,
   StarOutlined,
   LeftOutlined,
-  RightOutlined
-} from '@ant-design/icons';
-import HomePageHeader from './header/header';
-import HomePageFooter from './footer/footer';
-import AnimatedSection from '../../components/AnimatedSection';
-import { saveDownload, getDownloadStats } from '../../utils/downloadTracker';
-import { getFeedbackStats } from '../../utils/feedbackTracker';
-// import { useResponsive } from '../../hooks/useResponsive';
+  RightOutlined,
+} from "@ant-design/icons"
+import AnimatedSection from "../../components/AnimatedSection"
+import { saveDownload, getDownloadStats } from "../../utils/downloadTracker"
+import { getFeedbackStats } from "../../utils/feedbackTracker"
+import community02 from "../../assets/images/application/community-02.png"
+import repairShop from "../../assets/images/application/repair-shop.png"
+import communityPost from "../../assets/images/application/community-post.png"
+import viewMap from "../../assets/images/application/view-map.jpg"
+import sosRequest from "../../assets/images/application/sos-request.png"
+import viewAllCamera from "../../assets/images/application/view-all-camera.png"
+import yourTimeline from "../../assets/images/application/your-timeline.png"
+import applicationInterface from "../../assets/images/application/application-interface.png"
+import appLogoIcon from "../../assets/images/logo_header/logo_icon.png"
 
-// Import application images
-import navigateRoute from '../../assets/images/application/navigate-route.png';
-import safeRoute from '../../assets/images/application/safe-route.png';
-import community01 from '../../assets/images/application/community-01.jpg';
-import community02 from '../../assets/images/application/community-02.png';
-import repairShop from '../../assets/images/application/repair-shop.png';
-import communityPost from '../../assets/images/application/community-post.png';
-import viewMap from '../../assets/images/application/view-map.jpg';
-import sosRequest from '../../assets/images/application/sos-request.png';
-import viewAllCamera from '../../assets/images/application/view-all-camera.png';
-import yourTimeline from '../../assets/images/application/your-timeline.png';
-import applicationInterface from '../../assets/images/application/application-interface.png';
-
-const { Title, Paragraph, Text } = Typography;
-const { TextArea } = Input;
+const { Title, Paragraph, Text } = Typography
+const { TextArea } = Input
 
 interface DownloadFormData {
-  name: string;
-  email: string;
+  name: string
+  email: string
 }
 
 const APKDownload: React.FC = () => {
-  const { theme } = useColorTheme();
-  const [form] = Form.useForm();
-  const [loading, setLoading] = useState(false);
-  const [selectedMainImage, setSelectedMainImage] = useState<string>(applicationInterface);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: '' });
-  const [feedbackStats, setFeedbackStats] = useState({ averageRating: 0 });
-  const downloadFormRef = useRef<HTMLDivElement>(null);
-  const carouselRef = useRef<any>(null);
-  // const { isMobile, isTablet } = useResponsive();
+  const { theme } = useColorTheme()
+  const [form] = Form.useForm()
+  const [loading, setLoading] = useState(false)
+  const [selectedMainImage, setSelectedMainImage] = useState<string>(applicationInterface)
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [downloadStats, setDownloadStats] = useState({ totalDownloads: 0, lastUpdated: "" })
+  const [feedbackStats, setFeedbackStats] = useState({ averageRating: 0 })
+  const downloadFormRef = useRef<HTMLDivElement>(null)
+  const carouselRef = useRef<any>(null)
 
-  // Load download stats khi component mount
   useEffect(() => {
-    const stats = getDownloadStats();
-    const feedbacks = getFeedbackStats();
+    const stats = getDownloadStats()
+    const feedbacks = getFeedbackStats()
     setDownloadStats({
       totalDownloads: stats.totalDownloads,
-      lastUpdated: stats.lastUpdated
-    });
+      lastUpdated: stats.lastUpdated,
+    })
     setFeedbackStats({
-      averageRating: feedbacks.averageRating
-    });
-  }, []);
+      averageRating: feedbacks.averageRating,
+    })
+  }, [])
 
   const scrollToDownloadForm = () => {
     if (downloadFormRef.current) {
       downloadFormRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+        behavior: "smooth",
+        block: "start",
+      })
     }
-  };
+  }
 
   const handleSlideChange = (current: number) => {
-    setCurrentSlide(current);
+    setCurrentSlide(current)
     const images = [
       applicationInterface,
       viewMap,
@@ -106,18 +96,16 @@ const APKDownload: React.FC = () => {
       viewAllCamera,
       yourTimeline,
       repairShop,
-      community02
-    ];
-    // Cập nhật ngay lập tức không có delay
-    setSelectedMainImage(images[current]);
-  };
+      community02,
+    ]
+    setSelectedMainImage(images[current])
+  }
 
   const handleImageClick = (index: number) => {
-    // Di chuyển carousel đến ảnh được click
     if (carouselRef.current) {
-      carouselRef.current.goTo(index);
+      carouselRef.current.goTo(index)
     }
-    setCurrentSlide(index);
+    setCurrentSlide(index)
     const images = [
       applicationInterface,
       viewMap,
@@ -126,101 +114,95 @@ const APKDownload: React.FC = () => {
       viewAllCamera,
       yourTimeline,
       repairShop,
-      community02
-    ];
-    setSelectedMainImage(images[index]);
-  };
-
+      community02,
+    ]
+    setSelectedMainImage(images[index])
+  }
 
   const handleDownload = async (values: DownloadFormData) => {
-    setLoading(true);
-    
+    setLoading(true)
+
     try {
-      // Lưu thông tin download vào localStorage
-      const saveResult = saveDownload(values.name, values.email);
-      
+      const saveResult = saveDownload(values.name, values.email)
+
       if (saveResult.success) {
-        // Cập nhật thống kê hiển thị
-        setDownloadStats(prev => ({
+        setDownloadStats((prev) => ({
           ...prev,
           totalDownloads: saveResult.totalDownloads,
-          lastUpdated: new Date().toISOString()
-        }));
-        message.success(`Thông tin đã được ghi nhận! Tổng lượt tải: ${saveResult.totalDownloads}`);
+          lastUpdated: new Date().toISOString(),
+        }))
+        message.success(`Thông tin đã được ghi nhận! Tổng lượt tải: ${saveResult.totalDownloads}`)
       } else {
-        message.warning('Đã lưu thông tin nhưng có lỗi xảy ra với thống kê.');
+        message.warning("Đã lưu thông tin nhưng có lỗi xảy ra với thống kê.")
       }
-      
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Trigger APK download immediately using direct download link
-      const link = document.createElement('a');
-      link.href = 'https://drive.google.com/uc?export=download&id=1weaBUn1T8M0km0Uf5FPAzVB-Q3eXdR-v';
-      link.download = 'MekongPathfinder-app-release.apk';
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Show success message after a short delay
+
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      const link = document.createElement("a")
+      link.href = "https://drive.google.com/uc?export=download&id=1weaBUn1T8M0km0Uf5FPAzVB-Q3eXdR-v"
+      link.download = "MekongPathfinder-app-release.apk"
+      link.style.display = "none"
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+
       setTimeout(() => {
-        message.success('Tải xuống APK hoàn tất! Cảm ơn bạn đã sử dụng ứng dụng Mekong Pathfinder.');
-      }, 1000);
-      
+        message.success("Tải xuống APK hoàn tất! Cảm ơn bạn đã sử dụng ứng dụng Mekong Pathfinder.")
+      }, 1000)
     } catch (error) {
-      message.error('Có lỗi xảy ra. Vui lòng thử lại!');
+      message.error("Có lỗi xảy ra. Vui lòng thử lại!")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const appFeatures = [
     {
-      icon: <MobileOutlined style={{ color: '#1890ff' }} />,
-      title: 'Giao diện thân thiện',
-      description: 'Thiết kế đơn giản, dễ sử dụng cho mọi lứa tuổi'
+      icon: <MobileOutlined style={{ color: "#1890ff" }} />,
+      title: "Giao diện thân thiện",
+      description: "Thiết kế đơn giản, dễ sử dụng cho mọi lứa tuổi",
     },
     {
-      icon: <SafetyOutlined style={{ color: '#52c41a' }} />,
-      title: 'Bảo mật cao',
-      description: 'Dữ liệu được mã hóa và bảo vệ an toàn'
+      icon: <SafetyOutlined style={{ color: "#52c41a" }} />,
+      title: "Bảo mật cao",
+      description: "Dữ liệu được mã hóa và bảo vệ an toàn",
     },
     {
-      icon: <ClockCircleOutlined style={{ color: '#faad14' }} />,
-      title: 'Cập nhật thời gian thực',
-      description: 'Thông tin giao thông và thời tiết được cập nhật liên tục'
+      icon: <ClockCircleOutlined style={{ color: "#faad14" }} />,
+      title: "Cập nhật thời gian thực",
+      description: "Thông tin giao thông và thời tiết được cập nhật liên tục",
     },
     {
-      icon: <StarOutlined style={{ color: '#722ed1' }} />,
-      title: 'Đánh giá chất lượng',
-      description: 'Hệ thống đánh giá và phản hồi từ cộng đồng'
-    }
-  ];
+      icon: <StarOutlined style={{ color: "#722ed1" }} />,
+      title: "Đánh giá chất lượng",
+      description: "Hệ thống đánh giá và phản hồi từ cộng đồng",
+    },
+  ]
 
   const installationSteps = [
     {
-      title: 'Tải APK',
-      description: 'Tải file APK từ website'
+      title: "Tải APK",
+      description: "Tải file APK từ website",
     },
     {
-      title: 'Cài đặt',
-      description: 'Cho phép cài đặt từ nguồn không xác định'
+      title: "Cài đặt",
+      description: "Cho phép cài đặt từ nguồn không xác định",
     },
     {
-      title: 'Khởi động',
-      description: 'Mở ứng dụng và đăng nhập'
+      title: "Khởi động",
+      description: "Mở ứng dụng và đăng nhập",
     },
     {
-      title: 'Sử dụng',
-      description: 'Khám phá các tính năng của ứng dụng'
-    }
-  ];
+      title: "Sử dụng",
+      description: "Khám phá các tính năng của ứng dụng",
+    },
+  ]
 
   return (
     <>
       <style>
-      {`
+        {`
+        /* Enhanced carousel animations and transitions */
         .ant-carousel .slick-slide {
           display: block !important;
         }
@@ -243,13 +225,13 @@ const APKDownload: React.FC = () => {
           opacity: 1 !important;
           z-index: 10 !important;
           position: relative !important;
-          transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+          transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         }
         .ant-carousel .slick-slide:not(.slick-center) {
           transform: scale(0.85) !important;
           opacity: 0.8 !important;
           z-index: 1 !important;
-          transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+          transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         }
         .ant-carousel .slick-slide.slick-center .carousel-item {
           height: 300px !important;
@@ -265,7 +247,7 @@ const APKDownload: React.FC = () => {
           justify-content: center !important;
         }
         .main-image-container img {
-          transition: none !important;
+          transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
         .carousel-item:active {
           transform: scale(0.95) !important;
@@ -277,669 +259,956 @@ const APKDownload: React.FC = () => {
         .ant-steps-item-description {
           color: #000 !important;
         }
+
+        /* Smooth card transitions and hover effects */
+        .feature-card {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          transform: translateY(0) !important;
+        }
+        .feature-card:hover {
+          transform: translateY(-8px) scale(1.02) !important;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Smooth button transitions */
+        .ant-btn {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        .ant-btn:hover {
+          transform: translateY(-2px) !important;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Smooth input focus transitions */
+        .ant-input, .ant-input-number {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        .ant-input:focus, .ant-input-number:focus {
+          box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1) !important;
+          border-color: #1890ff !important;
+        }
+
+        /* Smooth tag transitions */
+        .ant-tag {
+          transition: all 0.3s ease !important;
+        }
+
+        /* Smooth list item transitions */
+        .ant-list-item {
+          transition: all 0.3s ease !important;
+        }
+        .ant-list-item:hover {
+          padding-left: 8px !important;
+        }
+
+        /* Smooth divider transitions */
+        .ant-divider {
+          transition: all 0.3s ease !important;
+        }
+
+        /* Smooth stat number animations */
+        @keyframes slideInNumber {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .stat-number {
+          animation: slideInNumber 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+        }
+
+        /* Smooth card entrance animations */
+        @keyframes cardSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .card-entrance {
+          animation: cardSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+        }
+
+        /* Smooth image transitions */
+        .main-image-container {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        /* Smooth arrow button transitions */
+        .carousel-arrow-btn {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        .carousel-arrow-btn:hover {
+          transform: scale(1.15) !important;
+          box-shadow: 0 8px 20px rgba(24, 144, 255, 0.25) !important;
+        }
+
+        /* Smooth text transitions */
+        .smooth-text {
+          transition: all 0.3s ease !important;
+        }
       `}
-    </style>
+      </style>
 
-    <Text style={{ 
-        color: '#000', 
-        margin: '0px 0px',
-        fontSize: 'clamp(20px, 3vw, 34px)',
-        fontWeight: '700',
-        textAlign: 'center',
-        display: 'block'
-      }}>
+      <Text
+        style={{
+          color: "#000",
+          margin: "0px 0px",
+          fontSize: "clamp(20px, 3vw, 34px)",
+          fontWeight: "700",
+          textAlign: "center",
+          display: "block",
+        }}
+      >
         Giới thiệu ứng dụng
-    </Text>
-      <div style={{ 
-        padding: '100px 0 0 0', 
-        width: '100%', 
-        margin: '0',
-        background: theme.background.page,
-        minHeight: '100vh'
-      }}>
-        <Space direction="vertical" size={24} style={{ width: '100%', padding: '0 24px' }}>
-        <AnimatedSection animationType="fadeInUp" delay={100}>
-          <Card style={{
-            background: 'rgba(255, 255, 255, 0.8)',
-            border: '1px solid #83b5fc',
-            borderRadius: '20px',
-            boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-            backdropFilter: 'blur(10px)'
-          }}
-          bodyStyle={{
-            padding: '10px'
-          }}>
-          <Row gutter={[8, 8]} align="middle">
-            <Col xs={24} sm={24} md={12}>
-              <Space direction="vertical" size={8}>
-                <Title level={2} style={{ margin: 0, color: '#000', fontSize: '24px' }}>
-                  <AndroidOutlined style={{ color: '#52c41a', marginRight: 8 }} />
-                  Mekong Pathfinder
-                </Title>
-                <Title level={4} style={{ margin: 0, color: '#000', fontSize: '16px' }}>
-                  Ứng dụng di động thông minh
-                </Title>
-                <Paragraph style={{ fontSize: '14px', lineHeight: 1.5, color: '#000', margin: '0 0 8px 0' }}>
-                  Khám phá các tuyến đường tối ưu, theo dõi giao thông và thời tiết thời gian thực 
-                  với ứng dụng Mekong Pathfinder. Được thiết kế đặc biệt cho khu vực Đồng bằng sông Cửu Long.
-                </Paragraph>
-                <Space wrap>
-                  <Tag color="green" icon={<CheckCircleOutlined />}>
-                    Miễn phí 100%
-                  </Tag>
-                  <Tag color="blue" icon={<InfoCircleOutlined />}>
-                    Không quảng cáo
-                  </Tag>
-                  <Tag color="purple" icon={<SafetyOutlined />}>
-                    Bảo mật cao
-                  </Tag>
-                </Space>
-              </Space>
-            </Col>
-            <Col xs={24} sm={24} md={12}>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{
-                  width: 'clamp(60px, 8vw, 80px)',
-                  height: 'clamp(60px, 8vw, 80px)',
-                  backgroundColor: '#f0f0f0',
-                  borderRadius: '10px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto',
-                  border: '2px dashed #d9d9d9'
-                }}>
-                  <AndroidOutlined style={{ fontSize: 'clamp(25px, 3vw, 35px)', color: '#52c41a' }} />
-                </div>
-                <Text style={{ marginTop: 4, display: 'block', color: '#001f44', fontSize: '11px' }}>
-                  Icon ứng dụng Mekong Pathfinder
-                </Text>
-                <Button
-                  type="primary"
-                  size={'small'}
-                  icon={<DownloadOutlined />}
-                  onClick={scrollToDownloadForm}
-                  style={{
-                    marginTop: 4,
-                    background: 'linear-gradient(135deg, #52c41a 0%, #73d13d 100%)',
-                    border: 'none',
-                    borderRadius: '14px',
-                    height: '28px',
-                    padding: '0 12px',
-                    fontSize: '11px',
-                    fontWeight: '600',
-                    boxShadow: '0 3px 12px rgba(3, 68, 214, 0.3)'
-                  }}
-                >
-                  Download APK
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          </Card>
-        </AnimatedSection>
-
-        {/* Combined Application Introduction & Screenshots Section */}
-        <AnimatedSection animationType="fadeInUp" delay={200}>
-          <Card 
-            style={{
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(197, 226, 255, 0.6) 100%)',
-              border: '1px solid #83b5fc',
-              borderRadius: '20px',
-              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)',
-              backdropFilter: 'blur(10px)',
-              minHeight: '400px'
-            }}
-            headStyle={{
-              background: 'transparent',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#000',
-              fontSize: '28px',
-              fontWeight: '700',
-              textAlign: 'center'
-            }}
-          >
-            <Row gutter={[24, 24]} align="stretch">
-              {/* Left Column - Main Image (5/10) */}
-              <Col xs={24} md={10}>
-                <div style={{ 
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  minHeight: '100px',
-                  padding: '20px'
-                }}>
-                  <div className="main-image-container" style={{ 
-                    textAlign: 'center',
-                    padding: '20px'
-                  }}>
-                    <img
-                      src={selectedMainImage}
-                      alt="Selected Application Image"
-                    style={{
-                      width: '100%',
-                        maxWidth: 'clamp(250px, 30vw, 350px)',
-                      height: '80%',
-                        borderRadius: '20px',
-                        boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-                        transition: 'all 0.3s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'scale(1.05)';
-                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                        e.currentTarget.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2)';
-                      }}
-                      onClick={() => {
-                        // Chỉ cập nhật ảnh chính, không hiển thị popup
-                        }}
-                      />
-                    </div>
-              </div>
-                  </Col>
-
-              {/* Right Column - Content & Screenshots (5/10) */}
-              <Col xs={24} md={14}>
-                <Space direction="vertical" size={24} style={{ width: '100%' }}>
-                  {/* Main Content */}
-              <div>
-                    <Title level={2} style={{ 
-                      color: '#000', 
-                      margin: '0 0 16px 0',
-                      fontSize: 'clamp(20px, 3vw, 24px)',
-                      fontWeight: '700'
-                    }}>
-                      Mekong Pathfinder
-                      </Title>
-                    <Paragraph style={{ 
-                      color: '#000', 
-                      fontSize: '16px', 
-                      lineHeight: 1.6,
-                      marginBottom: '20px'
-                    }}>
-                      Ứng dụng thông minh giúp người dùng điều hướng an toàn và hiệu quả 
-                      trong khu vực Đồng bằng sông Cửu Long với các tính năng tiên tiến.
-                      </Paragraph>
-                    
-                    {/* Features List */}
-                    <Row gutter={[16, 8]}>
-                      <Col xs={24} sm={12}>
-                        <List
-                          dataSource={[
-                            'Điều hướng thông minh với AI',
-                            'Tuyến đường an toàn thời gian thực',
-                            'Cộng đồng người dùng tương tác'
-                          ]}
-                          renderItem={item => (
-                            <List.Item style={{ 
-                              color: '#000',
-                              padding: '8px 0',
-                              borderBottom: 'none',
-                              justifyContent: 'flex-start'
-                            }}>
-                              <CheckCircleOutlined style={{ 
-                                color: '#52c41a', 
-                                marginRight: 12,
-                                fontSize: '16px'
-                              }} />
-                              <span style={{ fontSize: '15px', fontWeight: '500' }}>{item}</span>
-                            </List.Item>
-                          )}
-                        />
-                      </Col>
-                      <Col xs={24} sm={12}>
-                        <List
-                          dataSource={[
-                            'Cảnh báo thời tiết và lũ lụt',
-                            'Hệ thống camera giám sát',
-                            'Yêu cầu cứu trợ khẩn cấp'
-                          ]}
-                          renderItem={item => (
-                            <List.Item style={{ 
-                              color: '#000',
-                              padding: '8px 0',
-                              borderBottom: 'none',
-                              justifyContent: 'flex-start'
-                            }}>
-                              <CheckCircleOutlined style={{ 
-                                color: '#52c41a', 
-                                marginRight: 12,
-                                fontSize: '16px'
-                              }} />
-                              <span style={{ fontSize: '15px', fontWeight: '500' }}>{item}</span>
-                            </List.Item>
-                          )}
-                        />
-                      </Col>
-                    </Row>
-              </div>
-
-                  {/* Screenshots Gallery */}
-                  <div>
-                    <Title level={4} style={{ 
-                      color: '#000',
-                      margin: '0 0 16px 0',
-                      fontSize: '18px',
-                      fontWeight: '600',
-                      textAlign: 'center'
-                    }}>
-                      Hình ảnh ứng dụng
-                    </Title>
-            <Carousel 
-              ref={carouselRef}
-              autoplay={false}
-              dots={false}
-              arrows={true}
-              slidesToShow={5}
-              slidesToScroll={1}
-              infinite={true}
-              centerMode={true}
-              centerPadding="80px"
-              afterChange={handleSlideChange}
-              responsive={[
-                {
-                  breakpoint: 1200,
-                  settings: {
-                    slidesToShow: 3,
-                    centerMode: true,
-                    centerPadding: "60px"
-                  }
-                },
-                {
-                  breakpoint: 768,
-                  settings: {
-                    slidesToShow: 1,
-                    centerMode: true,
-                    centerPadding: "40px"
-                  }
-                }
-              ]}
-              prevArrow={<Button 
-                type="text" 
-                icon={<LeftOutlined />} 
-                style={{ 
-                          width: '35px',
-                          height: '35px',
-                  borderRadius: '50%',
-                  background: 'rgba(197, 226, 255, 0.9)',
-                  border: 'none',
-                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#1890ff',
-                          fontSize: '14px',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(197, 226, 255, 1)';
-                  e.currentTarget.style.transform = 'scale(1.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(197, 226, 255, 0.9)';
-                  e.currentTarget.style.transform = 'scale(1)';
-                }}
-              />}
-              nextArrow={<Button 
-                type="text" 
-                icon={<RightOutlined />} 
-                style={{ 
-                          width: '35px',
-                          height: '35px',
-                  borderRadius: '50%',
-                  background: 'rgba(197, 226, 255, 0.9)',
-                  border: 'none',
-                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#1890ff',
-                          fontSize: '14px',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(197, 226, 255, 1)';
-                  e.currentTarget.style.transform = 'scale(1.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(197, 226, 255, 0.9)';
-                  e.currentTarget.style.transform = 'scale(1)';
-                }}
-              />}
-            >
-              {[
-                { src: applicationInterface, alt: 'Giao diện ứng dụng', title: 'Giao diện chính' },
-                { src: viewMap, alt: 'Xem bản đồ', title: 'Bản đồ thông minh' },
-                { src: communityPost, alt: 'Cộng đồng', title: 'Cộng đồng người dùng' },
-                { src: sosRequest, alt: 'SOS Request', title: 'Yêu cầu cứu trợ' },
-                { src: viewAllCamera, alt: 'Camera', title: 'Hệ thống camera' },
-                { src: yourTimeline, alt: 'Timeline', title: 'Dòng thời gian' },
-                { src: repairShop, alt: 'Repair Shop', title: 'Tìm cửa hàng sửa chữa' },
-                        { src: community02, alt: 'Community 2', title: 'Cộng đồng tương tác' }
-              ].map((image, index) => (
-                <div key={index}>
-                  <div
-                    className="carousel-item"
-                    style={{
-                      position: 'relative',
-                      borderRadius: '12px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                      height: '400px',
-                      width: '150px',
-                      margin: '0 -20%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      maxHeight: '400px'
-                    }}
-                    onClick={() => handleImageClick(index)}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    }}
-                  >
-                    <div style={{
-                      flex: 1,
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'contain',
-                          objectPosition: 'center',
-                          backgroundColor: '#f0f0f0'
-                        }}
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                    <div style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      background: 'linear-gradient(transparent, rgba(0,0,0,0.9))',
-                      padding: '8px',
-                      color: 'white',
-                      minHeight: '35px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      <Text style={{ 
-                        fontSize: '10px', 
-                        fontWeight: '700',
-                        color: 'white',
-                        textShadow: '1px 1px 3px rgba(0,0,0,0.8)',
-                        textAlign: 'center',
-                        lineHeight: '1.2',
-                        margin: 0
-                      }}>
-                        {image.title}
-                      </Text>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Carousel>
-                  </div>
-                </Space>
-              </Col>
-            </Row>
-            {/* Features Section */}
-        <AnimatedSection animationType="fadeInUp" delay={400} style={{ marginTop: '40px' }}>
-          <Card 
-            title="Tính năng nổi bật"
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '20px',
-              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-              backdropFilter: 'blur(10px)'
-            }}
-            headStyle={{
-              background: 'transparent',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#000',
-              fontSize: '24px',
-              fontWeight: '700'
-            }}
-          >
-            <Row gutter={[12, 12]}>
-              {appFeatures.map((feature, index) => (
-                <Col xs={24} sm={12} md={6} key={index}>
-                  <Card 
-                    size="small" 
-                    style={{
-                      height: 'clamp(180px, 25vh, 200px)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      background: 'rgba(255, 255, 255, 0.6)',
-                      border: '1px solid #83b5fc',
-                      borderRadius: '16px',
-                      backdropFilter: 'blur(10px)',
-                      transition: 'all 0.3s ease'
-                    }}
-                    bodyStyle={{
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      padding: '20px',
-                      background: 'transparent'
-                    }}
-                  >
-                    <Space direction="vertical" align="center" style={{ width: '100%', textAlign: 'center', height: '100%', justifyContent: 'center' }}>
-                      <div style={{ fontSize: '32px', marginBottom: '12px' }}>{feature.icon}</div>
-                      <Title level={5} style={{ margin: '0 0 8px 0', color: '#000', fontSize: '16px' }}>{feature.title}</Title>
-                      <Text style={{ fontSize: '12px', color: '#000', lineHeight: '1.4', margin: 0 }}>
-                        {feature.description}
-                      </Text>
-                    </Space>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Card>
-        </AnimatedSection>
-        {/* Download Form */}
-        <div ref={downloadFormRef}>
-          <AnimatedSection animationType="fadeInUp" delay={800} style={{ marginTop: '40px' }}>
-            <Card 
-              title="Tải xuống ứng dụng"
+      </Text>
+      <div
+        style={{
+          padding: "100px 0 0 0",
+          width: "100%",
+          margin: "0",
+          background: theme.background.page,
+          minHeight: "100vh",
+        }}
+      >
+        <Space direction="vertical" size={24} style={{ width: "100%", padding: "0 24px" }}>
+          <AnimatedSection animationType="fadeInUp" delay={100}>
+            <Card
               style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '20px',
-                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-                backdropFilter: 'blur(10px)'
+                background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 245, 255, 0.8) 100%)",
+                border: "1px solid rgba(131, 181, 252, 0.5)",
+                borderRadius: "24px",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
+                backdropFilter: "blur(10px)",
+                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
               }}
-              headStyle={{
-                background: 'transparent',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                color: '#000',
-                fontSize: 'clamp(20px, 3vw, 24px)',
-                fontWeight: '700'
+              bodyStyle={{
+                padding: "10px",
               }}
             >
-          <Row gutter={[16, 16]}>
-            <Col xs={24} sm={24} md={12}>
-              <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#000' }}>Thông tin cá nhân</Title>
-                <Paragraph style={{ color: '#000' }}>
-                  Vui lòng cung cấp thông tin để chúng tôi có thể hỗ trợ bạn tốt nhất và 
-                  gửi thông báo về các phiên bản cập nhật mới.
-                </Paragraph>
-                
-                <Form
-                  form={form}
-                  layout="vertical"
-                  onFinish={handleDownload}
-                  requiredMark={false}
-                >
-                  <Form.Item
-                    name="name"
-                    label="Họ và tên"
-                    rules={[
-                      { required: true, message: 'Vui lòng nhập họ và tên!' },
-                      { min: 2, message: 'Họ và tên phải có ít nhất 2 ký tự!' }
-                    ]}
-                  >
-                    <Input
-                      prefix={<UserOutlined />}
-                      placeholder="Nhập họ và tên của bạn"
-                      size="large"
-                    />
-                  </Form.Item>
-
-                  <Form.Item
-                    name="email"
-                    label="Email"
-                    rules={[
-                      { required: true, message: 'Vui lòng nhập email!' },
-                      { type: 'email', message: 'Email không hợp lệ!' }
-                    ]}
-                  >
-                    <Input
-                      prefix={<MailOutlined />}
-                      placeholder="Nhập địa chỉ email của bạn"
-                      size="large"
-                    />
-                  </Form.Item>
-
-                  <Form.Item>
+              <Row gutter={[8, 8]} align="middle">
+                <Col xs={24} sm={24} md={12}>
+                  <Space direction="vertical" size={8}>
+                    <Title
+                      level={2}
+                      style={{ margin: 0, color: "#000", fontSize: "24px", transition: "all 0.3s ease" }}
+                    >
+                      <AndroidOutlined style={{ color: "#52c41a", marginRight: 8, transition: "all 0.3s ease" }} />
+                      Mekong Pathfinder
+                    </Title>
+                    <Title
+                      level={4}
+                      style={{ margin: 0, color: "#666", fontSize: "16px", transition: "all 0.3s ease" }}
+                    >
+                      Ứng dụng di động thông minh
+                    </Title>
+                    <Paragraph
+                      style={{
+                        fontSize: "14px",
+                        lineHeight: 1.6,
+                        color: "#333",
+                        margin: "0 0 8px 0",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      Khám phá các tuyến đường tối ưu, theo dõi giao thông và thời tiết thời gian thực với ứng dụng
+                      Mekong Pathfinder. Được thiết kế đặc biệt cho khu vực Đồng bằng sông Cửu Long.
+                    </Paragraph>
+                    <Space wrap>
+                      <Tag color="green" icon={<CheckCircleOutlined />} style={{ transition: "all 0.3s ease" }}>
+                        Miễn phí 100%
+                      </Tag>
+                      <Tag color="blue" icon={<InfoCircleOutlined />} style={{ transition: "all 0.3s ease" }}>
+                        Không quảng cáo
+                      </Tag>
+                      <Tag color="purple" icon={<SafetyOutlined />} style={{ transition: "all 0.3s ease" }}>
+                        Bảo mật cao
+                      </Tag>
+                    </Space>
+                  </Space>
+                </Col>
+                <Col xs={24} sm={24} md={12}>
+                  <div style={{ textAlign: "center" }}>
+                    <div
+                      style={{
+                        width: "clamp(60px, 8vw, 80px)",
+                        height: "clamp(60px, 8vw, 80px)",
+                        backgroundColor: "rgba(240, 240, 240, 0.8)",
+                        borderRadius: "16px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "0 auto",
+                        border: "2px solid rgba(131, 181, 252, 0.3)",
+                        transition: "all 0.3s ease",
+                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+                      }}
+                    >
+                      <img
+                        src={appLogoIcon || "/placeholder.svg"}
+                        alt="App Logo"
+                        style={{
+                          width: "clamp(28px, 5vw, 80px)",
+                          height: "clamp(28px, 5vw, 80px)",
+                          objectFit: "contain",
+                          transition: "all 0.3s ease",
+                        }}
+                      />
+                    </div>
+                    <Text
+                      style={{
+                        marginTop: 4,
+                        display: "block",
+                        color: "#666",
+                        fontSize: "11px",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      Download Ứng Dụng Mekong Pathfinder
+                    </Text>
                     <Button
                       type="primary"
-                      htmlType="submit"
-                      loading={loading}
-                      size="large"
+                      size={"small"}
                       icon={<DownloadOutlined />}
-                      style={{ width: '100%' }}
+                      onClick={scrollToDownloadForm}
+                      style={{
+                        marginTop: 4,
+                        background: "linear-gradient(135deg, #52c41a 0%, #73d13d 100%)",
+                        border: "none",
+                        borderRadius: "14px",
+                        height: "28px",
+                        padding: "0 12px",
+                        fontSize: "11px",
+                        fontWeight: "600",
+                        boxShadow: "0 4px 12px rgba(82, 196, 26, 0.3)",
+                        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                      }}
                     >
-                      Tải xuống APK
+                      Download APK
                     </Button>
-                  </Form.Item>
-                </Form>
-              </Space>
-            </Col>
-            
-            <Col xs={24} sm={24} md={12}>
-              <Card 
-                title="Thống kê tải xuống" 
-                size="small"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '16px',
-                  backdropFilter: 'blur(10px)'
-                }}
-                headStyle={{
-                  background: 'transparent',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                  color: '#000',
-                  fontSize: 'clamp(16px, 2.5vw, 18px)',
-                  fontWeight: '600'
-                }}
-              >
-                <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                  <Row gutter={[8, 8]}>
-                    <Col xs={12} sm={12} md={12}>
-                      <div style={{ textAlign: 'center' }}>
-                        <Title level={2} style={{ margin: 0, color: '#52c41a' }}>{downloadStats.totalDownloads}</Title>
-                        <Text style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>Lượt tải</Text>
-                      </div>
-                    </Col>
-                    <Col xs={12} sm={12} md={12}>
-                      <div style={{ textAlign: 'center' }}>
-                        <Title level={2} style={{ margin: 0, color: '#1890ff' }}>
-                          {feedbackStats.averageRating.toFixed(1)}
-                        </Title>
-                        <Text style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>Đánh giá</Text>
-                      </div>
-                    </Col>
-                  </Row>
-                  
-                  <Divider style={{ borderColor: 'rgba(255, 255, 255, 0.2)' }} />
-                  
-                  <div>
-                    <Text strong style={{ color: '#000' }}>Phiên bản hiện tại:</Text>
-                    <Tag color="blue" style={{ marginLeft: 8 }}>v1.0.0</Tag>
                   </div>
-                  
-                  <div>
-                    <Text strong style={{ color: '#000' }}>Cập nhật lần cuối:</Text>
-                    <Text style={{ marginLeft: 8, color: '#000' }}>15/12/2024</Text>
-                  </div>
-                  
-                  <div>
-                    <Text strong style={{ color: '#000' }}>Kích thước file:</Text>
-                    <Text style={{ marginLeft: 8, color: '#000' }}>45.2 MB</Text>
-                  </div>
-                </Space>
-              </Card>
-            </Col>
-          </Row>
+                </Col>
+              </Row>
             </Card>
           </AnimatedSection>
 
-        {/* User Guide Section */}
-        <Card title="Hướng dẫn sử dụng ứng dụng" style={{ marginTop: '40px' }}>
-          <Row gutter={[24, 24]}>
-            <Col xs={24} md={12}>
-              <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4}>Cài đặt và sử dụng</Title>
-                <Steps
-                  direction="vertical"
-                  current={-1}
-                  items={installationSteps.map(step => ({
-                    title: step.title,
-                    description: step.description
-                  }))}
-                />
-              </Space>
-            </Col>
-            <Col xs={24} md={12}>
-              <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4}>Tính năng chính</Title>
-                <List
-                  dataSource={[
-                    'Bản đồ thông minh với giao thông thời gian thực',
-                    'Dự báo thời tiết chính xác cho khu vực ĐBSCL',
-                    'Cảnh báo lũ lụt và thiên tai',
-                    'Cộng đồng người dùng chia sẻ thông tin',
-                    'Tìm kiếm địa điểm và lộ trình tối ưu',
-                    'Lưu vị trí yêu thích và lịch sử di chuyển'
-                  ]}
-                  renderItem={item => (
-                    <List.Item>
-                      <CheckCircleOutlined style={{ color: '#52c41a', marginRight: 8 }} />
-                      {item}
-                    </List.Item>
-                  )}
-                />
-              </Space>
-            </Col>
-          </Row>
-        </Card>
-        </div>
-          </Card>
-        </AnimatedSection>
-      </Space>
-        </div>
+          {/* Combined Application Introduction & Screenshots Section */}
+          <AnimatedSection animationType="fadeInUp" delay={200}>
+            <Card
+              style={{
+                background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(197, 226, 255, 0.4) 100%)",
+                border: "1px solid rgba(131, 181, 252, 0.5)",
+                borderRadius: "24px",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
+                backdropFilter: "blur(10px)",
+                minHeight: "400px",
+                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+              headStyle={{
+                background: "transparent",
+                borderBottom: "1px solid rgba(131, 181, 252, 0.2)",
+                color: "#000",
+                fontSize: "28px",
+                fontWeight: "700",
+                textAlign: "center",
+              }}
+            >
+              <Row gutter={[24, 24]} align="stretch">
+                {/* Left Column - Main Image */}
+                <Col xs={24} md={10}>
+                  <div
+                    style={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      minHeight: "100px",
+                      padding: "20px",
+                    }}
+                  >
+                    <div
+                      className="main-image-container"
+                      style={{
+                        textAlign: "center",
+                        padding: "20px",
+                      }}
+                    >
+                      <img
+                        src={selectedMainImage || "/placeholder.svg"}
+                        alt="Selected Application Image"
+                        style={{
+                          width: "100%",
+                          maxWidth: "clamp(250px, 30vw, 350px)",
+                          height: "80%",
+                          borderRadius: "20px",
+                          boxShadow: "0 15px 35px rgba(0, 0, 0, 0.12)",
+                          transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = "scale(1.05) translateY(-4px)"
+                          e.currentTarget.style.boxShadow = "0 20px 45px rgba(0, 0, 0, 0.2)"
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = "scale(1) translateY(0)"
+                          e.currentTarget.style.boxShadow = "0 15px 35px rgba(0, 0, 0, 0.12)"
+                        }}
+                        onClick={() => {}}
+                      />
+                    </div>
+                  </div>
+                </Col>
 
+                {/* Right Column - Content & Screenshots */}
+                <Col xs={24} md={14}>
+                  <Space direction="vertical" size={24} style={{ width: "100%" }}>
+                    {/* Main Content */}
+                    <div>
+                      <Title
+                        level={2}
+                        style={{
+                          color: "#000",
+                          margin: "0 0 16px 0",
+                          fontSize: "clamp(20px, 3vw, 24px)",
+                          fontWeight: "700",
+                          transition: "all 0.3s ease",
+                        }}
+                      >
+                        Mekong Pathfinder
+                      </Title>
+                      <Paragraph
+                        style={{
+                          color: "#333",
+                          fontSize: "16px",
+                          lineHeight: 1.7,
+                          marginBottom: "20px",
+                          transition: "all 0.3s ease",
+                        }}
+                      >
+                        Ứng dụng thông minh giúp người dùng điều hướng an toàn và hiệu quả trong khu vực Đồng bằng sông
+                        Cửu Long với các tính năng tiên tiến.
+                      </Paragraph>
+
+                      {/* Features List */}
+                      <Row gutter={[16, 8]}>
+                        <Col xs={24} sm={12}>
+                          <List
+                            dataSource={[
+                              "Điều hướng thông minh với AI",
+                              "Tuyến đường an toàn thời gian thực",
+                              "Cộng đồng người dùng tương tác",
+                            ]}
+                            renderItem={(item) => (
+                              <List.Item
+                                style={{
+                                  color: "#333",
+                                  padding: "8px 0",
+                                  borderBottom: "none",
+                                  justifyContent: "flex-start",
+                                  transition: "all 0.3s ease",
+                                }}
+                              >
+                                <CheckCircleOutlined
+                                  style={{
+                                    color: "#52c41a",
+                                    marginRight: 12,
+                                    fontSize: "16px",
+                                    transition: "all 0.3s ease",
+                                  }}
+                                />
+                                <span style={{ fontSize: "15px", fontWeight: "500", transition: "all 0.3s ease" }}>
+                                  {item}
+                                </span>
+                              </List.Item>
+                            )}
+                          />
+                        </Col>
+                        <Col xs={24} sm={12}>
+                          <List
+                            dataSource={[
+                              "Cảnh báo thời tiết và lũ lụt",
+                              "Hệ thống camera giám sát",
+                              "Yêu cầu cứu trợ khẩn cấp",
+                            ]}
+                            renderItem={(item) => (
+                              <List.Item
+                                style={{
+                                  color: "#333",
+                                  padding: "8px 0",
+                                  borderBottom: "none",
+                                  justifyContent: "flex-start",
+                                  transition: "all 0.3s ease",
+                                }}
+                              >
+                                <CheckCircleOutlined
+                                  style={{
+                                    color: "#52c41a",
+                                    marginRight: 12,
+                                    fontSize: "16px",
+                                    transition: "all 0.3s ease",
+                                  }}
+                                />
+                                <span style={{ fontSize: "15px", fontWeight: "500", transition: "all 0.3s ease" }}>
+                                  {item}
+                                </span>
+                              </List.Item>
+                            )}
+                          />
+                        </Col>
+                      </Row>
+                    </div>
+
+                    {/* Screenshots Gallery */}
+                    <div>
+                      <Title
+                        level={4}
+                        style={{
+                          color: "#000",
+                          margin: "0 0 16px 0",
+                          fontSize: "18px",
+                          fontWeight: "600",
+                          textAlign: "center",
+                          transition: "all 0.3s ease",
+                        }}
+                      >
+                        Hình ảnh ứng dụng
+                      </Title>
+                      <Carousel
+                        ref={carouselRef}
+                        autoplay={false}
+                        dots={false}
+                        arrows={true}
+                        slidesToShow={5}
+                        slidesToScroll={1}
+                        infinite={true}
+                        centerMode={true}
+                        centerPadding="80px"
+                        afterChange={handleSlideChange}
+                        responsive={[
+                          {
+                            breakpoint: 1200,
+                            settings: {
+                              slidesToShow: 3,
+                              centerMode: true,
+                              centerPadding: "60px",
+                            },
+                          },
+                          {
+                            breakpoint: 768,
+                            settings: {
+                              slidesToShow: 1,
+                              centerMode: true,
+                              centerPadding: "40px",
+                            },
+                          },
+                        ]}
+                        prevArrow={
+                          <Button
+                            type="text"
+                            icon={<LeftOutlined />}
+                            className="carousel-arrow-btn"
+                            style={{
+                              width: "35px",
+                              height: "35px",
+                              borderRadius: "50%",
+                              background:
+                                "linear-gradient(135deg, rgba(197, 226, 255, 0.9) 0%, rgba(197, 226, 255, 0.7) 100%)",
+                              border: "none",
+                              boxShadow: "0 4px 12px rgba(24, 144, 255, 0.2)",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#1890ff",
+                              fontSize: "14px",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background =
+                                "linear-gradient(135deg, rgba(197, 226, 255, 1) 0%, rgba(197, 226, 255, 0.9) 100%)"
+                              e.currentTarget.style.transform = "scale(1.15)"
+                              e.currentTarget.style.boxShadow = "0 8px 20px rgba(24, 144, 255, 0.3)"
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background =
+                                "linear-gradient(135deg, rgba(197, 226, 255, 0.9) 0%, rgba(197, 226, 255, 0.7) 100%)"
+                              e.currentTarget.style.transform = "scale(1)"
+                              e.currentTarget.style.boxShadow = "0 4px 12px rgba(24, 144, 255, 0.2)"
+                            }}
+                          />
+                        }
+                        nextArrow={
+                          <Button
+                            type="text"
+                            icon={<RightOutlined />}
+                            className="carousel-arrow-btn"
+                            style={{
+                              width: "35px",
+                              height: "35px",
+                              borderRadius: "50%",
+                              background:
+                                "linear-gradient(135deg, rgba(197, 226, 255, 0.9) 0%, rgba(197, 226, 255, 0.7) 100%)",
+                              border: "none",
+                              boxShadow: "0 4px 12px rgba(24, 144, 255, 0.2)",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#1890ff",
+                              fontSize: "14px",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background =
+                                "linear-gradient(135deg, rgba(197, 226, 255, 1) 0%, rgba(197, 226, 255, 0.9) 100%)"
+                              e.currentTarget.style.transform = "scale(1.15)"
+                              e.currentTarget.style.boxShadow = "0 8px 20px rgba(24, 144, 255, 0.3)"
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background =
+                                "linear-gradient(135deg, rgba(197, 226, 255, 0.9) 0%, rgba(197, 226, 255, 0.7) 100%)"
+                              e.currentTarget.style.transform = "scale(1)"
+                              e.currentTarget.style.boxShadow = "0 4px 12px rgba(24, 144, 255, 0.2)"
+                            }}
+                          />
+                        }
+                      >
+                        {[
+                          { src: applicationInterface, alt: "Giao diện ứng dụng", title: "Giao diện chính" },
+                          { src: viewMap, alt: "Xem bản đồ", title: "Bản đồ thông minh" },
+                          { src: communityPost, alt: "Cộng đồng", title: "Cộng đồng người dùng" },
+                          { src: sosRequest, alt: "SOS Request", title: "Yêu cầu cứu trợ" },
+                          { src: viewAllCamera, alt: "Camera", title: "Hệ thống camera" },
+                          { src: yourTimeline, alt: "Timeline", title: "Dòng thời gian" },
+                          { src: repairShop, alt: "Repair Shop", title: "Tìm cửa hàng sửa chữa" },
+                          { src: community02, alt: "Community 2", title: "Cộng đồng tương tác" },
+                        ].map((image, index) => (
+                          <div key={index}>
+                            <div
+                              className="carousel-item"
+                              style={{
+                                position: "relative",
+                                borderRadius: "16px",
+                                overflow: "hidden",
+                                transition:
+                                  "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                                height: "400px",
+                                width: "150px",
+                                margin: "0 -20%",
+                                display: "flex",
+                                flexDirection: "column",
+                                maxHeight: "400px",
+                                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
+                              }}
+                              onClick={() => handleImageClick(index)}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "translateY(-12px) scale(1.03)"
+                                e.currentTarget.style.boxShadow = "0 16px 32px rgba(0, 0, 0, 0.15)"
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "translateY(0) scale(1)"
+                                e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.1)"
+                              }}
+                            >
+                              <div
+                                style={{
+                                  flex: 1,
+                                  position: "relative",
+                                  overflow: "hidden",
+                                }}
+                              >
+                                <img
+                                  src={image.src || "/placeholder.svg"}
+                                  alt={image.alt}
+                                  style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                    objectPosition: "center",
+                                    backgroundColor: "#f5f5f5",
+                                    transition: "all 0.3s ease",
+                                  }}
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = "none"
+                                  }}
+                                />
+                              </div>
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  background: "linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.6), transparent)",
+                                  padding: "12px 8px 8px",
+                                  color: "white",
+                                  minHeight: "40px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  transition: "all 0.3s ease",
+                                }}
+                              >
+                                <Text
+                                  style={{
+                                    fontSize: "11px",
+                                    fontWeight: "700",
+                                    color: "white",
+                                    textShadow: "1px 1px 3px rgba(0,0,0,0.8)",
+                                    textAlign: "center",
+                                    lineHeight: "1.3",
+                                    margin: 0,
+                                    transition: "all 0.3s ease",
+                                  }}
+                                >
+                                  {image.title}
+                                </Text>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </Carousel>
+                    </div>
+                  </Space>
+                </Col>
+              </Row>
+              {/* Features Section */}
+              <AnimatedSection animationType="fadeInUp" delay={400} style={{ marginTop: "40px" }}>
+                <Card
+                  title="Tính năng nổi bật"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 245, 255, 0.6) 100%)",
+                    border: "1px solid rgba(131, 181, 252, 0.5)",
+                    borderRadius: "24px",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
+                    backdropFilter: "blur(10px)",
+                    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  }}
+                  headStyle={{
+                    background: "transparent",
+                    borderBottom: "1px solid rgba(131, 181, 252, 0.2)",
+                    color: "#000",
+                    fontSize: "24px",
+                    fontWeight: "700",
+                  }}
+                >
+                  <Row gutter={[12, 12]}>
+                    {appFeatures.map((feature, index) => (
+                      <Col xs={24} sm={12} md={6} key={index}>
+                        <Card
+                          size="small"
+                          className="feature-card"
+                          style={{
+                            height: "clamp(180px, 25vh, 200px)",
+                            display: "flex",
+                            flexDirection: "column",
+                            background:
+                              "linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(240, 248, 255, 0.6) 100%)",
+                            border: "1px solid rgba(131, 181, 252, 0.4)",
+                            borderRadius: "20px",
+                            backdropFilter: "blur(10px)",
+                            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+                          }}
+                          bodyStyle={{
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            padding: "20px",
+                            background: "transparent",
+                          }}
+                        >
+                          <Space
+                            direction="vertical"
+                            align="center"
+                            style={{ width: "100%", textAlign: "center", height: "100%", justifyContent: "center" }}
+                          >
+                            <div style={{ fontSize: "32px", marginBottom: "12px", transition: "all 0.3s ease" }}>
+                              {feature.icon}
+                            </div>
+                            <Title
+                              level={5}
+                              style={{
+                                margin: "0 0 8px 0",
+                                color: "#000",
+                                fontSize: "16px",
+                                fontWeight: "600",
+                                transition: "all 0.3s ease",
+                              }}
+                            >
+                              {feature.title}
+                            </Title>
+                            <Text
+                              style={{
+                                fontSize: "12px",
+                                color: "#666",
+                                lineHeight: "1.5",
+                                margin: 0,
+                                transition: "all 0.3s ease",
+                              }}
+                            >
+                              {feature.description}
+                            </Text>
+                          </Space>
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
+                </Card>
+              </AnimatedSection>
+              {/* Download Form */}
+              <div ref={downloadFormRef}>
+                <AnimatedSection animationType="fadeInUp" delay={800} style={{ marginTop: "40px" }}>
+                  <Card
+                    title="Tải xuống ứng dụng"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 245, 255, 0.6) 100%)",
+                      border: "1px solid rgba(131, 181, 252, 0.5)",
+                      borderRadius: "24px",
+                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
+                      backdropFilter: "blur(10px)",
+                      transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                    }}
+                    headStyle={{
+                      background: "transparent",
+                      borderBottom: "1px solid rgba(131, 181, 252, 0.2)",
+                      color: "#000",
+                      fontSize: "clamp(20px, 3vw, 24px)",
+                      fontWeight: "700",
+                    }}
+                  >
+                    <Row gutter={[16, 16]}>
+                      <Col xs={24} sm={24} md={12}>
+                        <Space direction="vertical" size={16} style={{ width: "100%" }}>
+                          <Title level={4} style={{ color: "#000", transition: "all 0.3s ease" }}>
+                            Thông tin cá nhân
+                          </Title>
+                          <Paragraph style={{ color: "#333", transition: "all 0.3s ease" }}>
+                            Vui lòng cung cấp thông tin để chúng tôi có thể hỗ trợ bạn tốt nhất và gửi thông báo về các
+                            phiên bản cập nhật mới.
+                          </Paragraph>
+
+                          <Form form={form} layout="vertical" onFinish={handleDownload} requiredMark={false}>
+                            <Form.Item
+                              name="name"
+                              label="Họ và tên"
+                              rules={[
+                                { required: true, message: "Vui lòng nhập họ và tên!" },
+                                { min: 2, message: "Họ và tên phải có ít nhất 2 ký tự!" },
+                              ]}
+                            >
+                              <Input
+                                prefix={<UserOutlined />}
+                                placeholder="Nhập họ và tên của bạn"
+                                size="large"
+                                style={{ transition: "all 0.3s ease" }}
+                              />
+                            </Form.Item>
+
+                            <Form.Item
+                              name="email"
+                              label="Email"
+                              rules={[
+                                { required: true, message: "Vui lòng nhập email!" },
+                                { type: "email", message: "Email không hợp lệ!" },
+                              ]}
+                            >
+                              <Input
+                                prefix={<MailOutlined />}
+                                placeholder="Nhập địa chỉ email của bạn"
+                                size="large"
+                                style={{ transition: "all 0.3s ease" }}
+                              />
+                            </Form.Item>
+
+                            <Form.Item>
+                              <Button
+                                type="primary"
+                                htmlType="submit"
+                                loading={loading}
+                                size="large"
+                                icon={<DownloadOutlined />}
+                                style={{ width: "100%", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}
+                              >
+                                Tải xuống APK
+                              </Button>
+                            </Form.Item>
+                          </Form>
+                        </Space>
+                      </Col>
+
+                      <Col xs={24} sm={24} md={12}>
+                        <Card
+                          title="Thống kê tải xuống"
+                          size="small"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(240, 248, 255, 0.6) 100%)",
+                            border: "1px solid rgba(131, 181, 252, 0.4)",
+                            borderRadius: "20px",
+                            backdropFilter: "blur(10px)",
+                            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+                            transition: "all 0.3s ease",
+                          }}
+                          headStyle={{
+                            background: "transparent",
+                            borderBottom: "1px solid rgba(131, 181, 252, 0.2)",
+                            color: "#000",
+                            fontSize: "clamp(16px, 2.5vw, 18px)",
+                            fontWeight: "600",
+                          }}
+                        >
+                          <Space direction="vertical" size={16} style={{ width: "100%" }}>
+                            <Row gutter={[8, 8]}>
+                              <Col xs={12} sm={12} md={12}>
+                                <div style={{ textAlign: "center", transition: "all 0.3s ease" }}>
+                                  <Title
+                                    level={2}
+                                    className="stat-number"
+                                    style={{ margin: 0, color: "#52c41a", transition: "all 0.3s ease" }}
+                                  >
+                                    {downloadStats.totalDownloads}
+                                  </Title>
+                                  <Text
+                                    style={{
+                                      color: "#666",
+                                      fontSize: "clamp(14px, 2vw, 16px)",
+                                      transition: "all 0.3s ease",
+                                    }}
+                                  >
+                                    Lượt tải
+                                  </Text>
+                                </div>
+                              </Col>
+                              <Col xs={12} sm={12} md={12}>
+                                <div style={{ textAlign: "center", transition: "all 0.3s ease" }}>
+                                  <Title
+                                    level={2}
+                                    className="stat-number"
+                                    style={{ margin: 0, color: "#1890ff", transition: "all 0.3s ease" }}
+                                  >
+                                    {feedbackStats.averageRating.toFixed(1)}
+                                  </Title>
+                                  <Text
+                                    style={{
+                                      color: "#666",
+                                      fontSize: "clamp(14px, 2vw, 16px)",
+                                      transition: "all 0.3s ease",
+                                    }}
+                                  >
+                                    Đánh giá
+                                  </Text>
+                                </div>
+                              </Col>
+                            </Row>
+
+                            <Divider style={{ borderColor: "rgba(131, 181, 252, 0.2)", transition: "all 0.3s ease" }} />
+
+                            <div style={{ transition: "all 0.3s ease" }}>
+                              <Text strong style={{ color: "#000", transition: "all 0.3s ease" }}>
+                                Phiên bản hiện tại:
+                              </Text>
+                              <Tag color="blue" style={{ marginLeft: 8, transition: "all 0.3s ease" }}>
+                                v1.0.0
+                              </Tag>
+                            </div>
+
+                            <div style={{ transition: "all 0.3s ease" }}>
+                              <Text strong style={{ color: "#000", transition: "all 0.3s ease" }}>
+                                Cập nhật lần cuối:
+                              </Text>
+                              <Text style={{ marginLeft: 8, color: "#666", transition: "all 0.3s ease" }}>
+                                15/12/2024
+                              </Text>
+                            </div>
+
+                            <div style={{ transition: "all 0.3s ease" }}>
+                              <Text strong style={{ color: "#000", transition: "all 0.3s ease" }}>
+                                Kích thước file:
+                              </Text>
+                              <Text style={{ marginLeft: 8, color: "#666", transition: "all 0.3s ease" }}>45.2 MB</Text>
+                            </div>
+                          </Space>
+                        </Card>
+                      </Col>
+                    </Row>
+                  </Card>
+                </AnimatedSection>
+
+                {/* User Guide Section */}
+                <Card
+                  title="Hướng dẫn sử dụng ứng dụng"
+                  style={{
+                    marginTop: "40px",
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 245, 255, 0.6) 100%)",
+                    border: "1px solid rgba(131, 181, 252, 0.5)",
+                    borderRadius: "24px",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
+                    backdropFilter: "blur(10px)",
+                    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  }}
+                  headStyle={{
+                    background: "transparent",
+                    borderBottom: "1px solid rgba(131, 181, 252, 0.2)",
+                    color: "#000",
+                    fontSize: "24px",
+                    fontWeight: "700",
+                  }}
+                >
+                  <Row gutter={[24, 24]}>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={16} style={{ width: "100%" }}>
+                        <Title level={4} style={{ transition: "all 0.3s ease" }}>
+                          Cài đặt và sử dụng
+                        </Title>
+                        <Steps
+                          direction="vertical"
+                          current={-1}
+                          items={installationSteps.map((step) => ({
+                            title: step.title,
+                            description: step.description,
+                          }))}
+                        />
+                      </Space>
+                    </Col>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={16} style={{ width: "100%" }}>
+                        <Title level={4} style={{ transition: "all 0.3s ease" }}>
+                          Tính năng chính
+                        </Title>
+                        <List
+                          dataSource={[
+                            "Bản đồ thông minh với giao thông thời gian thực",
+                            "Dự báo thời tiết chính xác cho khu vực ĐBSCL",
+                            "Cảnh báo lũ lụt và thiên tai",
+                            "Cộng đồng người dùng chia sẻ thông tin",
+                            "Tìm kiếm địa điểm và lộ trình tối ưu",
+                            "Lưu vị trí yêu thích và lịch sử di chuyển",
+                          ]}
+                          renderItem={(item) => (
+                            <List.Item style={{ transition: "all 0.3s ease" }}>
+                              <CheckCircleOutlined
+                                style={{ color: "#52c41a", marginRight: 8, transition: "all 0.3s ease" }}
+                              />
+                              <span style={{ transition: "all 0.3s ease" }}>{item}</span>
+                            </List.Item>
+                          )}
+                        />
+                      </Space>
+                    </Col>
+                  </Row>
+                </Card>
+              </div>
+            </Card>
+          </AnimatedSection>
+        </Space>
+      </div>
     </>
-  );
-};
+  )
+}
 
-export default APKDownload;
+export default APKDownload
