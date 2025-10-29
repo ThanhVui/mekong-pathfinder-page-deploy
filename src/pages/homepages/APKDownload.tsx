@@ -46,6 +46,7 @@ import viewAllCamera from "../../assets/images/application/view-all-camera.png"
 import yourTimeline from "../../assets/images/application/your-timeline.png"
 import applicationInterface from "../../assets/images/application/application-interface.png"
 import appLogoIcon from "../../assets/images/logo_header/logo_icon.png"
+import applicationBg from "../../assets/images/download-images/application-bg.png"
 
 const { Title, Paragraph, Text } = Typography
 const { TextArea } = Input
@@ -384,13 +385,25 @@ const APKDownload: React.FC = () => {
       </Text>
       <div
         style={{
-          padding: "100px 0 0 0",
           width: "100%",
-          margin: "0",
+          margin: "10px 0",
           background: theme.background.page,
           minHeight: "100vh",
         }}
       >
+        <div
+          style={{
+            height: "clamp(260px, 45vw, 600px)",
+            borderRadius: "20px",
+            backgroundImage: `url(${applicationBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.12)",
+            marginBottom: "20px",
+            objectFit: "fill",
+          }}
+        />
         <Space direction="vertical" size={24} style={{ width: "100%", padding: "0 24px" }}>
           <AnimatedSection animationType="fadeInUp" delay={100}>
             <Card
@@ -401,46 +414,51 @@ const APKDownload: React.FC = () => {
                 boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
                 backdropFilter: "blur(10px)",
                 transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                width: "calc(100% + 48px)",
+                marginLeft: "-24px",
+                marginRight: "-24px",
+                minHeight: "clamp(300px, 40vh, 500px)",
               }}
               bodyStyle={{
-                padding: "10px",
+                padding: "24px",
               }}
             >
-              <Row gutter={[8, 8]} align="middle">
+              <Row gutter={[16, 16]} align="middle" justify="space-between">
                 <Col xs={24} sm={24} md={12}>
-                  <Space direction="vertical" size={8}>
+                  <Space direction="vertical" size={12} style={{ alignItems: "flex-start", width: "100%" }}>
                     <Title
                       level={2}
-                      style={{ margin: 0, color: "#000", fontSize: "24px", transition: "all 0.3s ease" }}
+                      style={{ marginRight: '20px', color: "#000", fontSize: "28px", transition: "all 0.3s ease" }}
                     >
                       <AndroidOutlined style={{ color: "#52c41a", marginRight: 8, transition: "all 0.3s ease" }} />
                       {t('app.intro.name')}
                     </Title>
                     <Title
                       level={4}
-                      style={{ margin: 0, color: "#666", fontSize: "16px", transition: "all 0.3s ease" }}
+                      style={{ margin: 0, color: "#666", fontSize: "18px", transition: "all 0.3s ease" }}
                     >
                       {t('app.intro.subtitle')}
                     </Title>
                     <Paragraph
                       style={{
-                        fontSize: "14px",
-                        lineHeight: 1.6,
+                        fontSize: "16px",
+                        lineHeight: 1.75,
                         color: "#333",
-                        margin: "0 0 8px 0",
+                        margin: "0 0 12px 0",
                         transition: "all 0.3s ease",
+                        maxWidth: "720px",
                       }}
                     >
                       {t('app.intro.description')}
                     </Paragraph>
-                    <Space wrap>
-                      <Tag color="green" icon={<CheckCircleOutlined />} style={{ transition: "all 0.3s ease" }}>
+                    <Space wrap size={[12, 8]}>
+                      <Tag color="green" icon={<CheckCircleOutlined />} style={{ fontSize: 13 }}>
                         {t('app.intro.free')}
                       </Tag>
-                      <Tag color="blue" icon={<InfoCircleOutlined />} style={{ transition: "all 0.3s ease" }}>
+                      <Tag color="blue" icon={<InfoCircleOutlined />} style={{ fontSize: 13 }}>
                         {t('app.intro.no.ads')}
                       </Tag>
-                      <Tag color="purple" icon={<SafetyOutlined />} style={{ transition: "all 0.3s ease" }}>
+                      <Tag color="purple" icon={<SafetyOutlined />} style={{ fontSize: 13 }}>
                         {t('app.intro.secure')}
                       </Tag>
                     </Space>
@@ -450,8 +468,8 @@ const APKDownload: React.FC = () => {
                   <div style={{ textAlign: "center" }}>
                     <div
                       style={{
-                        width: "clamp(60px, 8vw, 80px)",
-                        height: "clamp(60px, 8vw, 80px)",
+                        width: "clamp(72px, 10vw, 100px)",
+                        height: "clamp(72px, 10vw, 100px)",
                         backgroundColor: "rgba(240, 240, 240, 0.8)",
                         borderRadius: "16px",
                         display: "flex",
@@ -467,8 +485,8 @@ const APKDownload: React.FC = () => {
                         src={appLogoIcon || "/placeholder.svg"}
                         alt="App Logo"
                         style={{
-                          width: "clamp(28px, 5vw, 80px)",
-                          height: "clamp(28px, 5vw, 80px)",
+                          width: "clamp(36px, 6vw, 90px)",
+                          height: "clamp(36px, 6vw, 90px)",
                           objectFit: "contain",
                           transition: "all 0.3s ease",
                         }}
@@ -476,10 +494,10 @@ const APKDownload: React.FC = () => {
                     </div>
                     <Text
                       style={{
-                        marginTop: 4,
+                        marginTop: 6,
                         display: "block",
                         color: "#666",
-                        fontSize: "11px",
+                        fontSize: "12px",
                         transition: "all 0.3s ease",
                       }}
                     >
@@ -487,17 +505,17 @@ const APKDownload: React.FC = () => {
                     </Text>
                     <Button
                       type="primary"
-                      size={"small"}
+                      size={"middle"}
                       icon={<DownloadOutlined />}
                       onClick={scrollToDownloadForm}
                       style={{
-                        marginTop: 4,
+                        marginTop: 6,
                         background: "linear-gradient(135deg, #52c41a 0%, #73d13d 100%)",
                         border: "none",
-                        borderRadius: "14px",
-                        height: "28px",
-                        padding: "0 12px",
-                        fontSize: "11px",
+                        borderRadius: "16px",
+                        height: "36px",
+                        padding: "0 16px",
+                        fontSize: "12px",
                         fontWeight: "600",
                         boxShadow: "0 4px 12px rgba(82, 196, 26, 0.3)",
                         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -522,6 +540,9 @@ const APKDownload: React.FC = () => {
                 backdropFilter: "blur(10px)",
                 minHeight: "400px",
                 transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                width: "calc(100% + 48px)",
+                marginLeft: "-24px",
+                marginRight: "-24px",
               }}
               headStyle={{
                 background: "transparent",

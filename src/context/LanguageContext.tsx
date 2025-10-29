@@ -198,6 +198,16 @@ const translations = {
     'feedback.category.improvement': 'Cải thiện tính năng',
     'feedback.category.bug': 'Báo lỗi',
     'feedback.category.other': 'Khác',
+    'feedback.recent.title': 'Góp ý gần đây',
+    'feedback.recent.noData': 'Chưa có góp ý nào',
+    'feedback.categoryStats.title': 'Thống kê theo loại góp ý',
+    'feedback.tag.allRecorded': 'Tất cả góp ý đều được ghi nhận',
+    'feedback.tag.quickResponse': 'Phản hồi nhanh chóng',
+    'feedback.tag.secure': 'Bảo mật thông tin',
+    'feedback.rating.label': 'Đánh giá tổng thể',
+    'feedback.title.label': 'Tiêu đề góp ý',
+    'feedback.anonymous.label': 'Gửi góp ý ẩn danh',
+    'feedback.anonymous.tag': 'Ẩn danh',
     
     // Footer
     'footer.company.name': 'Mekong Pathfinder',
@@ -425,6 +435,16 @@ const translations = {
     'feedback.category.improvement': 'Feature Improvement',
     'feedback.category.bug': 'Bug Report',
     'feedback.category.other': 'Other',
+    'feedback.recent.title': 'Recent Feedbacks',
+    'feedback.recent.noData': 'No feedback yet',
+    'feedback.categoryStats.title': 'Feedback Statistics by Category',
+    'feedback.tag.allRecorded': 'All feedbacks are acknowledged',
+    'feedback.tag.quickResponse': 'Quick response',
+    'feedback.tag.secure': 'Information security',
+    'feedback.rating.label': 'Overall Rating',
+    'feedback.title.label': 'Feedback Title',
+    'feedback.anonymous.label': 'Submit anonymous feedback',
+    'feedback.anonymous.tag': 'Anonymous',
     
     // Footer
     'footer.company.name': 'Mekong Pathfinder',

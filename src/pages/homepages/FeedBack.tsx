@@ -170,6 +170,7 @@ const FeedBack: React.FC = () => {
           textAlign: "center",
           display: "block",
           transition: 'all 0.3s ease',
+          marginBottom: '20px',
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.color = '#0344d6';
@@ -186,7 +187,6 @@ const FeedBack: React.FC = () => {
       </Text>
 
       <div style={{
-        padding: '100px 0 0 0',
         width: '100%',
         margin: '0',
         background: theme.background.page,
@@ -198,7 +198,10 @@ const FeedBack: React.FC = () => {
             border: '1px solid #83b5fc',
             borderRadius: '20px',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-            backdropFilter: 'blur(10px)'
+            backdropFilter: 'blur(10px)',
+            width: 'calc(100% + 48px)',
+            marginLeft: '-24px',
+            marginRight: '-24px',
           }}>
             <Row gutter={[16, 16]} align="middle">
               <Col xs={24} sm={24} md={16}>
@@ -228,15 +231,66 @@ const FeedBack: React.FC = () => {
                   </Paragraph>
                   <Space wrap>
                     <Tag color="blue" icon={<HeartOutlined />}>
-                      Tất cả góp ý đều được ghi nhận
+                      {t('feedback.tag.allRecorded')}
                     </Tag>
                     <Tag color="green" icon={<StarOutlined />}>
-                      Phản hồi nhanh chóng
+                      {t('feedback.tag.quickResponse')}
                     </Tag>
                     <Tag color="purple" icon={<UserOutlined />}>
-                      Bảo mật thông tin
+                      {t('feedback.tag.secure')}
                     </Tag>
                   </Space>
+                  
+                  {/* Statistics */}
+                  <Row gutter={[12, 12]} style={{ marginTop: '20px', width: '100%' }}>
+                    <Col xs={24} sm={8} md={8}>
+                      <Card style={{
+                        background: 'rgba(255, 255, 255, 0.6)',
+                        border: '1px solid rgba(131, 181, 252, 0.5)',
+                        borderRadius: '16px',
+                        backdropFilter: 'blur(10px)'
+                      }}>
+                        <Statistic
+                          title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>{t('feedback.stats.total')}</span>}
+                          value={totalFeedbacks}
+                          prefix={<CommentOutlined />}
+                          valueStyle={{ color: '#1890ff', fontSize: 'clamp(18px, 3vw, 24px)' }}
+                        />
+                      </Card>
+                    </Col>
+                    <Col xs={24} sm={8} md={8}>
+                      <Card style={{
+                        background: 'rgba(255, 255, 255, 0.6)',
+                        border: '1px solid rgba(131, 181, 252, 0.5)',
+                        borderRadius: '16px',
+                        backdropFilter: 'blur(10px)'
+                      }}>
+                        <Statistic
+                          title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>{t('feedback.stats.rating')}</span>}
+                          value={averageRating.toFixed(1)}
+                          prefix={<StarOutlined />}
+                          valueStyle={{ color: '#faad14', fontSize: 'clamp(18px, 3vw, 24px)' }}
+                          suffix="/ 5"
+                        />
+                      </Card>
+                    </Col>
+                    <Col xs={24} sm={8} md={8}>
+                      <Card style={{
+                        background: 'rgba(255, 255, 255, 0.6)',
+                        border: '1px solid rgba(131, 181, 252, 0.5)',
+                        borderRadius: '16px',
+                        backdropFilter: 'blur(10px)'
+                      }}>
+                        <Statistic
+                          title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>{t('feedback.stats.positive')}</span>}
+                          value={Math.round((feedbacks.filter(f => f.rating >= 4).length / Math.max(totalFeedbacks, 1)) * 100)}
+                          prefix={<LikeOutlined />}
+                          valueStyle={{ color: '#52c41a', fontSize: 'clamp(18px, 3vw, 24px)' }}
+                          suffix="%"
+                        />
+                      </Card>
+                    </Col>
+                  </Row>
                 </Space>
               </Col>
               <Col xs={24} sm={24} md={8}>
@@ -259,57 +313,6 @@ const FeedBack: React.FC = () => {
             </Row>
           </Card>
 
-          {/* Statistics */}
-          <Row gutter={[12, 12]}>
-            <Col xs={24} sm={12} md={8}>
-              <Card style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid #83b5fc',
-                borderRadius: '16px',
-                backdropFilter: 'blur(10px)'
-              }}>
-                <Statistic
-                  title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>{t('feedback.stats.total')}</span>}
-                  value={totalFeedbacks}
-                  prefix={<CommentOutlined />}
-                  valueStyle={{ color: '#1890ff', fontSize: 'clamp(18px, 3vw, 24px)' }}
-                />
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
-              <Card style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid #83b5fc',
-                borderRadius: '16px',
-                backdropFilter: 'blur(10px)'
-              }}>
-                <Statistic
-                  title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>{t('feedback.stats.rating')}</span>}
-                  value={averageRating.toFixed(1)}
-                  prefix={<StarOutlined />}
-                  valueStyle={{ color: '#faad14', fontSize: 'clamp(18px, 3vw, 24px)' }}
-                  suffix="/ 5"
-                />
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
-              <Card style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid #83b5fc',
-                borderRadius: '16px',
-                backdropFilter: 'blur(10px)'
-              }}>
-                <Statistic
-                  title={<span style={{ color: '#001f44', fontSize: 'clamp(14px, 2vw, 16px)' }}>{t('feedback.stats.positive')}</span>}
-                  value={Math.round((feedbacks.filter(f => f.rating >= 4).length / totalFeedbacks) * 100)}
-                  prefix={<LikeOutlined />}
-                  valueStyle={{ color: '#52c41a', fontSize: 'clamp(18px, 3vw, 24px)' }}
-                  suffix="%"
-                />
-              </Card>
-            </Col>
-          </Row>
-
           {/* Feedback Form */}
           <Card
             title={t('feedback.card.title')}
@@ -318,7 +321,10 @@ const FeedBack: React.FC = () => {
               border: '1px solid #83b5fc',
               borderRadius: '20px',
               boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-              backdropFilter: 'blur(10px)'
+              backdropFilter: 'blur(10px)',
+              width: 'calc(100% + 48px)',
+              marginLeft: '-24px',
+              marginRight: '-24px',
             }}
             headStyle={{
               background: 'transparent',
@@ -422,7 +428,7 @@ const FeedBack: React.FC = () => {
 
               <Form.Item
                 name="rating"
-                label="Đánh giá tổng thể"
+                label={t('feedback.rating.label')}
                 rules={[{ required: true, message: 'Vui lòng đánh giá ứng dụng!' }]}
               >
                 <Rate
@@ -435,7 +441,7 @@ const FeedBack: React.FC = () => {
 
               <Form.Item
                 name="title"
-                label="Tiêu đề góp ý"
+                label={t('feedback.title.label')}
                 rules={[
                   { required: true, message: 'Vui lòng nhập tiêu đề!' },
                   { min: 5, message: 'Tiêu đề phải có ít nhất 5 ký tự!' }
@@ -469,7 +475,7 @@ const FeedBack: React.FC = () => {
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <input type="checkbox" />
-                  <Text type="secondary">Gửi góp ý ẩn danh</Text>
+                  <Text type="secondary">{t('feedback.anonymous.label')}</Text>
                 </div>
               </Form.Item>
 
@@ -490,13 +496,16 @@ const FeedBack: React.FC = () => {
 
           {/* Recent Feedbacks */}
           <Card
-            title="Góp ý gần đây"
+            title={t('feedback.recent.title')}
             style={{
               background: 'rgba(255, 255, 255, 0.05)',
               border: '1px solid #83b5fc',
               borderRadius: '20px',
               boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-              backdropFilter: 'blur(10px)'
+              backdropFilter: 'blur(10px)',
+              width: 'calc(100% + 48px)',
+              marginLeft: '-24px',
+              marginRight: '-24px',
             }}
             headStyle={{
               background: 'transparent',
@@ -523,7 +532,7 @@ const FeedBack: React.FC = () => {
                       type="text"
                       icon={<LikeOutlined />}
                       onClick={() => handleLike(feedback.id)}
-                      style={{ color: '#1890ff' }}
+                      style={{ color: '#000' }}
                     >
                       {feedback.likes}
                     </Button>
@@ -539,7 +548,7 @@ const FeedBack: React.FC = () => {
                     }
                     title={
                       <Space wrap>
-                        <Text strong style={{ color: '#fff', fontSize: '16px' }}>{feedback.name}</Text>
+                        <Text strong style={{ color: '#000', fontSize: '16px' }}>{feedback.name}</Text>
                         <Tag color={getCategoryColor(feedback.category)} icon={getCategoryIcon(feedback.category)}>
                           {getCategoryText(feedback.category)}
                         </Tag>
@@ -548,14 +557,14 @@ const FeedBack: React.FC = () => {
                     }
                     description={
                       <Space direction="vertical" size={8} style={{ width: '100%' }}>
-                        <Text strong style={{ fontSize: '16px', color: '#fff' }}>{feedback.title}</Text>
-                        <Paragraph style={{ margin: 0, color: 'rgba(255, 255, 255, 0.9)' }}>{feedback.content}</Paragraph>
+                        <Text strong style={{ fontSize: '16px', color: '#000' }}>{feedback.title}</Text>
+                        <Paragraph style={{ margin: 0, color: '#000' }}>{feedback.content}</Paragraph>
                         <Space>
-                          <Text style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.7)' }}>
+                          <Text style={{ fontSize: '12px', color: '#000' }}>
                             <CalendarOutlined /> {new Date(feedback.timestamp).toLocaleDateString('vi-VN')}
                           </Text>
                           {feedback.isAnonymous && (
-                            <Tag color="orange">Ẩn danh</Tag>
+                            <Tag color="orange">{t('feedback.anonymous.tag')}</Tag>
                           )}
                         </Space>
                       </Space>
@@ -568,13 +577,16 @@ const FeedBack: React.FC = () => {
 
           {/* Category Statistics */}
           <Card
-            title="Thống kê theo loại góp ý"
+            title={t('feedback.categoryStats.title')}
             style={{
               background: 'rgba(255, 255, 255, 0.05)',
               border: '1px solid #83b5fc',
               borderRadius: '20px',
               boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
-              backdropFilter: 'blur(10px)'
+              backdropFilter: 'blur(10px)',
+              width: 'calc(100% + 48px)',
+              marginLeft: '-24px',
+              marginRight: '-24px',
             }}
             headStyle={{
               background: 'transparent',
@@ -584,10 +596,10 @@ const FeedBack: React.FC = () => {
               fontWeight: '700'
             }}
           >
-            <Row gutter={[12, 12]} justify="center">
+            <Row gutter={[12, 12]} justify="start">
               {Object.entries(categoryStats).length > 0 ? (
                 Object.entries(categoryStats).map(([category, count]) => (
-                  <Col xs={24} sm={8} md={8} key={category}>
+                  <Col xs={24} sm={12} md={6} lg={6} xl={6} key={category}>
                     <Card
                       size="small"
                       style={{
@@ -603,8 +615,8 @@ const FeedBack: React.FC = () => {
                     >
                       <Space direction="vertical" align="center" style={{ width: '100%', textAlign: 'center' }}>
                         <div style={{ fontSize: '24px' }}>{getCategoryIcon(category)}</div>
-                        <Title level={4} style={{ margin: 0, color: '#fff' }}>{count}</Title>
-                        <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{getCategoryText(category)}</Text>
+                        <Title level={4} style={{ margin: 0, color: '#000' }}>{count}</Title>
+                        <Text style={{ color: '#000' }}>{getCategoryText(category)}</Text>
                         <Progress
                           percent={Math.round((count / Math.max(totalFeedbacks, 1)) * 100)}
                           size="small"
@@ -624,7 +636,7 @@ const FeedBack: React.FC = () => {
                     color: 'rgba(255, 255, 255, 0.6)'
                   }}>
                     <MessageOutlined style={{ fontSize: '48px', marginBottom: '16px' }} />
-                    <div>Chưa có góp ý nào</div>
+                    <div>{t('feedback.recent.noData')}</div>
                   </div>
                 </Col>
               )}
