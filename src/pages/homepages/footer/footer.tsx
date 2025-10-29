@@ -16,6 +16,7 @@ import {
   Tag
 } from 'antd';
 import { useColorTheme } from '../../../context/ColorThemeContext';
+import { useLanguage } from '../../../context/LanguageContext';
 import {
   GlobalOutlined,
   PhoneOutlined,
@@ -46,6 +47,7 @@ const HomePageFooter: React.FC = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const handleNewsletterSubmit = async () => {
     if (!email) {
@@ -67,31 +69,31 @@ const HomePageFooter: React.FC = () => {
   };
 
   const quickLinks = [
-    { label: 'Trang chủ', path: '/', icon: <HomeOutlined /> },
-    { label: 'Tải ứng dụng', path: '/apk-download', icon: <DownloadOutlined /> },
-    { label: 'Hướng dẫn', path: '/guide', icon: <BookOutlined /> },
-    { label: 'Góp ý', path: '/feedback', icon: <MessageOutlined /> }
+    { label: t('footer.quick.home'), path: '/', icon: <HomeOutlined /> },
+    { label: t('footer.quick.download'), path: '/apk-download', icon: <DownloadOutlined /> },
+    { label: t('footer.quick.guide'), path: '/guide', icon: <BookOutlined /> },
+    { label: t('footer.quick.feedback'), path: '/feedback', icon: <MessageOutlined /> }
   ];
 
   const features = [
-    { label: 'Cảnh báo ngập lụt AI', icon: <SafetyOutlined /> },
-    { label: 'Dự báo kẹt xe thời gian thực', icon: <InfoCircleOutlined /> },
-    { label: 'Dịch vụ cứu hộ xe', icon: <TeamOutlined /> },
-    { label: 'Bản đồ số tích hợp camera', icon: <EnvironmentOutlined /> }
+    { label: t('footer.features.ai'), icon: <SafetyOutlined /> },
+    { label: t('footer.features.traffic'), icon: <InfoCircleOutlined /> },
+    { label: t('footer.features.rescue'), icon: <TeamOutlined /> },
+    { label: t('footer.features.camera'), icon: <EnvironmentOutlined /> }
   ];
 
   const supportLinks = [
-    { label: 'Trung tâm trợ giúp', path: '/help' },
-    { label: 'Liên hệ hỗ trợ', path: '/contact' },
-    { label: 'Báo cáo lỗi', path: '/bug-report' },
-    { label: 'Đề xuất tính năng', path: '/feature-request' }
+    { label: t('footer.support.center'), path: '/help' },
+    { label: t('footer.support.contact'), path: '/contact' },
+    { label: t('footer.support.bug'), path: '/bug-report' },
+    { label: t('footer.support.feature'), path: '/feature-request' }
   ];
 
   const legalLinks = [
-    { label: 'Điều khoản sử dụng', path: '/terms' },
-    { label: 'Chính sách bảo mật', path: '/privacy' },
-    { label: 'Cookie Policy', path: '/cookies' },
-    { label: 'Giấy phép', path: '/license' }
+    { label: t('footer.legal.terms'), path: '/terms' },
+    { label: t('footer.legal.privacy'), path: '/privacy' },
+    { label: t('footer.legal.cookies'), path: '/cookies' },
+    { label: t('footer.legal.license'), path: '/license' }
   ];
 
   const socialLinks = [
@@ -166,17 +168,16 @@ const HomePageFooter: React.FC = () => {
                   </div>
                   <div>
                     <Title level={3} style={{ color: '#fff', margin: 0 }}>
-                      Mekong Pathfinder
+                      {t('footer.company.name')}
                     </Title>
                     <Text style={{ color: '#c5e2ff' }}>
-                      Smart Navigation Platform
+                      {t('footer.company.slogan')}
                     </Text>
                   </div>
                 </Space>
                 
                 <Paragraph style={{ color: '#c5e2ff', fontSize: '16px', lineHeight: 1.6 }}>
-                  Ứng dụng di động thông minh dành riêng cho thành phố Cần Thơ, tích hợp AI, 
-                  bản đồ số và dữ liệu camera giao thông để cảnh báo ngập lụt và kẹt xe thời gian thực.
+                  {t('footer.company.desc')}
                 </Paragraph>
 
                 {/* Contact Info */}
@@ -184,7 +185,7 @@ const HomePageFooter: React.FC = () => {
                   <Space>
                     <PhoneOutlined style={{ color: '#52c41a' }} />
                     <Text style={{ color: '#c5e2ff' }}>
-                      Hotline: 0922306391
+                      {t('footer.contact.hotline')}: 0922306391
                     </Text>
                   </Space>
                   <Space>
@@ -196,7 +197,7 @@ const HomePageFooter: React.FC = () => {
                   <Space>
                     <EnvironmentOutlined style={{ color: '#faad14' }} />
                     <Text style={{ color: '#c5e2ff' }}>
-                      TP. Cần Thơ, Đồng bằng sông Cửu Long
+                      {t('footer.contact.location')}
                     </Text>
                   </Space>
                 </Space>
@@ -207,7 +208,7 @@ const HomePageFooter: React.FC = () => {
             <div className="footer-flex-item" style={{ flex: '0 0 auto', minWidth: '200px' }}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
                 <Title level={5} style={{ color: '#fff', margin: 0 }}>
-                  Tính năng
+                  {t('footer.features.title')}
                 </Title>
                 <List
                   dataSource={features}
@@ -227,45 +228,7 @@ const HomePageFooter: React.FC = () => {
               </Space>
             </div>
 
-            {/* Newsletter */}
-            <div className="footer-flex-item" style={{ flex: '1', minWidth: '300px' }}>
-              <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={5} style={{ color: '#fff', margin: 0 }}>
-                  Nhận tin tức mới
-                </Title>
-                <Paragraph style={{ color: '#c5e2ff', margin: 0 }}>
-                  Đăng ký để nhận thông tin cập nhật và tin tức mới nhất từ chúng tôi.
-                </Paragraph>
-                
-                <Space.Compact style={{ width: '100%' }}>
-                  <Input
-                    placeholder="Nhập email của bạn"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    style={{
-                      background: 'rgba(3, 68, 214, 0.2)',
-                      border: '1px solid rgba(131, 181, 252, 0.3)',
-                      color: '#fff',
-                      borderRadius: '8px 0 0 8px'
-                    }}
-                  />
-                  <Button
-                    type="primary"
-                    icon={<SendOutlined />}
-                    loading={loading}
-                    onClick={handleNewsletterSubmit}
-                    style={{
-                      background: 'linear-gradient(135deg, #0344d6 0%, #377aef 100%)',
-                      border: 'none',
-                      borderRadius: '0 8px 8px 0',
-                      height: '40px'
-                    }}
-                  >
-                    Đăng ký
-                  </Button>
-                </Space.Compact>
-              </Space>
-            </div>
+            {/* Newsletter removed per request */}
           </div>
 
           {/* Project Information Section */}
@@ -284,23 +247,30 @@ const HomePageFooter: React.FC = () => {
             <div style={{ flex: '1', minWidth: '300px' }}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
                 <Title level={4} style={{ color: '#fff', margin: 0, textAlign: 'center' }}>
-                  🏆 Mekong Tech - Business Challenge 2025
+                  {t('footer.project.title')}
                 </Title>
                 <Paragraph style={{ color: '#c5e2ff', fontSize: '16px', lineHeight: 1.6, textAlign: 'center', margin: 0 }}>
-                  <strong>Đội dự thi:</strong> Mekong Pathfinders (5 thành viên)<br/>
-                  <strong>Trưởng nhóm:</strong> Huỳnh Ngọc Như Quỳnh<br/>
-                  <strong>Khóa:</strong> K18 - FPT University<br/>
-                  <strong>Chủ đề:</strong> Khởi nghiệp dựa trên công nghệ vì phát triển bền vững vùng Đồng bằng sông Cửu Long
+                  {t('footer.project.team')}<br/>
+                  {t('footer.project.lead')}<br/>
+                  {t('footer.project.course')}<br/>
+                  {t('footer.project.topic')}
                 </Paragraph>
               </Space>
             </div>
             <div style={{ flex: '1', minWidth: '300px' }}>
               <Space direction="vertical" size={16} style={{ width: '100%' }}>
                 <Title level={4} style={{ color: '#fff', margin: 0, textAlign: 'center' }}>
-                  🚀 Công nghệ tiên tiến
+                  {t('footer.tech.title')}
                 </Title>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
-                  {['AI & Computer Vision', 'GIS & Bản đồ số', 'Big Data Analytics', 'Cloud Computing', 'Crowdsourcing', 'IoT Integration'].map((tech, index) => (
+                  {[
+                    t('footer.tech.tag.cv'),
+                    t('footer.tech.tag.gis'),
+                    t('footer.tech.tag.bigdata'),
+                    t('footer.tech.tag.cloud'),
+                    t('footer.tech.tag.crowd'),
+                    t('footer.tech.tag.iot')
+                  ].map((tech, index) => (
                     <Tag key={index} color="blue" style={{ 
                       background: 'rgba(3, 68, 214, 0.2)', 
                       border: '1px solid rgba(131, 181, 252, 0.3)',
@@ -373,11 +343,11 @@ const HomePageFooter: React.FC = () => {
           }}>
             <div style={{ flex: '1', minWidth: '300px' }}>
               <Space direction="vertical" size={8}>
-                        <Text style={{ color: '#c5e2ff' }}>
-                  © 2024 Mekong Pathfinder. Dự án tham gia Mekong Tech - Business Challenge 2025.
+                <Text style={{ color: '#c5e2ff' }}>
+                  {t('footer.bottom.copyright')}
                 </Text>
                 <Text style={{ color: 'rgba(197, 226, 255, 0.7)', fontSize: '12px' }}>
-                  Chủ đề: Khởi nghiệp dựa trên công nghệ vì phát triển bền vững vùng Đồng bằng sông Cửu Long
+                  {t('footer.project.topic')}
                 </Text>
                 <Space wrap>
                   {legalLinks.map((link, index) => (
@@ -403,15 +373,15 @@ const HomePageFooter: React.FC = () => {
               <Space direction="vertical" size={4} style={{ textAlign: 'right' }}>
                 <Space>
                   <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
-                    Được phát triển với
+                    {t('footer.bottom.theme')}
                   </Text>
                   <HeartOutlined style={{ color: '#ff4d4f', fontSize: '16px' }} />
                   <Text style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
-                    tại Việt Nam
+                    {t('footer.bottom.at')}
                   </Text>
                 </Space>
                 <Text style={{ color: 'rgba(197, 226, 255, 0.6)', fontSize: '12px' }}>
-                  Team: Mekong Pathfinders | Trưởng nhóm: Huỳnh Ngọc Như Quỳnh
+                  {t('footer.bottom.teamline')}
                 </Text>
               </Space>
             </div>

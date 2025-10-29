@@ -169,6 +169,17 @@ const FeedBack: React.FC = () => {
           fontWeight: "700",
           textAlign: "center",
           display: "block",
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = '#0344d6';
+          e.currentTarget.style.textShadow = '0 4px 8px rgba(3, 68, 214, 0.3)';
+          e.currentTarget.style.transform = 'scale(1.05)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = '#001f44';
+          e.currentTarget.style.textShadow = 'none';
+          e.currentTarget.style.transform = 'scale(1)';
         }}
       >
         {t('feedback.title')}
@@ -192,7 +203,20 @@ const FeedBack: React.FC = () => {
             <Row gutter={[16, 16]} align="middle">
               <Col xs={24} sm={24} md={16}>
                 <Space direction="vertical" size={16}>
-                  <Title level={1} style={{ margin: 0, color: '#000', fontSize: 'clamp(24px, 4vw, 32px)' }}>
+                  <Title
+                    level={1}
+                    style={{ margin: 0, color: '#000', fontSize: 'clamp(24px, 4vw, 32px)', transition: 'all 0.3s ease' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#0344d6';
+                      e.currentTarget.style.textShadow = '0 4px 8px rgba(3, 68, 214, 0.3)';
+                      e.currentTarget.style.transform = 'scale(1.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#001f44';
+                      e.currentTarget.style.textShadow = 'none';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
                     <MessageOutlined style={{ color: '#1890ff', marginRight: 12, fontSize: 'clamp(20px, 3vw, 24px)' }} />
                     {t('feedback.title')}
                   </Title>

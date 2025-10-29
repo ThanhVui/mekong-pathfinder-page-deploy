@@ -33,6 +33,7 @@ import ourTeamImage from '../../assets/images/map-location/can-tho-in-vietnam4.p
 import ourVisionUSImage from '../../assets/images/our-vision/our-vision-us-01.png';
 import ourVisionVNImage from '../../assets/images/our-vision/our-vision-vn.png';
 
+
 // Import poster images (we'll create these from video frames)
 import {
   DownloadOutlined,
@@ -73,6 +74,11 @@ import { getDownloadStats } from '../../utils/downloadTracker';
 import { getFeedbackStats } from '../../utils/feedbackTracker';
 
 const { Title, Paragraph, Text } = Typography;
+
+// Dynamically import all images from gallery folder
+// Webpack's require.context is used here to gather all gallery images at build time
+const importAll = (r: any): string[] => r.keys().map(r) as string[];
+const galleryImages = importAll((require as any).context('../../assets/images/gallery', false, /\.(png|jpe?g|webp|avif)$/));
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -288,7 +294,7 @@ const HomePage: React.FC = () => {
                     e.currentTarget.style.transform = 'scale(1)';
                   }}
                 >
-{t('section.about.title')}
+                  {t('section.about.title')}
                 </Title>
                 <Row gutter={[24, 24]} style={{ minHeight: '500px' }}>
                   {/* Left Panel - Map Can Tho Image */}
@@ -376,7 +382,7 @@ const HomePage: React.FC = () => {
                                 e.currentTarget.style.transform = 'translateX(0)';
                               }}
                             >
-{t('section.about.team')}
+                              {t('section.about.team')}
                             </Title>
                             <Paragraph
                               style={{
@@ -516,7 +522,7 @@ const HomePage: React.FC = () => {
                                 e.currentTarget.style.transform = 'translateX(0)';
                               }}
                             >
-{t('section.about.vision')}
+                              {t('section.about.vision')}
                             </Title>
                             <Paragraph
                               style={{
@@ -553,7 +559,26 @@ const HomePage: React.FC = () => {
 
             {/* Community Interview Section */}
             <AnimatedSection animationType="fadeInUp" delay={100}>
-              <Title level={1} style={{ textAlign: 'center', marginBottom: '24px', fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: '700' }}>
+              <Title
+                level={1}
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '24px',
+                  fontSize: 'clamp(24px, 4vw, 32px)',
+                  fontWeight: '700',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#0344d6';
+                  e.currentTarget.style.textShadow = '0 4px 8px rgba(3, 68, 214, 0.3)';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#001f44';
+                  e.currentTarget.style.textShadow = 'none';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
                 {t('section.community.survey')}
               </Title>
 
@@ -602,6 +627,22 @@ const HomePage: React.FC = () => {
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 6',
+                    description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
+                    duration: '2:50',
+                    views: '1.9K',
+                    date: '12/01/2025'
+                  },
+                  {
+                    title: 'Kết quả khảo sát cộng đồng - Video 7',
+                    description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
+                    duration: '2:50',
+                    views: '1.9K',
+                    date: '12/01/2025'
+                  },
+                  {
+                    title: 'Kết quả khảo sát cộng đồng - Video 8',
                     description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
                     videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
                     duration: '2:50',
@@ -882,7 +923,18 @@ const HomePage: React.FC = () => {
                   fontSize: 'clamp(24px, 4vw, 32px)',
                   fontWeight: '700',
                   color: '#000',
-                  letterSpacing: '2px'
+                  letterSpacing: '2px',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#0344d6';
+                  e.currentTarget.style.textShadow = '0 4px 8px rgba(3, 68, 214, 0.3)';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#001f44';
+                  e.currentTarget.style.textShadow = 'none';
+                  e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
                 {t('section.social.achievement')}
@@ -894,64 +946,36 @@ const HomePage: React.FC = () => {
                   {
                     image: post01,
                     title: 'Conservation',
-                    subtitle: 'Efforts',
-                    description: 'Our community-driven conservation initiatives have made significant impact on environmental protection and sustainable development in the Mekong Delta region.',
-                    stats: '2.5K Community Members',
-                    icon: <EnvironmentOutlined />,
                     facebookUrl: 'https://www.facebook.com/share/p/1D8mHMC4c3/'
                   },
                   {
                     image: post02,
                     title: 'Community',
-                    subtitle: 'Engagement',
-                    description: 'Building strong connections with local communities through technology and innovation for better social outcomes.',
-                    stats: '1.8K Active Users',
-                    icon: <TeamOutlined />,
                     facebookUrl: 'https://www.facebook.com/share/p/1G6HNSTikK/'
                   },
                   {
                     image: post03,
                     title: 'Innovation',
-                    subtitle: 'Impact',
-                    description: 'Developing cutting-edge solutions that address real-world challenges faced by Mekong Delta communities.',
-                    stats: '3.2K Downloads',
-                    icon: <RocketOutlined />,
                     facebookUrl: 'https://www.facebook.com/share/1BcDW5Cb8v/'
                   },
                   {
                     image: post04,
                     title: 'Sustainability',
-                    subtitle: 'Goals',
-                    description: 'Working towards long-term sustainable development goals through technology and community collaboration.',
-                    stats: '950 Projects',
-                    icon: <GlobalOutlined />,
                     facebookUrl: 'https://www.facebook.com/share/p/1BH3VLG8ZQ/'
                   },
                   {
                     image: post05,
                     title: 'Digital',
-                    subtitle: 'Transformation',
-                    description: 'Empowering communities through digital solutions and smart technology integration.',
-                    stats: '5.2K Interactions',
-                    icon: <BulbOutlined />,
                     facebookUrl: 'https://www.facebook.com/share/r/1RgUzWkQ4N/'
                   },
                   {
                     image: post06,
                     title: 'Social',
-                    subtitle: 'Impact',
-                    description: 'Creating positive social change through technology and community-driven initiatives.',
-                    stats: '1.2K New Members',
-                    icon: <HeartOutlined />,
                     facebookUrl: 'https://www.facebook.com/share/p/1BZuTZZwVB/'
                   },
                   {
                     image: post07,
                     title: 'Future',
-                    subtitle: 'Vision',
-                    description: 'Building a smarter, more connected Mekong Delta for future generations.',
-                    stats: '850 Partners',
-                    icon: <StarOutlined />,
                     facebookUrl: 'https://www.facebook.com/share/p/1BZuTZZwVB/'
                   }
                 ];
@@ -1087,8 +1111,8 @@ const HomePage: React.FC = () => {
                       {/* Far Left Item (Smallest) */}
                       <div
                         style={{
-                          width: '220px',
-                          height: '280px',
+                          width: '100px',
+                          height: '220px',
                           borderRadius: '16px',
                           overflow: 'hidden',
                           position: 'relative',
@@ -1116,34 +1140,52 @@ const HomePage: React.FC = () => {
                           style={{
                             width: '100%',
                             height: '100%',
-                            objectFit: 'cover',
-                            filter: 'brightness(0.8)'
+                            objectFit: 'fill',
                           }}
                         />
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '10px',
-                          left: '10px',
-                          right: '10px',
-                          color: 'white',
-                          textAlign: 'center'
-                        }}>
-                          <Title level={5} style={{
-                            color: 'white',
-                            margin: '0',
-                            fontSize: '12px',
-                            fontWeight: '600'
-                          }}>
-                            {currentItems[0].title}
-                          </Title>
-                        </div>
+                      </div>
+                      {/* Far Left Item (Smallest) */}
+                      <div
+                        style={{
+                          width: '180px',
+                          height: '300px',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                          transform: 'scale(0.7)',
+                          opacity: 1,
+                          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'scale(0.8)';
+                          e.currentTarget.style.opacity = '1';
+                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'scale(0.7)';
+                          e.currentTarget.style.opacity = '1';
+                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
+                        }}
+                        onClick={() => window.open(currentItems[0].facebookUrl, '_blank')}
+                      >
+                        <img
+                          src={currentItems[0].image}
+                          alt={currentItems[0].title}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'fill',
+                          }}
+                        />
                       </div>
 
                       {/* Left Item (Small) */}
                       <div
                         style={{
-                          width: '280px',
-                          height: '350px',
+                          width: '200px',
+                          height: '320px',
                           borderRadius: '20px',
                           overflow: 'hidden',
                           position: 'relative',
@@ -1171,34 +1213,16 @@ const HomePage: React.FC = () => {
                           style={{
                             width: '100%',
                             height: '100%',
-                            objectFit: 'cover',
-                            filter: 'brightness(0.9)'
+                            objectFit: 'fill',
                           }}
                         />
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '15px',
-                          left: '15px',
-                          right: '15px',
-                          color: 'white',
-                          textAlign: 'center'
-                        }}>
-                          <Title level={4} style={{
-                            color: 'white',
-                            margin: '0 0 5px 0',
-                            fontSize: '16px',
-                            fontWeight: '700'
-                          }}>
-                            {currentItems[1].title}
-                          </Title>
-                        </div>
                       </div>
 
                       {/* Center Item (Large) */}
                       <div
                         style={{
-                          width: '400px',
-                          height: '500px',
+                          width: '300px',
+                          height: '460px',
                           borderRadius: '25px',
                           overflow: 'hidden',
                           position: 'relative',
@@ -1223,69 +1247,18 @@ const HomePage: React.FC = () => {
                           style={{
                             width: '100%',
                             height: '100%',
-                            objectFit: 'cover',
-                            filter: 'brightness(0.8)'
+                            objectFit: 'fill',
                           }}
                         />
 
-                        {/* Content Overlay */}
-                        <div style={{
-                          position: 'absolute',
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          background: 'linear-gradient(transparent, rgba(0,0,0,0.9))',
-                          padding: '30px',
-                          color: 'white'
-                        }}>
-                          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
-                            {currentItems[2].icon}
-                            <span style={{
-                              marginLeft: '8px',
-                              fontSize: '14px',
-                              color: '#fff',
-                              fontWeight: '600'
-                            }}>
-                              {currentItems[2].stats}
-                            </span>
-                          </div>
-
-                          <Title level={1} style={{
-                            color: 'white',
-                            margin: '0 0 10px 0',
-                            fontSize: '32px',
-                            fontWeight: '800',
-                            lineHeight: 1.1
-                          }}>
-                            {currentItems[2].title}
-                          </Title>
-
-                          <Title level={2} style={{
-                            color: 'rgba(255,255,255,0.9)',
-                            margin: '0 0 15px 0',
-                            fontSize: '24px',
-                            fontWeight: '600',
-                            lineHeight: 1.2
-                          }}>
-                            {currentItems[2].subtitle}
-                          </Title>
-
-                          <Text style={{
-                            color: 'rgba(255,255,255,0.9)',
-                            fontSize: '14px',
-                            lineHeight: 1.5,
-                            display: 'block'
-                          }}>
-                            {currentItems[2].description}
-                          </Text>
-                        </div>
+                        {/* Center card overlay removed per request (image only) */}
                       </div>
 
                       {/* Right Item (Small) */}
                       <div
                         style={{
-                          width: '280px',
-                          height: '350px',
+                          width: '200px',
+                          height: '320px',
                           borderRadius: '20px',
                           overflow: 'hidden',
                           position: 'relative',
@@ -1313,34 +1286,16 @@ const HomePage: React.FC = () => {
                           style={{
                             width: '100%',
                             height: '100%',
-                            objectFit: 'cover',
-                            filter: 'brightness(0.9)'
+                            objectFit: 'fill',
                           }}
                         />
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '15px',
-                          left: '15px',
-                          right: '15px',
-                          color: 'white',
-                          textAlign: 'center'
-                        }}>
-                          <Title level={4} style={{
-                            color: 'white',
-                            margin: '0 0 5px 0',
-                            fontSize: '16px',
-                            fontWeight: '700'
-                          }}>
-                            {currentItems[3].title}
-                          </Title>
-                        </div>
                       </div>
 
                       {/* Far Right Item (Smallest) */}
                       <div
                         style={{
-                          width: '220px',
-                          height: '280px',
+                          width: '180px',
+                          height: '300px',
                           borderRadius: '16px',
                           overflow: 'hidden',
                           position: 'relative',
@@ -1368,27 +1323,46 @@ const HomePage: React.FC = () => {
                           style={{
                             width: '100%',
                             height: '100%',
-                            objectFit: 'cover',
-                            filter: 'brightness(0.8)'
+                            objectFit: 'fill',
                           }}
                         />
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '10px',
-                          left: '10px',
-                          right: '10px',
-                          color: 'white',
-                          textAlign: 'center'
-                        }}>
-                          <Title level={5} style={{
-                            color: 'white',
-                            margin: '0',
-                            fontSize: '12px',
-                            fontWeight: '600'
-                          }}>
-                            {currentItems[4].title}
-                          </Title>
-                        </div>
+                      </div>
+
+                      {/* Far Right Item (Smallest) */}
+                      <div
+                        style={{
+                          width: '100px',
+                          height: '220px',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                          transform: 'scale(0.7)',
+                          opacity: 1,
+                          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'scale(0.8)';
+                          e.currentTarget.style.opacity = '1';
+                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'scale(0.7)';
+                          e.currentTarget.style.opacity = '1';
+                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
+                        }}
+                        onClick={() => window.open(currentItems[4].facebookUrl, '_blank')}
+                      >
+                        <img
+                          src={currentItems[4].image}
+                          alt={currentItems[4].title}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'fill',
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -1406,7 +1380,18 @@ const HomePage: React.FC = () => {
                   fontSize: 'clamp(24px, 4vw, 32px)',
                   fontWeight: '700',
                   color: '#000',
-                  letterSpacing: '2px'
+                  letterSpacing: '2px',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#0344d6';
+                  e.currentTarget.style.textShadow = '0 4px 8px rgba(3, 68, 214, 0.3)';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#001f44';
+                  e.currentTarget.style.textShadow = 'none';
+                  e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
                 {t('section.gallery')}
@@ -1414,98 +1399,7 @@ const HomePage: React.FC = () => {
 
               {/* Gallery Data */}
               {(() => {
-                const galleryData = [
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811194/20251008_182018_dzfasn.jpg',
-                    category: 'Marketing',
-                    title: 'Discover, Explore the Product',
-                    description: 'Khám phá và phát triển sản phẩm công nghệ tiên tiến'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811192/20251008_181936_c5xjuz.jpg',
-                    category: 'Technology',
-                    title: 'SIEM Security Solutions',
-                    description: 'Giải pháp bảo mật thông tin và giám sát an ninh mạng'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811189/20251008_180835_pwcawb.jpg',
-                    category: 'Mobile App',
-                    title: 'Smart Mobile Applications',
-                    description: 'Ứng dụng di động thông minh cho cuộc sống hiện đại'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811186/20251008_180800_qlqj8h.jpg',
-                    category: 'Innovation',
-                    title: 'Innovative Solutions',
-                    description: 'Giải pháp sáng tạo và đột phá trong công nghệ'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811183/20251008_180755_qlqj8h.jpg',
-                    category: 'Development',
-                    title: 'Advanced Development',
-                    description: 'Phát triển tiên tiến với công nghệ hiện đại'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811180/20251008_180750_qlqj8h.jpg',
-                    category: 'Design',
-                    title: 'Creative Design',
-                    description: 'Thiết kế sáng tạo và thẩm mỹ cao'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811177/20251008_180745_qlqj8h.jpg',
-                    category: 'Analytics',
-                    title: 'Data Analytics',
-                    description: 'Phân tích dữ liệu thông minh và hiệu quả'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811174/20251008_180740_qlqj8h.jpg',
-                    category: 'Integration',
-                    title: 'System Integration',
-                    description: 'Tích hợp hệ thống và kết nối thông minh'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811171/20251008_180735_qlqj8h.jpg',
-                    category: 'AI & ML',
-                    title: 'Artificial Intelligence',
-                    description: 'Trí tuệ nhân tạo và học máy tiên tiến'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811168/20251008_180730_qlqj8h.jpg',
-                    category: 'Cloud',
-                    title: 'Cloud Computing',
-                    description: 'Điện toán đám mây và dịch vụ lưu trữ'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811165/20251008_180725_qlqj8h.jpg',
-                    category: 'IoT',
-                    title: 'Internet of Things',
-                    description: 'Internet vạn vật và kết nối thông minh'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811162/20251008_180720_qlqj8h.jpg',
-                    category: 'Blockchain',
-                    title: 'Blockchain Technology',
-                    description: 'Công nghệ blockchain và tiền điện tử'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811159/20251008_180715_qlqj8h.jpg',
-                    category: 'Cybersecurity',
-                    title: 'Cybersecurity Solutions',
-                    description: 'Giải pháp an ninh mạng và bảo mật'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811156/20251008_180710_qlqj8h.jpg',
-                    category: 'Automation',
-                    title: 'Process Automation',
-                    description: 'Tự động hóa quy trình và tối ưu hóa'
-                  },
-                  {
-                    image: 'https://res.cloudinary.com/dj7jvklwp/image/upload/v1760811153/20251008_180705_qlqj8h.jpg',
-                    category: 'Digital',
-                    title: 'Digital Transformation',
-                    description: 'Chuyển đổi số và số hóa doanh nghiệp'
-                  }
-                ];
+                const galleryData = galleryImages.map((img) => ({ image: img, title: '' }));
 
                 const itemsPerPage = 8;
                 const totalPages = Math.ceil(galleryData.length / itemsPerPage);
@@ -1526,10 +1420,9 @@ const HomePage: React.FC = () => {
                               overflow: 'hidden',
                               boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
                               transition: 'all 0.3s ease',
-                              height: '220px', // Giảm chiều cao từ clamp(300px, 50vh, 350px)
+                              height: '220px',
                               background: 'rgba(87, 128, 161, 0.1)',
                               border: '1px solid rgba(87, 128, 161, 0.3)',
-                              cursor: 'pointer'
                             }}
                             onMouseEnter={(e) => {
                               e.currentTarget.style.transform = 'translateY(-8px)';
@@ -1548,55 +1441,11 @@ const HomePage: React.FC = () => {
                                   width: '100%',
                                   height: '100%',
                                   objectFit: 'cover',
-                                  filter: 'brightness(0.9)'
                                 }}
                                 onError={(e) => {
                                   e.currentTarget.style.display = 'none';
                                 }}
                               />
-
-                              {/* Content overlay */}
-                              <div style={{
-                                position: 'absolute',
-                                bottom: 0,
-                                left: 0,
-                                right: 0,
-                                background: 'linear-gradient(transparent, rgba(0,0,0,0.9))',
-                                padding: '12px',
-                                color: 'white'
-                              }}>
-                                <div style={{
-                                  display: 'inline-block',
-                                  background: 'rgba(3, 68, 214, 0.8)',
-                                  color: 'white',
-                                  padding: '3px 6px',
-                                  borderRadius: '8px',
-                                  fontSize: '9px',
-                                  fontWeight: '600',
-                                  marginBottom: '6px'
-                                }}>
-                                  {item.category}
-                                </div>
-
-                                <Title level={5} style={{
-                                  color: 'white',
-                                  margin: '0 0 4px 0',
-                                  fontSize: '12px',
-                                  fontWeight: '700',
-                                  lineHeight: 1.2
-                                }}>
-                                  {item.title}
-                                </Title>
-
-                                <Text style={{
-                                  color: 'rgba(255,255,255,0.9)',
-                                  fontSize: '10px',
-                                  lineHeight: 1.3,
-                                  display: 'block'
-                                }}>
-                                  {item.description}
-                                </Text>
-                              </div>
                             </div>
                           </div>
                         </Col>

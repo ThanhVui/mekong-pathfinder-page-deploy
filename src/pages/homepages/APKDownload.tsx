@@ -367,6 +367,17 @@ const APKDownload: React.FC = () => {
           fontWeight: "700",
           textAlign: "center",
           display: "block",
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = '#0344d6';
+          e.currentTarget.style.textShadow = '0 4px 8px rgba(3, 68, 214, 0.3)';
+          e.currentTarget.style.transform = 'scale(1.05)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = '#001f44';
+          e.currentTarget.style.textShadow = 'none';
+          e.currentTarget.style.transform = 'scale(1)';
         }}
       >
         {t('app.intro.title')}
