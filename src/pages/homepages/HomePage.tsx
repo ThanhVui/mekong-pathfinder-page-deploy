@@ -278,7 +278,7 @@ const HomePage: React.FC = () => {
                   level={1}
                   style={{
                     textAlign: 'center',
-                    margin: '20px 0px',
+                    marginBottom: '20px',
                     fontSize: 'clamp(24px, 4vw, 32px)',
                     fontWeight: '700',
                     transition: 'all 0.3s ease',
@@ -563,7 +563,7 @@ const HomePage: React.FC = () => {
                 level={1}
                 style={{
                   textAlign: 'center',
-                  marginBottom: '24px',
+                  marginBottom: '20px',
                   fontSize: 'clamp(24px, 4vw, 32px)',
                   fontWeight: '700',
                   transition: 'all 0.3s ease',
@@ -604,7 +604,7 @@ const HomePage: React.FC = () => {
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 3',
                     description: 'Tổng kết và đánh giá tổng thể từ cộng đồng người dùng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5673_rf5rm6&profile=cld-default',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_1_e1jstd&profile=cld-default',
                     duration: '4:20',
                     views: '2.1K',
                     date: '29/12/2024'
@@ -612,7 +612,7 @@ const HomePage: React.FC = () => {
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 4',
                     description: 'Tổng kết và đánh giá tổng thể từ cộng đồng người dùng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5673_rf5rm6&profile=cld-default',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Video_TauHu_-_Made_with_Clipchamp_2_qcqnww&profile=cld-default',
                     duration: '4:20',
                     views: '2.1K',
                     date: '29/12/2024'
@@ -620,7 +620,7 @@ const HomePage: React.FC = () => {
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 5',
                     description: 'Phân tích sâu về xu hướng và nhu cầu của cộng đồng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5664_qx1vn6&profile=cld-default',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_2_um38h4&profile=cld-default',
                     duration: '3:45',
                     views: '1.5K',
                     date: '05/01/2025'
@@ -628,7 +628,7 @@ const HomePage: React.FC = () => {
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 6',
                     description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5673_rf5rm6&profile=cld-default',
                     duration: '2:50',
                     views: '1.9K',
                     date: '12/01/2025'
@@ -636,7 +636,7 @@ const HomePage: React.FC = () => {
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 7',
                     description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_obrkdi&profile=cld-default',
                     duration: '2:50',
                     views: '1.9K',
                     date: '12/01/2025'
@@ -644,7 +644,7 @@ const HomePage: React.FC = () => {
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 8',
                     description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5661_zxytqh&profile=cld-default',
                     duration: '2:50',
                     views: '1.9K',
                     date: '12/01/2025'
@@ -919,7 +919,7 @@ const HomePage: React.FC = () => {
                 level={1}
                 style={{
                   textAlign: 'center',
-                  marginBottom: '40px',
+                  marginBottom: '20px',
                   fontSize: 'clamp(24px, 4vw, 32px)',
                   fontWeight: '700',
                   color: '#000',

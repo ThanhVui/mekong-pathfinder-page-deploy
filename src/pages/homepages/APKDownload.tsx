@@ -35,6 +35,7 @@ import {
   RightOutlined,
 } from "@ant-design/icons"
 import AnimatedSection from "../../components/AnimatedSection"
+import NavigationButton from "../../components/NavigationButton"
 import { saveDownload, getDownloadStats } from "../../utils/downloadTracker"
 import { getFeedbackStats } from "../../utils/feedbackTracker"
 import community02 from "../../assets/images/application/community-02.png"
@@ -214,6 +215,7 @@ const APKDownload: React.FC = () => {
         }
         .ant-carousel .slick-list {
           height: auto !important;
+          margin: 0 auto;
         }
         .ant-carousel .slick-track {
           display: flex !important;
@@ -224,30 +226,25 @@ const APKDownload: React.FC = () => {
           margin: 0 auto !important;
         }
         .ant-carousel .slick-slide.slick-center {
-          transform: scale(1.15) !important;
           opacity: 1 !important;
           z-index: 10 !important;
           position: relative !important;
           transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         }
         .ant-carousel .slick-slide:not(.slick-center) {
-          transform: scale(0.85) !important;
           opacity: 0.8 !important;
           z-index: 1 !important;
           transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         }
         .ant-carousel .slick-slide.slick-center .carousel-item {
-          height: 300px !important;
-          width: 160px !important;
+          height: clamp(320px, 40vw, 420px) !important;
+          width: clamp(150px, 12vw, 200px) !important;
+          margin: 0 5px !important;
         }
         .ant-carousel .slick-slide:not(.slick-center) .carousel-item {
-          height: 280px !important;
-          width: 150px !important;
-        }
-        .ant-carousel .slick-track {
-          display: flex !important;
-          align-items: center !important;
-          justify-content: center !important;
+          height: clamp(280px, 35vw, 360px) !important;
+          width: clamp(130px, 10vw, 180px) !important;
+          margin: 0 5px !important;
         }
         .main-image-container img {
           transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -554,8 +551,179 @@ const APKDownload: React.FC = () => {
               }}
             >
               <Row gutter={[24, 24]} align="stretch">
-                {/* Left Column - Main Image */}
-                <Col xs={24} md={10}>
+                {/* MOBILE & TABLET: CONTENT -> IMAGE -> GALLERY */}
+                <Col xs={24} md={0}>
+                  {/* Main Content */}
+                  <div>
+                    <Title
+                      level={2}
+                      style={{
+                        color: "#000",
+                        margin: "0 0 16px 0",
+                        fontSize: "clamp(20px, 3vw, 24px)",
+                        fontWeight: "700",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      {t('app.intro.name')}
+                    </Title>
+                    <Paragraph
+                      style={{
+                        color: "#333",
+                        fontSize: "16px",
+                        lineHeight: 1.7,
+                        marginBottom: "20px",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      Ứng dụng thông minh giúp người dùng điều hướng an toàn và hiệu quả trong khu vực Đồng bằng sông Cửu
+                      Long với các tính năng tiên tiến.
+                    </Paragraph>
+                    <Row gutter={[16, 8]}>
+                      <Col xs={24} sm={12}>
+                        <List
+                          dataSource={[
+                            "Điều hướng thông minh với AI",
+                            "Tuyến đường an toàn thời gian thực",
+                            "Cộng đồng người dùng tương tác",
+                          ]}
+                          renderItem={(item) => (
+                            <List.Item
+                              style={{
+                                color: "#333",
+                                padding: "8px 0",
+                                borderBottom: "none",
+                                justifyContent: "flex-start",
+                              }}
+                            >
+                              <CheckCircleOutlined style={{ color: "#52c41a", marginRight: 12, fontSize: "16px" }} />
+                              <span style={{ fontSize: "15px", fontWeight: "500" }}>{item}</span>
+                            </List.Item>
+                          )}
+                        />
+                      </Col>
+                      <Col xs={24} sm={12}>
+                        <List
+                          dataSource={["Cảnh báo thời tiết và lũ lụt", "Hệ thống camera giám sát", "Yêu cầu cứu trợ khẩn cấp"]}
+                          renderItem={(item) => (
+                            <List.Item
+                              style={{
+                                color: "#333",
+                                padding: "8px 0",
+                                borderBottom: "none",
+                                justifyContent: "flex-start",
+                              }}
+                            >
+                              <CheckCircleOutlined style={{ color: "#52c41a", marginRight: 12, fontSize: "16px" }} />
+                              <span style={{ fontSize: "15px", fontWeight: "500" }}>{item}</span>
+                            </List.Item>
+                          )}
+                        />
+                      </Col>
+                    </Row>
+                  </div>
+                  {/* Main Image */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "20px 0",
+                    }}
+                  >
+                    <div className="main-image-container" style={{ textAlign: "center" }}>
+                      <img
+                        src={selectedMainImage || "/placeholder.svg"}
+                        alt="Selected Application Image"
+                        style={{
+                          width: "100%",
+                          maxWidth: "clamp(250px, 70vw, 350px)",
+                          borderRadius: "20px",
+                          boxShadow: "0 15px 35px rgba(0, 0, 0, 0.12)",
+                          transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {/* Gallery */}
+                  <div>
+                    <Title
+                      level={4}
+                      style={{
+                        color: "#000",
+                        margin: "24px 0 16px 0",
+                        fontSize: "18px",
+                        fontWeight: "600",
+                        textAlign: "center",
+                      }}
+                    >
+                      {t('app.screenshots')}
+                    </Title>
+                    <Carousel
+                      ref={carouselRef}
+                      dots={false}
+                      arrows={true}
+                      slidesToShow={1}
+                      infinite={true}
+                      centerMode={true}
+                      centerPadding="50px"
+                      afterChange={handleSlideChange}
+                      prevArrow={<NavigationButton direction="left" onClick={() => {}} style={{ left: "-8px" }} />}
+                      nextArrow={<NavigationButton direction="right" onClick={() => {}} style={{ right: "-8px" }} />}
+                    >
+                      {[
+                        { src: applicationInterface, alt: "Giao diện ứng dụng", title: "Giao diện chính" },
+                        { src: viewMap, alt: "Xem bản đồ", title: "Bản đồ thông minh" },
+                        { src: communityPost, alt: "Cộng đồng", title: "Cộng đồng người dùng" },
+                        { src: sosRequest, alt: "SOS Request", title: "Yêu cầu cứu trợ" },
+                        { src: viewAllCamera, alt: "Camera", title: "Hệ thống camera" },
+                        { src: yourTimeline, alt: "Timeline", title: "Dòng thời gian" },
+                        { src: repairShop, alt: "Repair Shop", title: "Tìm cửa hàng sửa chữa" },
+                        { src: community02, alt: "Community 2", title: "Cộng đồng tương tác" },
+                      ].map((image, index) => (
+                        <div key={index} style={{ padding: "0 10px" }}>
+                          <div
+                            className="carousel-item"
+                            style={{
+                              position: "relative",
+                              borderRadius: "16px",
+                              overflow: "hidden",
+                              height: "clamp(300px, 38vw, 400px)",
+                            }}
+                            onClick={() => handleImageClick(index)}
+                          >
+                            <img
+                              src={image.src || "/placeholder.svg"}
+                              alt={image.alt}
+                              style={{ width: "100%", height: "100%", objectFit: "cover", backgroundColor: "#f5f5f5" }}
+                            />
+                            <div
+                              style={{
+                                position: "absolute",
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                background: "linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2), transparent)",
+                                padding: "10px 8px 8px",
+                                color: "white",
+                                minHeight: "38px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <Text style={{ fontSize: "12px", fontWeight: "700", color: "white" }}>{image.title}</Text>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </Carousel>
+                  </div>
+                </Col>
+
+                {/* DESKTOP: IMAGE | (CONTENT + GALLERY) */}
+                <Col xs={0} md={10}>
                   <div
                     style={{
                       height: "100%",
@@ -593,14 +761,12 @@ const APKDownload: React.FC = () => {
                           e.currentTarget.style.transform = "scale(1) translateY(0)"
                           e.currentTarget.style.boxShadow = "0 15px 35px rgba(0, 0, 0, 0.12)"
                         }}
-                        onClick={() => { }}
+                        onClick={() => {}}
                       />
                     </div>
                   </div>
                 </Col>
-
-                {/* Right Column - Content & Screenshots */}
-                <Col xs={24} md={14}>
+                <Col xs={0} md={14}>
                   <Space direction="vertical" size={24} style={{ width: "100%" }}>
                     {/* Main Content */}
                     <div>
@@ -699,7 +865,7 @@ const APKDownload: React.FC = () => {
                     </div>
 
                     {/* Screenshots Gallery */}
-                    <div>
+                    <div style={{ overflow: "hidden" }}>
                       <Title
                         level={4}
                         style={{
@@ -718,96 +884,14 @@ const APKDownload: React.FC = () => {
                         autoplay={false}
                         dots={false}
                         arrows={true}
-                        slidesToShow={5}
+                        slidesToShow={4}
                         slidesToScroll={1}
                         infinite={true}
                         centerMode={true}
-                        centerPadding="80px"
+                        centerPadding="40px"
                         afterChange={handleSlideChange}
-                        responsive={[
-                          {
-                            breakpoint: 1200,
-                            settings: {
-                              slidesToShow: 3,
-                              centerMode: true,
-                              centerPadding: "60px",
-                            },
-                          },
-                          {
-                            breakpoint: 768,
-                            settings: {
-                              slidesToShow: 1,
-                              centerMode: true,
-                              centerPadding: "40px",
-                            },
-                          },
-                        ]}
-                        prevArrow={
-                          <Button
-                            type="text"
-                            icon={<LeftOutlined />}
-                            className="carousel-arrow-btn"
-                            style={{
-                              width: "35px",
-                              height: "35px",
-                              borderRadius: "50%",
-                              background:
-                                "linear-gradient(135deg, rgba(197, 226, 255, 0.9) 0%, rgba(197, 226, 255, 0.7) 100%)",
-                              border: "none",
-                              boxShadow: "0 4px 12px rgba(24, 144, 255, 0.2)",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#1890ff",
-                              fontSize: "14px",
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.background =
-                                "linear-gradient(135deg, rgba(197, 226, 255, 1) 0%, rgba(197, 226, 255, 0.9) 100%)"
-                              e.currentTarget.style.transform = "scale(1.15)"
-                              e.currentTarget.style.boxShadow = "0 8px 20px rgba(24, 144, 255, 0.3)"
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.background =
-                                "linear-gradient(135deg, rgba(197, 226, 255, 0.9) 0%, rgba(197, 226, 255, 0.7) 100%)"
-                              e.currentTarget.style.transform = "scale(1)"
-                              e.currentTarget.style.boxShadow = "0 4px 12px rgba(24, 144, 255, 0.2)"
-                            }}
-                          />
-                        }
-                        nextArrow={
-                          <Button
-                            type="text"
-                            icon={<RightOutlined />}
-                            className="carousel-arrow-btn"
-                            style={{
-                              width: "35px",
-                              height: "35px",
-                              borderRadius: "50%",
-                              background:
-                                "linear-gradient(135deg, rgba(197, 226, 255, 0.9) 0%, rgba(197, 226, 255, 0.7) 100%)",
-                              border: "none",
-                              boxShadow: "0 4px 12px rgba(24, 144, 255, 0.2)",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#1890ff",
-                              fontSize: "14px",
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.background =
-                                "linear-gradient(135deg, rgba(197, 226, 255, 1) 0%, rgba(197, 226, 255, 0.9) 100%)"
-                              e.currentTarget.style.transform = "scale(1.15)"
-                              e.currentTarget.style.boxShadow = "0 8px 20px rgba(24, 144, 255, 0.3)"
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.background =
-                                "linear-gradient(135deg, rgba(197, 226, 255, 0.9) 0%, rgba(197, 226, 255, 0.7) 100%)"
-                              e.currentTarget.style.transform = "scale(1)"
-                              e.currentTarget.style.boxShadow = "0 4px 12px rgba(24, 144, 255, 0.2)"
-                            }}
-                          />
-                        }
+                        prevArrow={<NavigationButton direction="left" onClick={() => {}} style={{ left: "-8px" }} />}
+                        nextArrow={<NavigationButton direction="right" onClick={() => {}} style={{ right: "-8px" }} />}
                       >
                         {[
                           { src: applicationInterface, alt: "Giao diện ứng dụng", title: "Giao diện chính" },
@@ -819,7 +903,7 @@ const APKDownload: React.FC = () => {
                           { src: repairShop, alt: "Repair Shop", title: "Tìm cửa hàng sửa chữa" },
                           { src: community02, alt: "Community 2", title: "Cộng đồng tương tác" },
                         ].map((image, index) => (
-                          <div key={index}>
+                          <div key={index} style={{ padding: "0 10px" }}>
                             <div
                               className="carousel-item"
                               style={{
@@ -828,9 +912,7 @@ const APKDownload: React.FC = () => {
                                 overflow: "hidden",
                                 transition:
                                   "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                                height: "400px",
-                                width: "150px",
-                                margin: "0 -20%",
+                                height: "clamp(300px, 38vw, 400px)",
                                 display: "flex",
                                 flexDirection: "column",
                                 maxHeight: "400px",
@@ -859,7 +941,7 @@ const APKDownload: React.FC = () => {
                                   style={{
                                     width: "100%",
                                     height: "100%",
-                                    objectFit: "contain",
+                                    objectFit: "cover",
                                     objectPosition: "center",
                                     backgroundColor: "#f5f5f5",
                                     transition: "all 0.3s ease",
@@ -875,10 +957,10 @@ const APKDownload: React.FC = () => {
                                   bottom: 0,
                                   left: 0,
                                   right: 0,
-                                  background: "linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.6), transparent)",
-                                  padding: "12px 8px 8px",
+                                  background: "linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2), transparent)",
+                                  padding: "10px 8px 8px",
                                   color: "white",
-                                  minHeight: "40px",
+                                  minHeight: "38px",
                                   display: "flex",
                                   alignItems: "center",
                                   justifyContent: "center",
@@ -887,7 +969,7 @@ const APKDownload: React.FC = () => {
                               >
                                 <Text
                                   style={{
-                                    fontSize: "11px",
+                                    fontSize: "12px",
                                     fontWeight: "700",
                                     color: "white",
                                     textShadow: "1px 1px 3px rgba(0,0,0,0.8)",
@@ -908,6 +990,7 @@ const APKDownload: React.FC = () => {
                   </Space>
                 </Col>
               </Row>
+              
               {/* Features Section */}
               <AnimatedSection animationType="fadeInUp" delay={400} style={{ marginTop: "40px" }}>
                 <Card
