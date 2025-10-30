@@ -30,6 +30,7 @@ import post07 from '../../assets/images/activities-fanpage/post-07.png';
 // Import About Us images
 import mapCanTho from '../../assets/images/map-location/map-cantho.png';
 import ourTeamImage from '../../assets/images/map-location/can-tho-in-vietnam4.png';
+import aboutTeamImage from '../../assets/images/about-us/nhom-5-nguoi-ninh-kieu.png';
 import ourVisionUSImage from '../../assets/images/our-vision/our-vision-us-01.png';
 import ourVisionVNImage from '../../assets/images/our-vision/our-vision-vn.png';
 
@@ -96,7 +97,52 @@ const HomePage: React.FC = () => {
   const [isSurveyTransitioning, setIsSurveyTransitioning] = useState(false);
   const [currentAchievementSlide, setCurrentAchievementSlide] = useState(0);
   const [isAchievementTransitioning, setIsAchievementTransitioning] = useState(false);
+  const [achievementItemsToShow, setAchievementItemsToShow] = useState(7);
   const [currentGalleryPage, setCurrentGalleryPage] = useState(1);
+  const [teamSlideIndex, setTeamSlideIndex] = useState(0);
+  const [visionSlideIndex, setVisionSlideIndex] = useState(0);
+  const aboutPauseRef = React.useRef(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      if (w <= 768) {
+        setAchievementItemsToShow(1);
+      } else if (w <= 1024) {
+        setAchievementItemsToShow(3);
+      } else {
+        setAchievementItemsToShow(7);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleAboutHover = (isHover: boolean) => {
+    aboutPauseRef.current = isHover;
+  };
+
+  const teamImages = [aboutTeamImage, ourTeamImage];
+  const visionImages = [ourVisionUSImage, ourVisionVNImage];
+
+  // Auto-rotate images in About section image frames
+  useEffect(() => {
+    const teamTimer = setInterval(() => {
+      if (!aboutPauseRef.current) {
+        setTeamSlideIndex((prev) => (prev + 1) % teamImages.length);
+      }
+    }, 4000);
+    const visionTimer = setInterval(() => {
+      if (!aboutPauseRef.current) {
+        setVisionSlideIndex((prev) => (prev + 1) % visionImages.length);
+      }
+    }, 4000);
+    return () => {
+      clearInterval(teamTimer);
+      clearInterval(visionTimer);
+    };
+  }, []);
 
   // Handle survey slide transition with animation
   const handleSurveySlideChange = (newSlide: number) => {
@@ -109,15 +155,10 @@ const HomePage: React.FC = () => {
     }, 150);
   };
 
-  // Handle achievement slide transition with animation
+  // Handle achievement slide transition with animation (no delay)
   const handleAchievementSlideChange = (newSlide: number) => {
-    setIsAchievementTransitioning(true);
-    setTimeout(() => {
-      setCurrentAchievementSlide(newSlide);
-      setTimeout(() => {
-        setIsAchievementTransitioning(false);
-      }, 50);
-    }, 150);
+    setIsAchievementTransitioning(false);
+    setCurrentAchievementSlide(newSlide);
   };
 
   // Load stats on component mount
@@ -254,6 +295,17 @@ const HomePage: React.FC = () => {
 
   return (
     <>
+      {/* Mobile-specific styles for About Us text justification */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .about-vision-text {
+              text-align: justify !important;
+              text-justify: inter-word;
+            }
+          }
+        `}
+      </style>
 
       {/* Header with Hero Background */}
       <HomePageHeader />
@@ -296,7 +348,7 @@ const HomePage: React.FC = () => {
                 >
                   {t('section.about.title')}
                 </Title>
-                <Row gutter={[24, 24]} style={{ minHeight: '500px' }}>
+                <Row gutter={[24, 24]} style={{ minHeight: '520px' }}>
                   {/* Left Panel - Map Can Tho Image */}
                   <Col xs={24} md={8}>
                     <div
@@ -349,6 +401,9 @@ const HomePage: React.FC = () => {
                               padding: '40px',
                               boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
                               height: '100%',
+                              maxHeight: '100%',
+                              display: 'flex',
+                              flexDirection: 'column',
                               transition: 'all 0.3s ease'
                             }}
                             onMouseEnter={(e) => {
@@ -391,6 +446,8 @@ const HomePage: React.FC = () => {
                                 color: '#333',
                                 textAlign: 'justify',
                                 transition: 'all 0.3s ease',
+                                flex: 1,
+                                overflowY: 'auto'
                               }}
                               onMouseEnter={(e) => {
                                 e.currentTarget.style.color = '#0344d6';
@@ -415,7 +472,7 @@ const HomePage: React.FC = () => {
                         <Col xs={24} md={12}>
                           <div
                             style={{
-                              height: '100%',
+                              height: 'clamp(260px, 30vw, 400px)',
                               borderRadius: '16px',
                               overflow: 'hidden',
                               boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
@@ -425,14 +482,16 @@ const HomePage: React.FC = () => {
                             onMouseEnter={(e) => {
                               e.currentTarget.style.transform = 'translateY(-5px) scale(1.02)';
                               e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 31, 68, 0.25)';
+                              handleAboutHover(true);
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.transform = 'translateY(0) scale(1)';
                               e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                              handleAboutHover(false);
                             }}
                           >
                             <img
-                              src={ourTeamImage}
+                              src={teamImages[teamSlideIndex]}
                               alt="Global Responsibility"
                               style={{
                                 width: '100%',
@@ -451,7 +510,7 @@ const HomePage: React.FC = () => {
                         <Col xs={24} md={12}>
                           <div
                             style={{
-                              height: '100%',
+                              height: 'clamp(260px, 30vw, 360px)',
                               borderRadius: '16px',
                               overflow: 'hidden',
                               boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
@@ -461,14 +520,16 @@ const HomePage: React.FC = () => {
                             onMouseEnter={(e) => {
                               e.currentTarget.style.transform = 'translateY(-5px) scale(1.02)';
                               e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 31, 68, 0.25)';
+                              handleAboutHover(true);
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.transform = 'translateY(0) scale(1)';
                               e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                              handleAboutHover(false);
                             }}
                           >
                             <img
-                              src={ourVisionUSImage}
+                              src={visionImages[visionSlideIndex]}
                               alt="Can Tho Vietnam"
                               style={{
                                 width: '100%',
@@ -489,6 +550,9 @@ const HomePage: React.FC = () => {
                               padding: '40px',
                               boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
                               height: '100%',
+                              maxHeight: '100%',
+                              display: 'flex',
+                              flexDirection: 'column',
                               transition: 'all 0.3s ease'
                             }}
                             onMouseEnter={(e) => {
@@ -525,12 +589,15 @@ const HomePage: React.FC = () => {
                               {t('section.about.vision')}
                             </Title>
                             <Paragraph
+                              className="about-vision-text"
                               style={{
                                 fontSize: 'clamp(14px, 2vw, 16px)',
                                 lineHeight: '1.6',
                                 color: '#333',
                                 textAlign: 'justify',
                                 transition: 'all 0.3s ease',
+                                flex: 1,
+                                overflowY: 'auto'
                               }}
                               onMouseEnter={(e) => {
                                 e.currentTarget.style.color = '#0344d6';
@@ -588,66 +655,42 @@ const HomePage: React.FC = () => {
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 1',
                     description: 'Chia sẻ kết quả khảo sát từ cộng đồng người dùng Mekong Pathfinder',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5664_qx1vn6&profile=cld-default',
-                    duration: '2:30',
-                    views: '1.2K',
-                    date: '15/12/2024'
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5664_qx1vn6&profile=cld-default'
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 2',
                     description: 'Phân tích chi tiết về phản hồi và đánh giá từ người dùng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default',
-                    duration: '3:15',
-                    views: '1.8K',
-                    date: '22/12/2024'
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_0321_ydirrb&profile=cld-default'
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 3',
                     description: 'Tổng kết và đánh giá tổng thể từ cộng đồng người dùng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_1_e1jstd&profile=cld-default',
-                    duration: '4:20',
-                    views: '2.1K',
-                    date: '29/12/2024'
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_1_e1jstd&profile=cld-default'
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 4',
                     description: 'Tổng kết và đánh giá tổng thể từ cộng đồng người dùng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Video_TauHu_-_Made_with_Clipchamp_2_qcqnww&profile=cld-default',
-                    duration: '4:20',
-                    views: '2.1K',
-                    date: '29/12/2024'
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Video_TauHu_-_Made_with_Clipchamp_2_qcqnww&profile=cld-default'
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 5',
                     description: 'Phân tích sâu về xu hướng và nhu cầu của cộng đồng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_2_um38h4&profile=cld-default',
-                    duration: '3:45',
-                    views: '1.5K',
-                    date: '05/01/2025'
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_2_um38h4&profile=cld-default'
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 6',
                     description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5673_rf5rm6&profile=cld-default',
-                    duration: '2:50',
-                    views: '1.9K',
-                    date: '12/01/2025'
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5673_rf5rm6&profile=cld-default'
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 7',
                     description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_obrkdi&profile=cld-default',
-                    duration: '2:50',
-                    views: '1.9K',
-                    date: '12/01/2025'
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=Untitled_video_-_Made_with_Clipchamp_obrkdi&profile=cld-default'
                   },
                   {
                     title: 'Kết quả khảo sát cộng đồng - Video 8',
                     description: 'Đánh giá hiệu quả và tác động của các sáng kiến cộng đồng',
-                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5661_zxytqh&profile=cld-default',
-                    duration: '2:50',
-                    views: '1.9K',
-                    date: '12/01/2025'
+                    videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dj7jvklwp&public_id=IMG_5661_zxytqh&profile=cld-default'
                   }
                 ];
 
@@ -796,7 +839,11 @@ const HomePage: React.FC = () => {
                       }}
                     >
                       {currentItems.map((item, index) => (
-                        <Col xs={24} sm={12} md={6} key={index}>
+                        <Col xs={24} sm={12} md={6} key={index} style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                        }}>
                           <div
                             style={{
                               borderRadius: '12px',
@@ -810,7 +857,8 @@ const HomePage: React.FC = () => {
                               flexDirection: 'column',
                               animationDelay: `${index * 0.1}s`,
                               transform: isSurveyTransitioning ? 'translateY(10px) scale(0.98)' : 'translateY(0) scale(1)',
-                              opacity: isSurveyTransitioning ? 0.7 : 1
+                              opacity: isSurveyTransitioning ? 0.7 : 1,
+                              width: '100%'
                             }}
                             onMouseEnter={(e) => {
                               e.currentTarget.style.transform = 'translateY(-6px)';
@@ -865,7 +913,7 @@ const HomePage: React.FC = () => {
                               <div>
                                 <h4 style={{
                                   margin: '0 0 6px 0',
-                                  fontSize: '13px',
+                                  fontSize: '16px',
                                   fontWeight: '600',
                                   color: '#000',
                                   lineHeight: '1.3',
@@ -879,7 +927,7 @@ const HomePage: React.FC = () => {
                                 </h4>
                                 <p style={{
                                   margin: '0 0 8px 0',
-                                  fontSize: '11px',
+                                  fontSize: '14px',
                                   color: '#666',
                                   lineHeight: '1.3',
                                   overflow: 'hidden',
@@ -891,18 +939,7 @@ const HomePage: React.FC = () => {
                                   {item.description}
                                 </p>
                               </div>
-
-                              <div style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                fontSize: '10px',
-                                color: '#888'
-                              }}>
-                                <span>{item.duration}</span>
-                                <span>{item.views}</span>
-                                <span>{item.date}</span>
-                              </div>
+                              
                             </div>
                           </div>
                         </Col>
@@ -981,9 +1018,10 @@ const HomePage: React.FC = () => {
                 ];
 
                 const totalSlides = achievementData.length;
+                const itemsToShow = achievementItemsToShow;
                 const getCurrentItems = () => {
-                  const items = [];
-                  for (let i = 0; i < 5; i++) {
+                  const items: typeof achievementData = [] as any;
+                  for (let i = 0; i < itemsToShow; i++) {
                     const index = (currentAchievementSlide + i) % totalSlides;
                     items.push(achievementData[index]);
                   }
@@ -991,6 +1029,27 @@ const HomePage: React.FC = () => {
                 };
 
                 const currentItems = getCurrentItems();
+
+                // Predefined sizes per layout for visual balance
+                const sizesByCount: Record<number, Array<{ w: number; h: number }>> = {
+                  1: [{ w: 280, h: 420 }],
+                  3: [
+                    { w: 200, h: 300 },
+                    { w: 260, h: 380 },
+                    { w: 200, h: 300 },
+                  ],
+                  7: [
+                    { w: 100, h: 220 },
+                    { w: 160, h: 280 },
+                    { w: 200, h: 320 },
+                    { w: 300, h: 460 },
+                    { w: 200, h: 320 },
+                    { w: 160, h: 280 },
+                    { w: 100, h: 220 },
+                  ],
+                };
+
+                const sizes = sizesByCount[itemsToShow] || sizesByCount[7];
 
                 return (
                   <div
@@ -1005,10 +1064,8 @@ const HomePage: React.FC = () => {
 
                         if (Math.abs(diffX) > 50) {
                           if (diffX > 0) {
-                            // Swipe left - go to next slide (circular)
                             handleAchievementSlideChange((currentAchievementSlide + 1) % totalSlides);
                           } else if (diffX < 0) {
-                            // Swipe right - go to previous slide (circular)
                             handleAchievementSlideChange((currentAchievementSlide - 1 + totalSlides) % totalSlides);
                           }
                           document.removeEventListener('touchmove', handleTouchMove);
@@ -1045,20 +1102,8 @@ const HomePage: React.FC = () => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        transition: 'all 0.3s ease',
+                        transition: 'none',
                         color: '#001f44'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
-                        e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
-                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
-                        e.currentTarget.style.borderColor = 'rgba(0, 31, 68, 0.4)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
-                        e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
-                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-                        e.currentTarget.style.borderColor = 'rgba(0, 31, 68, 0.2)';
                       }}
                     />
 
@@ -1082,20 +1127,8 @@ const HomePage: React.FC = () => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        transition: 'all 0.3s ease',
+                        transition: 'none',
                         color: '#001f44'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
-                        e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
-                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
-                        e.currentTarget.style.borderColor = 'rgba(0, 31, 68, 0.4)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
-                        e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
-                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-                        e.currentTarget.style.borderColor = 'rgba(0, 31, 68, 0.2)';
                       }}
                     />
 
@@ -1104,266 +1137,32 @@ const HomePage: React.FC = () => {
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      gap: '15px',
-                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                      transform: isAchievementTransitioning ? 'translateX(20px)' : 'translateX(0)',
+                      gap: '14px',
+                      transition: 'none'
                     }}>
-                      {/* Far Left Item (Smallest) */}
-                      <div
-                        style={{
-                          width: '100px',
-                          height: '220px',
-                          borderRadius: '16px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          cursor: 'pointer',
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          transform: 'scale(0.7)',
-                          opacity: 1,
-                          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.8)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.7)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
-                        }}
-                        onClick={() => window.open(currentItems[0].facebookUrl, '_blank')}
-                      >
-                        <img
-                          src={currentItems[0].image}
-                          alt={currentItems[0].title}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'fill',
-                          }}
-                        />
-                      </div>
-                      {/* Far Left Item (Smallest) */}
-                      <div
-                        style={{
-                          width: '180px',
-                          height: '300px',
-                          borderRadius: '16px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          cursor: 'pointer',
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          transform: 'scale(0.7)',
-                          opacity: 1,
-                          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.8)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.7)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
-                        }}
-                        onClick={() => window.open(currentItems[0].facebookUrl, '_blank')}
-                      >
-                        <img
-                          src={currentItems[0].image}
-                          alt={currentItems[0].title}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'fill',
-                          }}
-                        />
-                      </div>
-
-                      {/* Left Item (Small) */}
-                      <div
-                        style={{
-                          width: '200px',
-                          height: '320px',
-                          borderRadius: '20px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          cursor: 'pointer',
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          transform: 'scale(0.85)',
-                          opacity: 1,
-                          boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.9)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.2)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.85)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                        }}
-                        onClick={() => window.open(currentItems[1].facebookUrl, '_blank')}
-                      >
-                        <img
-                          src={currentItems[1].image}
-                          alt={currentItems[1].title}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'fill',
-                          }}
-                        />
-                      </div>
-
-                      {/* Center Item (Large) */}
-                      <div
-                        style={{
-                          width: '300px',
-                          height: '460px',
-                          borderRadius: '25px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          cursor: 'pointer',
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          transform: 'scale(1)',
-                          boxShadow: '0 15px 40px rgba(0, 0, 0, 0.2)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(1.05)';
-                          e.currentTarget.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.3)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(1)';
-                          e.currentTarget.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.2)';
-                        }}
-                        onClick={() => window.open(currentItems[2].facebookUrl, '_blank')}
-                      >
-                        <img
-                          src={currentItems[2].image}
-                          alt={currentItems[2].title}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'fill',
-                          }}
-                        />
-
-                        {/* Center card overlay removed per request (image only) */}
-                      </div>
-
-                      {/* Right Item (Small) */}
-                      <div
-                        style={{
-                          width: '200px',
-                          height: '320px',
-                          borderRadius: '20px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          cursor: 'pointer',
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          transform: 'scale(0.85)',
-                          opacity: 1,
-                          boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.9)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.2)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.85)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                        }}
-                        onClick={() => window.open(currentItems[3].facebookUrl, '_blank')}
-                      >
-                        <img
-                          src={currentItems[3].image}
-                          alt={currentItems[3].title}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'fill',
-                          }}
-                        />
-                      </div>
-
-                      {/* Far Right Item (Smallest) */}
-                      <div
-                        style={{
-                          width: '180px',
-                          height: '300px',
-                          borderRadius: '16px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          cursor: 'pointer',
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          transform: 'scale(0.7)',
-                          opacity: 1,
-                          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.8)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.7)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
-                        }}
-                        onClick={() => window.open(currentItems[4].facebookUrl, '_blank')}
-                      >
-                        <img
-                          src={currentItems[4].image}
-                          alt={currentItems[4].title}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'fill',
-                          }}
-                        />
-                      </div>
-
-                      {/* Far Right Item (Smallest) */}
-                      <div
-                        style={{
-                          width: '100px',
-                          height: '220px',
-                          borderRadius: '16px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          cursor: 'pointer',
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          transform: 'scale(0.7)',
-                          opacity: 1,
-                          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.8)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(0.7)';
-                          e.currentTarget.style.opacity = '1';
-                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.12)';
-                        }}
-                        onClick={() => window.open(currentItems[4].facebookUrl, '_blank')}
-                      >
-                        <img
-                          src={currentItems[4].image}
-                          alt={currentItems[4].title}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'fill',
-                          }}
-                        />
-                      </div>
+                      {currentItems.map((item, idx) => {
+                        const size = sizes[idx] || sizes[sizes.length - 1];
+                        return (
+                          <div
+                            key={idx}
+                            style={{
+                              width: `${size.w}px`,
+                              height: `${size.h}px`,
+                              borderRadius: '20px',
+                              overflow: 'hidden',
+                              position: 'relative',
+                              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.18)'
+                            }}
+                            onClick={() => window.open(item.facebookUrl, '_blank')}
+                          >
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );

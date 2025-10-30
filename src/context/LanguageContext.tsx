@@ -251,7 +251,24 @@ const translations = {
     'footer.bottom.copyright': '© 2025 Mekong Pathfinder. Dự án tham gia Mekong Tech - Business Challenge 2025.',
     'footer.bottom.theme': 'Được phát triển với',
     'footer.bottom.at': 'tại Việt Nam',
-    'footer.bottom.teamline': 'Team: Mekong Pathfinders | Trưởng nhóm: Huỳnh Ngọc Như Quỳnh'
+    'footer.bottom.teamline': 'Team: Mekong Pathfinders | Trưởng nhóm: Huỳnh Ngọc Như Quỳnh',
+    'apkdownload.intro.desc': 'Ứng dụng thông minh giúp người dùng điều hướng an toàn và hiệu quả trong khu vực Đồng bằng sông Cửu Long với các tính năng tiên tiến.',
+    'apkdownload.feature.ai': 'Điều hướng thông minh với AI',
+    'apkdownload.feature.realtime': 'Tuyến đường an toàn thời gian thực',
+    'apkdownload.feature.community': 'Cộng đồng người dùng tương tác',
+    'apkdownload.feature.weather': 'Cảnh báo thời tiết và lũ lụt',
+    'apkdownload.feature.camera': 'Hệ thống camera giám sát',
+    'apkdownload.feature.sos': 'Yêu cầu cứu trợ khẩn cấp',
+    'apkdownload.feature.friendly': 'Giao diện thân thiện',
+    'apkdownload.feature.secure': 'Bảo mật cao',
+    'apkdownload.feature.realtime.desc': 'Thông tin giao thông và thời tiết được cập nhật liên tục',
+    'apkdownload.feature.quality': 'Đánh giá chất lượng',
+    'apkdownload.guide.feature1': 'Bản đồ thông minh với giao thông thời gian thực',
+    'apkdownload.guide.feature2': 'Dự báo thời tiết chính xác cho khu vực ĐBSCL',
+    'apkdownload.guide.feature3': 'Cảnh báo lũ lụt và thiên tai',
+    'apkdownload.guide.feature4': 'Cộng đồng người dùng chia sẻ thông tin',
+    'apkdownload.guide.feature5': 'Tìm kiếm địa điểm và lộ trình tối ưu',
+    'apkdownload.guide.feature6': 'Lưu vị trí yêu thích và lịch sử di chuyển'
   },
   en: {
     // Navigation
@@ -488,7 +505,24 @@ const translations = {
     'footer.bottom.copyright': '© 2025 Mekong Pathfinder. Participating in Mekong Tech - Business Challenge 2025.',
     'footer.bottom.theme': 'Built with',
     'footer.bottom.at': 'in Vietnam',
-    'footer.bottom.teamline': 'Team: Mekong Pathfinders | Team Lead: Huynh Ngoc Nhu Quynh'
+    'footer.bottom.teamline': 'Team: Mekong Pathfinders | Team Lead: Huynh Ngoc Nhu Quynh',
+    'apkdownload.intro.desc': 'A smart application to help users navigate safely and effectively in the Mekong Delta region with advanced features.',
+    'apkdownload.feature.ai': 'Smart navigation with AI',
+    'apkdownload.feature.realtime': 'Real-time safe routes',
+    'apkdownload.feature.community': 'Interactive user community',
+    'apkdownload.feature.weather': 'Weather and flood warnings',
+    'apkdownload.feature.camera': 'Monitoring camera system',
+    'apkdownload.feature.sos': 'Emergency rescue request',
+    'apkdownload.feature.friendly': 'User-friendly Interface',
+    'apkdownload.feature.secure': 'High Security',
+    'apkdownload.feature.realtime.desc': 'Traffic and weather information is continuously updated',
+    'apkdownload.feature.quality': 'Quality Rating',
+    'apkdownload.guide.feature1': 'Smart map with real-time traffic',
+    'apkdownload.guide.feature2': 'Accurate weather forecast for Mekong Delta region',
+    'apkdownload.guide.feature3': 'Flood and disaster warnings',
+    'apkdownload.guide.feature4': 'User community sharing information',
+    'apkdownload.guide.feature5': 'Search locations and optimal routes',
+    'apkdownload.guide.feature6': 'Save favorite locations and movement history'
   }
 };
 

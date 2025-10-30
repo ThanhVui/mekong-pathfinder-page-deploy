@@ -68,6 +68,23 @@ const APKDownload: React.FC = () => {
   const [feedbackStats, setFeedbackStats] = useState({ averageRating: 0 })
   const downloadFormRef = useRef<HTMLDivElement>(null)
   const carouselRef = useRef<any>(null)
+  const [screenshotsToShow, setScreenshotsToShow] = useState(5)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth
+      if (w <= 768) {
+        setScreenshotsToShow(1)
+      } else if (w <= 1024) {
+        setScreenshotsToShow(3)
+      } else {
+        setScreenshotsToShow(5)
+      }
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const stats = getDownloadStats()
@@ -354,6 +371,54 @@ const APKDownload: React.FC = () => {
         .smooth-text {
           transition: all 0.3s ease !important;
         }
+        .ant-carousel .slick-slide .carousel-item {
+          height: clamp(220px, 21vw, 320px) !important;
+          width: clamp(125px, 15vw, 220px) !important;
+          margin: 0 8px !important;
+          box-shadow: none !important;
+          background: white !important; /* Prevent see-through/anti-overlap */
+        }
+        .ant-carousel .slick-slide {
+          padding-left: 8px !important;
+          padding-right: 8px !important;
+        }
+        .ant-carousel .slick-list {
+          margin-left: -8px !important;
+          margin-right: -8px !important;
+        }
+        .carousel-item:active,
+        .carousel-item:hover,
+        .carousel-item img:hover {
+          transform: none !important;
+          box-shadow: none !important;
+        }
+        .ant-carousel .slick-slide:not(.slick-center) {
+          opacity: 0.8 !important;
+          z-index: 1 !important;
+        }
+        .ant-carousel .slick-slide.slick-center {
+          opacity: 1 !important;
+          z-index: 10 !important;
+        }
+        /* Clean up any weird image overflow/bleed for all carousel images */
+        .carousel-item img {
+          border-radius: 15px;
+          background: #f5f5f5;
+          box-sizing: border-box;
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover;
+          margin: 0;
+          display: block;
+        }
+        /* Responsive: cut margin on smallest screens */
+        @media (max-width: 600px) {
+          .ant-carousel .slick-slide .carousel-item {
+            margin: 0 4px !important;
+          }
+          .ant-carousel .slick-slide { padding-left:4px !important; padding-right:4px !important; }
+          .ant-carousel .slick-list { margin-left: -4px !important; margin-right: -4px !important; }
+        }
       `}
       </style>
 
@@ -393,7 +458,7 @@ const APKDownload: React.FC = () => {
             height: "clamp(260px, 45vw, 600px)",
             borderRadius: "20px",
             backgroundImage: `url(${applicationBg})`,
-            backgroundSize: "cover",
+            backgroundSize: "100% 100%",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             boxShadow: "0 10px 30px rgba(0, 0, 0, 0.12)",
@@ -576,16 +641,15 @@ const APKDownload: React.FC = () => {
                         transition: "all 0.3s ease",
                       }}
                     >
-                      Ứng dụng thông minh giúp người dùng điều hướng an toàn và hiệu quả trong khu vực Đồng bằng sông Cửu
-                      Long với các tính năng tiên tiến.
+                      {t('apkdownload.intro.desc')}
                     </Paragraph>
                     <Row gutter={[16, 8]}>
                       <Col xs={24} sm={12}>
                         <List
                           dataSource={[
-                            "Điều hướng thông minh với AI",
-                            "Tuyến đường an toàn thời gian thực",
-                            "Cộng đồng người dùng tương tác",
+                            t('apkdownload.feature.ai'),
+                            t('apkdownload.feature.realtime'),
+                            t('apkdownload.feature.community'),
                           ]}
                           renderItem={(item) => (
                             <List.Item
@@ -604,7 +668,11 @@ const APKDownload: React.FC = () => {
                       </Col>
                       <Col xs={24} sm={12}>
                         <List
-                          dataSource={["Cảnh báo thời tiết và lũ lụt", "Hệ thống camera giám sát", "Yêu cầu cứu trợ khẩn cấp"]}
+                          dataSource={[
+                            t('apkdownload.feature.weather'),
+                            t('apkdownload.feature.camera'),
+                            t('apkdownload.feature.sos'),
+                          ]}
                           renderItem={(item) => (
                             <List.Item
                               style={{
@@ -664,10 +732,11 @@ const APKDownload: React.FC = () => {
                       ref={carouselRef}
                       dots={false}
                       arrows={true}
-                      slidesToShow={1}
+                      slidesToShow={screenshotsToShow}
                       infinite={true}
                       centerMode={true}
-                      centerPadding="50px"
+                      centerPadding="0px"
+                      speed={0}
                       afterChange={handleSlideChange}
                       prevArrow={<NavigationButton direction="left" onClick={() => {}} style={{ left: "-8px" }} />}
                       nextArrow={<NavigationButton direction="right" onClick={() => {}} style={{ right: "-8px" }} />}
@@ -689,7 +758,7 @@ const APKDownload: React.FC = () => {
                               position: "relative",
                               borderRadius: "16px",
                               overflow: "hidden",
-                              height: "clamp(300px, 38vw, 400px)",
+                              height: "clamp(220px, 30vw, 300px)",
                             }}
                             onClick={() => handleImageClick(index)}
                           >
@@ -791,8 +860,7 @@ const APKDownload: React.FC = () => {
                           transition: "all 0.3s ease",
                         }}
                       >
-                        Ứng dụng thông minh giúp người dùng điều hướng an toàn và hiệu quả trong khu vực Đồng bằng sông
-                        Cửu Long với các tính năng tiên tiến.
+                        {t('apkdownload.intro.desc')}
                       </Paragraph>
 
                       {/* Features List */}
@@ -800,9 +868,9 @@ const APKDownload: React.FC = () => {
                         <Col xs={24} sm={12}>
                           <List
                             dataSource={[
-                              "Điều hướng thông minh với AI",
-                              "Tuyến đường an toàn thời gian thực",
-                              "Cộng đồng người dùng tương tác",
+                              t('apkdownload.feature.ai'),
+                              t('apkdownload.feature.realtime'),
+                              t('apkdownload.feature.community'),
                             ]}
                             renderItem={(item) => (
                               <List.Item
@@ -832,9 +900,9 @@ const APKDownload: React.FC = () => {
                         <Col xs={24} sm={12}>
                           <List
                             dataSource={[
-                              "Cảnh báo thời tiết và lũ lụt",
-                              "Hệ thống camera giám sát",
-                              "Yêu cầu cứu trợ khẩn cấp",
+                              t('apkdownload.feature.weather'),
+                              t('apkdownload.feature.camera'),
+                              t('apkdownload.feature.sos'),
                             ]}
                             renderItem={(item) => (
                               <List.Item
@@ -884,11 +952,12 @@ const APKDownload: React.FC = () => {
                         autoplay={false}
                         dots={false}
                         arrows={true}
-                        slidesToShow={4}
+                        slidesToShow={screenshotsToShow}
                         slidesToScroll={1}
                         infinite={true}
                         centerMode={true}
-                        centerPadding="40px"
+                        centerPadding="0px"
+                        speed={0}
                         afterChange={handleSlideChange}
                         prevArrow={<NavigationButton direction="left" onClick={() => {}} style={{ left: "-8px" }} />}
                         nextArrow={<NavigationButton direction="right" onClick={() => {}} style={{ right: "-8px" }} />}
@@ -912,10 +981,10 @@ const APKDownload: React.FC = () => {
                                 overflow: "hidden",
                                 transition:
                                   "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                                height: "clamp(300px, 38vw, 400px)",
+                                height: "clamp(220px, 28vw, 320px)",
                                 display: "flex",
                                 flexDirection: "column",
-                                maxHeight: "400px",
+                                maxHeight: "320px",
                                 boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
                               }}
                               onClick={() => handleImageClick(index)}

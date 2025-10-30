@@ -120,14 +120,92 @@ const HomePageFooter: React.FC = () => {
               flex-direction: column !important;
               align-items: center !important;
               text-align: center !important;
+              justify-content: center !important;
             }
             .footer-flex-item {
               min-width: 100% !important;
               flex: none !important;
+              justify-content: center !important;
+              align-items: center !important;
+              text-align: center !important;
+              margin-left: auto !important;
+              margin-right: auto !important;
+              box-sizing: border-box !important;
             }
             .footer-bottom-right {
               text-align: center !important;
+              align-items: center !important;
+              justify-content: center !important;
+              margin-left: auto !important;
+              margin-right: auto !important;
             }
+            .ant-space, .ant-typography, .ant-typography-title, .ant-typography-paragraph, .ant-typography-text {
+              text-align: center !important;
+              justify-content: center !important;
+              word-break: break-word !important;
+              white-space: normal !important;
+            }
+            .footer-social-block {
+              justify-content: center !important;
+              align-items: center !important;
+              text-align: center !important;
+            }
+            .footer-project-block, .footer-tech-block {
+              text-align: center !important;
+              margin-left: auto !important;
+              margin-right: auto !important;
+              max-width: 100% !important;
+            }
+            .footer-features-list {
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: center !important;
+              justify-content: center !important;
+              text-align: center !important;
+            }
+            .footer-features-list .ant-list-items {
+              width: 100% !important;
+              text-align: center !important;
+              align-items: center !important;
+            }
+            .footer-features-list .ant-list-item {
+              justify-content: center !important;
+              text-align: center !important;
+              align-items: center !important;
+            }
+            /* Center and prevent overflow for project and bottom sections */
+            .footer-project-section {
+              flex-direction: column !important;
+              justify-content: center !important;
+              align-items: center !important;
+              text-align: center !important;
+              padding: 20px !important;
+              max-width: 100% !important;
+              box-sizing: border-box !important;
+            }
+            .footer-project-section p,
+            .footer-project-section h4,
+            .footer-project-section h5,
+            .footer-project-section span {
+              word-break: break-word !important;
+              white-space: normal !important;
+            }
+            .footer-tech-tags {
+              justify-content: center !important;
+              gap: 10px !important;
+              width: 100% !important;
+              box-sizing: border-box !important;
+            }
+            .footer-bottom-section {
+              justify-content: center !important;
+              text-align: center !important;
+              gap: 12px !important;
+            }
+            .footer-teamline-desktop { display: none !important; }
+            .footer-teamline-mobile { display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; }
+          }
+          @media (min-width: 769px) {
+            .footer-teamline-mobile { display: none !important; }
           }
         `}
       </style>
@@ -211,10 +289,11 @@ const HomePageFooter: React.FC = () => {
                   {t('footer.features.title')}
                 </Title>
                 <List
+                  className="footer-features-list"
                   dataSource={features}
                   renderItem={item => (
                     <List.Item style={{ padding: '4px 0', border: 'none' }}>
-                      <Space size={8}>
+                      <Space size={8} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
                           {item.icon}
                         </div>
@@ -229,61 +308,6 @@ const HomePageFooter: React.FC = () => {
             </div>
 
             {/* Newsletter removed per request */}
-          </div>
-
-          {/* Project Information Section */}
-          <div style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            gap: '32px',
-            marginBottom: '40px', 
-            padding: '30px', 
-            background: 'rgba(3, 68, 214, 0.1)', 
-            borderRadius: '16px', 
-            border: '1px solid rgba(131, 181, 252, 0.2)' 
-          }}>
-            <div style={{ flex: '1', minWidth: '300px' }}>
-              <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#fff', margin: 0, textAlign: 'center' }}>
-                  {t('footer.project.title')}
-                </Title>
-                <Paragraph style={{ color: '#c5e2ff', fontSize: '16px', lineHeight: 1.6, textAlign: 'center', margin: 0 }}>
-                  {t('footer.project.team')}<br/>
-                  {t('footer.project.lead')}<br/>
-                  {t('footer.project.course')}<br/>
-                  {t('footer.project.topic')}
-                </Paragraph>
-              </Space>
-            </div>
-            <div style={{ flex: '1', minWidth: '300px' }}>
-              <Space direction="vertical" size={16} style={{ width: '100%' }}>
-                <Title level={4} style={{ color: '#fff', margin: 0, textAlign: 'center' }}>
-                  {t('footer.tech.title')}
-                </Title>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
-                  {[
-                    t('footer.tech.tag.cv'),
-                    t('footer.tech.tag.gis'),
-                    t('footer.tech.tag.bigdata'),
-                    t('footer.tech.tag.cloud'),
-                    t('footer.tech.tag.crowd'),
-                    t('footer.tech.tag.iot')
-                  ].map((tech, index) => (
-                    <Tag key={index} color="blue" style={{ 
-                      background: 'rgba(3, 68, 214, 0.2)', 
-                      border: '1px solid rgba(131, 181, 252, 0.3)',
-                      color: '#c5e2ff',
-                      borderRadius: '20px',
-                      padding: '4px 12px'
-                    }}>
-                      {tech}
-                    </Tag>
-                  ))}
-                </div>
-              </Space>
-            </div>
           </div>
 
           {/* Social Links */}
@@ -334,7 +358,7 @@ const HomePageFooter: React.FC = () => {
           {/* Bottom Section */}
           <Divider style={{ borderColor: 'rgba(255, 255, 255, 0.2)', margin: '30px 0' }} />
           
-          <div style={{ 
+          <div className="footer-bottom-section" style={{ 
             display: 'flex', 
             justifyContent: 'space-between', 
             alignItems: 'center',
@@ -380,9 +404,17 @@ const HomePageFooter: React.FC = () => {
                     {t('footer.bottom.at')}
                   </Text>
                 </Space>
-                <Text style={{ color: 'rgba(197, 226, 255, 0.6)', fontSize: '12px' }}>
-                  {t('footer.bottom.teamline')}
-                </Text>
+                <Space direction="vertical" size={8}>
+                  <Text className="footer-teamline-desktop" style={{ color: 'rgba(197, 226, 255, 0.6)', fontSize: '12px' }}>
+                    {t('footer.bottom.teamline')}
+                  </Text>
+                  <div className="footer-teamline-mobile" style={{ color: 'rgba(197, 226, 255, 0.8)', fontSize: '12px' }}>
+                    <span>Team</span>
+                    <span>Mekong Pathfinders</span><br/>
+                    <span>Trưởng nhóm</span>
+                    <span>Huỳnh Ngọc Như Quỳnh</span>
+                  </div>
+                </Space>
               </Space>
             </div>
           </div>
@@ -397,15 +429,15 @@ const HomePageFooter: React.FC = () => {
         onClick={scrollToTop}
         style={{
           position: 'fixed',
-          bottom: '30px',
-          right: '30px',
-          width: '50px',
-          height: '50px',
+          bottom: 'clamp(12px, 4vw, 30px)',
+          right: 'clamp(12px, 4vw, 30px)',
+          width: 'clamp(40px, 7vw, 50px)',
+          height: 'clamp(40px, 7vw, 50px)',
           background: 'linear-gradient(135deg, #0344d6 0%, #377aef 100%)',
           border: 'none',
           boxShadow: '0 8px 25px rgba(3, 68, 214, 0.4)',
           zIndex: 1000,
-          fontSize: '18px',
+          fontSize: '16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'

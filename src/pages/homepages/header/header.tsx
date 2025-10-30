@@ -131,24 +131,31 @@ const HomePageHeader: React.FC = () => {
           .center-nav {
             display: flex;
           }
+          .language-switch-select {
+            min-width: 90px !important;
+          }
+          .contact-btn { display: flex; }
+          /* Responsive tweaks for hero elements */
           @media (max-width: 768px) {
-            .desktop-nav {
-              display: none !important;
+            .desktop-nav { display: none !important; }
+            .desktop-text { display: none !important; }
+            .mobile-menu-btn { display: flex !important; }
+            .center-nav { display: none !important; }
+            .language-switch-select {
+              min-width: 100px !important;
+              width: 100px !important;
+              font-size: 14px !important;
             }
-            .desktop-text {
-              display: none !important;
-            }
-            .mobile-menu-btn {
-              display: flex !important;
-            }
-            .center-nav {
-              display: none !important;
-            }
+            .contact-btn { display: none !important; }
+            .hero-welcome { bottom: 16px !important; padding: 0 16px !important; }
+            .hero-logo { top: 40% !important; }
+            .hero-logo img { height: clamp(80px, 18vw, 140px) !important; }
           }
           @media (max-width: 1024px) and (min-width: 769px) {
-            .center-nav {
-              gap: 8px !important;
-            }
+            .center-nav { gap: 8px !important; }
+            .hero-welcome { bottom: 32px !important; }
+            .hero-logo { top: 35% !important; }
+            .hero-logo img { height: clamp(100px, 16vw, 200px) !important; }
           }
         `}
       </style>
@@ -157,10 +164,10 @@ const HomePageHeader: React.FC = () => {
       <div
         style={{
           position: 'relative',
-          height: '700px',
+          height: 'clamp(360px, 58vw, 680px)',
           width: '100%',
           backgroundImage: `url(${backgroundHeader})`,
-          backgroundSize: 'fill',
+          backgroundSize: '100% 100%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           zIndex: 1,
@@ -180,8 +187,9 @@ const HomePageHeader: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '0 24px',
+            padding: '0 16px',
             transition: 'all 0.3s ease',
+            width: '100%'
           }}
         >
         <div
@@ -195,11 +203,12 @@ const HomePageHeader: React.FC = () => {
             background: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(10px)',
             borderRadius: '25px',
-            padding: 'clamp(4px, 1vw, 8px) clamp(15px, 3vw, 30px)',
+            padding: 'clamp(4px, 1vw, 8px) clamp(12px, 3vw, 24px)',
             border: '1px solid #83b5fc',
             gap: 'clamp(8px, 2vw, 16px)',
             transition: 'all 0.3s ease',
             boxShadow: '0 4px 20px rgba(131, 181, 252, 0.1)',
+            overflow: 'hidden'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
@@ -268,12 +277,14 @@ const HomePageHeader: React.FC = () => {
             }}
           >
               <Select
+                className="language-switch-select"
                 value={language}
                 onChange={setLanguage}
                 style={{
-                  width: 'clamp(60px, 15vw, 120px)',
+                  width: 'clamp(70px, 14vw, 110px)',
+                  minWidth: '90px',
                   borderRadius: '20px',
-                  fontSize: 'clamp(10px, 2vw, 12px)',
+                  fontSize: 'clamp(10px, 2vw, 14px)',
                 }}
                 suffixIcon={<GlobalOutlined style={{ color: theme.primary.bright }} />}
                 options={[
@@ -316,6 +327,7 @@ const HomePageHeader: React.FC = () => {
                 borderRadius: '30px',
                 background: 'linear-gradient(135deg, #0344d6 0%, #377aef 100%)',
               }}
+              className="contact-btn"
             >
               <span className="desktop-text">{t('nav.contact')}</span>
             </AnimatedButton>
@@ -328,8 +340,8 @@ const HomePageHeader: React.FC = () => {
               className="mobile-menu-btn"
               style={{
                 borderRadius: '50%',
-                height: '36px',
-                width: '36px',
+                height: '32px',
+                width: '32px',
                 background: 'rgba(255, 255, 255, 0.9)',
                 border: '1px solid rgba(0, 31, 68, 0.2)',
                 display: 'flex',
@@ -356,6 +368,7 @@ const HomePageHeader: React.FC = () => {
 
         {/* Center Logo on Background */}
         <div
+          className="hero-logo"
           style={{
             position: 'absolute',
             top: '40%',
@@ -380,7 +393,7 @@ const HomePageHeader: React.FC = () => {
             src={logoCenter}
             alt="Mekong Pathfinder"
             style={{
-              height: '250px',
+              height: 'clamp(120px, 22vw, 250px)',
               objectFit: 'contain',
               transition: 'all 0.3s ease'
             }}
@@ -389,6 +402,7 @@ const HomePageHeader: React.FC = () => {
 
         {/* Welcome Section in Hero */}
         <div
+          className="hero-welcome"
           style={{
             position: 'absolute',
             bottom: '80px',
@@ -415,19 +429,22 @@ const HomePageHeader: React.FC = () => {
               width: '100%',
               background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(10px)',
-              borderRadius: '50px',
-              padding: '5px 0px',
+              borderRadius: '24px',
+              padding: '4px 0px',
               boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
               border: '1px solid rgba(255, 255, 255, 0.3)',
               textAlign: 'center',
               transition: 'all 0.3s ease',
-              marginBottom: '20px'
+              marginBottom: '14px',
+              maxWidth: '600px',
+              marginLeft: 'auto',
+              marginRight: 'auto'
             }}
           >
             <h1
               style={{
                 color: '#0344d6',
-                fontSize: 'clamp(24px, 4vw, 32px)',
+                fontSize: 'clamp(18px, 3.5vw, 26px)',
                 fontWeight: '700',
                 margin: '0',
                 background: 'transparent',
@@ -450,13 +467,16 @@ const HomePageHeader: React.FC = () => {
           {/* Content without background */}
           <p
             style={{
-              fontSize: 'clamp(14px, 2.5vw, 16px)',
+              fontSize: 'clamp(12px, 2.2vw, 15px)',
               lineHeight: 1.6,
               color: '#fff',
               margin: '0',
               textAlign: 'justify',
               background: 'transparent',
               transition: 'all 0.3s ease',
+              maxWidth: '640px',
+              marginLeft: 'auto',
+              marginRight: 'auto'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = '#f0f8ff';
@@ -525,7 +545,12 @@ const HomePageHeader: React.FC = () => {
               <Button
                 key={item.key}
                 type="text"
-                icon={item.icon}
+                icon={React.cloneElement(item.icon as any, {
+                  style: {
+                    color: isActive ? '#ffffff' : '#1890ff',
+                    fontSize: '18px'
+                  }
+                })}
                 onClick={() => {
                   item.onClick();
                   setMobileMenuVisible(false);
@@ -538,14 +563,26 @@ const HomePageHeader: React.FC = () => {
                   fontSize: '16px',
                   fontWeight: '500',
                   borderRadius: '12px',
-                  background: isActive ? 'rgba(131, 181, 252, 0.2)' : 'transparent',
-                  color: isActive ? '#83b5fc' : '#c5e2ff'
+                  background: isActive ? '#1890ff' : 'transparent',
+                  color: isActive ? '#ffffff' : '#001f44',
+                  transition: 'all 0.2s',
+                  boxShadow: isActive ? '0 4px 24px #1890ff22' : 'none'
                 }}
               >
                 {item.label}
               </Button>
             );
           })}
+
+          {/* Contact in drawer for mobile */}
+          <Button
+            type="primary"
+            icon={<PhoneOutlined />}
+            onClick={() => { window.open('https://www.facebook.com/mekongpathfinder','_blank','noopener,noreferrer'); setMobileMenuVisible(false); }}
+            style={{ width: '100%', borderRadius: '12px' }}
+          >
+            {t('nav.contact')}
+          </Button>
         </Space>
       </Drawer>
 

@@ -33,26 +33,12 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
     color: '#0344d6',
     zIndex: 10,
     backdropFilter: 'blur(10px)',
-    transition: 'all 0.3s ease',
+    transition: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: disabled ? 'not-allowed' : 'pointer',
     opacity: disabled ? 0.5 : 1
-  };
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!disabled) {
-      e.currentTarget.style.background = 'rgba(255, 255, 255, 1)';
-      e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
-    }
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!disabled) {
-      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
-      e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
-    }
   };
 
   return (
@@ -62,8 +48,6 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       style={{ ...defaultStyle, ...style }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     />
   );
 };
