@@ -1374,11 +1374,11 @@ const APKDownload: React.FC = () => {
                             t('app.guide.feature6'),
                           ]}
                           renderItem={(item) => (
-                            <List.Item style={{ transition: "all 0.3s ease" }}>
+                            <List.Item style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 0', borderBottom: 'none', justifyContent: 'flex-start', textAlign: 'left' }}>
                               <CheckCircleOutlined
-                                style={{ color: "#52c41a", marginRight: 8, transition: "all 0.3s ease" }}
+                                style={{ color: '#52c41a', marginRight: 8, minWidth: 16 }}
                               />
-                              <span style={{ transition: "all 0.3s ease" }}>{item}</span>
+                              <span style={{ textAlign: 'left' }}>{item}</span>
                             </List.Item>
                           )}
                         />
