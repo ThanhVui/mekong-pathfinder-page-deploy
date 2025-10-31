@@ -1306,7 +1306,7 @@ const APKDownload: React.FC = () => {
                                 {t('app.download.updated')}
                               </Text>
                               <Text style={{ marginLeft: 8, color: "#666", transition: "all 0.3s ease" }}>
-                                15/12/2024
+                                31/10/2025
                               </Text>
                             </div>
 
