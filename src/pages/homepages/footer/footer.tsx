@@ -269,7 +269,7 @@ const HomePageFooter: React.FC = () => {
                   <Space>
                     <MailOutlined style={{ color: '#1890ff' }} />
                     <Text style={{ color: '#c5e2ff' }}>
-                      quynhhnnce182514@fpt.edu.vn
+                        mekongpathfinders@gmail.com
                     </Text>
                   </Space>
                   <Space>
