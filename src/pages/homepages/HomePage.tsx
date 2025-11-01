@@ -25,7 +25,7 @@ import post02 from '../../assets/images/activities-fanpage/post-02.png';
 import post03 from '../../assets/images/activities-fanpage/post-03.png';
 import post04 from '../../assets/images/activities-fanpage/post-04.png';
 import post05 from '../../assets/images/activities-fanpage/post-05.png';
-import post06 from '../../assets/images/activities-fanpage/post-06.png';
+import post06 from '../../assets/images/activities-fanpage/post-08.png';
 import post07 from '../../assets/images/activities-fanpage/post-07.png';
 // Import About Us images
 import mapCanTho from '../../assets/images/map-location/map-cantho.png';

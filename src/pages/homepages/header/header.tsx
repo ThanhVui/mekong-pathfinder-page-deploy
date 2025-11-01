@@ -24,8 +24,8 @@ import { useColorTheme } from '../../../context/ColorThemeContext';
 import AnimatedButton from '../../../components/AnimatedButton';
 import NavigationMenu from '../../../components/NavigationMenu';
 import logoBanner from '../../../assets/images/logo_header/logo-04.png';
-import logoCenter from '../../../assets/images/logo_header/logo-12.png';
-import backgroundHeader from '../../../assets/images/page-images/background-header.png';
+import logoCenter from '../../../assets/images/logo_header/logo-04.png';
+import backgroundHeader from '../../../assets/images/page-images/background-header-02.png';
 import usFlag from '../../../assets/images/page-images/us.png';
 import vietnamFlag from '../../../assets/images/page-images/vietnam.png';
 
@@ -427,7 +427,7 @@ const HomePageHeader: React.FC = () => {
           <div
             style={{
               width: '100%',
-              background: 'rgba(255, 255, 255, 0.95)',
+              background: '#0344d6',
               backdropFilter: 'blur(10px)',
               borderRadius: '24px',
               padding: '4px 0px',
@@ -443,7 +443,7 @@ const HomePageHeader: React.FC = () => {
           >
             <h1
               style={{
-                color: '#0344d6',
+                color: '#fff',
                 fontSize: 'clamp(18px, 3.5vw, 26px)',
                 fontWeight: '700',
                 margin: '0',
@@ -452,11 +452,9 @@ const HomePageHeader: React.FC = () => {
                 padding: '0px 0px',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#001f44';
-                e.currentTarget.style.textShadow = '0 2px 4px rgba(3, 68, 214, 0.3)';
+                e.currentTarget.style.textShadow = '0 2px 4px rgba(198, 203, 213, 0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = '#0344d6';
                 e.currentTarget.style.textShadow = 'none';
               }}
             >
@@ -469,9 +467,9 @@ const HomePageHeader: React.FC = () => {
             style={{
               fontSize: 'clamp(12px, 2.2vw, 15px)',
               lineHeight: 1.6,
-              color: '#fff',
+              color: '#000',
               margin: '0',
-              textAlign: 'justify',
+              textAlign: 'center',
               background: 'transparent',
               transition: 'all 0.3s ease',
               maxWidth: '640px',
@@ -479,11 +477,9 @@ const HomePageHeader: React.FC = () => {
               marginRight: 'auto'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#f0f8ff';
               e.currentTarget.style.textShadow = '0 1px 3px rgba(3, 68, 214, 0.4)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#fff';
               e.currentTarget.style.textShadow = 'none';
             }}
           >
